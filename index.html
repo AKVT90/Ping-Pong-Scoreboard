@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Placar — Ping Pong</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ ECRÃ: MENU PRINCIPAL ============ -->
+<div id="screen-menu" class="screen active">
+  <div class="menu-wrap">
+    <div class="menu-header">
+      <div class="menu-mark">
+        <span class="mark-dot mark-dot--blue"></span>
+        <span class="mark-dot mark-dot--white"></span>
+      </div>
+      <h1 class="menu-title">PLACAR</h1>
+      <p class="menu-sub">Ping Pong</p>
+    </div>
+
+    <div class="menu-actions">
+      <button class="menu-btn menu-btn--primary" id="btn-new-game">
+        <span class="menu-btn-icon">＋</span>
+        <span class="menu-btn-text">
+          <strong>Novo Jogo</strong>
+          <small>Escolher jogadores e começar</small>
+        </span>
+      </button>
+
+      <button class="menu-btn" id="btn-players">
+        <span class="menu-btn-icon">☷</span>
+        <span class="menu-btn-text">
+          <strong>Jogadores</strong>
+          <small>Gerir e ver estatísticas</small>
+        </span>
+      </button>
+
+      <button class="menu-btn" id="btn-history">
+        <span class="menu-btn-icon">▤</span>
+        <span class="menu-btn-text">
+          <strong>Histórico</strong>
+          <small>Jogos anteriores</small>
+        </span>
+      </button>
+
+      <button class="menu-btn" id="btn-data">
+        <span class="menu-btn-icon">⇄</span>
+        <span class="menu-btn-text">
+          <strong>Dados</strong>
+          <small>Exportar ou importar cópia de segurança</small>
+        </span>
+      </button>
+    </div>
+
+    <div class="menu-resume" id="menu-resume" hidden>
+      <p>Tens um jogo em curso</p>
+      <button class="resume-btn" id="btn-resume">Continuar jogo ▸</button>
+    </div>
+
+    <p class="menu-footer">dados guardados apenas neste tablet</p>
+    <p class="menu-credit">Powered by AKVT90</p>
+  </div>
+</div>
+
+<!-- ============ ECRÃ: JOGADORES ============ -->
+<div id="screen-players" class="screen">
+  <header class="bar">
+    <button class="bar-back" data-back="screen-menu">‹</button>
+    <h2 class="bar-title">Jogadores</h2>
+    <button class="bar-action" id="btn-add-player">＋ Novo</button>
+  </header>
+  <div class="bar-spacer"></div>
+  <div class="content" id="players-list">
+    <!-- preenchido via JS -->
+  </div>
+</div>
+
+<!-- ============ ECRÃ: PERFIL DE JOGADOR ============ -->
+<div id="screen-player-profile" class="screen">
+  <header class="bar">
+    <button class="bar-back" data-back="screen-players">‹</button>
+    <h2 class="bar-title" id="profile-name">Jogador</h2>
+    <button class="bar-action bar-action--danger" id="btn-delete-player">Eliminar</button>
+  </header>
+  <div class="bar-spacer"></div>
+  <div class="content" id="profile-content">
+    <!-- preenchido via JS -->
+  </div>
+</div>
+
+<!-- ============ ECRÃ: HISTÓRICO ============ -->
+<div id="screen-history" class="screen">
+  <header class="bar">
+    <button class="bar-back" data-back="screen-menu">‹</button>
+    <h2 class="bar-title">Histórico</h2>
+    <span class="bar-action bar-action--ghost"></span>
+  </header>
+  <div class="bar-spacer"></div>
+  <div class="content" id="history-list">
+    <!-- preenchido via JS -->
+  </div>
+</div>
+
+<!-- ============ ECRÃ: DETALHE DE JOGO (histórico) ============ -->
+<div id="screen-game-detail" class="screen">
+  <header class="bar">
+    <button class="bar-back" data-back="screen-history">‹</button>
+    <h2 class="bar-title">Detalhe do Jogo</h2>
+    <span class="bar-action bar-action--ghost"></span>
+  </header>
+  <div class="bar-spacer"></div>
+  <div class="content" id="game-detail-content">
+    <!-- preenchido via JS -->
+  </div>
+</div>
+
+<!-- ============ ECRÃ: NOVO JOGO (passo 1 — jogadores) ============ -->
+<div id="screen-setup" class="screen">
+  <header class="bar">
+    <button class="bar-back" data-back="screen-menu">‹</button>
+    <h2 class="bar-title">Novo Jogo</h2>
+    <span class="bar-action bar-action--ghost"></span>
+  </header>
+  <div class="bar-spacer"></div>
+  <div class="content setup-content">
+
+    <section class="setup-section">
+      <p class="setup-label">Lado Azul</p>
+      <button class="setup-player-pick setup-player-pick--blue" id="pick-blue">
+        <span>Escolher jogador</span>
+      </button>
+    </section>
+
+    <div class="setup-vs">VS</div>
+
+    <section class="setup-section">
+      <p class="setup-label">Lado Branco</p>
+      <button class="setup-player-pick setup-player-pick--white" id="pick-white">
+        <span>Escolher jogador</span>
+      </button>
+    </section>
+
+    <section class="setup-section">
+      <p class="setup-label">Descrição <span class="setup-label-optional">(opcional)</span></p>
+      <input type="text" id="input-game-description" class="setup-description-input" placeholder="Ex: torneio de verão, sala de jogos..." maxlength="60" autocomplete="off">
+    </section>
+
+    <button class="setup-confirm" id="btn-goto-mode" disabled>Continuar ▸</button>
+  </div>
+</div>
+
+<!-- ============ ECRÃ: NOVO JOGO (passo 2 — Clássico / Personalizado) ============ -->
+<div id="screen-setup-mode" class="screen">
+  <header class="bar">
+    <button class="bar-back" id="btn-back-from-mode">‹</button>
+    <h2 class="bar-title">Tipo de Jogo</h2>
+    <span class="bar-action bar-action--ghost"></span>
+  </header>
+  <div class="bar-spacer"></div>
+  <div class="content setup-content">
+
+    <button class="mode-card mode-card--custom active" id="mode-custom" data-mode="custom">
+      <span class="mode-card-title">Personalizado</span>
+      <span class="mode-card-desc">11 ou 21 pontos · livre, BO3 ou BO5 · serviço alterna a cada 5 pontos somados</span>
+    </button>
+
+    <button class="mode-card mode-card--classic" id="mode-classic" data-mode="classic">
+      <span class="mode-card-title">Clássico</span>
+      <span class="mode-card-desc">11 pontos por set · BO3, BO5 ou BO7</span>
+    </button>
+
+    <button class="setup-confirm" id="btn-goto-options">Continuar ▸</button>
+  </div>
+</div>
+
+<!-- ============ ECRÃ: NOVO JOGO (passo 3 — pontos e formato) ============ -->
+<div id="screen-setup-options" class="screen">
+  <header class="bar">
+    <button class="bar-back" id="btn-back-from-options">‹</button>
+    <h2 class="bar-title">Pontos e Formato</h2>
+    <span class="bar-action bar-action--ghost"></span>
+  </header>
+  <div class="bar-spacer"></div>
+  <div class="content setup-content">
+
+    <section class="setup-section" id="section-points">
+      <p class="setup-label">Pontos por set</p>
+      <div class="setup-options" id="opt-points">
+        <button class="setup-option" data-points="11">11 pontos</button>
+        <button class="setup-option active" data-points="21">21 pontos</button>
+      </div>
+    </section>
+
+    <section class="setup-section">
+      <p class="setup-label">Formato</p>
+      <div class="setup-options" id="opt-format">
+        <button class="setup-option active" data-format="free">Livre</button>
+        <button class="setup-option" data-format="3">Melhor de 3</button>
+        <button class="setup-option" data-format="5">Melhor de 5</button>
+        <button class="setup-option" data-format="7" id="opt-format-7">Melhor de 7</button>
+      </div>
+    </section>
+
+    <button class="setup-confirm" id="btn-confirm-setup">Começar Jogo</button>
+  </div>
+</div>
+
+<!-- ============ ECRÃ: PICKER DE JOGADOR (modal-like screen) ============ -->
+<div id="screen-pick-player" class="screen">
+  <header class="bar">
+    <button class="bar-back" id="btn-cancel-pick">‹</button>
+    <h2 class="bar-title" id="pick-player-title">Escolher Jogador</h2>
+    <span class="bar-action bar-action--ghost"></span>
+  </header>
+  <div class="bar-spacer"></div>
+  <div class="content" id="pick-player-list">
+    <!-- preenchido via JS -->
+  </div>
+</div>
+
+<!-- ============ ECRÃ: BOLAR (escolher quem serve) ============ -->
+<div id="screen-bolar" class="screen screen-bolar">
+  <div class="bolar-board">
+    <button class="bolar-half bolar-half--blue" id="bolar-blue" data-side="blue">
+      <span class="bolar-name" id="bolar-name-blue">Azul</span>
+      <span class="bolar-hint">serve primeiro</span>
+    </button>
+    <button class="bolar-half bolar-half--white" id="bolar-white" data-side="white">
+      <span class="bolar-name" id="bolar-name-white">Branco</span>
+      <span class="bolar-hint">serve primeiro</span>
+    </button>
+    <div class="bolar-center">
+      <span class="bolar-title">BOLAR</span>
+      <span class="bolar-set-label" id="bolar-set-label">Set 1 · quem serve primeiro?</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ECRÃ: JOGO (PLACAR) ============ -->
+<div id="screen-game" class="screen screen-game">
+  <div class="board" id="board">
+
+    <button class="half half--blue" id="half-blue" data-side="blue">
+      <span class="half-score" id="score-blue">0</span>
+    </button>
+
+    <button class="half half--white" id="half-white" data-side="white">
+      <span class="half-score" id="score-white">0</span>
+    </button>
+
+    <div class="sets-badge sets-badge--blue" id="sets-blue">
+      <span class="sets-num">0</span>
+      <span class="serve-ball serve-ball--blue" id="serve-ball-blue" hidden></span>
+    </div>
+
+    <div class="sets-badge sets-badge--white" id="sets-white">
+      <span class="sets-num">0</span>
+      <span class="serve-ball serve-ball--white" id="serve-ball-white" hidden></span>
+    </div>
+
+    <div class="topbar">
+      <div class="topbar-name topbar-name--blue"><span id="name-blue">Azul</span><span class="topbar-elo" id="elo-blue"></span></div>
+      <div class="timer" id="timer">00:00</div>
+      <div class="topbar-name topbar-name--white"><span id="name-white">Branco</span><span class="topbar-elo" id="elo-white"></span></div>
+    </div>
+
+    <div class="status-banner" id="status-banner" hidden>
+      <span id="status-banner-text">DEUCE</span>
+    </div>
+
+    <div class="bottombar">
+      <button class="btn-undo" id="btn-undo" title="Anular último ponto">↺</button>
+      <button class="btn-end-game" id="btn-end-game">Terminar Jogo</button>
+      <button class="btn-pause" id="btn-pause" title="Pausar cronómetro">❙❙</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ OVERLAY: FIM DE SET ============ -->
+<div id="overlay-set-end" class="overlay" hidden>
+  <div class="overlay-card">
+    <p class="overlay-eyebrow" id="set-end-eyebrow">FIM DO SET</p>
+    <h3 class="overlay-title" id="set-end-winner">Jogador venceu o set</h3>
+    <p class="overlay-detail" id="set-end-detail">11 — 6</p>
+    <div class="overlay-sets-recap" id="set-end-recap"></div>
+    <div class="overlay-actions">
+      <button class="overlay-btn overlay-btn--ghost" id="btn-finish-from-set">Terminar Jogo</button>
+      <button class="overlay-btn overlay-btn--primary" id="btn-next-set">Próximo Set ▸</button>
+    </div>
+    <button class="overlay-undo-link" id="btn-undo-set-end">Foi engano — anular o último ponto</button>
+  </div>
+</div>
+
+<!-- ============ OVERLAY: CONFIRMAR FIM DE JOGO ============ -->
+<div id="overlay-confirm-end" class="overlay" hidden>
+  <div class="overlay-card">
+    <p class="overlay-eyebrow">TERMINAR JOGO</p>
+    <h3 class="overlay-title">Confirmar fim de jogo?</h3>
+    <p class="overlay-detail" id="confirm-end-detail">O resultado atual vai ser guardado no histórico.</p>
+    <div class="overlay-actions">
+      <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-end">Cancelar</button>
+      <button class="overlay-btn overlay-btn--danger" id="btn-confirm-end">Terminar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ OVERLAY: FIM DE JOGO (resumo final) ============ -->
+<div id="overlay-game-end" class="overlay" hidden>
+  <div class="overlay-card overlay-card--big">
+    <p class="overlay-eyebrow">JOGO TERMINADO</p>
+    <h3 class="overlay-title" id="game-end-winner">Jogador venceu o jogo</h3>
+    <div class="overlay-sets-recap" id="game-end-recap"></div>
+    <div class="overlay-actions">
+      <button class="overlay-btn overlay-btn--primary" id="btn-game-end-ok">Voltar ao Menu</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ OVERLAY: NOVO JOGADOR ============ -->
+<div id="overlay-new-player" class="overlay" hidden>
+  <div class="overlay-card">
+    <p class="overlay-eyebrow">NOVO JOGADOR</p>
+    <h3 class="overlay-title">Nome do jogador</h3>
+    <input type="text" id="input-player-name" class="overlay-input" placeholder="Ex: Miguel" maxlength="20" autocomplete="off">
+    <p class="color-picker-label">Cor no placar</p>
+    <div class="color-picker" id="color-picker-new">
+      <button class="color-swatch color-swatch--blue-white active" data-color="blue-white" title="Azul / Branco"></button>
+      <button class="color-swatch color-swatch--green-white" data-color="green-white" title="Verde / Branco"></button>
+      <button class="color-swatch color-swatch--red-white" data-color="red-white" title="Vermelho / Branco"></button>
+      <button class="color-swatch color-swatch--pink-white" data-color="pink-white" title="Rosa / Branco"></button>
+    </div>
+    <div class="overlay-actions">
+      <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-new-player">Cancelar</button>
+      <button class="overlay-btn overlay-btn--primary" id="btn-save-new-player">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ECRÃ: DADOS (exportar / importar) ============ -->
+<div id="screen-data" class="screen">
+  <header class="bar">
+    <button class="bar-back" data-back="screen-menu">‹</button>
+    <h2 class="bar-title">Dados</h2>
+    <span class="bar-action bar-action--ghost"></span>
+  </header>
+  <div class="bar-spacer"></div>
+  <div class="content">
+
+    <div class="data-summary" id="data-summary">
+      <!-- preenchido via JS -->
+    </div>
+
+    <p class="section-label">Cópia de segurança</p>
+    <p class="data-explain">
+      Guarda jogadores e histórico num ficheiro que podes manter na nuvem (Drive, email, etc.)
+      e usar para recuperar tudo neste tablet ou noutro.
+    </p>
+    <button class="data-action data-action--primary" id="btn-export">
+      <span class="data-action-icon">⇩</span>
+      <span class="data-action-text">
+        <strong>Exportar cópia de segurança</strong>
+        <small>Gera um ficheiro .json com tudo</small>
+      </span>
+    </button>
+
+    <button class="data-action" id="btn-import">
+      <span class="data-action-icon">⇧</span>
+      <span class="data-action-text">
+        <strong>Importar cópia de segurança</strong>
+        <small>Substitui os dados atuais por um ficheiro</small>
+      </span>
+    </button>
+    <input type="file" id="input-import-file" accept="application/json,.json" hidden>
+
+    <p class="section-label">Apagar tudo</p>
+    <button class="data-action data-action--danger" id="btn-wipe">
+      <span class="data-action-icon">⨯</span>
+      <span class="data-action-text">
+        <strong>Apagar todos os dados</strong>
+        <small>Remove jogadores e histórico deste tablet</small>
+      </span>
+    </button>
+
+  </div>
+</div>
+
+<!-- ============ OVERLAY: CONFIRMAR IMPORTAÇÃO ============ -->
+<div id="overlay-confirm-import" class="overlay" hidden>
+  <div class="overlay-card">
+    <p class="overlay-eyebrow">IMPORTAR DADOS</p>
+    <h3 class="overlay-title">O que queres fazer?</h3>
+    <p class="overlay-detail" id="confirm-import-detail">Isto vai substituir os jogadores e o histórico já guardados neste tablet.</p>
+    <div class="overlay-actions overlay-actions--col">
+      <button class="overlay-btn overlay-btn--primary" id="btn-merge-import">Adicionar ao que já tenho</button>
+      <button class="overlay-btn overlay-btn--danger" id="btn-confirm-import">Substituir tudo</button>
+      <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-import">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ OVERLAY: CONFIRMAR APAGAR TUDO ============ -->
+<div id="overlay-confirm-wipe" class="overlay" hidden>
+  <div class="overlay-card">
+    <p class="overlay-eyebrow">APAGAR TUDO</p>
+    <h3 class="overlay-title">Apagar todos os dados?</h3>
+    <p class="overlay-detail">Esta ação não pode ser desfeita. Considera exportar uma cópia de segurança primeiro.</p>
+    <div class="overlay-actions">
+      <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-wipe">Cancelar</button>
+      <button class="overlay-btn overlay-btn--danger" id="btn-confirm-wipe">Apagar tudo</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TOAST genérico (feedback rápido) ============ -->
+<div id="toast" class="toast" hidden></div>
+
+<!-- ============ TOAST ROTAÇÃO ============ -->
+<div id="rotate-hint" class="rotate-hint" hidden>
+  <div class="rotate-icon">⟳</div>
+  <p>Roda o tablet para a horizontal</p>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
