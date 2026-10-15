@@ -170,8 +170,9 @@
       .map((p) => ({ player: p, stats: computePlayerStats(p.id, allElos) }))
       .filter((entry) => entry.stats.gamesPlayed > 0)
       .sort((a, b) => {
-        if (b.stats.winRate !== a.stats.winRate) return b.stats.winRate - a.stats.winRate;
         if (b.stats.gamesWon !== a.stats.gamesWon) return b.stats.gamesWon - a.stats.gamesWon;
+        if (a.stats.gamesLost !== b.stats.gamesLost) return a.stats.gamesLost - b.stats.gamesLost;
+        if (b.stats.winRate !== a.stats.winRate) return b.stats.winRate - a.stats.winRate;
         return b.stats.gamesPlayed - a.stats.gamesPlayed;
       })
       .slice(0, 5);
@@ -636,7 +637,7 @@
     const setsHTML = g.sets
       .map((s, i) => {
         const winnerName = s.winnerSide === "blue" ? blueName : whiteName;
-        const momentumSVG = buildMomentumSVG(s, blueName, whiteName);
+        const momentumSVG = buildMomentumSVG({ ...s, _idx: `${g.id}_${i}` }, blueName, whiteName, g.blue.playerId, g.white.playerId);
         return `
           <div class="set-row set-row--expanded">
             <div class="set-row-top">
@@ -673,7 +674,7 @@
      GRÁFICO DE MOMENTUM — linha simples em SVG que mostra quem
      dominou o set, ponto a ponto (diferença acumulada azul-branco)
      --------------------------------------------------------- */
-  function buildMomentumSVG(set, blueName, whiteName) {
+  function buildMomentumSVG(set, blueName, whiteName, bluePlayerId, whitePlayerId) {
     const log = set.pointLog;
     if (!log || log.length === 0) return "";
 
@@ -685,32 +686,119 @@
       series.push(diff);
     });
 
-    const W = 600, H = 120, padX = 10, padY = 14;
-    const maxAbs = Math.max(1, ...series.map((v) => Math.abs(v)));
+    const W = 600, H = 140, padX = 14, padY = 18;
+    const maxAbs = Math.max(2, ...series.map((v) => Math.abs(v)));
     const n = series.length;
     const stepX = n > 1 ? (W - padX * 2) / (n - 1) : 0;
     const midY = H / 2;
     const scaleY = (H / 2 - padY) / maxAbs;
 
-    const points = series
-      .map((v, i) => {
-        const x = padX + i * stepX;
-        const y = midY - v * scaleY;
-        return `${x.toFixed(1)},${y.toFixed(1)}`;
-      })
-      .join(" ");
+    const pts = series.map((v, i) => ({
+      x: padX + i * stepX,
+      y: midY - v * scaleY,
+      v
+    }));
 
-    // áreas de cor para reforçar visualmente quem domina em cada troço
+    // gera um path de área que só "existe" acima da linha central (valores positivos)
+    // ou só abaixo (valores negativos). Cada vez que a série toca ou cruza o zero,
+    // fechamos o "lóbulo" atual de volta à linha do meio e começamos um novo —
+    // isto evita que lóbulos distintos fiquem ligados por baixo da linha central.
+    function buildHalfAreaPath(points, keepPositive) {
+      const segs = [];
+      let current = [];
+
+      const flush = () => {
+        if (current.length > 1) {
+          const first = current[0];
+          const last = current[current.length - 1];
+          const d = `M ${first.x.toFixed(1)},${midY.toFixed(1)} ` +
+            current.map((p) => `L ${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ") +
+            ` L ${last.x.toFixed(1)},${midY.toFixed(1)} Z`;
+          segs.push(d);
+        }
+        current = [];
+      };
+
+      for (let i = 0; i < points.length - 1; i++) {
+        const p = points[i];
+        const next = points[i + 1];
+        const pIn = keepPositive ? p.v >= 0 : p.v <= 0;
+        const nextIn = keepPositive ? next.v >= 0 : next.v <= 0;
+
+        if (pIn) current.push(p);
+
+        const crosses = (p.v > 0 && next.v < 0) || (p.v < 0 && next.v > 0);
+        if (crosses) {
+          const t = Math.abs(p.v) / (Math.abs(p.v) + Math.abs(next.v));
+          const zx = p.x + (next.x - p.x) * t;
+          current.push({ x: zx, y: midY });
+          flush();
+        } else if (pIn && !nextIn) {
+          // o próximo ponto está fora da zona (tipicamente exatamente a 0):
+          // inclui-o como fronteira para o lóbulo fechar de forma suave, e termina aqui
+          current.push({ x: next.x, y: midY });
+          flush();
+        }
+      }
+      // garante que o último ponto da série é incluído se pertencer ao lóbulo aberto
+      const lastPoint = points[points.length - 1];
+      const lastIn = keepPositive ? lastPoint.v >= 0 : lastPoint.v <= 0;
+      if (lastIn) current.push(lastPoint);
+      flush();
+
+      return segs.join(" ");
+    }
+
+    const blueAreaPath = buildHalfAreaPath(pts, true);
+    const whiteAreaPath = buildHalfAreaPath(pts, false);
+
+    // cores reais de cada jogador, para o gráfico refletir o placar tal como apareceu no jogo
+    const blueColorKey = getPlayerColorKey(getPlayer(bluePlayerId));
+    const whiteColorKeyRaw = getPlayerColorKey(getPlayer(whitePlayerId));
+    const blueColor = PLAYER_COLORS[blueColorKey].bg;
+    const whiteColor = blueColorKey === whiteColorKeyRaw ? PLAYER_COLORS[whiteColorKeyRaw].fg : PLAYER_COLORS[whiteColorKeyRaw].bg;
+    // se a cor "branca" calculada for muito clara (quase igual ao fundo do cartão), usamos um tom mais visível só para o gráfico
+    const whiteColorForChart = whiteColor.toLowerCase() === "#f4f1ea" ? "#9aa0a8" : whiteColor;
+
+    // resumo textual: quem liderou mais tempo ao longo do set
+    const blueLeadPoints = series.filter((v) => v > 0).length;
+    const whiteLeadPoints = series.filter((v) => v < 0).length;
+    let leadSummary;
+    if (blueLeadPoints === whiteLeadPoints) {
+      leadSummary = "Set equilibrado do início ao fim";
+    } else {
+      const leaderName = blueLeadPoints > whiteLeadPoints ? blueName : whiteName;
+      leadSummary = `${escapeHTML(leaderName)} esteve à frente a maior parte do set`;
+    }
+
+    // maior vantagem alcançada por cada lado, para dar contexto extra
+    const maxBlueLead = Math.max(0, ...series);
+    const maxWhiteLead = Math.max(0, ...series.map((v) => -v));
+
+    const lastPoint = pts[pts.length - 1];
+    const firstPoint = pts[0];
+    const linePointsAttr = pts.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ");
+
     return `
       <div class="momentum-wrap">
+        <p class="momentum-summary">${leadSummary}</p>
         <div class="momentum-labels">
-          <span class="momentum-label momentum-label--blue">${escapeHTML(blueName)}</span>
-          <span class="momentum-label momentum-label--white">${escapeHTML(whiteName)}</span>
+          <span class="momentum-label momentum-label--blue">${escapeHTML(blueName)} <small>(max. vantagem ${maxBlueLead})</small></span>
+          <span class="momentum-label momentum-label--white">${escapeHTML(whiteName)} <small>(max. vantagem ${maxWhiteLead})</small></span>
         </div>
         <svg viewBox="0 0 ${W} ${H}" class="momentum-svg" preserveAspectRatio="none">
-          <line x1="${padX}" y1="${midY}" x2="${W - padX}" y2="${midY}" class="momentum-midline" />
-          <polyline points="${points}" class="momentum-line" fill="none" />
+          ${blueAreaPath ? `<path d="${blueAreaPath}" fill="${blueColor}" opacity="0.4" />` : ""}
+          ${whiteAreaPath ? `<path d="${whiteAreaPath}" fill="${whiteColorForChart}" opacity="0.4" />` : ""}
+          <line x1="${padX}" y1="${midY}" x2="${W - padX}" y2="${midY}" class="momentum-midline" stroke-dasharray="4 4" />
+          <polyline points="${linePointsAttr}" class="momentum-line" fill="none" stroke="${diff >= 0 ? blueColor : whiteColorForChart}" />
+          <circle cx="${firstPoint.x}" cy="${firstPoint.y}" r="4.5" class="momentum-dot" />
+          <circle cx="${lastPoint.x}" cy="${lastPoint.y}" r="5.5" class="momentum-dot momentum-dot--end" fill="${diff >= 0 ? blueColor : whiteColorForChart}" />
         </svg>
+        <div class="momentum-axis">
+          <span>Início do set</span>
+          <span>${log.length} pontos jogados</span>
+          <span>Fim do set</span>
+        </div>
       </div>
     `;
   }
@@ -901,6 +989,7 @@
   let timerInterval = null;
 
   function startNewGame(bluePlayerId, whitePlayerId, points, format, description, mode) {
+    lastSetEndSnapshot = null;
     game = {
       id: uid("game"),
       bluePlayerId,
@@ -1150,30 +1239,30 @@
     osc.stop(now + dur + 0.04);
   }
 
-  // ponto marcado: "pling" curto e claro, dá confirmação imediata do toque
+  // ponto marcado: "pling" curto, bem definido, para confirmar o toque mesmo distraído
   function playTapSound() {
-    playTone(1200, 70, 0.16, "sine");
-    playTone(1800, 50, 0.07, "sine");
+    playTone(1300, 90, 0.34, "triangle");
+    playTone(1950, 60, 0.16, "sine");
   }
 
-  // troca de serviço: dois beeps mais firmes, claramente audíveis
+  // troca de serviço: dois beeps firmes e bem audíveis
   function playServeChangeSound() {
-    playTone(1046, 130, 0.18, "triangle");
-    setTimeout(() => playTone(1046, 130, 0.18, "triangle"), 160);
+    playTone(1046, 150, 0.38, "square");
+    setTimeout(() => playTone(1046, 150, 0.38, "square"), 170);
   }
 
-  // match point: sequência ascendente de 3 notas, marcante mas curta
+  // match point: sequência ascendente de 3 notas, marcante e bem presente
   function playMatchPointSound() {
-    playTone(784, 110, 0.2, "square");
-    setTimeout(() => playTone(988, 110, 0.2, "square"), 130);
-    setTimeout(() => playTone(1318, 160, 0.2, "square"), 260);
+    playTone(784, 130, 0.4, "square");
+    setTimeout(() => playTone(988, 130, 0.4, "square"), 140);
+    setTimeout(() => playTone(1318, 190, 0.4, "square"), 280);
   }
 
-  // deuce: duas notas a oscilar (sobe-desce), transmite "equilíbrio/tensão"
+  // deuce: três notas a oscilar (sobe-desce-sobe), transmite "equilíbrio/tensão"
   function playDeuceSound() {
-    playTone(880, 140, 0.18, "triangle");
-    setTimeout(() => playTone(740, 140, 0.18, "triangle"), 160);
-    setTimeout(() => playTone(880, 180, 0.18, "triangle"), 320);
+    playTone(880, 160, 0.36, "square");
+    setTimeout(() => playTone(700, 160, 0.36, "square"), 175);
+    setTimeout(() => playTone(880, 220, 0.36, "square"), 350);
   }
 
   /* ---------------------------------------------------------
@@ -1199,6 +1288,7 @@
 
   // histórico de ações para permitir "anular último ponto"
   let pointHistory = [];
+  let lastSetEndSnapshot = null; // permite desfazer um fim de set por engano
 
   document.getElementById("half-blue").addEventListener("click", () => addPoint("blue"));
   document.getElementById("half-white").addEventListener("click", () => addPoint("white"));
@@ -1290,6 +1380,17 @@
 
     if (!winnerSide) return false; // set continua
 
+    // snapshot do estado mesmo antes de fechar o set, para permitir desfazer
+    // caso o "fim de set" tenha sido um engano (clique na pessoa errada)
+    lastSetEndSnapshot = {
+      currentBlue: blue,
+      currentWhite: white,
+      pointLog: game.pointLog.slice(),
+      servingSide: game.servingSide,
+      pointHistory: pointHistory.slice(),
+      winnerSide: winnerSide
+    };
+
     // fecha o set
     const closedSet = {
       blueScore: blue,
@@ -1357,12 +1458,44 @@
 
   document.getElementById("btn-next-set").addEventListener("click", () => {
     document.getElementById("overlay-set-end").hidden = true;
+    lastSetEndSnapshot = null;
     openBolarScreen();
   });
 
   document.getElementById("btn-finish-from-set").addEventListener("click", () => {
     document.getElementById("overlay-set-end").hidden = true;
+    lastSetEndSnapshot = null;
     openConfirmEndOverlay();
+  });
+
+  document.getElementById("btn-undo-set-end").addEventListener("click", () => {
+    if (!game || !lastSetEndSnapshot) return;
+
+    // remove o set que tinha acabado de fechar e repõe os sets ganhos
+    game.sets.pop();
+    if (lastSetEndSnapshot.winnerSide === "blue" && game.blueSetsWon > 0) game.blueSetsWon--;
+    if (lastSetEndSnapshot.winnerSide === "white" && game.whiteSetsWon > 0) game.whiteSetsWon--;
+
+    // repõe o estado do set tal como estava mesmo antes do ponto final,
+    // e depois retira esse último ponto para corrigir o engano
+    game.currentBlue = lastSetEndSnapshot.currentBlue;
+    game.currentWhite = lastSetEndSnapshot.currentWhite;
+    game.pointLog = lastSetEndSnapshot.pointLog;
+    game.servingSide = lastSetEndSnapshot.servingSide;
+    pointHistory = lastSetEndSnapshot.pointHistory;
+
+    const lastPoint = pointHistory.pop();
+    if (lastPoint === "blue" && game.currentBlue > 0) game.currentBlue--;
+    if (lastPoint === "white" && game.currentWhite > 0) game.currentWhite--;
+    if (game.pointLog.length > 0) game.pointLog.pop();
+
+    lastSetEndSnapshot = null;
+    persistActiveGame();
+
+    document.getElementById("overlay-set-end").hidden = true;
+    resumeGameUI();
+    showScreen("screen-game");
+    showToast("Último ponto anulado — podes continuar o set.", "success");
   });
 
   /* ---------- terminar jogo ---------- */
@@ -1388,6 +1521,7 @@
   function finishGame() {
     stopTimerLoop();
     stopServeBlinkLoop();
+    lastSetEndSnapshot = null;
 
     if (game.sets.length === 0) {
       // nenhum set foi concluído — descarta sem guardar no histórico
@@ -1540,12 +1674,15 @@
           return;
         }
         pendingImport = parsed;
+        const preview = previewMerge(parsed);
         const detail = document.getElementById("confirm-import-detail");
         const pJogador = (n) => (n === 1 ? "jogador" : "jogadores");
         const pJogo = (n) => (n === 1 ? "jogo" : "jogos");
-        detail.textContent =
-          `O ficheiro tem ${parsed.players.length} ${pJogador(parsed.players.length)} e ${parsed.games.length} ${pJogo(parsed.games.length)} no histórico. ` +
-          `Isto vai substituir os ${DATA.players.length} ${pJogador(DATA.players.length)} e ${DATA.games.length} ${pJogo(DATA.games.length)} já guardados neste tablet.`;
+        detail.innerHTML =
+          `O ficheiro tem ${parsed.players.length} ${pJogador(parsed.players.length)} e ${parsed.games.length} ${pJogo(parsed.games.length)}.<br><br>` +
+          `<strong>Adicionar ao que já tens</strong> traz ${preview.newPlayers} ${pJogador(preview.newPlayers)} novo(s) e ${preview.newGames} ${pJogo(preview.newGames)} novo(s) ` +
+          `(jogadores com o mesmo nome são juntos automaticamente; jogos repetidos são ignorados).<br><br>` +
+          `<strong>Substituir tudo</strong> apaga os ${DATA.players.length} ${pJogador(DATA.players.length)} e ${DATA.games.length} ${pJogo(DATA.games.length)} atuais e fica só com o que está no ficheiro.`;
         document.getElementById("overlay-confirm-import").hidden = false;
       } catch (err) {
         showToast("Ficheiro inválido ou corrompido.", "error");
@@ -1565,15 +1702,127 @@
     return { ok: true };
   }
 
+  function normalizeName(name) {
+    return (name || "").trim().toLowerCase().replace(/\s+/g, " ");
+  }
+
+  // calcula quantos jogadores/jogos novos um merge traria, sem alterar DATA (usado só para mostrar no resumo)
+  function previewMerge(imported) {
+    const existingNames = new Set(DATA.players.map((p) => normalizeName(p.name)));
+    const newPlayers = imported.players.filter((p) => !existingNames.has(normalizeName(p.name))).length;
+
+    const existingSignatures = new Set(DATA.games.map(gameSignature));
+    const idMap = buildPlayerIdMap(imported.players);
+    const newGames = imported.games.filter((g) => {
+      const remapped = remapGamePlayerIds(g, idMap);
+      return !existingSignatures.has(gameSignature(remapped));
+    }).length;
+
+    return { newPlayers, newGames };
+  }
+
+  // assinatura simples de um jogo, usada para detetar duplicados ao fundir históricos
+  function gameSignature(g) {
+    return [g.endedAt, g.blue.playerId, g.white.playerId, g.blue.setsWon, g.white.setsWon].join("|");
+  }
+
+  // mapeia ids de jogadores do ficheiro importado para ids já existentes no tablet
+  // (quando o nome coincide) ou mantém o id do ficheiro para jogadores novos
+  function buildPlayerIdMap(importedPlayers) {
+    const byName = {};
+    DATA.players.forEach((p) => { byName[normalizeName(p.name)] = p.id; });
+    const map = {};
+    importedPlayers.forEach((p) => {
+      const existingId = byName[normalizeName(p.name)];
+      map[p.id] = existingId || p.id;
+    });
+    return map;
+  }
+
+  function remapGamePlayerIds(g, idMap) {
+    return {
+      ...g,
+      blue: { ...g.blue, playerId: idMap[g.blue.playerId] || g.blue.playerId },
+      white: { ...g.white, playerId: idMap[g.white.playerId] || g.white.playerId }
+    };
+  }
+
+  // recalcula a flag "capote" de cada set de um jogo a partir do resultado final
+  // guardado, usando exatamente a mesma regra do jogo ao vivo. Isto garante que
+  // jogos vindos de cópias de segurança antigas (de antes desta regra existir,
+  // ou da regra ter sido corrigida) ficam com a tag certa depois de importados.
+  function recomputeCapoteForSet(set, pointsTarget) {
+    if (pointsTarget !== 21) return { ...set, capote: false };
+    const blue = set.blueScore;
+    const white = set.whiteScore;
+    let capote = false;
+    if (set.winnerSide === "blue") {
+      capote = (blue >= 11 && white === 0) || white <= 10;
+    } else if (set.winnerSide === "white") {
+      capote = (white >= 11 && blue === 0) || blue <= 10;
+    }
+    return { ...set, capote };
+  }
+
+  function recomputeGameCapotes(game) {
+    return {
+      ...game,
+      sets: game.sets.map((s) => recomputeCapoteForSet(s, game.pointsTarget))
+    };
+  }
+
+  function mergeImportedData(imported) {
+    const idMap = buildPlayerIdMap(imported.players);
+    const existingNames = new Set(DATA.players.map((p) => normalizeName(p.name)));
+
+    let addedPlayers = 0;
+    imported.players.forEach((p) => {
+      if (!existingNames.has(normalizeName(p.name))) {
+        DATA.players.push({ ...p, id: idMap[p.id] });
+        existingNames.add(normalizeName(p.name));
+        addedPlayers++;
+      }
+      // se já existe (mesmo nome), mantemos o jogador atual tal como está
+      // (incluindo a cor que já tinhas escolhido) e não sobrescrevemos nada.
+    });
+
+    const existingSignatures = new Set(DATA.games.map(gameSignature));
+    let addedGames = 0;
+    imported.games.forEach((g) => {
+      const remapped = recomputeGameCapotes(remapGamePlayerIds(g, idMap));
+      const sig = gameSignature(remapped);
+      if (!existingSignatures.has(sig)) {
+        DATA.games.push(remapped);
+        existingSignatures.add(sig);
+        addedGames++;
+      }
+    });
+
+    return { addedPlayers, addedGames };
+  }
+
   document.getElementById("btn-cancel-import").addEventListener("click", () => {
     pendingImport = null;
     document.getElementById("overlay-confirm-import").hidden = true;
   });
 
+  document.getElementById("btn-merge-import").addEventListener("click", () => {
+    if (!pendingImport) return;
+    const { addedPlayers, addedGames } = mergeImportedData(pendingImport);
+    saveData();
+    pendingImport = null;
+    document.getElementById("overlay-confirm-import").hidden = true;
+    renderDataScreen();
+    checkResumeBanner();
+    const pJogador = (n) => (n === 1 ? "jogador" : "jogadores");
+    const pJogo = (n) => (n === 1 ? "jogo" : "jogos");
+    showToast(`Adicionados ${addedPlayers} ${pJogador(addedPlayers)} e ${addedGames} ${pJogo(addedGames)} novo(s).`, "success");
+  });
+
   document.getElementById("btn-confirm-import").addEventListener("click", () => {
     if (!pendingImport) return;
     DATA.players = pendingImport.players;
-    DATA.games = pendingImport.games;
+    DATA.games = pendingImport.games.map(recomputeGameCapotes);
     DATA.nextPlayerId = pendingImport.nextPlayerId || DATA.nextPlayerId;
     DATA.nextGameId = pendingImport.nextGameId || DATA.nextGameId;
     DATA.activeGame = null; // não importamos jogos em curso, para evitar estados inconsistentes
@@ -1582,7 +1831,7 @@
     document.getElementById("overlay-confirm-import").hidden = true;
     renderDataScreen();
     checkResumeBanner();
-    showToast("Dados importados com sucesso.", "success");
+    showToast("Dados substituídos com sucesso.", "success");
   });
 
   /* ---------- apagar tudo ---------- */

@@ -300,6 +300,7 @@
       <button class="overlay-btn overlay-btn--ghost" id="btn-finish-from-set">Terminar Jogo</button>
       <button class="overlay-btn overlay-btn--primary" id="btn-next-set">Próximo Set ▸</button>
     </div>
+    <button class="overlay-undo-link" id="btn-undo-set-end">Foi engano — anular o último ponto</button>
   </div>
 </div>
 
@@ -400,11 +401,12 @@
 <div id="overlay-confirm-import" class="overlay" hidden>
   <div class="overlay-card">
     <p class="overlay-eyebrow">IMPORTAR DADOS</p>
-    <h3 class="overlay-title">Substituir dados atuais?</h3>
+    <h3 class="overlay-title">O que queres fazer?</h3>
     <p class="overlay-detail" id="confirm-import-detail">Isto vai substituir os jogadores e o histórico já guardados neste tablet.</p>
-    <div class="overlay-actions">
+    <div class="overlay-actions overlay-actions--col">
+      <button class="overlay-btn overlay-btn--primary" id="btn-merge-import">Adicionar ao que já tenho</button>
+      <button class="overlay-btn overlay-btn--danger" id="btn-confirm-import">Substituir tudo</button>
       <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-import">Cancelar</button>
-      <button class="overlay-btn overlay-btn--danger" id="btn-confirm-import">Substituir</button>
     </div>
   </div>
 </div>
