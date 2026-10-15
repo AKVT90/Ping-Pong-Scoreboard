@@ -54,6 +54,14 @@
           <small>Jogos anteriores</small>
         </span>
       </button>
+
+      <button class="menu-btn" id="btn-data">
+        <span class="menu-btn-icon">⇄</span>
+        <span class="menu-btn-text">
+          <strong>Dados</strong>
+          <small>Exportar ou importar cópia de segurança</small>
+        </span>
+      </button>
     </div>
 
     <div class="menu-resume" id="menu-resume" hidden>
@@ -263,6 +271,83 @@
     </div>
   </div>
 </div>
+
+<!-- ============ ECRÃ: DADOS (exportar / importar) ============ -->
+<div id="screen-data" class="screen">
+  <header class="bar">
+    <button class="bar-back" data-back="screen-menu">‹</button>
+    <h2 class="bar-title">Dados</h2>
+    <span class="bar-action bar-action--ghost"></span>
+  </header>
+  <div class="bar-spacer"></div>
+  <div class="content">
+
+    <div class="data-summary" id="data-summary">
+      <!-- preenchido via JS -->
+    </div>
+
+    <p class="section-label">Cópia de segurança</p>
+    <p class="data-explain">
+      Guarda jogadores e histórico num ficheiro que podes manter na nuvem (Drive, email, etc.)
+      e usar para recuperar tudo neste tablet ou noutro.
+    </p>
+    <button class="data-action data-action--primary" id="btn-export">
+      <span class="data-action-icon">⇩</span>
+      <span class="data-action-text">
+        <strong>Exportar cópia de segurança</strong>
+        <small>Gera um ficheiro .json com tudo</small>
+      </span>
+    </button>
+
+    <button class="data-action" id="btn-import">
+      <span class="data-action-icon">⇧</span>
+      <span class="data-action-text">
+        <strong>Importar cópia de segurança</strong>
+        <small>Substitui os dados atuais por um ficheiro</small>
+      </span>
+    </button>
+    <input type="file" id="input-import-file" accept="application/json,.json" hidden>
+
+    <p class="section-label">Apagar tudo</p>
+    <button class="data-action data-action--danger" id="btn-wipe">
+      <span class="data-action-icon">⨯</span>
+      <span class="data-action-text">
+        <strong>Apagar todos os dados</strong>
+        <small>Remove jogadores e histórico deste tablet</small>
+      </span>
+    </button>
+
+  </div>
+</div>
+
+<!-- ============ OVERLAY: CONFIRMAR IMPORTAÇÃO ============ -->
+<div id="overlay-confirm-import" class="overlay" hidden>
+  <div class="overlay-card">
+    <p class="overlay-eyebrow">IMPORTAR DADOS</p>
+    <h3 class="overlay-title">Substituir dados atuais?</h3>
+    <p class="overlay-detail" id="confirm-import-detail">Isto vai substituir os jogadores e o histórico já guardados neste tablet.</p>
+    <div class="overlay-actions">
+      <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-import">Cancelar</button>
+      <button class="overlay-btn overlay-btn--danger" id="btn-confirm-import">Substituir</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ OVERLAY: CONFIRMAR APAGAR TUDO ============ -->
+<div id="overlay-confirm-wipe" class="overlay" hidden>
+  <div class="overlay-card">
+    <p class="overlay-eyebrow">APAGAR TUDO</p>
+    <h3 class="overlay-title">Apagar todos os dados?</h3>
+    <p class="overlay-detail">Esta ação não pode ser desfeita. Considera exportar uma cópia de segurança primeiro.</p>
+    <div class="overlay-actions">
+      <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-wipe">Cancelar</button>
+      <button class="overlay-btn overlay-btn--danger" id="btn-confirm-wipe">Apagar tudo</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TOAST genérico (feedback rápido) ============ -->
+<div id="toast" class="toast" hidden></div>
 
 <!-- ============ TOAST ROTAÇÃO ============ -->
 <div id="rotate-hint" class="rotate-hint" hidden>

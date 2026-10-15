@@ -599,7 +599,68 @@ input{ font-family:inherit; }
 }
 .overlay-input:focus{ outline:none; border-color:var(--yellow); }
 
-/* ============== ROTATE HINT ============== */
+/* ============== DATA SCREEN (exportar/importar) ============== */
+.data-summary{
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:24px;
+}
+.data-explain{
+  font-size:13.5px;
+  color:var(--text-mid);
+  line-height:1.5;
+  margin-bottom:14px;
+}
+.data-action{
+  display:flex; align-items:center; gap:14px;
+  width:100%;
+  padding:16px 16px;
+  background:var(--panel);
+  border:1px solid var(--panel-line);
+  border-radius:12px;
+  text-align:left;
+  margin-bottom:10px;
+}
+.data-action:active{ background:#242424; }
+.data-action-icon{
+  font-size:20px;
+  width:30px; text-align:center;
+  flex-shrink:0;
+  color:var(--yellow);
+}
+.data-action-text{ display:flex; flex-direction:column; gap:2px; }
+.data-action-text strong{ font-size:15px; font-weight:600; }
+.data-action-text small{ font-size:12.5px; color:var(--text-dim); }
+.data-action--primary{ background:var(--blue); border-color:var(--blue-light); }
+.data-action--primary:active{ background:var(--blue-deep); }
+.data-action--primary .data-action-icon{ color:var(--white); }
+.data-action--primary .data-action-text small{ color:#cfe0f0; }
+.data-action--danger .data-action-icon{ color:var(--danger); }
+.data-action--danger .data-action-text strong{ color:var(--danger); }
+
+/* ============== TOAST ============== */
+.toast[hidden]{ display:none; }
+.toast{
+  position:fixed;
+  bottom:calc(28px + var(--safe-bottom));
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--panel);
+  border:1px solid var(--panel-line);
+  color:var(--white);
+  font-size:14px;
+  font-weight:500;
+  padding:13px 22px;
+  border-radius:30px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.4);
+  z-index:300;
+  max-width:86vw;
+  text-align:center;
+}
+.toast.is-error{ border-color:var(--danger); color:#ffb3a3; }
+.toast.is-success{ border-color:#5fb872; }
+
+
 .rotate-hint[hidden]{ display:none !important; }
 .rotate-hint{
   position:fixed; inset:0;

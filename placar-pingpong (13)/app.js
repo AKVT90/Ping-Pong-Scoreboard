@@ -104,6 +104,10 @@
     renderHistoryList();
     showScreen("screen-history");
   });
+  document.getElementById("btn-data").addEventListener("click", () => {
+    renderDataScreen();
+    showScreen("screen-data");
+  });
 
   function checkResumeBanner() {
     const banner = document.getElementById("menu-resume");
@@ -774,6 +778,148 @@
     pointHistory = [];
     showScreen("screen-menu");
     checkResumeBanner();
+  });
+
+  /* ---------------------------------------------------------
+     TOAST — feedback rápido não-bloqueante
+     --------------------------------------------------------- */
+  let toastTimeout = null;
+  function showToast(message, type) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.remove("is-error", "is-success");
+    if (type) toast.classList.add(type === "error" ? "is-error" : "is-success");
+    toast.hidden = false;
+    if (toastTimeout) clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+      toast.hidden = true;
+    }, 2800);
+  }
+
+  /* ---------------------------------------------------------
+     DADOS — ecrã com resumo, exportar, importar, apagar tudo
+     --------------------------------------------------------- */
+  const DATA_VERSION = 1;
+
+  function renderDataScreen() {
+    const summary = document.getElementById("data-summary");
+    summary.innerHTML = `
+      <div class="stat-box"><strong>${DATA.players.length}</strong><span>Jogadores guardados</span></div>
+      <div class="stat-box"><strong>${DATA.games.length}</strong><span>Jogos no histórico</span></div>
+    `;
+  }
+
+  function exportData() {
+    const exportPayload = {
+      appName: "placar-pingpong",
+      dataVersion: DATA_VERSION,
+      exportedAt: new Date().toISOString(),
+      players: DATA.players,
+      games: DATA.games,
+      nextPlayerId: DATA.nextPlayerId,
+      nextGameId: DATA.nextGameId
+    };
+
+    const json = JSON.stringify(exportPayload, null, 2);
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    const stamp = new Date().toISOString().slice(0, 10);
+    const filename = `placar-pingpong-backup-${stamp}.json`;
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    showToast("Cópia exportada: " + filename, "success");
+  }
+  document.getElementById("btn-export").addEventListener("click", exportData);
+
+  /* ---------- importar ---------- */
+  let pendingImport = null;
+
+  document.getElementById("btn-import").addEventListener("click", () => {
+    document.getElementById("input-import-file").click();
+  });
+
+  document.getElementById("input-import-file").addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    e.target.value = ""; // permite escolher o mesmo ficheiro outra vez depois
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(reader.result);
+        const validation = validateImportPayload(parsed);
+        if (!validation.ok) {
+          showToast(validation.message, "error");
+          return;
+        }
+        pendingImport = parsed;
+        const detail = document.getElementById("confirm-import-detail");
+        const pJogador = (n) => (n === 1 ? "jogador" : "jogadores");
+        const pJogo = (n) => (n === 1 ? "jogo" : "jogos");
+        detail.textContent =
+          `O ficheiro tem ${parsed.players.length} ${pJogador(parsed.players.length)} e ${parsed.games.length} ${pJogo(parsed.games.length)} no histórico. ` +
+          `Isto vai substituir os ${DATA.players.length} ${pJogador(DATA.players.length)} e ${DATA.games.length} ${pJogo(DATA.games.length)} já guardados neste tablet.`;
+        document.getElementById("overlay-confirm-import").hidden = false;
+      } catch (err) {
+        showToast("Ficheiro inválido ou corrompido.", "error");
+      }
+    };
+    reader.onerror = () => showToast("Não foi possível ler o ficheiro.", "error");
+    reader.readAsText(file);
+  });
+
+  function validateImportPayload(parsed) {
+    if (!parsed || typeof parsed !== "object") {
+      return { ok: false, message: "Ficheiro inválido: formato inesperado." };
+    }
+    if (!Array.isArray(parsed.players) || !Array.isArray(parsed.games)) {
+      return { ok: false, message: "Ficheiro inválido: não é uma cópia de segurança do Placar." };
+    }
+    return { ok: true };
+  }
+
+  document.getElementById("btn-cancel-import").addEventListener("click", () => {
+    pendingImport = null;
+    document.getElementById("overlay-confirm-import").hidden = true;
+  });
+
+  document.getElementById("btn-confirm-import").addEventListener("click", () => {
+    if (!pendingImport) return;
+    DATA.players = pendingImport.players;
+    DATA.games = pendingImport.games;
+    DATA.nextPlayerId = pendingImport.nextPlayerId || DATA.nextPlayerId;
+    DATA.nextGameId = pendingImport.nextGameId || DATA.nextGameId;
+    DATA.activeGame = null; // não importamos jogos em curso, para evitar estados inconsistentes
+    saveData();
+    pendingImport = null;
+    document.getElementById("overlay-confirm-import").hidden = true;
+    renderDataScreen();
+    checkResumeBanner();
+    showToast("Dados importados com sucesso.", "success");
+  });
+
+  /* ---------- apagar tudo ---------- */
+  document.getElementById("btn-wipe").addEventListener("click", () => {
+    document.getElementById("overlay-confirm-wipe").hidden = false;
+  });
+  document.getElementById("btn-cancel-wipe").addEventListener("click", () => {
+    document.getElementById("overlay-confirm-wipe").hidden = true;
+  });
+  document.getElementById("btn-confirm-wipe").addEventListener("click", () => {
+    DATA = defaultData();
+    saveData();
+    document.getElementById("overlay-confirm-wipe").hidden = true;
+    renderDataScreen();
+    checkResumeBanner();
+    showToast("Todos os dados foram apagados.", "success");
   });
 
   /* ---------------------------------------------------------

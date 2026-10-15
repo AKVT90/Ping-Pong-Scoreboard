@@ -41,4 +41,14 @@ A app foi pensada para ser usada com o tablet na horizontal. Se estiver na verti
 
 ## Sobre os dados
 
-Tudo o que crias (jogadores, jogos, estatísticas) fica guardado apenas dentro do tablet, no armazenamento local do navegador. Não há sincronização, conta, nem envio de dados para lado nenhum. Se desinstalares a app ou limpares os dados do Chrome, o histórico perde-se — por isso, se quiseres, podes fazer cópias de segurança copiando o conteúdo guardado (fala comigo se precisares de ajuda a exportar/importar isso).
+Tudo o que crias (jogadores, jogos, estatísticas) fica guardado apenas dentro do tablet, no armazenamento local do navegador. Não há sincronização, conta, nem envio de dados para lado nenhum.
+
+### Cópia de segurança (exportar / importar)
+
+No menu principal, toca em **"Dados"**. Aí tens três opções:
+
+- **Exportar cópia de segurança**: gera um ficheiro `.json` com todos os jogadores e todo o histórico, e abre o ecrã de partilha/transferência do Android. Podes guardar esse ficheiro no Google Drive, enviar por email para ti próprio, ou simplesmente deixá-lo na pasta de Transferências do tablet.
+- **Importar cópia de segurança**: escolhe um ficheiro `.json` exportado anteriormente para repor todos os jogadores e histórico. Útil se limpaste a cache do Chrome, mudaste de tablet, ou queres juntar dados de outro dispositivo. Atenção: isto substitui por completo os dados atuais — a app avisa-te e pede confirmação antes de continuar.
+- **Apagar todos os dados**: limpa tudo (jogadores e histórico) deste tablet. Também pede confirmação antes de avançar.
+
+Recomendo exportar uma cópia de segurança de vez em quando, sobretudo antes de limpares os dados do Chrome ou trocares de tablet.
