@@ -70,6 +70,7 @@
     </div>
 
     <p class="menu-footer">dados guardados apenas neste tablet</p>
+    <p class="menu-credit">Powered by AKVT90</p>
   </div>
 </div>
 
@@ -154,8 +155,8 @@
     <section class="setup-section">
       <p class="setup-label">Pontos por set</p>
       <div class="setup-options" id="opt-points">
-        <button class="setup-option active" data-points="11">11 pontos</button>
-        <button class="setup-option" data-points="21">21 pontos</button>
+        <button class="setup-option" data-points="11">11 pontos</button>
+        <button class="setup-option active" data-points="21">21 pontos</button>
       </div>
     </section>
 
@@ -166,6 +167,11 @@
         <button class="setup-option" data-format="3">Melhor de 3</button>
         <button class="setup-option" data-format="5">Melhor de 5</button>
       </div>
+    </section>
+
+    <section class="setup-section">
+      <p class="setup-label">Descrição <span class="setup-label-optional">(opcional)</span></p>
+      <input type="text" id="input-game-description" class="setup-description-input" placeholder="Ex: torneio de verão, sala de jogos..." maxlength="60" autocomplete="off">
     </section>
 
     <button class="setup-confirm" id="btn-confirm-setup" disabled>Começar Jogo</button>
@@ -185,6 +191,24 @@
   </div>
 </div>
 
+<!-- ============ ECRÃ: BOLAR (escolher quem serve) ============ -->
+<div id="screen-bolar" class="screen screen-bolar">
+  <div class="bolar-board">
+    <button class="bolar-half bolar-half--blue" id="bolar-blue" data-side="blue">
+      <span class="bolar-name" id="bolar-name-blue">Azul</span>
+      <span class="bolar-hint">serve primeiro</span>
+    </button>
+    <button class="bolar-half bolar-half--white" id="bolar-white" data-side="white">
+      <span class="bolar-name" id="bolar-name-white">Branco</span>
+      <span class="bolar-hint">serve primeiro</span>
+    </button>
+    <div class="bolar-center">
+      <span class="bolar-title">BOLAR</span>
+      <span class="bolar-set-label" id="bolar-set-label">Set 1 · quem serve primeiro?</span>
+    </div>
+  </div>
+</div>
+
 <!-- ============ ECRÃ: JOGO (PLACAR) ============ -->
 <div id="screen-game" class="screen screen-game">
   <div class="board" id="board">
@@ -199,10 +223,12 @@
 
     <div class="sets-badge sets-badge--blue" id="sets-blue">
       <span class="sets-num">0</span>
+      <span class="serve-ball serve-ball--blue" id="serve-ball-blue" hidden></span>
     </div>
 
     <div class="sets-badge sets-badge--white" id="sets-white">
       <span class="sets-num">0</span>
+      <span class="serve-ball serve-ball--white" id="serve-ball-white" hidden></span>
     </div>
 
     <div class="topbar">
