@@ -29,11 +29,22 @@ Como esta app não passa pela Play Store, a forma de "instalar" é através do n
 ## Como usar
 
 - **Menu principal**: cria os jogadores primeiro (em "Jogadores"), depois usa "Novo Jogo" sempre que quiseres começar uma partida.
-- **Novo Jogo**: escolhe o jogador do lado azul, o do lado branco, quantos pontos por set (11 ou 21) e o formato (livre, melhor de 3, ou melhor de 5).
-- **Durante o jogo**: toca em qualquer metade do ecrã para somar um ponto a esse lado. O quadrado amarelo no canto mostra os sets ganhos. O botão de pausa (❙❙) para o cronómetro, e o botão ↺ anula o último ponto marcado por engano.
+- **Novo Jogo**: escolhe o jogador do lado azul, o do lado branco, quantos pontos por set (21 é a predefinição, ou 11), o formato (livre, melhor de 3, ou melhor de 5) e, se quiseres, uma descrição opcional (por exemplo, onde o jogo está a ser disputado).
+- **BOLAR**: antes de cada set (incluindo o primeiro), aparece um ecrã a dividir o tablet a azul e branco para escolherem quem serve primeiro nesse set. Toca no lado de quem vai começar a servir.
+- **Durante o jogo**: toca em qualquer metade do ecrã para somar um ponto a esse lado. O quadrado amarelo no canto mostra os sets ganhos, com uma pequena bola branca a piscar do lado de quem está a servir. O serviço troca automaticamente de lado sempre que a soma dos pontos dos dois jogadores atinge um múltiplo de 5 (ex: 4-1, 8-7, 9-6...), com um beep discreto a avisar da troca. Quando um dos lados está a um ponto de fechar o set ("match point"), ouve-se um som diferente. O botão de pausa (❙❙) para o cronómetro, e o botão ↺ anula o último ponto marcado por engano.
 - **Capote**: em jogos de 21 pontos, se um jogador chegar aos 11 enquanto o adversário continua a 0, o set termina automaticamente e fica assinalado como "Capote" no histórico.
-- **Terminar jogo**: o botão vermelho em baixo. Pede confirmação e guarda o resultado no histórico — exceto se ainda não tiveres completado nenhum set, nesse caso não grava nada.
-- **Jogo em curso**: se saíres da app a meio de um jogo (por engano ou de propósito), ao voltares ao menu vais ver "Continuar jogo" para retomares exatamente onde ficaste.
+- **Terminar jogo**: o botão vermelho em baixo. Pede confirmação e guarda o resultado no histórico — exceto se ainda não tiveres completado nenhum set, nesse caso não grava nada. Se os sets ficarem empatados (ex: 1-1), o jogo fica registado como "Empate", sem atribuir vitória a ninguém.
+- **Jogo em curso**: se saíres da app a meio de um jogo (por engano ou de propósito), ao voltares ao menu vais ver "Continuar jogo" para retomares exatamente onde ficaste, incluindo o serviço.
+
+## Estatísticas e leaderboard
+
+No ecrã "Jogadores", no topo, aparece uma tabela com os 5 melhores jogadores (ordenados por win rate), mostrando vitórias, derrotas, empates e capotes de jogos. Abaixo, a lista completa de todos os jogadores.
+
+Ao abrires o perfil de um jogador específico, vês: jogos disputados, win rate, jogos ganhos/perdidos/empatados (a nível de jogo completo), sets ganhos e perdidos (vitórias e derrotas a nível de set), total de sets ganhos/perdidos, capotes feitos e sofridos, o adversário contra quem tens mais vitórias e mais derrotas, os confrontos diretos contra cada adversário, e os últimos jogos disputados.
+
+## Histórico e gráfico de momentum
+
+No histórico, cada jogo mostra a data, o formato, se houve empate, e a descrição que escreveste ao criar o jogo (se escreveste alguma). Ao abrir o detalhe de um jogo, para cada set aparece também um pequeno gráfico de linha ("momentum") que mostra visualmente quem esteve a dominar o set, ponto a ponto.
 
 ## Rotação de ecrã
 
