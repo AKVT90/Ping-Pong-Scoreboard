@@ -126,7 +126,7 @@
   </div>
 </div>
 
-<!-- ============ ECRÃ: NOVO JOGO (setup) ============ -->
+<!-- ============ ECRÃ: NOVO JOGO (passo 1 — jogadores) ============ -->
 <div id="screen-setup" class="screen">
   <header class="bar">
     <button class="bar-back" data-back="screen-menu">‹</button>
@@ -153,6 +153,49 @@
     </section>
 
     <section class="setup-section">
+      <p class="setup-label">Descrição <span class="setup-label-optional">(opcional)</span></p>
+      <input type="text" id="input-game-description" class="setup-description-input" placeholder="Ex: torneio de verão, sala de jogos..." maxlength="60" autocomplete="off">
+    </section>
+
+    <button class="setup-confirm" id="btn-goto-mode" disabled>Continuar ▸</button>
+  </div>
+</div>
+
+<!-- ============ ECRÃ: NOVO JOGO (passo 2 — Clássico / Personalizado) ============ -->
+<div id="screen-setup-mode" class="screen">
+  <header class="bar">
+    <button class="bar-back" id="btn-back-from-mode">‹</button>
+    <h2 class="bar-title">Tipo de Jogo</h2>
+    <span class="bar-action bar-action--ghost"></span>
+  </header>
+  <div class="bar-spacer"></div>
+  <div class="content setup-content">
+
+    <button class="mode-card mode-card--custom active" id="mode-custom" data-mode="custom">
+      <span class="mode-card-title">Personalizado</span>
+      <span class="mode-card-desc">11 ou 21 pontos · livre, BO3 ou BO5 · serviço alterna a cada 5 pontos somados</span>
+    </button>
+
+    <button class="mode-card mode-card--classic" id="mode-classic" data-mode="classic">
+      <span class="mode-card-title">Clássico</span>
+      <span class="mode-card-desc">11 pontos por set · BO3, BO5 ou BO7</span>
+    </button>
+
+    <button class="setup-confirm" id="btn-goto-options">Continuar ▸</button>
+  </div>
+</div>
+
+<!-- ============ ECRÃ: NOVO JOGO (passo 3 — pontos e formato) ============ -->
+<div id="screen-setup-options" class="screen">
+  <header class="bar">
+    <button class="bar-back" id="btn-back-from-options">‹</button>
+    <h2 class="bar-title">Pontos e Formato</h2>
+    <span class="bar-action bar-action--ghost"></span>
+  </header>
+  <div class="bar-spacer"></div>
+  <div class="content setup-content">
+
+    <section class="setup-section" id="section-points">
       <p class="setup-label">Pontos por set</p>
       <div class="setup-options" id="opt-points">
         <button class="setup-option" data-points="11">11 pontos</button>
@@ -166,15 +209,11 @@
         <button class="setup-option active" data-format="free">Livre</button>
         <button class="setup-option" data-format="3">Melhor de 3</button>
         <button class="setup-option" data-format="5">Melhor de 5</button>
+        <button class="setup-option" data-format="7" id="opt-format-7">Melhor de 7</button>
       </div>
     </section>
 
-    <section class="setup-section">
-      <p class="setup-label">Descrição <span class="setup-label-optional">(opcional)</span></p>
-      <input type="text" id="input-game-description" class="setup-description-input" placeholder="Ex: torneio de verão, sala de jogos..." maxlength="60" autocomplete="off">
-    </section>
-
-    <button class="setup-confirm" id="btn-confirm-setup" disabled>Começar Jogo</button>
+    <button class="setup-confirm" id="btn-confirm-setup">Começar Jogo</button>
   </div>
 </div>
 
@@ -291,6 +330,13 @@
     <p class="overlay-eyebrow">NOVO JOGADOR</p>
     <h3 class="overlay-title">Nome do jogador</h3>
     <input type="text" id="input-player-name" class="overlay-input" placeholder="Ex: Miguel" maxlength="20" autocomplete="off">
+    <p class="color-picker-label">Cor no placar</p>
+    <div class="color-picker" id="color-picker-new">
+      <button class="color-swatch color-swatch--blue-white active" data-color="blue-white" title="Azul / Branco"></button>
+      <button class="color-swatch color-swatch--green-white" data-color="green-white" title="Verde / Branco"></button>
+      <button class="color-swatch color-swatch--red-white" data-color="red-white" title="Vermelho / Branco"></button>
+      <button class="color-swatch color-swatch--pink-white" data-color="pink-white" title="Rosa / Branco"></button>
+    </div>
     <div class="overlay-actions">
       <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-new-player">Cancelar</button>
       <button class="overlay-btn overlay-btn--primary" id="btn-save-new-player">Guardar</button>

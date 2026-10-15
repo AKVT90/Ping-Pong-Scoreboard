@@ -93,6 +93,28 @@
   }
 
   /* ---------------------------------------------------------
+     CORES DE JOGADOR — cada jogador tem uma cor de placar
+     própria (fundo / número), predefinida azul-branco.
+     --------------------------------------------------------- */
+  const PLAYER_COLORS = {
+    "blue-white": { bg: "#0d3b66", fg: "#f4f1ea", label: "Azul / Branco" },
+    "green-white": { bg: "#2f8f4e", fg: "#f4f1ea", label: "Verde / Branco" },
+    "red-white": { bg: "#c1432f", fg: "#f4f1ea", label: "Vermelho / Branco" },
+    "pink-white": { bg: "#d6558c", fg: "#f4f1ea", label: "Rosa / Branco" }
+  };
+  const DEFAULT_PLAYER_COLOR = "blue-white";
+
+  function getPlayerColorKey(player) {
+    return player && player.color && PLAYER_COLORS[player.color] ? player.color : DEFAULT_PLAYER_COLOR;
+  }
+
+  // cor invertida: troca fundo <-> número (usada quando dois jogadores coincidem na cor)
+  function invertedColor(colorKey) {
+    const c = PLAYER_COLORS[colorKey] || PLAYER_COLORS[DEFAULT_PLAYER_COLOR];
+    return { bg: c.fg, fg: c.bg };
+  }
+
+  /* ---------------------------------------------------------
      MENU PRINCIPAL
      --------------------------------------------------------- */
   document.getElementById("btn-new-game").addEventListener("click", openSetup);
@@ -218,10 +240,16 @@
 
   document.getElementById("btn-add-player").addEventListener("click", openNewPlayerOverlay);
 
+  let newPlayerColor = DEFAULT_PLAYER_COLOR;
+
   function openNewPlayerOverlay() {
     const overlay = document.getElementById("overlay-new-player");
     const input = document.getElementById("input-player-name");
     input.value = "";
+    newPlayerColor = DEFAULT_PLAYER_COLOR;
+    document.querySelectorAll("#color-picker-new .color-swatch").forEach((sw) => {
+      sw.classList.toggle("active", sw.dataset.color === newPlayerColor);
+    });
     overlay.hidden = false;
     setTimeout(() => input.focus(), 50);
   }
@@ -234,6 +262,15 @@
     if (e.key === "Enter") saveNewPlayer();
   });
 
+  document.querySelectorAll("#color-picker-new .color-swatch").forEach((sw) => {
+    sw.addEventListener("click", () => {
+      newPlayerColor = sw.dataset.color;
+      document.querySelectorAll("#color-picker-new .color-swatch").forEach((s) => {
+        s.classList.toggle("active", s === sw);
+      });
+    });
+  });
+
   function saveNewPlayer() {
     const input = document.getElementById("input-player-name");
     const name = input.value.trim();
@@ -241,6 +278,7 @@
     const player = {
       id: uid("player"),
       name: name,
+      color: newPlayerColor,
       createdAt: new Date().toISOString()
     };
     DATA.players.push(player);
@@ -343,7 +381,27 @@
       ${rivalsHTML}
       <p class="section-label">Últimos jogos</p>
       ${historyHTML}
+      <p class="section-label">Cor no placar</p>
+      <div class="color-picker color-picker--profile" id="color-picker-profile">
+        <button class="color-swatch color-swatch--blue-white" data-color="blue-white" title="Azul / Branco"></button>
+        <button class="color-swatch color-swatch--green-white" data-color="green-white" title="Verde / Branco"></button>
+        <button class="color-swatch color-swatch--red-white" data-color="red-white" title="Vermelho / Branco"></button>
+        <button class="color-swatch color-swatch--pink-white" data-color="pink-white" title="Rosa / Branco"></button>
+      </div>
     `;
+
+    const currentColor = getPlayerColorKey(player);
+    document.querySelectorAll("#color-picker-profile .color-swatch").forEach((sw) => {
+      sw.classList.toggle("active", sw.dataset.color === currentColor);
+      sw.addEventListener("click", () => {
+        player.color = sw.dataset.color;
+        saveData();
+        document.querySelectorAll("#color-picker-profile .color-swatch").forEach((s) => {
+          s.classList.toggle("active", s === sw);
+        });
+      });
+    });
+
     showScreen("screen-player-profile");
   }
 
@@ -495,6 +553,7 @@
   function formatModeLabel(format) {
     if (format === "3") return "MD3";
     if (format === "5") return "MD5";
+    if (format === "7") return "MD7";
     return "LIVRE";
   }
 
@@ -593,15 +652,18 @@
   let setup = {
     bluePlayerId: null,
     whitePlayerId: null,
+    mode: "custom", // "custom" | "classic"
     points: 21,
     format: "free",
     description: ""
   };
 
   function openSetup() {
-    setup = { bluePlayerId: null, whitePlayerId: null, points: 21, format: "free", description: "" };
+    setup = { bluePlayerId: null, whitePlayerId: null, mode: "custom", points: 21, format: "free", description: "" };
     document.getElementById("input-game-description").value = "";
     updateSetupUI();
+    updateModeUI();
+    updateOptionsUI();
     showScreen("screen-setup");
   }
 
@@ -627,32 +689,82 @@
       whitePick.innerHTML = `<span>Escolher jogador</span>`;
     }
 
-    document.querySelectorAll("#opt-points .setup-option").forEach((btn) => {
-      btn.classList.toggle("active", Number(btn.dataset.points) === setup.points);
-    });
-    document.querySelectorAll("#opt-format .setup-option").forEach((btn) => {
-      btn.classList.toggle("active", btn.dataset.format === setup.format);
-    });
-
-    const confirmBtn = document.getElementById("btn-confirm-setup");
+    const goNextBtn = document.getElementById("btn-goto-mode");
     const ready = setup.bluePlayerId && setup.whitePlayerId && setup.bluePlayerId !== setup.whitePlayerId;
-    confirmBtn.disabled = !ready;
+    goNextBtn.disabled = !ready;
   }
 
   document.getElementById("input-game-description").addEventListener("input", (e) => {
     setup.description = e.target.value;
   });
 
+  /* ---------- passo 2: Clássico / Personalizado ---------- */
+  function updateModeUI() {
+    document.getElementById("mode-custom").classList.toggle("active", setup.mode === "custom");
+    document.getElementById("mode-classic").classList.toggle("active", setup.mode === "classic");
+  }
+
+  document.getElementById("mode-custom").addEventListener("click", () => {
+    setup.mode = "custom";
+    updateModeUI();
+  });
+  document.getElementById("mode-classic").addEventListener("click", () => {
+    setup.mode = "classic";
+    updateModeUI();
+  });
+
+  document.getElementById("btn-goto-mode").addEventListener("click", () => {
+    showScreen("screen-setup-mode");
+  });
+  document.getElementById("btn-back-from-mode").addEventListener("click", () => {
+    showScreen("screen-setup");
+  });
+
+  document.getElementById("btn-goto-options").addEventListener("click", () => {
+    // ao entrar no modo Clássico, força pontos=11 e formato válido (3/5/7); nunca "free"
+    if (setup.mode === "classic") {
+      setup.points = 11;
+      if (setup.format === "free") setup.format = "3";
+    } else {
+      // Personalizado: predefinição é sempre 21 pontos ao entrar vindo do Clássico
+      if (setup.points !== 11 && setup.points !== 21) setup.points = 21;
+    }
+    updateOptionsUI();
+    showScreen("screen-setup-options");
+  });
+  document.getElementById("btn-back-from-options").addEventListener("click", () => {
+    showScreen("screen-setup-mode");
+  });
+
+  /* ---------- passo 3: pontos e formato ---------- */
+  function updateOptionsUI() {
+    const isClassic = setup.mode === "classic";
+
+    // pontos por set: no Clássico só existe 11, escondemos a secção toda
+    document.getElementById("section-points").hidden = isClassic;
+
+    // formato: Clássico esconde "Livre" e mostra "Melhor de 7"; Personalizado é o oposto
+    document.querySelector('#opt-format [data-format="free"]').hidden = isClassic;
+    document.getElementById("opt-format-7").hidden = !isClassic;
+
+    document.querySelectorAll("#opt-points .setup-option").forEach((btn) => {
+      btn.classList.toggle("active", Number(btn.dataset.points) === setup.points);
+    });
+    document.querySelectorAll("#opt-format .setup-option").forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.format === setup.format);
+    });
+  }
+
   document.querySelectorAll("#opt-points .setup-option").forEach((btn) => {
     btn.addEventListener("click", () => {
       setup.points = Number(btn.dataset.points);
-      updateSetupUI();
+      updateOptionsUI();
     });
   });
   document.querySelectorAll("#opt-format .setup-option").forEach((btn) => {
     btn.addEventListener("click", () => {
       setup.format = btn.dataset.format;
-      updateSetupUI();
+      updateOptionsUI();
     });
   });
 
@@ -709,7 +821,7 @@
 
   document.getElementById("btn-confirm-setup").addEventListener("click", () => {
     if (setup.bluePlayerId && setup.whitePlayerId) {
-      startNewGame(setup.bluePlayerId, setup.whitePlayerId, setup.points, setup.format, setup.description);
+      startNewGame(setup.bluePlayerId, setup.whitePlayerId, setup.points, setup.format, setup.description, setup.mode);
     }
   });
 
@@ -719,13 +831,14 @@
   let game = null;       // estado do jogo em curso
   let timerInterval = null;
 
-  function startNewGame(bluePlayerId, whitePlayerId, points, format, description) {
+  function startNewGame(bluePlayerId, whitePlayerId, points, format, description, mode) {
     game = {
       id: uid("game"),
       bluePlayerId,
       whitePlayerId,
       pointsTarget: points,
       format,
+      gameMode: mode || "custom",
       description: (description || "").trim(),
       startedAt: new Date().toISOString(),
       elapsedSeconds: 0,
@@ -752,6 +865,7 @@
     document.getElementById("bolar-name-white").textContent = whiteName;
     const setNumber = game.sets.length + 1;
     document.getElementById("bolar-set-label").textContent = `Set ${setNumber} · quem serve primeiro?`;
+    applyGameColors();
     showScreen("screen-bolar");
     if (document.documentElement.requestFullscreen) {
       document.documentElement.requestFullscreen().then(tryLockOrientation).catch(() => {});
@@ -774,6 +888,40 @@
     saveData();
   }
 
+  /* ---------------------------------------------------------
+     RESOLUÇÃO DE CORES DO JOGO — cada jogador tem a sua cor de
+     placar; se ambos tiverem escolhido a MESMA cor, o jogador
+     do lado branco joga com essa cor invertida (fundo <-> número).
+     --------------------------------------------------------- */
+  function resolveGameColors() {
+    const bluePlayer = getPlayer(game.bluePlayerId);
+    const whitePlayer = getPlayer(game.whitePlayerId);
+    const blueColorKey = getPlayerColorKey(bluePlayer);
+    const whiteColorKey = getPlayerColorKey(whitePlayer);
+
+    const blueColor = PLAYER_COLORS[blueColorKey];
+    let whiteColor;
+    if (blueColorKey === whiteColorKey) {
+      // coincidência: o lado branco joga com a cor do jogador invertida
+      whiteColor = invertedColor(whiteColorKey);
+    } else {
+      whiteColor = PLAYER_COLORS[whiteColorKey];
+    }
+
+    return { blueColor, whiteColor };
+  }
+
+  function applyGameColors() {
+    const { blueColor, whiteColor } = resolveGameColors();
+    [document.getElementById("board"), document.querySelector(".bolar-board")].forEach((el) => {
+      if (!el) return;
+      el.style.setProperty("--side-blue-bg", blueColor.bg);
+      el.style.setProperty("--side-blue-fg", blueColor.fg);
+      el.style.setProperty("--side-white-bg", whiteColor.bg);
+      el.style.setProperty("--side-white-fg", whiteColor.fg);
+    });
+  }
+
   function resumeGameUI() {
     game = DATA.activeGame;
     if (!game) return;
@@ -783,6 +931,7 @@
     document.getElementById("name-blue").textContent = blueName;
     document.getElementById("name-white").textContent = whiteName;
 
+    applyGameColors();
     renderScores();
     startTimerLoop();
     startServeBlinkLoop();
@@ -802,11 +951,15 @@
      pontos do set atual (ex: 4+1=5, 8+7=15, 9+6=15...).
      A bolinha de serviço pisca do lado de quem está a servir.
      --------------------------------------------------------- */
+  function serveSwapInterval() {
+    return game && game.gameMode === "classic" ? 2 : 5;
+  }
   function currentServingSide() {
     if (!game || !game.servingSide) return null;
     const total = game.currentBlue + game.currentWhite;
-    const swaps = Math.floor(total / 5);
-    // cada bloco completo de 5 pontos totais troca o serviço uma vez
+    const interval = serveSwapInterval();
+    const swaps = Math.floor(total / interval);
+    // cada bloco completo de pontos totais troca o serviço uma vez
     return swaps % 2 === 0 ? game.servingSide : otherSide(game.servingSide);
   }
   function otherSide(side) {
@@ -1025,9 +1178,9 @@
       })
       .join("");
 
-    // se o formato for melhor-de-3 ou melhor-de-5, avisamos quando já há vencedor
-    // matemático, mas a decisão de avançar ou terminar continua a ser do utilizador.
-    const neededToWin = game.format === "3" ? 2 : game.format === "5" ? 3 : null;
+    // se o formato for melhor-de-3, melhor-de-5 ou melhor-de-7, avisamos quando já há
+    // vencedor matemático, mas a decisão de avançar ou terminar continua a ser do utilizador.
+    const neededToWin = game.format === "3" ? 2 : game.format === "5" ? 3 : game.format === "7" ? 4 : null;
     const nextBtn = document.getElementById("btn-next-set");
     if (neededToWin && (game.blueSetsWon >= neededToWin || game.whiteSetsWon >= neededToWin)) {
       const matchWinnerName =
@@ -1100,6 +1253,7 @@
       id: game.id,
       pointsTarget: game.pointsTarget,
       format: game.format,
+      gameMode: game.gameMode || "custom",
       description: game.description || "",
       startedAt: game.startedAt,
       endedAt: new Date().toISOString(),

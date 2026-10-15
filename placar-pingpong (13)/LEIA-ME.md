@@ -29,12 +29,22 @@ Como esta app não passa pela Play Store, a forma de "instalar" é através do n
 ## Como usar
 
 - **Menu principal**: cria os jogadores primeiro (em "Jogadores"), depois usa "Novo Jogo" sempre que quiseres começar uma partida.
-- **Novo Jogo**: escolhe o jogador do lado azul, o do lado branco, quantos pontos por set (21 é a predefinição, ou 11), o formato (livre, melhor de 3, ou melhor de 5) e, se quiseres, uma descrição opcional (por exemplo, onde o jogo está a ser disputado).
-- **BOLAR**: antes de cada set (incluindo o primeiro), aparece um ecrã a dividir o tablet a azul e branco para escolherem quem serve primeiro nesse set. Toca no lado de quem vai começar a servir.
-- **Durante o jogo**: toca em qualquer metade do ecrã para somar um ponto a esse lado. O quadrado amarelo no canto mostra os sets ganhos, com uma pequena bola branca a piscar do lado de quem está a servir. O serviço troca automaticamente de lado sempre que a soma dos pontos dos dois jogadores atinge um múltiplo de 5 (ex: 4-1, 8-7, 9-6...), com um beep discreto a avisar da troca. Quando um dos lados está a um ponto de fechar o set ("match point"), ouve-se um som diferente. O botão de pausa (❙❙) para o cronómetro, e o botão ↺ anula o último ponto marcado por engano.
-- **Capote**: em jogos de 21 pontos, se um jogador chegar aos 11 enquanto o adversário continua a 0, o set termina automaticamente e fica assinalado como "Capote" no histórico.
+- **Novo Jogo — passo 1**: escolhe o jogador do lado azul, o do lado branco, e se quiseres, uma descrição opcional (por exemplo, onde o jogo está a ser disputado).
+- **Novo Jogo — passo 2 (tipo de jogo)**: escolhe entre "Personalizado" (predefinição) ou "Clássico".
+  - **Personalizado**: 11 ou 21 pontos por set (21 é a predefinição), formato livre, melhor de 3 ou melhor de 5, e o serviço alterna sempre que a soma dos pontos dos dois jogadores atinge um múltiplo de 5.
+  - **Clássico**: sempre 11 pontos por set, formato melhor de 3, melhor de 5 ou melhor de 7 (sem modo livre), e o serviço alterna a cada 2 pontos somados, como nas regras oficiais de ping pong.
+- **Novo Jogo — passo 3**: confirma os pontos e formato (varia conforme o tipo escolhido no passo anterior) e toca em "Começar Jogo".
+- **BOLAR**: antes de cada set (incluindo o primeiro), aparece um ecrã a dividir o tablet a meio para escolherem quem serve primeiro nesse set. Toca no lado de quem vai começar a servir.
+- **Durante o jogo**: toca em qualquer metade do ecrã para somar um ponto a esse lado. O quadrado amarelo no canto mostra os sets ganhos, com uma pequena bola branca a piscar do lado de quem está a servir, com um beep discreto a avisar da troca de serviço. Quando um dos lados está a um ponto de fechar o set ("match point"), ouve-se um som diferente. O botão de pausa (❙❙) para o cronómetro, e o botão ↺ anula o último ponto marcado por engano.
+- **Capote**: apenas nos jogos de 21 pontos (modo Personalizado), se um jogador chegar aos 11 enquanto o adversário continua a 0, o set termina automaticamente e fica assinalado como "Capote" no histórico.
 - **Terminar jogo**: o botão vermelho em baixo. Pede confirmação e guarda o resultado no histórico — exceto se ainda não tiveres completado nenhum set, nesse caso não grava nada. Se os sets ficarem empatados (ex: 1-1), o jogo fica registado como "Empate", sem atribuir vitória a ninguém.
-- **Jogo em curso**: se saíres da app a meio de um jogo (por engano ou de propósito), ao voltares ao menu vais ver "Continuar jogo" para retomares exatamente onde ficaste, incluindo o serviço.
+- **Jogo em curso**: se saíres da app a meio de um jogo (por engano ou de propósito), ao voltares ao menu vais ver "Continuar jogo" para retomares exatamente onde ficaste, incluindo o serviço e as cores.
+
+## Cor de cada jogador no placar
+
+Ao criar um jogador (ou depois, no perfil dele), podes escolher a cor que ele usa no placar: azul/branco (predefinição), verde/branco, vermelho/branco ou rosa/branco. A cor segue o jogador, não o lado do tablet: se colocares um jogador "verde" no lado esquerdo do placar, esse lado fica verde nesse jogo, independentemente de ser tecnicamente o "lado azul" da app.
+
+Se os dois jogadores de um jogo tiverem escolhido a mesma cor, o jogador do lado branco joga automaticamente com essa cor invertida (fundo e número trocados), para que se consiga distinguir sempre os dois lados no placar.
 
 ## Estatísticas e leaderboard
 
