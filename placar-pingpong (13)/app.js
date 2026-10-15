@@ -97,10 +97,14 @@
      própria (fundo / número), predefinida azul-branco.
      --------------------------------------------------------- */
   const PLAYER_COLORS = {
-    "blue-white": { bg: "#0d3b66", fg: "#f4f1ea", label: "Azul / Branco" },
-    "green-white": { bg: "#2f8f4e", fg: "#f4f1ea", label: "Verde / Branco" },
-    "red-white": { bg: "#c1432f", fg: "#f4f1ea", label: "Vermelho / Branco" },
-    "pink-white": { bg: "#d6558c", fg: "#f4f1ea", label: "Rosa / Branco" }
+    "blue-white":   { bg: "#0d3b66", fg: "#f4f1ea", label: "Azul / Branco" },
+    "green-white":  { bg: "#2f8f4e", fg: "#f4f1ea", label: "Verde / Branco" },
+    "red-white":    { bg: "#c1432f", fg: "#f4f1ea", label: "Vermelho / Branco" },
+    "pink-white":   { bg: "#d6558c", fg: "#f4f1ea", label: "Rosa / Branco" },
+    "purple-white": { bg: "#6b3fa0", fg: "#f4f1ea", label: "Roxo / Branco" },
+    "gold-white":   { bg: "#c9920a", fg: "#f4f1ea", label: "Dourado / Branco" },
+    "white-black":  { bg: "#f4f1ea", fg: "#1a1a1a", label: "Branco / Preto" },
+    "orange-white": { bg: "#d4620a", fg: "#f4f1ea", label: "Laranja / Branco" }
   };
   const DEFAULT_PLAYER_COLOR = "blue-white";
 
@@ -218,24 +222,27 @@
       list.appendChild(allLabel);
     }
 
+    const grid = document.createElement("div");
+    grid.className = "players-grid";
+    list.appendChild(grid);
+
     DATA.players
       .slice()
       .sort((a, b) => a.name.localeCompare(b.name, "pt"))
       .forEach((p) => {
         const stats = computePlayerStats(p.id, allElos);
         const card = document.createElement("button");
-        card.className = "player-card";
+        card.className = "player-card player-card--grid";
         card.innerHTML = `
           <div class="player-avatar">${playerInitials(p.name)}</div>
           <div class="player-info">
             <strong>${escapeHTML(p.name)}</strong>
-            <span>${stats.gamesPlayed} jogos · ${stats.winRate}% vitórias</span>
+            <span>${stats.gamesPlayed} jogos · ${stats.winRate}%</span>
           </div>
-          <span class="player-elo">${stats.elo} ELO</span>
-          <div class="player-chevron">›</div>
+          <span class="player-elo player-elo--small">${stats.elo}</span>
         `;
         card.addEventListener("click", () => openPlayerProfile(p.id));
-        list.appendChild(card);
+        grid.appendChild(card);
       });
   }
 
@@ -391,10 +398,14 @@
       ${historyHTML}
       <p class="section-label">Cor no placar</p>
       <div class="color-picker color-picker--profile" id="color-picker-profile">
-        <button class="color-swatch color-swatch--blue-white" data-color="blue-white" title="Azul / Branco"></button>
-        <button class="color-swatch color-swatch--green-white" data-color="green-white" title="Verde / Branco"></button>
-        <button class="color-swatch color-swatch--red-white" data-color="red-white" title="Vermelho / Branco"></button>
-        <button class="color-swatch color-swatch--pink-white" data-color="pink-white" title="Rosa / Branco"></button>
+        <button class="color-swatch color-swatch--blue-white"   data-color="blue-white"   title="Azul / Branco"></button>
+        <button class="color-swatch color-swatch--green-white"  data-color="green-white"  title="Verde / Branco"></button>
+        <button class="color-swatch color-swatch--red-white"    data-color="red-white"    title="Vermelho / Branco"></button>
+        <button class="color-swatch color-swatch--pink-white"   data-color="pink-white"   title="Rosa / Branco"></button>
+        <button class="color-swatch color-swatch--purple-white" data-color="purple-white" title="Roxo / Branco"></button>
+        <button class="color-swatch color-swatch--gold-white"   data-color="gold-white"   title="Dourado / Branco"></button>
+        <button class="color-swatch color-swatch--white-black"  data-color="white-black"  title="Branco / Preto"></button>
+        <button class="color-swatch color-swatch--orange-white" data-color="orange-white" title="Laranja / Branco"></button>
       </div>
     `;
 
@@ -1171,47 +1182,61 @@
 
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
+
+    // compressor dinâmico: aumenta a perceção de volume sem clippar
+    // (como um limiter profissional — faz o som "aparecer" mais no altifalante)
+    if (!ctx._compressor) {
+      const comp = ctx.createDynamicsCompressor();
+      comp.threshold.value = -12;
+      comp.knee.value = 4;
+      comp.ratio.value = 8;
+      comp.attack.value = 0.003;
+      comp.release.value = 0.1;
+      comp.connect(ctx.destination);
+      ctx._compressor = comp;
+    }
+
     osc.type = type || "sine";
     osc.frequency.value = freq;
     gain.gain.value = 0;
     osc.connect(gain);
-    gain.connect(ctx.destination);
+    gain.connect(ctx._compressor);
 
     const now = ctx.currentTime;
     const dur = durationMs / 1000;
     gain.gain.setValueAtTime(0, now);
-    gain.gain.linearRampToValueAtTime(volume, now + 0.008);
+    gain.gain.linearRampToValueAtTime(volume, now + 0.006);
     gain.gain.exponentialRampToValueAtTime(Math.max(volume * 0.05, 0.001), now + dur);
-    gain.gain.linearRampToValueAtTime(0, now + dur + 0.02);
+    gain.gain.linearRampToValueAtTime(0, now + dur + 0.015);
 
     osc.start(now);
     osc.stop(now + dur + 0.04);
   }
 
-  // ponto marcado: "pling" curto, bem definido, para confirmar o toque mesmo distraído
+  // ponto marcado: "pling" nítido e presente
   function playTapSound() {
-    playTone(1300, 90, 0.34, "triangle");
-    playTone(1950, 60, 0.16, "sine");
+    playTone(1400, 80, 0.75, "triangle");
+    playTone(2100, 55, 0.35, "sine");
   }
 
-  // troca de serviço: dois beeps firmes e bem audíveis
+  // troca de serviço: dois beeps duplos bem audíveis
   function playServeChangeSound() {
-    playTone(1046, 150, 0.38, "square");
-    setTimeout(() => playTone(1046, 150, 0.38, "square"), 170);
+    playTone(1046, 140, 0.8, "square");
+    setTimeout(() => playTone(1046, 140, 0.8, "square"), 165);
   }
 
-  // match point: sequência ascendente de 3 notas, marcante e bem presente
+  // match point: fanfarra ascendente de 3 notas, inconfundível
   function playMatchPointSound() {
-    playTone(784, 130, 0.4, "square");
-    setTimeout(() => playTone(988, 130, 0.4, "square"), 140);
-    setTimeout(() => playTone(1318, 190, 0.4, "square"), 280);
+    playTone(784,  120, 0.85, "square");
+    setTimeout(() => playTone(988,  120, 0.85, "square"), 135);
+    setTimeout(() => playTone(1318, 200, 0.85, "square"), 270);
   }
 
-  // deuce: três notas a oscilar (sobe-desce-sobe), transmite "equilíbrio/tensão"
+  // deuce: três notas tensas, alternadas, transmite equilíbrio
   function playDeuceSound() {
-    playTone(880, 160, 0.36, "square");
-    setTimeout(() => playTone(700, 160, 0.36, "square"), 175);
-    setTimeout(() => playTone(880, 220, 0.36, "square"), 350);
+    playTone(880, 150, 0.78, "square");
+    setTimeout(() => playTone(698, 150, 0.78, "square"), 170);
+    setTimeout(() => playTone(880, 230, 0.78, "square"), 340);
   }
 
   /* ---------------------------------------------------------

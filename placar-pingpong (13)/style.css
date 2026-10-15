@@ -219,14 +219,27 @@ input{ font-family:inherit; }
 .player-info{ flex:1; min-width:0; }
 .player-info strong{ font-size:16px; display:block; }
 .player-info span{ font-size:12.5px; color:var(--text-dim); }
-.player-elo{
-  font-family:var(--font-score);
-  font-size:12px;
-  color:var(--text-dim);
-  flex-shrink:0;
-  margin-right:6px;
+.players-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
 }
-.player-chevron{ color:var(--text-dim); font-size:18px; }
+.player-card--grid{
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding:16px 10px;
+  gap:8px;
+}
+.player-card--grid .player-info strong{ font-size:14px; }
+.player-card--grid .player-info span{ font-size:11px; }
+.player-elo--small{
+  font-family:var(--font-score);
+  font-size:10.5px;
+  color:var(--text-dim);
+}
+
+
 
 /* ============== PROFILE STATS ============== */
 .profile-stats-grid{
@@ -845,18 +858,23 @@ input{ font-family:inherit; }
   text-align:center;
 }
 .color-picker{
-  display:flex; justify-content:center; gap:14px;
+  display:grid;
+  grid-template-columns:repeat(4, 44px);
+  gap:12px;
+  justify-content:center;
   margin-bottom:20px;
 }
 .color-swatch{
   width:44px; height:44px;
   border-radius:9px;
-  border:2px solid transparent;
+  border:none;
+  outline:3px solid transparent;
+  outline-offset:2px;
   box-shadow:0 2px 6px rgba(0,0,0,0.35);
   position:relative;
 }
 .color-swatch.active{
-  border-color:var(--yellow);
+  outline-color:var(--yellow);
   transform:scale(1.08);
 }
 .color-swatch.active::after{
@@ -871,10 +889,14 @@ input{ font-family:inherit; }
 }
 /* diagonal: aresta superior-direita até aresta inferior-esquerda.
    metade superior-esquerda = cor de fundo do placar; metade inferior-direita = cor do número */
-.color-swatch--blue-white{ background:linear-gradient(135deg, var(--blue) 50%, var(--white) 50%); }
-.color-swatch--green-white{ background:linear-gradient(135deg, #2f8f4e 50%, var(--white) 50%); }
-.color-swatch--red-white{ background:linear-gradient(135deg, var(--danger) 50%, var(--white) 50%); }
-.color-swatch--pink-white{ background:linear-gradient(135deg, #d6558c 50%, var(--white) 50%); }
+.color-swatch--blue-white{   background:linear-gradient(135deg, #0d3b66 50%, #f4f1ea 50%); }
+.color-swatch--green-white{  background:linear-gradient(135deg, #2f8f4e 50%, #f4f1ea 50%); }
+.color-swatch--red-white{    background:linear-gradient(135deg, #c1432f 50%, #f4f1ea 50%); }
+.color-swatch--pink-white{   background:linear-gradient(135deg, #d6558c 50%, #f4f1ea 50%); }
+.color-swatch--purple-white{ background:linear-gradient(135deg, #6b3fa0 50%, #f4f1ea 50%); }
+.color-swatch--gold-white{   background:linear-gradient(135deg, #c9920a 50%, #f4f1ea 50%); }
+.color-swatch--white-black{  background:linear-gradient(135deg, #f4f1ea 50%, #1a1a1a 50%); }
+.color-swatch--orange-white{ background:linear-gradient(135deg, #d4620a 50%, #f4f1ea 50%); }
 
 /* mini amostra usada no perfil do jogador (4 quadradinhos, não interativos) */
 .color-sample-row{
