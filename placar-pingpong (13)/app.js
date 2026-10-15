@@ -140,56 +140,6 @@
       return;
     }
 
-    // ---------- leaderboard: top 5 por win rate (mínimo 1 jogo) ----------
-    const ranked = DATA.players
-      .map((p) => ({ player: p, stats: computePlayerStats(p.id) }))
-      .filter((entry) => entry.stats.gamesPlayed > 0)
-      .sort((a, b) => {
-        if (b.stats.winRate !== a.stats.winRate) return b.stats.winRate - a.stats.winRate;
-        if (b.stats.gamesWon !== a.stats.gamesWon) return b.stats.gamesWon - a.stats.gamesWon;
-        return b.stats.gamesPlayed - a.stats.gamesPlayed;
-      })
-      .slice(0, 5);
-
-    if (ranked.length > 0) {
-      const leaderboard = document.createElement("div");
-      leaderboard.className = "leaderboard";
-      leaderboard.innerHTML = `
-        <p class="section-label">Leaderboard · Top ${ranked.length}</p>
-        <div class="leaderboard-table">
-          <div class="leaderboard-row leaderboard-row--head">
-            <span class="lb-rank"></span>
-            <span class="lb-name">Jogador</span>
-            <span class="lb-cell">V</span>
-            <span class="lb-cell">D</span>
-            <span class="lb-cell">E</span>
-            <span class="lb-cell">Cap.</span>
-            <span class="lb-cell lb-cell--accent">Win%</span>
-          </div>
-          ${ranked
-            .map(
-              (entry, i) => `
-            <div class="leaderboard-row">
-              <span class="lb-rank">${i + 1}</span>
-              <span class="lb-name">${escapeHTML(entry.player.name)}</span>
-              <span class="lb-cell">${entry.stats.gamesWon}</span>
-              <span class="lb-cell">${entry.stats.gamesLost}</span>
-              <span class="lb-cell">${entry.stats.gamesDrawn}</span>
-              <span class="lb-cell">${entry.stats.capotes}</span>
-              <span class="lb-cell lb-cell--accent">${entry.stats.winRate}%</span>
-            </div>`
-            )
-            .join("")}
-        </div>
-      `;
-      list.appendChild(leaderboard);
-
-      const allLabel = document.createElement("p");
-      allLabel.className = "section-label";
-      allLabel.textContent = "Todos os jogadores";
-      list.appendChild(allLabel);
-    }
-
     DATA.players
       .slice()
       .sort((a, b) => a.name.localeCompare(b.name, "pt"))
@@ -274,24 +224,14 @@
           const isBlue = g.blue.playerId === playerId;
           const me = isBlue ? g.blue : g.white;
           const opp = isBlue ? g.white : g.blue;
+          const won = g.winnerSide === (isBlue ? "blue" : "white");
           const oppName = opp.playerId ? getPlayer(opp.playerId)?.name || "—" : "—";
-          let resultClass, resultLabel;
-          if (g.isDraw) {
-            resultClass = "history-row-result--draw";
-            resultLabel = "Empatou";
-          } else if (g.winnerSide === (isBlue ? "blue" : "white")) {
-            resultClass = "history-row-result--win";
-            resultLabel = "Venceu";
-          } else {
-            resultClass = "history-row-result--loss";
-            resultLabel = "Perdeu";
-          }
           return `
             <div class="history-row">
-              <span class="history-row-result ${resultClass}"></span>
+              <span class="history-row-result ${won ? "history-row-result--win" : "history-row-result--loss"}"></span>
               <div class="history-row-main">
-                <strong>${resultLabel} vs ${escapeHTML(oppName)}</strong>
-                <small>${formatDate(g.endedAt)} · ${g.pointsTarget} pts${g.description ? " · " + escapeHTML(g.description) : ""}</small>
+                <strong>${won ? "Venceu" : "Perdeu"} vs ${escapeHTML(oppName)}</strong>
+                <small>${formatDate(g.endedAt)} · ${g.pointsTarget} pts</small>
               </div>
               <span class="history-row-score">${me.setsWon}-${opp.setsWon}</span>
             </div>`;
@@ -299,48 +239,15 @@
         .join("");
     }
 
-    let rivalsHTML = "";
-    if (stats.rivals.length > 0) {
-      rivalsHTML = `
-        <p class="section-label">Confrontos diretos</p>
-        ${stats.rivals
-          .map(
-            (r) => `
-            <div class="history-row">
-              <div class="history-row-main">
-                <strong>vs ${escapeHTML(r.name)}</strong>
-                <small>${r.gamesPlayed} jogo(s) disputado(s)</small>
-              </div>
-              <span class="history-row-score">${r.gamesWon}V – ${r.gamesLost}D${r.gamesDrawn ? ` – ${r.gamesDrawn}E` : ""}</span>
-            </div>`
-          )
-          .join("")}
-      `;
-    }
-
     content.innerHTML = `
       <div class="profile-stats-grid">
         <div class="stat-box"><strong>${stats.gamesPlayed}</strong><span>Jogos disputados</span></div>
         <div class="stat-box stat-box--accent"><strong>${stats.winRate}%</strong><span>Win rate</span></div>
-        <div class="stat-box"><strong>${stats.gamesWon}</strong><span>Jogos ganhos</span></div>
-        <div class="stat-box"><strong>${stats.gamesLost}</strong><span>Jogos perdidos</span></div>
-        <div class="stat-box"><strong>${stats.gamesDrawn}</strong><span>Jogos empatados</span></div>
-        <div class="stat-box"><strong>${stats.wins}</strong><span>Sets ganhos (vitórias)</span></div>
-        <div class="stat-box"><strong>${stats.losses}</strong><span>Sets perdidos (derrotas)</span></div>
-        <div class="stat-box"><strong>${stats.setsWon}</strong><span>Total sets ganhos</span></div>
-        <div class="stat-box"><strong>${stats.setsLost}</strong><span>Total sets perdidos</span></div>
+        <div class="stat-box"><strong>${stats.wins}</strong><span>Vitórias</span></div>
+        <div class="stat-box"><strong>${stats.losses}</strong><span>Derrotas</span></div>
+        <div class="stat-box"><strong>${stats.setsWon}</strong><span>Sets ganhos</span></div>
         <div class="stat-box"><strong>${stats.capotes}</strong><span>Capotes feitos</span></div>
-        <div class="stat-box"><strong>${stats.capotesSuffered}</strong><span>Capotes sofridos</span></div>
       </div>
-      ${
-        stats.bestRival || stats.worstRival
-          ? `<div class="profile-stats-grid">
-              ${stats.bestRival ? `<div class="stat-box stat-box--accent"><strong>${escapeHTML(stats.bestRival.name)}</strong><span>Mais vitórias contra (${stats.bestRival.gamesWon})</span></div>` : ""}
-              ${stats.worstRival ? `<div class="stat-box"><strong>${escapeHTML(stats.worstRival.name)}</strong><span>Mais derrotas contra (${stats.worstRival.gamesLost})</span></div>` : ""}
-            </div>`
-          : ""
-      }
-      ${rivalsHTML}
       <p class="section-label">Últimos jogos</p>
       ${historyHTML}
     `;
@@ -351,80 +258,24 @@
     const games = DATA.games.filter(
       (g) => g.blue.playerId === playerId || g.white.playerId === playerId
     );
-    let wins = 0, losses = 0, setsWon = 0, setsLost = 0, capotes = 0, capotesSuffered = 0;
-    let gamesWon = 0, gamesLost = 0, gamesDrawn = 0;
-
-    const rivalsMap = {}; // opponentId -> { name, gamesPlayed, gamesWon, gamesLost, gamesDrawn }
+    let wins = 0, losses = 0, setsWon = 0, setsLost = 0, capotes = 0;
 
     games.forEach((g) => {
       const isBlue = g.blue.playerId === playerId;
       const me = isBlue ? g.blue : g.white;
       const opp = isBlue ? g.white : g.blue;
-      const mySide = isBlue ? "blue" : "white";
-
-      // sets (vitórias/derrotas a nível de set)
       setsWon += me.setsWon;
       setsLost += opp.setsWon;
-      wins += me.setsWon;
-      losses += opp.setsWon;
-
-      // jogos (vitórias/derrotas/empates a nível de jogo completo)
-      if (g.isDraw) gamesDrawn++;
-      else if (g.winnerSide === mySide) gamesWon++;
-      else gamesLost++;
-
-      // capotes feitos e sofridos
+      if (g.winnerSide === (isBlue ? "blue" : "white")) wins++;
+      else losses++;
       g.sets.forEach((s) => {
-        if (!s.capote) return;
-        if (s.winnerSide === mySide) capotes++;
-        else capotesSuffered++;
+        if (s.capote && s.winnerSide === (isBlue ? "blue" : "white")) capotes++;
       });
-
-      // estatística de confrontos diretos (rival)
-      if (opp.playerId) {
-        if (!rivalsMap[opp.playerId]) {
-          const oppPlayer = getPlayer(opp.playerId);
-          rivalsMap[opp.playerId] = {
-            id: opp.playerId,
-            name: oppPlayer ? oppPlayer.name : "Jogador removido",
-            gamesPlayed: 0,
-            gamesWon: 0,
-            gamesLost: 0,
-            gamesDrawn: 0
-          };
-        }
-        const r = rivalsMap[opp.playerId];
-        r.gamesPlayed++;
-        if (g.isDraw) r.gamesDrawn++;
-        else if (g.winnerSide === mySide) r.gamesWon++;
-        else r.gamesLost++;
-      }
     });
 
     const gamesPlayed = games.length;
-    const decidedGames = gamesWon + gamesLost; // win rate não conta empates
-    const winRate = decidedGames > 0 ? Math.round((gamesWon / decidedGames) * 100) : 0;
-
-    const rivals = Object.values(rivalsMap).sort((a, b) => b.gamesPlayed - a.gamesPlayed);
-    const bestRival = rivals.filter((r) => r.gamesWon > 0).sort((a, b) => b.gamesWon - a.gamesWon)[0] || null;
-    const worstRival = rivals.filter((r) => r.gamesLost > 0).sort((a, b) => b.gamesLost - a.gamesLost)[0] || null;
-
-    return {
-      gamesPlayed,
-      gamesWon,
-      gamesLost,
-      gamesDrawn,
-      wins,
-      losses,
-      setsWon,
-      setsLost,
-      capotes,
-      capotesSuffered,
-      winRate,
-      rivals,
-      bestRival,
-      worstRival
-    };
+    const winRate = gamesPlayed > 0 ? Math.round((wins / gamesPlayed) * 100) : 0;
+    return { gamesPlayed, wins, losses, setsWon, setsLost, capotes, winRate };
   }
 
   document.getElementById("btn-delete-player").addEventListener("click", () => {
@@ -463,8 +314,7 @@
       .forEach((g) => {
         const blueName = g.blue.playerId ? getPlayer(g.blue.playerId)?.name || "Jogador" : "Jogador";
         const whiteName = g.white.playerId ? getPlayer(g.white.playerId)?.name || "Jogador" : "Jogador";
-        const blueWon = !g.isDraw && g.winnerSide === "blue";
-        const whiteWon = !g.isDraw && g.winnerSide === "white";
+        const blueWon = g.winnerSide === "blue";
         const card = document.createElement("button");
         card.className = "history-card";
         card.style.width = "100%";
@@ -472,7 +322,7 @@
         card.innerHTML = `
           <div class="history-card-top">
             <span class="history-card-date">${formatDate(g.endedAt)}</span>
-            <span class="history-card-format">${g.pointsTarget} PTS · ${formatModeLabel(g.format)}${g.isDraw ? " · EMPATE" : ""}</span>
+            <span class="history-card-format">${g.pointsTarget} PTS · ${formatModeLabel(g.format)}</span>
           </div>
           <div class="history-card-matchup">
             <div class="history-side history-side--blue">
@@ -481,11 +331,10 @@
             </div>
             <span class="history-card-sep">SETS</span>
             <div class="history-side history-side--white history-side--right">
-              <span class="history-side-name ${whiteWon ? "is-winner" : ""}">${escapeHTML(whiteName)}</span>
+              <span class="history-side-name ${!blueWon ? "is-winner" : ""}">${escapeHTML(whiteName)}</span>
               <span class="history-side-sets">${g.white.setsWon}</span>
             </div>
           </div>
-          ${g.description ? `<p class="history-card-desc">${escapeHTML(g.description)}</p>` : ""}
         `;
         card.addEventListener("click", () => openGameDetail(g.id));
         list.appendChild(card);
@@ -503,27 +352,19 @@
     if (!g) return;
     const blueName = g.blue.playerId ? getPlayer(g.blue.playerId)?.name || "Jogador" : "Jogador";
     const whiteName = g.white.playerId ? getPlayer(g.white.playerId)?.name || "Jogador" : "Jogador";
-    const blueWon = !g.isDraw && g.winnerSide === "blue";
+    const blueWon = g.winnerSide === "blue";
 
     const setsHTML = g.sets
       .map((s, i) => {
         const winnerName = s.winnerSide === "blue" ? blueName : whiteName;
-        const momentumSVG = buildMomentumSVG(s, blueName, whiteName);
         return `
-          <div class="set-row set-row--expanded">
-            <div class="set-row-top">
-              <span class="set-row-num">SET ${i + 1}</span>
-              <span class="set-row-score">${s.blueScore} – ${s.whiteScore}</span>
-              <span class="set-row-winner">${winnerName}${s.capote ? '<span class="capote-tag">Capote</span>' : ""}</span>
-            </div>
-            ${momentumSVG}
+          <div class="set-row">
+            <span class="set-row-num">SET ${i + 1}</span>
+            <span class="set-row-score">${s.blueScore} – ${s.whiteScore}</span>
+            <span class="set-row-winner">${winnerName}${s.capote ? '<span class="capote-tag">Capote</span>' : ""}</span>
           </div>`;
       })
       .join("");
-
-    const resultLabel = g.isDraw
-      ? "Jogo terminou empatado"
-      : `Sets (${blueWon ? escapeHTML(blueName) : escapeHTML(whiteName)} venceu o jogo)`;
 
     document.getElementById("game-detail-content").innerHTML = `
       <div class="detail-header">
@@ -533,58 +374,11 @@
           <span class="detail-name">${escapeHTML(whiteName)}</span>
         </div>
         <p class="detail-sub">${formatDate(g.endedAt)} · ${g.pointsTarget} pontos por set · ${formatModeLabel(g.format)} · duração ${formatClock(g.durationSeconds)}</p>
-        ${g.description ? `<p class="detail-description">"${escapeHTML(g.description)}"</p>` : ""}
       </div>
-      <p class="section-label">${resultLabel}</p>
+      <p class="section-label">Sets (${blueWon ? escapeHTML(blueName) : escapeHTML(whiteName)} venceu o jogo)</p>
       ${setsHTML}
     `;
     showScreen("screen-game-detail");
-  }
-
-  /* ---------------------------------------------------------
-     GRÁFICO DE MOMENTUM — linha simples em SVG que mostra quem
-     dominou o set, ponto a ponto (diferença acumulada azul-branco)
-     --------------------------------------------------------- */
-  function buildMomentumSVG(set, blueName, whiteName) {
-    const log = set.pointLog;
-    if (!log || log.length === 0) return "";
-
-    // construir série de diferença acumulada (positivo = azul a ganhar, negativo = branco)
-    let diff = 0;
-    const series = [0];
-    log.forEach((side) => {
-      diff += side === "blue" ? 1 : -1;
-      series.push(diff);
-    });
-
-    const W = 600, H = 120, padX = 10, padY = 14;
-    const maxAbs = Math.max(1, ...series.map((v) => Math.abs(v)));
-    const n = series.length;
-    const stepX = n > 1 ? (W - padX * 2) / (n - 1) : 0;
-    const midY = H / 2;
-    const scaleY = (H / 2 - padY) / maxAbs;
-
-    const points = series
-      .map((v, i) => {
-        const x = padX + i * stepX;
-        const y = midY - v * scaleY;
-        return `${x.toFixed(1)},${y.toFixed(1)}`;
-      })
-      .join(" ");
-
-    // áreas de cor para reforçar visualmente quem domina em cada troço
-    return `
-      <div class="momentum-wrap">
-        <div class="momentum-labels">
-          <span class="momentum-label momentum-label--blue">${escapeHTML(blueName)}</span>
-          <span class="momentum-label momentum-label--white">${escapeHTML(whiteName)}</span>
-        </div>
-        <svg viewBox="0 0 ${W} ${H}" class="momentum-svg" preserveAspectRatio="none">
-          <line x1="${padX}" y1="${midY}" x2="${W - padX}" y2="${midY}" class="momentum-midline" />
-          <polyline points="${points}" class="momentum-line" fill="none" />
-        </svg>
-      </div>
-    `;
   }
 
   /* ---------------------------------------------------------
@@ -593,14 +387,12 @@
   let setup = {
     bluePlayerId: null,
     whitePlayerId: null,
-    points: 21,
-    format: "free",
-    description: ""
+    points: 11,
+    format: "free"
   };
 
   function openSetup() {
-    setup = { bluePlayerId: null, whitePlayerId: null, points: 21, format: "free", description: "" };
-    document.getElementById("input-game-description").value = "";
+    setup = { bluePlayerId: null, whitePlayerId: null, points: 11, format: "free" };
     updateSetupUI();
     showScreen("screen-setup");
   }
@@ -638,10 +430,6 @@
     const ready = setup.bluePlayerId && setup.whitePlayerId && setup.bluePlayerId !== setup.whitePlayerId;
     confirmBtn.disabled = !ready;
   }
-
-  document.getElementById("input-game-description").addEventListener("input", (e) => {
-    setup.description = e.target.value;
-  });
 
   document.querySelectorAll("#opt-points .setup-option").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -709,7 +497,7 @@
 
   document.getElementById("btn-confirm-setup").addEventListener("click", () => {
     if (setup.bluePlayerId && setup.whitePlayerId) {
-      startNewGame(setup.bluePlayerId, setup.whitePlayerId, setup.points, setup.format, setup.description);
+      startNewGame(setup.bluePlayerId, setup.whitePlayerId, setup.points, setup.format);
     }
   });
 
@@ -719,55 +507,26 @@
   let game = null;       // estado do jogo em curso
   let timerInterval = null;
 
-  function startNewGame(bluePlayerId, whitePlayerId, points, format, description) {
+  function startNewGame(bluePlayerId, whitePlayerId, points, format) {
     game = {
       id: uid("game"),
       bluePlayerId,
       whitePlayerId,
       pointsTarget: points,
       format,
-      description: (description || "").trim(),
       startedAt: new Date().toISOString(),
       elapsedSeconds: 0,
       paused: false,
       currentBlue: 0,
       currentWhite: 0,
-      pointLog: [],       // sequência de pontos do set atual: "blue" | "white"
-      servingSide: null,  // definido no ecrã BOLAR
-      sets: [],          // sets já fechados: { blueScore, whiteScore, winnerSide, capote, pointLog }
+      sets: [],          // sets já fechados: { blueScore, whiteScore, winnerSide, capote }
       blueSetsWon: 0,
       whiteSetsWon: 0
     };
     persistActiveGame();
-    openBolarScreen();
-  }
-
-  /* ---------------------------------------------------------
-     BOLAR — escolher quem serve primeiro, no início de cada set
-     --------------------------------------------------------- */
-  function openBolarScreen() {
-    const blueName = getPlayer(game.bluePlayerId)?.name || "Azul";
-    const whiteName = getPlayer(game.whitePlayerId)?.name || "Branco";
-    document.getElementById("bolar-name-blue").textContent = blueName;
-    document.getElementById("bolar-name-white").textContent = whiteName;
-    const setNumber = game.sets.length + 1;
-    document.getElementById("bolar-set-label").textContent = `Set ${setNumber} · quem serve primeiro?`;
-    showScreen("screen-bolar");
-    if (document.documentElement.requestFullscreen) {
-      document.documentElement.requestFullscreen().then(tryLockOrientation).catch(() => {});
-    } else {
-      tryLockOrientation();
-    }
-  }
-
-  function chooseServer(side) {
-    game.servingSide = side;
-    persistActiveGame();
     resumeGameUI();
     showScreen("screen-game");
   }
-  document.getElementById("bolar-blue").addEventListener("click", () => chooseServer("blue"));
-  document.getElementById("bolar-white").addEventListener("click", () => chooseServer("white"));
 
   function persistActiveGame() {
     DATA.activeGame = game;
@@ -785,7 +544,6 @@
 
     renderScores();
     startTimerLoop();
-    startServeBlinkLoop();
   }
 
   function renderScores() {
@@ -794,44 +552,6 @@
     document.querySelector("#sets-blue .sets-num").textContent = game.blueSetsWon;
     document.querySelector("#sets-white .sets-num").textContent = game.whiteSetsWon;
     document.getElementById("timer").textContent = formatClock(game.elapsedSeconds);
-    renderServeIndicator();
-  }
-
-  /* ---------------------------------------------------------
-     SERVIÇO — troca de lado a cada múltiplo de 5 na soma dos
-     pontos do set atual (ex: 4+1=5, 8+7=15, 9+6=15...).
-     A bolinha de serviço pisca do lado de quem está a servir.
-     --------------------------------------------------------- */
-  function currentServingSide() {
-    if (!game || !game.servingSide) return null;
-    const total = game.currentBlue + game.currentWhite;
-    const swaps = Math.floor(total / 5);
-    // cada bloco completo de 5 pontos totais troca o serviço uma vez
-    return swaps % 2 === 0 ? game.servingSide : otherSide(game.servingSide);
-  }
-  function otherSide(side) {
-    return side === "blue" ? "white" : "blue";
-  }
-
-  function renderServeIndicator() {
-    const ballBlue = document.getElementById("serve-ball-blue");
-    const ballWhite = document.getElementById("serve-ball-white");
-    const serving = currentServingSide();
-    ballBlue.hidden = serving !== "blue";
-    ballWhite.hidden = serving !== "white";
-  }
-
-  let serveBlinkInterval = null;
-  function startServeBlinkLoop() {
-    stopServeBlinkLoop();
-    serveBlinkInterval = setInterval(() => {
-      document.getElementById("serve-ball-blue").classList.toggle("is-dim");
-      document.getElementById("serve-ball-white").classList.toggle("is-dim");
-    }, 600);
-  }
-  function stopServeBlinkLoop() {
-    if (serveBlinkInterval) clearInterval(serveBlinkInterval);
-    serveBlinkInterval = null;
   }
 
   function startTimerLoop() {
@@ -857,53 +577,6 @@
     persistActiveGame();
   });
 
-  /* ---------------------------------------------------------
-     SONS — beeps curtos e discretos via Web Audio API
-     (sem ficheiros externos, gerados na hora)
-     --------------------------------------------------------- */
-  let audioCtx = null;
-  function getAudioCtx() {
-    if (!audioCtx) {
-      const Ctx = window.AudioContext || window.webkitAudioContext;
-      if (Ctx) audioCtx = new Ctx();
-    }
-    return audioCtx;
-  }
-
-  function playTone(freq, durationMs, volume) {
-    const ctx = getAudioCtx();
-    if (!ctx) return;
-    if (ctx.state === "suspended") ctx.resume().catch(() => {});
-
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.type = "sine";
-    osc.frequency.value = freq;
-    gain.gain.value = 0;
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-
-    const now = ctx.currentTime;
-    const dur = durationMs / 1000;
-    gain.gain.setValueAtTime(0, now);
-    gain.gain.linearRampToValueAtTime(volume, now + 0.012);
-    gain.gain.linearRampToValueAtTime(0, now + dur);
-
-    osc.start(now);
-    osc.stop(now + dur + 0.02);
-  }
-
-  function playServeChangeSound() {
-    // beep curto e discreto, único, para troca de serviço
-    playTone(880, 110, 0.07);
-  }
-
-  function playMatchPointSound() {
-    // dois beeps curtos em sequência, ligeiramente mais presentes, para match point
-    playTone(660, 90, 0.09);
-    setTimeout(() => playTone(990, 130, 0.09), 140);
-  }
-
   // histórico de ações para permitir "anular último ponto"
   let pointHistory = [];
 
@@ -912,26 +585,12 @@
 
   function addPoint(side) {
     if (!game || game.paused) return;
-
-    const servingBefore = currentServingSide();
-
     pointHistory.push(side);
     if (side === "blue") game.currentBlue++;
     else game.currentWhite++;
-    game.pointLog.push(side);
-
     renderScores();
     persistActiveGame();
-
-    const servingAfter = currentServingSide();
-    if (servingAfter !== servingBefore) {
-      playServeChangeSound();
-    }
-
-    const wasSetEnd = checkSetEnd();
-    if (!wasSetEnd && isMatchPoint()) {
-      playMatchPointSound();
-    }
+    checkSetEnd();
   }
 
   document.getElementById("btn-undo").addEventListener("click", () => {
@@ -939,20 +598,9 @@
     const last = pointHistory.pop();
     if (last === "blue" && game.currentBlue > 0) game.currentBlue--;
     if (last === "white" && game.currentWhite > 0) game.currentWhite--;
-    if (game.pointLog.length > 0) game.pointLog.pop();
     renderScores();
     persistActiveGame();
   });
-
-  // match point: o próximo ponto de um dos lados terminaria o set
-  function isMatchPoint() {
-    const target = game.pointsTarget;
-    const blue = game.currentBlue;
-    const white = game.currentWhite;
-    const blueWouldWin = blue + 1 >= target && (blue + 1) - white >= 2;
-    const whiteWouldWin = white + 1 >= target && (white + 1) - blue >= 2;
-    return blueWouldWin || whiteWouldWin;
-  }
 
   function checkSetEnd() {
     const target = game.pointsTarget;
@@ -980,15 +628,14 @@
       }
     }
 
-    if (!winnerSide) return false; // set continua
+    if (!winnerSide) return; // set continua
 
     // fecha o set
     const closedSet = {
       blueScore: blue,
       whiteScore: white,
       winnerSide,
-      capote: isCapote,
-      pointLog: game.pointLog.slice()
+      capote: isCapote
     };
     game.sets.push(closedSet);
     if (winnerSide === "blue") game.blueSetsWon++;
@@ -996,15 +643,11 @@
 
     game.currentBlue = 0;
     game.currentWhite = 0;
-    game.pointLog = [];
-    game.servingSide = null;
     pointHistory = [];
     persistActiveGame();
     renderScores();
-    stopServeBlinkLoop();
 
     showSetEndOverlay(closedSet, winnerSide);
-    return true;
   }
 
   function showSetEndOverlay(closedSet, winnerSide) {
@@ -1049,7 +692,6 @@
 
   document.getElementById("btn-next-set").addEventListener("click", () => {
     document.getElementById("overlay-set-end").hidden = true;
-    openBolarScreen();
   });
 
   document.getElementById("btn-finish-from-set").addEventListener("click", () => {
@@ -1079,7 +721,6 @@
 
   function finishGame() {
     stopTimerLoop();
-    stopServeBlinkLoop();
 
     if (game.sets.length === 0) {
       // nenhum set foi concluído — descarta sem guardar no histórico
@@ -1090,23 +731,16 @@
       return;
     }
 
-    let winnerSide = null;
-    let isDraw = false;
-    if (game.blueSetsWon > game.whiteSetsWon) winnerSide = "blue";
-    else if (game.whiteSetsWon > game.blueSetsWon) winnerSide = "white";
-    else isDraw = true;
-
+    const winnerSide = game.blueSetsWon > game.whiteSetsWon ? "blue" : "white";
     const record = {
       id: game.id,
       pointsTarget: game.pointsTarget,
       format: game.format,
-      description: game.description || "",
       startedAt: game.startedAt,
       endedAt: new Date().toISOString(),
       durationSeconds: game.elapsedSeconds,
       sets: game.sets,
       winnerSide,
-      isDraw,
       blue: { playerId: game.bluePlayerId, setsWon: game.blueSetsWon },
       white: { playerId: game.whitePlayerId, setsWon: game.whiteSetsWon }
     };
@@ -1121,13 +755,9 @@
   function showGameEndOverlay(record) {
     const blueName = getPlayer(record.blue.playerId)?.name || "Azul";
     const whiteName = getPlayer(record.white.playerId)?.name || "Branco";
+    const winnerName = record.winnerSide === "blue" ? blueName : whiteName;
 
-    if (record.isDraw) {
-      document.getElementById("game-end-winner").textContent = `Empate entre ${blueName} e ${whiteName}`;
-    } else {
-      const winnerName = record.winnerSide === "blue" ? blueName : whiteName;
-      document.getElementById("game-end-winner").textContent = `${winnerName} venceu o jogo`;
-    }
+    document.getElementById("game-end-winner").textContent = `${winnerName} venceu o jogo`;
     const recap = document.getElementById("game-end-recap");
     recap.innerHTML = `
       <span class="recap-pill">${blueName} ${record.blue.setsWon}</span>
@@ -1337,7 +967,14 @@
     }
   }
 
-  // (entrada em fullscreen/orientação tratada em openBolarScreen, antes do placar)
+  // tentar bloquear orientação ao entrar no ecrã de jogo (requer gesto do utilizador)
+  document.getElementById("btn-confirm-setup").addEventListener("click", () => {
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen().then(tryLockOrientation).catch(() => {});
+    } else {
+      tryLockOrientation();
+    }
+  });
   document.getElementById("btn-resume").addEventListener("click", () => {
     if (document.documentElement.requestFullscreen) {
       document.documentElement.requestFullscreen().then(tryLockOrientation).catch(() => {});
