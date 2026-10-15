@@ -163,8 +163,11 @@
     }
 
     // ---------- leaderboard: top 5 por win rate (mínimo 1 jogo) ----------
+    // nota: ELO é só para diversão e aparece como coluna extra; a ordenação
+    // do leaderboard continua sempre baseada em vitórias/derrotas, não em ELO.
+    const allElos = computeAllElos();
     const ranked = DATA.players
-      .map((p) => ({ player: p, stats: computePlayerStats(p.id) }))
+      .map((p) => ({ player: p, stats: computePlayerStats(p.id, allElos) }))
       .filter((entry) => entry.stats.gamesPlayed > 0)
       .sort((a, b) => {
         if (b.stats.winRate !== a.stats.winRate) return b.stats.winRate - a.stats.winRate;
@@ -187,6 +190,7 @@
             <span class="lb-cell">E</span>
             <span class="lb-cell">Cap.</span>
             <span class="lb-cell lb-cell--accent">Win%</span>
+            <span class="lb-cell lb-cell--elo">ELO</span>
           </div>
           ${ranked
             .map(
@@ -199,6 +203,7 @@
               <span class="lb-cell">${entry.stats.gamesDrawn}</span>
               <span class="lb-cell">${entry.stats.capotes}</span>
               <span class="lb-cell lb-cell--accent">${entry.stats.winRate}%</span>
+              <span class="lb-cell lb-cell--elo">${entry.stats.elo}</span>
             </div>`
             )
             .join("")}
@@ -216,7 +221,7 @@
       .slice()
       .sort((a, b) => a.name.localeCompare(b.name, "pt"))
       .forEach((p) => {
-        const stats = computePlayerStats(p.id);
+        const stats = computePlayerStats(p.id, allElos);
         const card = document.createElement("button");
         card.className = "player-card";
         card.innerHTML = `
@@ -225,6 +230,7 @@
             <strong>${escapeHTML(p.name)}</strong>
             <span>${stats.gamesPlayed} jogos · ${stats.winRate}% vitórias</span>
           </div>
+          <span class="player-elo">${stats.elo} ELO</span>
           <div class="player-chevron">›</div>
         `;
         card.addEventListener("click", () => openPlayerProfile(p.id));
@@ -358,8 +364,9 @@
 
     content.innerHTML = `
       <div class="profile-stats-grid">
-        <div class="stat-box"><strong>${stats.gamesPlayed}</strong><span>Jogos disputados</span></div>
+        <div class="stat-box stat-box--elo"><strong>${stats.elo}</strong><span>ELO (diversão)</span></div>
         <div class="stat-box stat-box--accent"><strong>${stats.winRate}%</strong><span>Win rate</span></div>
+        <div class="stat-box"><strong>${stats.gamesPlayed}</strong><span>Jogos disputados</span></div>
         <div class="stat-box"><strong>${stats.gamesWon}</strong><span>Jogos ganhos</span></div>
         <div class="stat-box"><strong>${stats.gamesLost}</strong><span>Jogos perdidos</span></div>
         <div class="stat-box"><strong>${stats.gamesDrawn}</strong><span>Jogos empatados</span></div>
@@ -405,7 +412,66 @@
     showScreen("screen-player-profile");
   }
 
-  function computePlayerStats(playerId) {
+  /* ---------------------------------------------------------
+     ELO — só para diversão entre amigos, não determina o
+     leaderboard (que continua ordenado por vitórias/derrotas).
+     Processa todos os jogos por ordem cronológica para que o
+     ELO de cada jogador reflita a força dos adversários que
+     defrontou ao longo do tempo, tal como no Faceit/xadrez.
+     --------------------------------------------------------- */
+  const ELO_BASE = 1000;
+  const ELO_K = 32;
+
+  function computeAllElos() {
+    const elo = {}; // playerId -> rating atual
+    DATA.players.forEach((p) => { elo[p.id] = ELO_BASE; });
+
+    const chronological = DATA.games
+      .slice()
+      .sort((a, b) => new Date(a.endedAt) - new Date(b.endedAt));
+
+    chronological.forEach((g) => {
+      const blueId = g.blue.playerId;
+      const whiteId = g.white.playerId;
+      if (!blueId || !whiteId) return;
+      if (!(blueId in elo)) elo[blueId] = ELO_BASE;
+      if (!(whiteId in elo)) elo[whiteId] = ELO_BASE;
+
+      const blueElo = elo[blueId];
+      const whiteElo = elo[whiteId];
+
+      // resultado real: 1 = vitória, 0.5 = empate, 0 = derrota (perspetiva do lado azul)
+      let actualBlue;
+      if (g.isDraw) actualBlue = 0.5;
+      else actualBlue = g.winnerSide === "blue" ? 1 : 0;
+      const actualWhite = 1 - actualBlue;
+
+      // expectativa de vitória de cada lado, segundo a fórmula padrão de ELO
+      const expectedBlue = 1 / (1 + Math.pow(10, (whiteElo - blueElo) / 400));
+      const expectedWhite = 1 - expectedBlue;
+
+      // margem extra: diferença de sets e eventuais capotes dão um pequeno
+      // ajuste ao "peso" do resultado, para refletir o domínio na partida
+      const setDiff = Math.abs(g.blue.setsWon - g.white.setsWon);
+      const capoteCount = g.sets.filter((s) => s.capote).length;
+      const marginFactor = 1 + Math.min(setDiff * 0.08 + capoteCount * 0.12, 0.5);
+
+      const blueDelta = Math.round(ELO_K * marginFactor * (actualBlue - expectedBlue));
+      const whiteDelta = Math.round(ELO_K * marginFactor * (actualWhite - expectedWhite));
+
+      elo[blueId] = blueElo + blueDelta;
+      elo[whiteId] = whiteElo + whiteDelta;
+    });
+
+    return elo;
+  }
+
+  function getPlayerElo(playerId, precomputedElos) {
+    const allElos = precomputedElos || computeAllElos();
+    return playerId in allElos ? allElos[playerId] : ELO_BASE;
+  }
+
+  function computePlayerStats(playerId, precomputedElos) {
     const games = DATA.games.filter(
       (g) => g.blue.playerId === playerId || g.white.playerId === playerId
     );
@@ -481,7 +547,8 @@
       winRate,
       rivals,
       bestRival,
-      worstRival
+      worstRival,
+      elo: getPlayerElo(playerId, precomputedElos)
     };
   }
 
@@ -523,6 +590,7 @@
         const whiteName = g.white.playerId ? getPlayer(g.white.playerId)?.name || "Jogador" : "Jogador";
         const blueWon = !g.isDraw && g.winnerSide === "blue";
         const whiteWon = !g.isDraw && g.winnerSide === "white";
+        const capoteCount = g.sets.filter((s) => s.capote).length;
         const card = document.createElement("button");
         card.className = "history-card";
         card.style.width = "100%";
@@ -543,6 +611,7 @@
               <span class="history-side-sets">${g.white.setsWon}</span>
             </div>
           </div>
+          ${capoteCount > 0 ? `<span class="capote-tag capote-tag--card">${capoteCount > 1 ? capoteCount + "x Capote" : "Capote"}</span>` : ""}
           ${g.description ? `<p class="history-card-desc">${escapeHTML(g.description)}</p>` : ""}
         `;
         card.addEventListener("click", () => openGameDetail(g.id));
@@ -931,6 +1000,12 @@
     document.getElementById("name-blue").textContent = blueName;
     document.getElementById("name-white").textContent = whiteName;
 
+    const allElos = computeAllElos();
+    const blueEloEl = document.getElementById("elo-blue");
+    const whiteEloEl = document.getElementById("elo-white");
+    blueEloEl.textContent = game.bluePlayerId ? ` · ${getPlayerElo(game.bluePlayerId, allElos)}` : "";
+    whiteEloEl.textContent = game.whitePlayerId ? ` · ${getPlayerElo(game.whitePlayerId, allElos)}` : "";
+
     applyGameColors();
     renderScores();
     startTimerLoop();
@@ -951,17 +1026,46 @@
      pontos do set atual (ex: 4+1=5, 8+7=15, 9+6=15...).
      A bolinha de serviço pisca do lado de quem está a servir.
      --------------------------------------------------------- */
-  function serveSwapInterval() {
-    return game && game.gameMode === "classic" ? 2 : 5;
+  function isDeuce() {
+    if (!game || game.gameMode !== "classic") return false;
+    const target = game.pointsTarget;
+    // deuce começa quando ambos chegam a target-1 (ex: 10-10 num jogo de 11)
+    return game.currentBlue >= target - 1 && game.currentWhite >= target - 1
+      && game.currentBlue === game.currentWhite;
   }
+
+  function serveSwapInterval() {
+    if (!game) return 5;
+    if (game.gameMode === "classic") {
+      return isDeuce() ? 1 : 2;
+    }
+    return 5;
+  }
+
   function currentServingSide() {
     if (!game || !game.servingSide) return null;
-    const total = game.currentBlue + game.currentWhite;
-    const interval = serveSwapInterval();
+    const blue = game.currentBlue;
+    const white = game.currentWhite;
+    const target = game.pointsTarget;
+
+    if (game.gameMode === "classic" && blue >= target - 1 && white >= target - 1) {
+      // em deuce: contamos pontos a partir do momento em que o deuce começou (target-1, target-1)
+      // cada ponto individual troca o serviço
+      const pointsSinceDeuce = (blue - (target - 1)) + (white - (target - 1));
+      const swaps = pointsSinceDeuce;
+      // antes do deuce calculamos trocas normais (a cada 2) até (target-1)*2 pontos totais
+      const totalBeforeDeuce = (target - 1) * 2;
+      const swapsBeforeDeuce = Math.floor(totalBeforeDeuce / 2);
+      const totalSwaps = swapsBeforeDeuce + swaps;
+      return totalSwaps % 2 === 0 ? game.servingSide : otherSide(game.servingSide);
+    }
+
+    const total = blue + white;
+    const interval = game.gameMode === "classic" ? 2 : 5;
     const swaps = Math.floor(total / interval);
-    // cada bloco completo de pontos totais troca o serviço uma vez
     return swaps % 2 === 0 ? game.servingSide : otherSide(game.servingSide);
   }
+
   function otherSide(side) {
     return side === "blue" ? "white" : "blue";
   }
@@ -1011,8 +1115,7 @@
   });
 
   /* ---------------------------------------------------------
-     SONS — beeps curtos e discretos via Web Audio API
-     (sem ficheiros externos, gerados na hora)
+     SONS — via Web Audio API (sem ficheiros externos)
      --------------------------------------------------------- */
   let audioCtx = null;
   function getAudioCtx() {
@@ -1023,14 +1126,14 @@
     return audioCtx;
   }
 
-  function playTone(freq, durationMs, volume) {
+  function playTone(freq, durationMs, volume, type) {
     const ctx = getAudioCtx();
     if (!ctx) return;
     if (ctx.state === "suspended") ctx.resume().catch(() => {});
 
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
-    osc.type = "sine";
+    osc.type = type || "sine";
     osc.frequency.value = freq;
     gain.gain.value = 0;
     osc.connect(gain);
@@ -1039,22 +1142,59 @@
     const now = ctx.currentTime;
     const dur = durationMs / 1000;
     gain.gain.setValueAtTime(0, now);
-    gain.gain.linearRampToValueAtTime(volume, now + 0.012);
-    gain.gain.linearRampToValueAtTime(0, now + dur);
+    gain.gain.linearRampToValueAtTime(volume, now + 0.008);
+    gain.gain.exponentialRampToValueAtTime(Math.max(volume * 0.05, 0.001), now + dur);
+    gain.gain.linearRampToValueAtTime(0, now + dur + 0.02);
 
     osc.start(now);
-    osc.stop(now + dur + 0.02);
+    osc.stop(now + dur + 0.04);
   }
 
+  // ponto marcado: "pling" curto e claro, dá confirmação imediata do toque
+  function playTapSound() {
+    playTone(1200, 70, 0.16, "sine");
+    playTone(1800, 50, 0.07, "sine");
+  }
+
+  // troca de serviço: dois beeps mais firmes, claramente audíveis
   function playServeChangeSound() {
-    // beep curto e discreto, único, para troca de serviço
-    playTone(880, 110, 0.07);
+    playTone(1046, 130, 0.18, "triangle");
+    setTimeout(() => playTone(1046, 130, 0.18, "triangle"), 160);
   }
 
+  // match point: sequência ascendente de 3 notas, marcante mas curta
   function playMatchPointSound() {
-    // dois beeps curtos em sequência, ligeiramente mais presentes, para match point
-    playTone(660, 90, 0.09);
-    setTimeout(() => playTone(990, 130, 0.09), 140);
+    playTone(784, 110, 0.2, "square");
+    setTimeout(() => playTone(988, 110, 0.2, "square"), 130);
+    setTimeout(() => playTone(1318, 160, 0.2, "square"), 260);
+  }
+
+  // deuce: duas notas a oscilar (sobe-desce), transmite "equilíbrio/tensão"
+  function playDeuceSound() {
+    playTone(880, 140, 0.18, "triangle");
+    setTimeout(() => playTone(740, 140, 0.18, "triangle"), 160);
+    setTimeout(() => playTone(880, 180, 0.18, "triangle"), 320);
+  }
+
+  /* ---------------------------------------------------------
+     STATUS BANNER — animação visual central para deuce e match point
+     --------------------------------------------------------- */
+  let statusBannerTimeout = null;
+  function showStatusBanner(text, kind) {
+    const banner = document.getElementById("status-banner");
+    const label = document.getElementById("status-banner-text");
+    label.textContent = text;
+    banner.classList.remove("is-matchpoint", "is-playing");
+    void banner.offsetWidth; // força reinício da animação mesmo se já estava a correr
+    banner.classList.toggle("is-matchpoint", kind === "matchpoint");
+    banner.hidden = false;
+    banner.classList.add("is-playing");
+
+    if (statusBannerTimeout) clearTimeout(statusBannerTimeout);
+    statusBannerTimeout = setTimeout(() => {
+      banner.hidden = true;
+      banner.classList.remove("is-playing");
+    }, 1700);
   }
 
   // histórico de ações para permitir "anular último ponto"
@@ -1066,7 +1206,10 @@
   function addPoint(side) {
     if (!game || game.paused) return;
 
+    playTapSound();
+
     const servingBefore = currentServingSide();
+    const wasDeuceBefore = isDeuce();
 
     pointHistory.push(side);
     if (side === "blue") game.currentBlue++;
@@ -1082,8 +1225,15 @@
     }
 
     const wasSetEnd = checkSetEnd();
-    if (!wasSetEnd && isMatchPoint()) {
-      playMatchPointSound();
+    if (!wasSetEnd) {
+      const isDeuceNow = isDeuce();
+      if (isDeuceNow && !wasDeuceBefore) {
+        playDeuceSound();
+        showStatusBanner("DEUCE", "deuce");
+      } else if (isMatchPoint()) {
+        playMatchPointSound();
+        showStatusBanner("MATCH POINT", "matchpoint");
+      }
     }
   }
 

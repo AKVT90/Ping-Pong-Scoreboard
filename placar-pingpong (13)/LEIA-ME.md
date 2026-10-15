@@ -36,9 +36,18 @@ Como esta app não passa pela Play Store, a forma de "instalar" é através do n
 - **Novo Jogo — passo 3**: confirma os pontos e formato (varia conforme o tipo escolhido no passo anterior) e toca em "Começar Jogo".
 - **BOLAR**: antes de cada set (incluindo o primeiro), aparece um ecrã a dividir o tablet a meio para escolherem quem serve primeiro nesse set. Toca no lado de quem vai começar a servir.
 - **Durante o jogo**: toca em qualquer metade do ecrã para somar um ponto a esse lado. O quadrado amarelo no canto mostra os sets ganhos, com uma pequena bola branca a piscar do lado de quem está a servir, com um beep discreto a avisar da troca de serviço. Quando um dos lados está a um ponto de fechar o set ("match point"), ouve-se um som diferente. O botão de pausa (❙❙) para o cronómetro, e o botão ↺ anula o último ponto marcado por engano.
-- **Capote**: apenas nos jogos de 21 pontos (modo Personalizado), se um jogador chegar aos 11 enquanto o adversário continua a 0, o set termina automaticamente e fica assinalado como "Capote" no histórico.
+- **Capote**: apenas nos jogos de 21 pontos (modo Personalizado), se um jogador chegar aos 11 enquanto o adversário continua a 0, o set termina automaticamente e fica assinalado como "Capote" — tanto na lista do histórico como no detalhe do jogo — e conta nas estatísticas do jogador (capotes feitos e sofridos), mesmo não sendo critério de vitória.
+- **Deuce (modo Clássico)**: quando o set chega a 10-10 (ou equivalente), aparece uma animação "DEUCE" no centro do ecrã com um som distinto, e a partir daí o serviço passa a trocar a cada ponto (em vez de a cada 2), seguindo a regra oficial.
+- **Match point**: sempre que um lado está a um ponto de fechar o set (em qualquer modo), aparece uma animação "MATCH POINT" a vermelho com som próprio.
+- **Sons**: cada toque para marcar ponto tem um "pling" curto de confirmação. A troca de serviço, o deuce e o match point têm sons distintos entre si, pensados para serem audíveis mesmo durante o jogo.
 - **Terminar jogo**: o botão vermelho em baixo. Pede confirmação e guarda o resultado no histórico — exceto se ainda não tiveres completado nenhum set, nesse caso não grava nada. Se os sets ficarem empatados (ex: 1-1), o jogo fica registado como "Empate", sem atribuir vitória a ninguém.
 - **Jogo em curso**: se saíres da app a meio de um jogo (por engano ou de propósito), ao voltares ao menu vais ver "Continuar jogo" para retomares exatamente onde ficaste, incluindo o serviço e as cores.
+
+## ELO (só por diversão)
+
+Cada jogador tem um ELO, calculado a partir de todo o histórico de jogos (não de sets), tendo em conta a força do adversário em cada confronto — vencer alguém com ELO mais alto vale mais do que vencer alguém mais fraco, tal como em sistemas de matchmaking de jogos competitivos. O ELO aparece no leaderboard, no perfil de cada jogador, e em pequeno junto ao nome no ecrã de jogo.
+
+Importante: o ELO **não** determina a ordenação do leaderboard nem é critério de vitória — isso continua a ser sempre vitórias e derrotas reais. É só um número extra para curiosidade entre amigos.
 
 ## Cor de cada jogador no placar
 
