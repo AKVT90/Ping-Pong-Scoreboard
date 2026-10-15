@@ -370,36 +370,43 @@ input{ font-family:inherit; }
 .set-row-winner{ width:60px; text-align:right; font-size:12px; color:var(--text-dim); flex-shrink:0; }
 
 /* ============== MOMENTUM CHART ============== */
-.momentum-wrap{ margin-top:14px; padding-top:14px; border-top:1px solid var(--panel-line); }
+.momentum-wrap{
+  margin-top:14px;
+  padding-top:14px;
+  border-top:1px solid var(--panel-line);
+}
 .momentum-summary{
   font-size:12.5px;
   color:var(--text-mid);
   margin-bottom:10px;
   text-align:center;
 }
-.momentum-labels{
-  display:flex; justify-content:space-between;
-  margin-bottom:6px;
+.momentum-point-legend{
+  display:flex; align-items:center; gap:8px;
+  margin-bottom:10px;
 }
-.momentum-label{
+.momentum-legend-dot{
+  width:12px; height:12px;
+  border-radius:3px;
+  flex-shrink:0;
+}
+.momentum-legend-name{
+  font-size:12px;
+  color:var(--text-mid);
+  margin-right:10px;
+}
+.momentum-svg{ width:100%; display:block; overflow:visible; }
+.momentum-tick{
   font-family:var(--font-score);
-  font-size:11px;
-  letter-spacing:0.3px;
+  font-size:9px;
+  fill:var(--text-dim);
+  text-anchor:middle;
 }
-.momentum-label small{ font-size:9.5px; opacity:0.75; }
-.momentum-label--blue{ color:var(--blue-light); }
-.momentum-label--white{ color:var(--white); }
-.momentum-svg{ width:100%; height:74px; display:block; }
-.momentum-midline{ stroke:var(--panel-line); stroke-width:1.5; }
-.momentum-line{ stroke-width:2.75; stroke-linejoin:round; stroke-linecap:round; }
-.momentum-dot{ fill:var(--text-dim); }
-.momentum-dot--end{ stroke:var(--ink); stroke-width:2; }
-.momentum-axis{
-  display:flex; justify-content:space-between;
-  margin-top:6px;
-  font-size:10px;
+.momentum-total{
+  text-align:center;
+  font-size:11px;
   color:var(--text-dim);
-  letter-spacing:0.3px;
+  margin-top:6px;
 }
 
 /* ============== LEADERBOARD ============== */

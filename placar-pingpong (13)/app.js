@@ -678,127 +678,76 @@
     const log = set.pointLog;
     if (!log || log.length === 0) return "";
 
-    // construir série de diferença acumulada (positivo = azul a ganhar, negativo = branco)
-    let diff = 0;
-    const series = [0];
-    log.forEach((side) => {
-      diff += side === "blue" ? 1 : -1;
-      series.push(diff);
-    });
-
-    const W = 600, H = 140, padX = 14, padY = 18;
-    const maxAbs = Math.max(2, ...series.map((v) => Math.abs(v)));
-    const n = series.length;
-    const stepX = n > 1 ? (W - padX * 2) / (n - 1) : 0;
-    const midY = H / 2;
-    const scaleY = (H / 2 - padY) / maxAbs;
-
-    const pts = series.map((v, i) => ({
-      x: padX + i * stepX,
-      y: midY - v * scaleY,
-      v
-    }));
-
-    // gera um path de área que só "existe" acima da linha central (valores positivos)
-    // ou só abaixo (valores negativos). Cada vez que a série toca ou cruza o zero,
-    // fechamos o "lóbulo" atual de volta à linha do meio e começamos um novo —
-    // isto evita que lóbulos distintos fiquem ligados por baixo da linha central.
-    function buildHalfAreaPath(points, keepPositive) {
-      const segs = [];
-      let current = [];
-
-      const flush = () => {
-        if (current.length > 1) {
-          const first = current[0];
-          const last = current[current.length - 1];
-          const d = `M ${first.x.toFixed(1)},${midY.toFixed(1)} ` +
-            current.map((p) => `L ${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ") +
-            ` L ${last.x.toFixed(1)},${midY.toFixed(1)} Z`;
-          segs.push(d);
-        }
-        current = [];
-      };
-
-      for (let i = 0; i < points.length - 1; i++) {
-        const p = points[i];
-        const next = points[i + 1];
-        const pIn = keepPositive ? p.v >= 0 : p.v <= 0;
-        const nextIn = keepPositive ? next.v >= 0 : next.v <= 0;
-
-        if (pIn) current.push(p);
-
-        const crosses = (p.v > 0 && next.v < 0) || (p.v < 0 && next.v > 0);
-        if (crosses) {
-          const t = Math.abs(p.v) / (Math.abs(p.v) + Math.abs(next.v));
-          const zx = p.x + (next.x - p.x) * t;
-          current.push({ x: zx, y: midY });
-          flush();
-        } else if (pIn && !nextIn) {
-          // o próximo ponto está fora da zona (tipicamente exatamente a 0):
-          // inclui-o como fronteira para o lóbulo fechar de forma suave, e termina aqui
-          current.push({ x: next.x, y: midY });
-          flush();
-        }
-      }
-      // garante que o último ponto da série é incluído se pertencer ao lóbulo aberto
-      const lastPoint = points[points.length - 1];
-      const lastIn = keepPositive ? lastPoint.v >= 0 : lastPoint.v <= 0;
-      if (lastIn) current.push(lastPoint);
-      flush();
-
-      return segs.join(" ");
-    }
-
-    const blueAreaPath = buildHalfAreaPath(pts, true);
-    const whiteAreaPath = buildHalfAreaPath(pts, false);
-
-    // cores reais de cada jogador, para o gráfico refletir o placar tal como apareceu no jogo
+    // cores reais de cada jogador (mesma lógica do placar de jogo)
     const blueColorKey = getPlayerColorKey(getPlayer(bluePlayerId));
     const whiteColorKeyRaw = getPlayerColorKey(getPlayer(whitePlayerId));
     const blueColor = PLAYER_COLORS[blueColorKey].bg;
-    const whiteColor = blueColorKey === whiteColorKeyRaw ? PLAYER_COLORS[whiteColorKeyRaw].fg : PLAYER_COLORS[whiteColorKeyRaw].bg;
-    // se a cor "branca" calculada for muito clara (quase igual ao fundo do cartão), usamos um tom mais visível só para o gráfico
-    const whiteColorForChart = whiteColor.toLowerCase() === "#f4f1ea" ? "#9aa0a8" : whiteColor;
+    const whiteColor = blueColorKey === whiteColorKeyRaw
+      ? PLAYER_COLORS[whiteColorKeyRaw].fg
+      : PLAYER_COLORS[whiteColorKeyRaw].bg;
+    const whiteColorForChart = whiteColor.toLowerCase() === "#f4f1ea" ? "#7a8a9a" : whiteColor;
 
-    // resumo textual: quem liderou mais tempo ao longo do set
-    const blueLeadPoints = series.filter((v) => v > 0).length;
-    const whiteLeadPoints = series.filter((v) => v < 0).length;
+    // contagem de sequências longas de cada lado, para o resumo textual
+    let blueLeadPoints = 0, whiteLeadPoints = 0;
+    let runningDiff = 0;
+    log.forEach((side) => {
+      runningDiff += side === "blue" ? 1 : -1;
+      if (runningDiff > 0) blueLeadPoints++;
+      else if (runningDiff < 0) whiteLeadPoints++;
+    });
     let leadSummary;
     if (blueLeadPoints === whiteLeadPoints) {
-      leadSummary = "Set equilibrado do início ao fim";
+      leadSummary = "Set muito equilibrado";
     } else {
-      const leaderName = blueLeadPoints > whiteLeadPoints ? blueName : whiteName;
-      leadSummary = `${escapeHTML(leaderName)} esteve à frente a maior parte do set`;
+      const leaderName = blueLeadPoints > whiteLeadPoints
+        ? escapeHTML(blueName)
+        : escapeHTML(whiteName);
+      leadSummary = `${leaderName} esteve à frente a maior parte do set`;
     }
 
-    // maior vantagem alcançada por cada lado, para dar contexto extra
-    const maxBlueLead = Math.max(0, ...series);
-    const maxWhiteLead = Math.max(0, ...series.map((v) => -v));
+    // cada ponto é um bloco colorido; tamanho e gap adaptam-se ao número total de pontos
+    const total = log.length;
+    const W = 600;
+    const BLOCK_H = 28;
+    const GAP = total > 60 ? 1 : total > 30 ? 2 : 3;
+    const blockW = Math.max(4, Math.floor((W - GAP * (total - 1)) / total));
+    const actualW = blockW * total + GAP * (total - 1);
+    const offsetX = Math.floor((W - actualW) / 2);
 
-    const lastPoint = pts[pts.length - 1];
-    const firstPoint = pts[0];
-    const linePointsAttr = pts.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ");
+    const rects = log.map((side, i) => {
+      const x = offsetX + i * (blockW + GAP);
+      const color = side === "blue" ? blueColor : whiteColorForChart;
+      return `<rect x="${x}" y="0" width="${blockW}" height="${BLOCK_H}" fill="${color}" rx="1.5"/>`;
+    }).join("");
+
+    // linha de placar corrente por baixo dos blocos (score a cada ponto)
+    // mostramos só os múltiplos de 5 para não sobrecarregar
+    const ticks = [];
+    let b = 0, w = 0;
+    log.forEach((side, i) => {
+      if (side === "blue") b++; else w++;
+      if ((b + w) % 5 === 0 || i === log.length - 1) {
+        const x = offsetX + i * (blockW + GAP) + blockW / 2;
+        ticks.push(`<text x="${x.toFixed(1)}" y="52" class="momentum-tick">${b}-${w}</text>`);
+      }
+    });
+
+    const svgH = 60;
 
     return `
       <div class="momentum-wrap">
         <p class="momentum-summary">${leadSummary}</p>
-        <div class="momentum-labels">
-          <span class="momentum-label momentum-label--blue">${escapeHTML(blueName)} <small>(max. vantagem ${maxBlueLead})</small></span>
-          <span class="momentum-label momentum-label--white">${escapeHTML(whiteName)} <small>(max. vantagem ${maxWhiteLead})</small></span>
+        <div class="momentum-point-legend">
+          <span class="momentum-legend-dot" style="background:${blueColor}"></span>
+          <span class="momentum-legend-name">${escapeHTML(blueName)}</span>
+          <span class="momentum-legend-dot" style="background:${whiteColorForChart}"></span>
+          <span class="momentum-legend-name">${escapeHTML(whiteName)}</span>
         </div>
-        <svg viewBox="0 0 ${W} ${H}" class="momentum-svg" preserveAspectRatio="none">
-          ${blueAreaPath ? `<path d="${blueAreaPath}" fill="${blueColor}" opacity="0.4" />` : ""}
-          ${whiteAreaPath ? `<path d="${whiteAreaPath}" fill="${whiteColorForChart}" opacity="0.4" />` : ""}
-          <line x1="${padX}" y1="${midY}" x2="${W - padX}" y2="${midY}" class="momentum-midline" stroke-dasharray="4 4" />
-          <polyline points="${linePointsAttr}" class="momentum-line" fill="none" stroke="${diff >= 0 ? blueColor : whiteColorForChart}" />
-          <circle cx="${firstPoint.x}" cy="${firstPoint.y}" r="4.5" class="momentum-dot" />
-          <circle cx="${lastPoint.x}" cy="${lastPoint.y}" r="5.5" class="momentum-dot momentum-dot--end" fill="${diff >= 0 ? blueColor : whiteColorForChart}" />
+        <svg viewBox="0 0 ${W} ${svgH}" class="momentum-svg" preserveAspectRatio="xMidYMid meet">
+          ${rects}
+          ${ticks.join("")}
         </svg>
-        <div class="momentum-axis">
-          <span>Início do set</span>
-          <span>${log.length} pontos jogados</span>
-          <span>Fim do set</span>
-        </div>
+        <p class="momentum-total">${total} pontos jogados</p>
       </div>
     `;
   }
