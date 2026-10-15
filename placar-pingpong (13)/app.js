@@ -1270,15 +1270,20 @@
     if (blue >= target && blue - white >= minLead) winnerSide = "blue";
     else if (white >= target && white - blue >= minLead) winnerSide = "white";
 
-    // regra especial de "capote": só em jogos de 21 pontos.
-    // Se um jogador chega aos 11 pontos e o adversário continua a 0,
-    // o set termina imediatamente como capote.
-    if (!winnerSide && target === 21) {
-      if (blue >= 11 && white === 0) {
+    // regra de "capote": só se aplica em jogos de 21 pontos, e cobre dois casos:
+    //  (a) interrupção antecipada — alguém chega aos 11 com o adversário ainda a 0;
+    //  (b) resultado final — o set corre normalmente até ao fim (alguém faz 21+ com
+    //      vantagem de 2), mas o adversário não passou dos 10 pontos.
+    if (target === 21) {
+      if (!winnerSide && blue >= 11 && white === 0) {
         winnerSide = "blue";
         isCapote = true;
-      } else if (white >= 11 && blue === 0) {
+      } else if (!winnerSide && white >= 11 && blue === 0) {
         winnerSide = "white";
+        isCapote = true;
+      } else if (winnerSide === "blue" && white <= 10) {
+        isCapote = true;
+      } else if (winnerSide === "white" && blue <= 10) {
         isCapote = true;
       }
     }
