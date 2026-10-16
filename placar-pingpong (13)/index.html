@@ -28,46 +28,56 @@
       </div>
       <h1 class="menu-title">PLACAR</h1>
       <p class="menu-sub">Ping Pong</p>
+      <button class="menu-lang-btn" id="btn-lang" title="Idioma">🇵🇹</button>
+    </div>
+    <div class="menu-lang-dropdown" id="menu-lang-dropdown" hidden>
+      <button class="lang-option" data-lang="pt" data-flag="🇵🇹">🇵🇹 Português</button>
+      <button class="lang-option" data-lang="en" data-flag="🏴󠁧󠁢󠁥󠁮󠁧󠁿">🇬🇧 English</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      <button class="lang-option" data-lang="fr" data-flag="🇫🇷">🇫🇷 Français</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="zh" data-flag="🇨🇳">🇨🇳 中文</button>
+        <button class="lang-option" data-lang="ja" data-flag="🇯🇵">🇯🇵 日本語</button>
     </div>
 
     <div class="menu-actions">
       <button class="menu-btn menu-btn--primary" id="btn-new-game">
         <span class="menu-btn-icon">＋</span>
         <span class="menu-btn-text">
-          <strong>Novo Jogo</strong>
-          <small>Escolher jogadores e começar</small>
+          <strong data-i18n="menu.newGame">Novo Jogo</strong>
+          <small data-i18n="menu.newGameSub">Escolher jogadores e começar</small>
         </span>
       </button>
 
       <button class="menu-btn menu-btn--tournament" id="btn-tournament">
         <span class="menu-btn-icon">⬡</span>
         <span class="menu-btn-text">
-          <strong>Torneio</strong>
-          <small>Eliminatórias com chaveamento automático</small>
+          <strong data-i18n="menu.tournament">Torneio</strong>
+          <small data-i18n="menu.tournamentSub">Eliminatórias com chaveamento automático</small>
         </span>
       </button>
 
       <button class="menu-btn" id="btn-players">
         <span class="menu-btn-icon">☷</span>
         <span class="menu-btn-text">
-          <strong>Jogadores</strong>
-          <small>Gerir e ver estatísticas</small>
+          <strong data-i18n="menu.players">Jogadores</strong>
+          <small data-i18n="menu.playersSub">Gerir e ver estatísticas</small>
         </span>
       </button>
 
       <button class="menu-btn" id="btn-history">
         <span class="menu-btn-icon">▤</span>
         <span class="menu-btn-text">
-          <strong>Histórico</strong>
-          <small>Jogos anteriores</small>
+          <strong data-i18n="menu.history">Histórico</strong>
+          <small data-i18n="menu.historySub">Jogos anteriores</small>
         </span>
       </button>
 
       <button class="menu-btn" id="btn-data">
         <span class="menu-btn-icon">⇄</span>
         <span class="menu-btn-text">
-          <strong>Dados</strong>
-          <small>Exportar ou importar cópia de segurança</small>
+          <strong data-i18n="menu.data">Dados</strong>
+          <small data-i18n="menu.dataSub">Exportar ou importar cópia de segurança</small>
         </span>
       </button>
     </div>
@@ -84,7 +94,7 @@
       <button class="resume-btn" id="btn-resume">Continuar jogo ▸</button>
     </div>
 
-    <p class="menu-footer">dados guardados apenas neste tablet</p>
+    <p class="menu-footer"><span data-i18n="menu.footer">dados guardados apenas neste tablet</span></p>
     <p class="menu-credit">Powered by AKVT90</p>
   </div>
 </div>
@@ -93,8 +103,8 @@
 <div id="screen-players" class="screen">
   <header class="bar">
     <button class="bar-back" data-back="screen-menu">‹</button>
-    <h2 class="bar-title">Jogadores</h2>
-    <button class="bar-action" id="btn-add-player">＋ Novo</button>
+    <h2 class="bar-title" data-i18n="screen.players">Jogadores</h2>
+    <button class="bar-action" id="btn-add-player" data-i18n="btn.addPlayer">＋ Novo</button>
   </header>
   <div class="bar-spacer"></div>
   <div class="content" id="players-list">
@@ -107,7 +117,7 @@
   <header class="bar">
     <button class="bar-back" data-back="screen-players">‹</button>
     <h2 class="bar-title" id="profile-name">Jogador</h2>
-    <button class="bar-action bar-action--danger" id="btn-delete-player">Eliminar</button>
+    <button class="bar-action bar-action--danger" id="btn-delete-player" data-i18n="btn.deletePlayer">Eliminar</button>
   </header>
   <div class="bar-spacer"></div>
   <div class="content" id="profile-content">
@@ -119,7 +129,7 @@
 <div id="screen-history" class="screen">
   <header class="bar">
     <button class="bar-back" data-back="screen-menu">‹</button>
-    <h2 class="bar-title">Histórico</h2>
+    <h2 class="bar-title" data-i18n="screen.history">Histórico</h2>
     <span class="bar-action bar-action--ghost"></span>
   </header>
   <div class="bar-spacer"></div>
@@ -132,7 +142,7 @@
 <div id="screen-game-detail" class="screen">
   <header class="bar">
     <button class="bar-back" data-back="screen-history">‹</button>
-    <h2 class="bar-title">Detalhe do Jogo</h2>
+    <h2 class="bar-title" data-i18n="screen.gameDetail">Detalhe do Jogo</h2>
     <span class="bar-action bar-action--ghost"></span>
   </header>
   <div class="bar-spacer"></div>
@@ -145,14 +155,14 @@
 <div id="screen-setup" class="screen">
   <header class="bar">
     <button class="bar-back" data-back="screen-menu">‹</button>
-    <h2 class="bar-title">Novo Jogo</h2>
+    <h2 class="bar-title" data-i18n="screen.newGame">Novo Jogo</h2>
     <span class="bar-action bar-action--ghost"></span>
   </header>
   <div class="bar-spacer"></div>
   <div class="content setup-content">
 
     <section class="setup-section">
-      <p class="setup-label">Lado Azul</p>
+      <p class="setup-label" data-i18n="setup.bluePlayer">Lado Azul</p>
       <button class="setup-player-pick setup-player-pick--blue" id="pick-blue">
         <span>Escolher jogador</span>
       </button>
@@ -161,7 +171,7 @@
     <div class="setup-vs">VS</div>
 
     <section class="setup-section">
-      <p class="setup-label">Lado Branco</p>
+      <p class="setup-label" data-i18n="setup.whitePlayer">Lado Branco</p>
       <button class="setup-player-pick setup-player-pick--white" id="pick-white">
         <span>Escolher jogador</span>
       </button>
@@ -172,7 +182,7 @@
       <input type="text" id="input-game-description" class="setup-description-input" placeholder="Ex: torneio de verão, sala de jogos..." maxlength="60" autocomplete="off">
     </section>
 
-    <button class="setup-confirm" id="btn-goto-mode" disabled>Continuar ▸</button>
+    <button class="setup-confirm" id="btn-goto-mode" disabled data-i18n="btn.continue">Continuar ▸</button>
   </div>
 </div>
 
@@ -180,7 +190,7 @@
 <div id="screen-setup-mode" class="screen">
   <header class="bar">
     <button class="bar-back" id="btn-back-from-mode">‹</button>
-    <h2 class="bar-title">Tipo de Jogo</h2>
+    <h2 class="bar-title" data-i18n="screen.gameType">Tipo de Jogo</h2>
     <span class="bar-action bar-action--ghost"></span>
   </header>
   <div class="bar-spacer"></div>
@@ -196,7 +206,7 @@
       <span class="mode-card-desc">11 pontos por set · BO3, BO5 ou BO7</span>
     </button>
 
-    <button class="setup-confirm" id="btn-goto-options">Continuar ▸</button>
+    <button class="setup-confirm" id="btn-goto-options" data-i18n="btn.continue">Continuar ▸</button>
   </div>
 </div>
 
@@ -204,14 +214,14 @@
 <div id="screen-setup-options" class="screen">
   <header class="bar">
     <button class="bar-back" id="btn-back-from-options">‹</button>
-    <h2 class="bar-title">Pontos e Formato</h2>
+    <h2 class="bar-title" data-i18n="screen.pointsFormat">Pontos e Formato</h2>
     <span class="bar-action bar-action--ghost"></span>
   </header>
   <div class="bar-spacer"></div>
   <div class="content setup-content">
 
     <section class="setup-section" id="section-points">
-      <p class="setup-label">Pontos por set</p>
+      <p class="setup-label" data-i18n="setup.pointsPerSet">Pontos por set</p>
       <div class="setup-options" id="opt-points">
         <button class="setup-option" data-points="11">11 pontos</button>
         <button class="setup-option active" data-points="21">21 pontos</button>
@@ -219,7 +229,7 @@
     </section>
 
     <section class="setup-section">
-      <p class="setup-label">Formato</p>
+      <p class="setup-label" data-i18n="setup.format">Formato</p>
       <div class="setup-options" id="opt-format">
         <button class="setup-option active" data-format="free">Livre</button>
         <button class="setup-option" data-format="3">Melhor de 3</button>
@@ -228,7 +238,7 @@
       </div>
     </section>
 
-    <button class="setup-confirm" id="btn-confirm-setup">Começar Jogo</button>
+    <button class="setup-confirm" id="btn-confirm-setup" data-i18n="btn.startGame">Começar Jogo</button>
   </div>
 </div>
 
@@ -249,7 +259,7 @@
 <div id="screen-tournament-setup" class="screen">
   <header class="bar">
     <button class="bar-back" data-back="screen-menu">‹</button>
-    <h2 class="bar-title">Novo Torneio</h2>
+    <h2 class="bar-title" data-i18n="screen.newTournament">Novo Torneio</h2>
     <span class="bar-action bar-action--ghost"></span>
   </header>
   <div class="bar-spacer"></div>
@@ -278,14 +288,14 @@
     </div>
     <p class="section-label">Jogadores <span id="tournament-player-count" class="section-label-count">0 / 4</span></p>
     <div id="tournament-player-list" class="tournament-player-checklist"></div>
-    <button class="setup-confirm" id="btn-start-tournament" disabled>Criar Torneio</button>
+    <button class="setup-confirm" id="btn-start-tournament" disabled data-i18n="btn.createTournament">Criar Torneio</button>
   </div>
 </div>
 <div id="screen-tournament-bracket" class="screen">
   <header class="bar">
     <button class="bar-back" id="btn-tournament-back">‹</button>
-    <h2 class="bar-title">Torneio</h2>
-    <button class="bar-action bar-action--danger" id="btn-tournament-abandon">Abandonar</button>
+    <h2 class="bar-title" data-i18n="screen.tournament">Torneio</h2>
+    <button class="bar-action bar-action--danger" id="btn-tournament-abandon" data-i18n="btn.abandon">Abandonar</button>
   </header>
   <div class="bar-spacer"></div>
   <div class="content" id="tournament-bracket-content"></div>
@@ -296,7 +306,7 @@
     <p class="tournament-winner-label">Campeão do Torneio</p>
     <h1 class="tournament-winner-name" id="tournament-winner-name">—</h1>
     <p class="tournament-winner-sub" id="tournament-winner-sub"></p>
-    <button class="setup-confirm" id="btn-tournament-done">Voltar ao Menu</button>
+    <button class="setup-confirm" id="btn-tournament-done" data-i18n="btn.backMenu">Voltar ao Menu</button>
   </div>
 </div>
 <div id="screen-training" class="screen screen-training">
@@ -311,7 +321,7 @@
         <span class="training-time-val" id="training-time-val">15</span>
         <button class="training-time-btn" id="btn-time-plus">+</button>
       </div>
-      <button class="setup-confirm" id="btn-training-start-timed">Começar</button>
+      <button class="setup-confirm" id="btn-training-start-timed" data-i18n="btn.start">Começar</button>
     </div>
     <button class="training-pick-back" id="btn-training-pick-back">‹ Voltar</button>
   </div>
@@ -329,14 +339,14 @@
 <div id="screen-minigames" class="screen">
   <header class="bar">
     <button class="bar-back" data-back="screen-menu">‹</button>
-    <h2 class="bar-title">Mini Jogos</h2>
+    <h2 class="bar-title" data-i18n="screen.minigames">Mini Jogos</h2>
     <span class="bar-action bar-action--ghost"></span>
   </header>
   <div class="bar-spacer"></div>
   <div class="content">
     <div class="minigame-cards">
-      <button class="minigame-card" id="btn-minigame-tap"><div class="minigame-card-icon">⚡</div><strong>Toques Rápidos</strong><small>Clica nos pontos antes que desapareçam</small></button>
-      <button class="minigame-card" id="btn-minigame-memory"><div class="minigame-card-icon">🧠</div><strong>Memória Visual</strong><small>Memoriza e repete a sequência</small></button>
+      <button class="minigame-card" id="btn-minigame-tap"><div class="minigame-card-icon">⚡</div><strong data-i18n="mg.tap">Toques Rápidos</strong><small data-i18n="mg.tapSub">Clica nos pontos antes que desapareçam</small></button>
+      <button class="minigame-card" id="btn-minigame-memory"><div class="minigame-card-icon">🧠</div><strong data-i18n="mg.memory">Memória Visual</strong><small data-i18n="mg.memorySub">Memoriza e repete a sequência</small></button>
     </div>
     <p class="section-label" style="margin-top:24px">Jogar como</p>
     <div id="minigame-player-pick" class="players-grid"></div>
@@ -364,14 +374,14 @@
   <div class="bolar-board">
     <button class="bolar-half bolar-half--blue" id="bolar-blue" data-side="blue">
       <span class="bolar-name" id="bolar-name-blue">Azul</span>
-      <span class="bolar-hint">serve primeiro</span>
+      <span class="bolar-hint" data-i18n="serve.hint">serve primeiro</span>
     </button>
     <button class="bolar-half bolar-half--white" id="bolar-white" data-side="white">
       <span class="bolar-name" id="bolar-name-white">Branco</span>
       <span class="bolar-hint">serve primeiro</span>
     </button>
     <div class="bolar-center">
-      <span class="bolar-title">BOLAR</span>
+      <span class="bolar-title" data-i18n="serve.title">SERVIÇO</span>
       <span class="bolar-set-label" id="bolar-set-label">Set 1 · quem serve primeiro?</span>
     </div>
   </div>
@@ -486,7 +496,7 @@
 <div id="screen-data" class="screen">
   <header class="bar">
     <button class="bar-back" data-back="screen-menu">‹</button>
-    <h2 class="bar-title">Dados</h2>
+    <h2 class="bar-title" data-i18n="screen.data">Dados</h2>
     <span class="bar-action bar-action--ghost"></span>
   </header>
   <div class="bar-spacer"></div>
@@ -504,16 +514,16 @@
     <button class="data-action data-action--primary" id="btn-export">
       <span class="data-action-icon">⇩</span>
       <span class="data-action-text">
-        <strong>Exportar cópia de segurança</strong>
-        <small>Gera um ficheiro .json com tudo</small>
+        <strong data-i18n="data.export">Exportar cópia de segurança</strong>
+        <small data-i18n="data.exportSub">Gera um ficheiro .json com tudo</small>
       </span>
     </button>
 
     <button class="data-action" id="btn-import">
       <span class="data-action-icon">⇧</span>
       <span class="data-action-text">
-        <strong>Importar cópia de segurança</strong>
-        <small>Adicionar ou fundir dados de uma cópia de segurança</small>
+        <strong data-i18n="data.import">Importar cópia de segurança</strong>
+        <small data-i18n="data.importSub">Adicionar ou fundir dados de uma cópia de segurança</small>
       </span>
     </button>
     <input type="file" id="input-import-file" accept="application/json,.json" hidden>
@@ -522,8 +532,8 @@
     <button class="data-action data-action--danger" id="btn-wipe">
       <span class="data-action-icon">⨯</span>
       <span class="data-action-text">
-        <strong>Apagar todos os dados</strong>
-        <small>Remove jogadores e histórico deste tablet</small>
+        <strong data-i18n="data.wipe">Apagar todos os dados</strong>
+        <small data-i18n="data.wipeSub">Remove jogadores e histórico deste tablet</small>
       </span>
     </button>
 
@@ -571,7 +581,7 @@
 <!-- ACHIEVEMENT TOAST -->
 <div id="achievement-toast" class="achievement-toast" hidden>
   <div class="ach-toast-inner">
-    <div class="ach-toast-eyebrow">🏆 CONQUISTA DESBLOQUEADA!</div>
+    <div class="ach-toast-eyebrow" data-i18n="ach.unlocked">🏆 CONQUISTA DESBLOQUEADA!</div>
     <div class="ach-toast-icon" id="ach-toast-icon">⭐</div>
     <div class="ach-toast-name" id="ach-toast-name">Nome</div>
     <div class="ach-toast-desc" id="ach-toast-desc">Descrição</div>
@@ -580,7 +590,7 @@
 </div>
 <!-- CONQUISTAS -->
 <div id="screen-achievements" class="screen">
-  <header class="bar"><button class="bar-back" data-back="screen-menu">‹</button><h2 class="bar-title">Conquistas</h2><span class="bar-action bar-action--ghost"></span></header>
+  <header class="bar"><button class="bar-back" data-back="screen-menu">‹</button><h2 class="bar-title" data-i18n="screen.achievements">Conquistas</h2><span class="bar-action bar-action--ghost"></span></header>
   <div class="bar-spacer"></div>
   <div class="content">
     <div class="ach-player-picker" id="ach-player-picker"></div>
@@ -593,7 +603,7 @@
 </div>
 <!-- RECORDES -->
 <div id="screen-records" class="screen">
-  <header class="bar"><button class="bar-back" data-back="screen-menu">‹</button><h2 class="bar-title">Recordes</h2><span class="bar-action bar-action--ghost"></span></header>
+  <header class="bar"><button class="bar-back" data-back="screen-menu">‹</button><h2 class="bar-title" data-i18n="screen.records">Recordes</h2><span class="bar-action bar-action--ghost"></span></header>
   <div class="bar-spacer"></div>
   <div class="content" id="records-list"></div>
 </div>

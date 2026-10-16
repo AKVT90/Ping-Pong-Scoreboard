@@ -52,6 +52,516 @@
   /* ---------------------------------------------------------
      NAVEGAÇÃO ENTRE ECRÃS
      --------------------------------------------------------- */
+
+  /* ==========================================================
+     SISTEMA DE INTERNACIONALIZAÇÃO (i18n)
+     ========================================================== */
+  const LANGS = {
+    pt: {
+      // menu
+      "menu.newGame":"Novo Jogo","menu.newGameSub":"Escolher jogadores e começar",
+      "menu.tournament":"Torneio","menu.tournamentSub":"Eliminatórias com chaveamento automático",
+      "menu.players":"Jogadores","menu.playersSub":"Gerir e ver estatísticas",
+      "menu.history":"Histórico","menu.historySub":"Jogos anteriores",
+      "menu.data":"Dados","menu.dataSub":"Exportar ou importar cópia de segurança",
+      "menu.footer":"dados guardados apenas neste tablet",
+      // ecrãs
+      "screen.players":"Jogadores","screen.history":"Histórico",
+      "screen.gameDetail":"Detalhe do Jogo","screen.newGame":"Novo Jogo",
+      "screen.gameType":"Tipo de Jogo","screen.pointsFormat":"Pontos e Formato",
+      "screen.newTournament":"Novo Torneio","screen.tournament":"Torneio",
+      "screen.minigames":"Mini Jogos","screen.achievements":"Conquistas",
+      "screen.records":"Recordes","screen.data":"Dados",
+      // botões
+      "btn.addPlayer":"＋ Novo","btn.deletePlayer":"Eliminar",
+      "btn.abandon":"Abandonar","btn.continue":"Continuar ▸",
+      "btn.startGame":"Começar Jogo","btn.createTournament":"Criar Torneio",
+      "btn.backMenu":"Voltar ao Menu","btn.start":"Começar",
+      // serviço
+      "serve.title":"SERVIÇO","serve.hint":"serve primeiro",
+      // setup
+      "setup.bluePlayer":"Lado Azul","setup.whitePlayer":"Lado Branco",
+      "setup.pointsPerSet":"Pontos por set","setup.format":"Formato",
+      // mini jogos
+      "mg.tap":"Toques Rápidos","mg.tapSub":"Clica nos pontos antes que desapareçam",
+      "mg.memory":"Memória Visual","mg.memorySub":"Memoriza e repete a sequência",
+      // conquistas
+      "ach.unlocked":"🏆 CONQUISTA DESBLOQUEADA!",
+      // dados
+      "data.export":"Exportar cópia de segurança","data.exportSub":"Gera um ficheiro .json com tudo",
+      "data.import":"Importar cópia de segurança","data.importSub":"Adicionar ou fundir dados de uma cópia de segurança",
+      "data.wipe":"Apagar todos os dados","data.wipeSub":"Remove jogadores e histórico deste tablet",
+      // dinâmicos (usados no JS)
+      "js.choosePlayer":"Escolher jogador","js.continue":"Continuar de qualquer forma ▸",
+      "js.nextSet":"Próximo Set ▸","js.undoMsg":"Último ponto anulado — podes continuar o set.",
+      "js.setInProgress":"O set em curso (%b-%w) não vai ser contado. O resultado dos sets já fechados é guardado no histórico.",
+      "js.confirmEnd":"O resultado atual vai ser guardado no histórico.",
+      "js.confirmWipe":"Apagar todos os dados?",
+      "js.confirmAbandon":"Abandonar torneio?",
+      "js.emptyPlayers":"Cria jogadores primeiro.",
+      "js.noData":"Sem dados ainda",
+      "js.wins":"vitórias","js.losses":"derrotas","js.draws":"empates","js.capotes":"capotes",
+      "js.winRate":"Win%","js.elo":"ELO",
+      "js.allPlayers":"Todos os jogadores",
+      "js.serve":"Serve","js.notServe":"Não serve",
+      "js.set":"Set","js.bestOf":"Melhor de","js.free":"Livre",
+      "js.classic":"Clássico","js.custom":"Personalizado",
+      "js.gameWon":"%n venceu o jogo","js.setWon":"%n venceu o set",
+      "js.deuce":"DEUCE","js.matchPoint":"MATCH POINT",
+      "js.capoteTag":"Capote","js.newRecord":"🏆 Novo recorde!",
+      "js.points":"Pontos","js.level":"Nível","js.levelReached":"Nível atingido",
+      "js.playAgain":"Jogar de novo",
+      "js.tbd":"A definir","js.play":"▶ JOGAR",
+      "js.whoseServe":"Set %n · quem serve primeiro?",
+      "js.champion":"🏆 Campeão do Torneio",
+      "js.winsLabel":"V","js.lossesLabel":"D","js.drawsLabel":"E",
+      "js.capotesLabel":"Cap.","js.winRateLabel":"Win%","js.eloLabel":"ELO",
+      "js.bestRival":"Melhor rival","js.worstRival":"Pior rival",
+      "js.last10":"Últimos 10 jogos","js.streak":"Sequência atual",
+      "js.setsWon":"Sets ganhos","js.setsLost":"Sets perdidos",
+      "js.capotesMade":"Capotes feitos","js.capotesSuffered":"Capotes sofridos",
+      "js.tournamentsWon":"Torneios ganhos","js.tournamentsPlayed":"Torneios jogados",
+      "js.trainingMin":"min. de treino","js.trainingSessions":"sessões",
+      "js.importReplace":"Substituir tudo","js.importMerge":"Adicionar ao que já tenho",
+      "js.recElo":"Maior ELO","js.recStreak":"Maior Sequência","js.recWins":"Mais Vitórias",
+      "js.recCapotes":"Mais Capotes Feitos","js.recTournaments":"Mais Torneios Ganhos",
+      "js.recPoints":"Mais Pontos Marcados","js.recDuration":"Jogo Mais Longo",
+      "js.recMgTap":"Recorde Toques Rápidos","js.recMgMemory":"Recorde Memória",
+      "js.recEloGain":"Maior Ganho de ELO",
+      "js.wins_unit":"vitórias","js.min_unit":"min","js.pts_unit":"pts",
+      "js.roundQF":"Quartos-de-final","js.roundSF":"Meia-final","js.roundF":"Final",
+      "js.serveEvery2":"Serviço a cada 2 pontos","js.serveEvery5":"Serviço a cada 5 pontos",
+      "js.serveEvery1":"Serviço a cada 1 ponto (deuce)",
+      "js.eraseConfirm":"Tens a certeza? Esta ação não pode ser desfeita.",
+      "js.missedGame":"Foi engano — anular o último ponto",
+    },
+    en: {
+      "menu.newGame":"New Game","menu.newGameSub":"Choose players and start",
+      "menu.tournament":"Tournament","menu.tournamentSub":"Knockout bracket, auto-seeded",
+      "menu.players":"Players","menu.playersSub":"Manage and view statistics",
+      "menu.history":"History","menu.historySub":"Previous matches",
+      "menu.data":"Data","menu.dataSub":"Export or import backup",
+      "menu.footer":"data stored only on this device",
+      "screen.players":"Players","screen.history":"History",
+      "screen.gameDetail":"Match Detail","screen.newGame":"New Game",
+      "screen.gameType":"Game Type","screen.pointsFormat":"Points & Format",
+      "screen.newTournament":"New Tournament","screen.tournament":"Tournament",
+      "screen.minigames":"Mini Games","screen.achievements":"Achievements",
+      "screen.records":"Records","screen.data":"Data",
+      "btn.addPlayer":"＋ New","btn.deletePlayer":"Delete",
+      "btn.abandon":"Abandon","btn.continue":"Continue ▸",
+      "btn.startGame":"Start Match","btn.createTournament":"Create Tournament",
+      "btn.backMenu":"Back to Menu","btn.start":"Start",
+      "serve.title":"SERVICE","serve.hint":"serves first",
+      "setup.bluePlayer":"Blue Side","setup.whitePlayer":"White Side",
+      "setup.pointsPerSet":"Points per game","setup.format":"Format",
+      "mg.tap":"Quick Taps","mg.tapSub":"Tap the dots before they disappear",
+      "mg.memory":"Visual Memory","mg.memorySub":"Memorise and repeat the sequence",
+      "ach.unlocked":"🏆 ACHIEVEMENT UNLOCKED!",
+      "data.export":"Export backup","data.exportSub":"Generates a .json file with everything",
+      "data.import":"Import backup","data.importSub":"Add or merge data from a backup",
+      "data.wipe":"Wipe all data","data.wipeSub":"Removes players and history from this device",
+      "js.choosePlayer":"Choose player","js.continue":"Continue anyway ▸",
+      "js.nextSet":"Next Game ▸","js.undoMsg":"Last point undone — you can continue the game.",
+      "js.setInProgress":"The current game (%b-%w) will not count. Finished games are saved to history.",
+      "js.confirmEnd":"The current result will be saved to history.",
+      "js.confirmWipe":"Wipe all data?","js.confirmAbandon":"Abandon tournament?",
+      "js.emptyPlayers":"Create players first.","js.noData":"No data yet",
+      "js.wins":"wins","js.losses":"losses","js.draws":"draws","js.capotes":"whitewashes",
+      "js.winRate":"Win%","js.elo":"Rating",
+      "js.allPlayers":"All players",
+      "js.serve":"Serves","js.notServe":"Doesn't serve",
+      "js.set":"Game","js.bestOf":"Best of","js.free":"Free",
+      "js.classic":"Classic","js.custom":"Custom",
+      "js.gameWon":"%n won the match","js.setWon":"%n won the game",
+      "js.deuce":"DEUCE","js.matchPoint":"MATCH POINT",
+      "js.capoteTag":"Whitewash","js.newRecord":"🏆 New record!",
+      "js.points":"Points","js.level":"Level","js.levelReached":"Level reached",
+      "js.playAgain":"Play again",
+      "js.tbd":"TBD","js.play":"▶ PLAY",
+      "js.whoseServe":"Game %n · who serves first?",
+      "js.champion":"🏆 Tournament Champion",
+      "js.winsLabel":"W","js.lossesLabel":"L","js.drawsLabel":"D",
+      "js.capotesLabel":"W/W","js.winRateLabel":"Win%","js.eloLabel":"Rating",
+      "js.bestRival":"Best rival","js.worstRival":"Worst rival",
+      "js.last10":"Last 10 matches","js.streak":"Current streak",
+      "js.setsWon":"Games won","js.setsLost":"Games lost",
+      "js.capotesMade":"Whitewashes made","js.capotesSuffered":"Whitewashes suffered",
+      "js.tournamentsWon":"Tournaments won","js.tournamentsPlayed":"Tournaments played",
+      "js.trainingMin":"min. of training","js.trainingSessions":"sessions",
+      "js.importReplace":"Replace everything","js.importMerge":"Add to existing data",
+      "js.recElo":"Highest Rating","js.recStreak":"Longest Streak","js.recWins":"Most Wins",
+      "js.recCapotes":"Most Whitewashes","js.recTournaments":"Most Tournaments Won",
+      "js.recPoints":"Most Points Scored","js.recDuration":"Longest Match",
+      "js.recMgTap":"Quick Taps Record","js.recMgMemory":"Memory Record",
+      "js.recEloGain":"Biggest Rating Gain",
+      "js.wins_unit":"wins","js.min_unit":"min","js.pts_unit":"pts",
+      "js.roundQF":"Quarter-finals","js.roundSF":"Semi-finals","js.roundF":"Final",
+      "js.serveEvery2":"Service every 2 points","js.serveEvery5":"Service every 5 points",
+      "js.serveEvery1":"Service every 1 point (deuce)",
+      "js.eraseConfirm":"Are you sure? This cannot be undone.",
+      "js.missedGame":"Mistake — undo last point",
+    },
+    es: {
+      "menu.newGame":"Nueva Partida","menu.newGameSub":"Elegir jugadores y empezar",
+      "menu.tournament":"Torneo","menu.tournamentSub":"Cuadro eliminatorio automático",
+      "menu.players":"Jugadores","menu.playersSub":"Gestionar y ver estadísticas",
+      "menu.history":"Historial","menu.historySub":"Partidas anteriores",
+      "menu.data":"Datos","menu.dataSub":"Exportar o importar copia de seguridad",
+      "menu.footer":"datos guardados solo en esta tableta",
+      "screen.players":"Jugadores","screen.history":"Historial",
+      "screen.gameDetail":"Detalle del Partido","screen.newGame":"Nueva Partida",
+      "screen.gameType":"Tipo de Juego","screen.pointsFormat":"Puntos y Formato",
+      "screen.newTournament":"Nuevo Torneo","screen.tournament":"Torneo",
+      "screen.minigames":"Minijuegos","screen.achievements":"Logros",
+      "screen.records":"Récords","screen.data":"Datos",
+      "btn.addPlayer":"＋ Nuevo","btn.deletePlayer":"Eliminar",
+      "btn.abandon":"Abandonar","btn.continue":"Continuar ▸",
+      "btn.startGame":"Iniciar Partido","btn.createTournament":"Crear Torneo",
+      "btn.backMenu":"Volver al Menú","btn.start":"Empezar",
+      "serve.title":"SAQUE","serve.hint":"saca primero",
+      "setup.bluePlayer":"Lado Azul","setup.whitePlayer":"Lado Blanco",
+      "setup.pointsPerSet":"Puntos por juego","setup.format":"Formato",
+      "mg.tap":"Toques Rápidos","mg.tapSub":"Toca los puntos antes de que desaparezcan",
+      "mg.memory":"Memoria Visual","mg.memorySub":"Memoriza y repite la secuencia",
+      "ach.unlocked":"🏆 ¡LOGRO DESBLOQUEADO!",
+      "data.export":"Exportar copia de seguridad","data.exportSub":"Genera un archivo .json con todo",
+      "data.import":"Importar copia de seguridad","data.importSub":"Añadir o fusionar datos de una copia",
+      "data.wipe":"Borrar todos los datos","data.wipeSub":"Elimina jugadores e historial de esta tableta",
+      "js.choosePlayer":"Elegir jugador","js.continue":"Continuar de todas formas ▸",
+      "js.nextSet":"Siguiente Juego ▸","js.undoMsg":"Último punto anulado — puedes continuar el juego.",
+      "js.setInProgress":"El juego en curso (%b-%w) no se contará. Los juegos cerrados quedan en el historial.",
+      "js.confirmEnd":"El resultado actual se guardará en el historial.",
+      "js.confirmWipe":"¿Borrar todos los datos?","js.confirmAbandon":"¿Abandonar el torneo?",
+      "js.emptyPlayers":"Crea jugadores primero.","js.noData":"Sin datos aún",
+      "js.wins":"victorias","js.losses":"derrotas","js.draws":"empates","js.capotes":"capotes",
+      "js.winRate":"V%","js.elo":"Ranking",
+      "js.allPlayers":"Todos los jugadores",
+      "js.serve":"Saca","js.notServe":"No saca",
+      "js.set":"Juego","js.bestOf":"Al mejor de","js.free":"Libre",
+      "js.classic":"Clásico","js.custom":"Personalizado",
+      "js.gameWon":"%n ganó el partido","js.setWon":"%n ganó el juego",
+      "js.deuce":"IGUALES","js.matchPoint":"BOLA DE PARTIDO",
+      "js.capoteTag":"Capote","js.newRecord":"🏆 ¡Nuevo récord!",
+      "js.points":"Puntos","js.level":"Nivel","js.levelReached":"Nivel alcanzado",
+      "js.playAgain":"Jugar de nuevo",
+      "js.tbd":"Por definir","js.play":"▶ JUGAR",
+      "js.whoseServe":"Juego %n · ¿quién saca primero?",
+      "js.champion":"🏆 Campeón del Torneo",
+      "js.winsLabel":"V","js.lossesLabel":"D","js.drawsLabel":"E",
+      "js.capotesLabel":"Cap.","js.winRateLabel":"V%","js.eloLabel":"Ranking",
+      "js.bestRival":"Mejor rival","js.worstRival":"Peor rival",
+      "js.last10":"Últimos 10 partidos","js.streak":"Racha actual",
+      "js.setsWon":"Juegos ganados","js.setsLost":"Juegos perdidos",
+      "js.capotesMade":"Capotes realizados","js.capotesSuffered":"Capotes encajados",
+      "js.tournamentsWon":"Torneos ganados","js.tournamentsPlayed":"Torneos jugados",
+      "js.trainingMin":"min. de entrenamiento","js.trainingSessions":"sesiones",
+      "js.importReplace":"Reemplazar todo","js.importMerge":"Añadir a los datos actuales",
+      "js.recElo":"Mayor Ranking","js.recStreak":"Mayor Racha","js.recWins":"Más Victorias",
+      "js.recCapotes":"Más Capotes","js.recTournaments":"Más Torneos Ganados",
+      "js.recPoints":"Más Puntos Marcados","js.recDuration":"Partido Más Largo",
+      "js.recMgTap":"Récord Toques Rápidos","js.recMgMemory":"Récord Memoria",
+      "js.recEloGain":"Mayor Subida de Ranking",
+      "js.wins_unit":"victorias","js.min_unit":"min","js.pts_unit":"pts",
+      "js.roundQF":"Cuartos de final","js.roundSF":"Semifinales","js.roundF":"Final",
+      "js.serveEvery2":"Saque cada 2 puntos","js.serveEvery5":"Saque cada 5 puntos",
+      "js.serveEvery1":"Saque cada 1 punto (iguales)",
+      "js.eraseConfirm":"¿Seguro? Esta acción no se puede deshacer.",
+      "js.missedGame":"Error — anular último punto",
+    },
+    fr: {
+      "menu.newGame":"Nouvelle Partie","menu.newGameSub":"Choisir les joueurs et commencer",
+      "menu.tournament":"Tournoi","menu.tournamentSub":"Tableau éliminatoire automatique",
+      "menu.players":"Joueurs","menu.playersSub":"Gérer et voir les statistiques",
+      "menu.history":"Historique","menu.historySub":"Parties précédentes",
+      "menu.data":"Données","menu.dataSub":"Exporter ou importer une sauvegarde",
+      "menu.footer":"données enregistrées uniquement sur cette tablette",
+      "screen.players":"Joueurs","screen.history":"Historique",
+      "screen.gameDetail":"Détail de la Partie","screen.newGame":"Nouvelle Partie",
+      "screen.gameType":"Type de Jeu","screen.pointsFormat":"Points et Format",
+      "screen.newTournament":"Nouveau Tournoi","screen.tournament":"Tournoi",
+      "screen.minigames":"Mini-Jeux","screen.achievements":"Succès",
+      "screen.records":"Records","screen.data":"Données",
+      "btn.addPlayer":"＋ Nouveau","btn.deletePlayer":"Supprimer",
+      "btn.abandon":"Abandonner","btn.continue":"Continuer ▸",
+      "btn.startGame":"Démarrer la Partie","btn.createTournament":"Créer le Tournoi",
+      "btn.backMenu":"Retour au Menu","btn.start":"Commencer",
+      "serve.title":"SERVICE","serve.hint":"sert en premier",
+      "setup.bluePlayer":"Côté Bleu","setup.whitePlayer":"Côté Blanc",
+      "setup.pointsPerSet":"Points par manche","setup.format":"Format",
+      "mg.tap":"Frappes Rapides","mg.tapSub":"Tapez les points avant qu'ils disparaissent",
+      "mg.memory":"Mémoire Visuelle","mg.memorySub":"Mémorisez et répétez la séquence",
+      "ach.unlocked":"🏆 SUCCÈS DÉBLOQUÉ !",
+      "data.export":"Exporter la sauvegarde","data.exportSub":"Génère un fichier .json avec tout",
+      "data.import":"Importer une sauvegarde","data.importSub":"Ajouter ou fusionner des données",
+      "data.wipe":"Effacer toutes les données","data.wipeSub":"Supprime les joueurs et l'historique",
+      "js.choosePlayer":"Choisir un joueur","js.continue":"Continuer quand même ▸",
+      "js.nextSet":"Manche suivante ▸","js.undoMsg":"Dernier point annulé — vous pouvez continuer.",
+      "js.setInProgress":"La manche en cours (%b-%w) ne sera pas comptée. Les manches terminées sont sauvegardées.",
+      "js.confirmEnd":"Le résultat actuel sera enregistré dans l'historique.",
+      "js.confirmWipe":"Effacer toutes les données ?","js.confirmAbandon":"Abandonner le tournoi ?",
+      "js.emptyPlayers":"Créez des joueurs d'abord.","js.noData":"Pas encore de données",
+      "js.wins":"victoires","js.losses":"défaites","js.draws":"nuls","js.capotes":"blancs",
+      "js.winRate":"V%","js.elo":"Classement",
+      "js.allPlayers":"Tous les joueurs",
+      "js.serve":"Sert","js.notServe":"Ne sert pas",
+      "js.set":"Manche","js.bestOf":"Au meilleur de","js.free":"Libre",
+      "js.classic":"Classique","js.custom":"Personnalisé",
+      "js.gameWon":"%n a gagné la partie","js.setWon":"%n a gagné la manche",
+      "js.deuce":"ÉGALITÉ","js.matchPoint":"BALLE DE MATCH",
+      "js.capoteTag":"Blanc","js.newRecord":"🏆 Nouveau record !",
+      "js.points":"Points","js.level":"Niveau","js.levelReached":"Niveau atteint",
+      "js.playAgain":"Rejouer",
+      "js.tbd":"À définir","js.play":"▶ JOUER",
+      "js.whoseServe":"Manche %n · qui sert en premier ?",
+      "js.champion":"🏆 Champion du Tournoi",
+      "js.winsLabel":"V","js.lossesLabel":"D","js.drawsLabel":"N",
+      "js.capotesLabel":"Bl.","js.winRateLabel":"V%","js.eloLabel":"Class.",
+      "js.bestRival":"Meilleur rival","js.worstRival":"Pire rival",
+      "js.last10":"10 dernières parties","js.streak":"Série actuelle",
+      "js.setsWon":"Manches gagnées","js.setsLost":"Manches perdues",
+      "js.capotesMade":"Blancs réalisés","js.capotesSuffered":"Blancs encaissés",
+      "js.tournamentsWon":"Tournois gagnés","js.tournamentsPlayed":"Tournois joués",
+      "js.trainingMin":"min. d'entraînement","js.trainingSessions":"séances",
+      "js.importReplace":"Tout remplacer","js.importMerge":"Ajouter aux données existantes",
+      "js.recElo":"Meilleur Classement","js.recStreak":"Plus Longue Série","js.recWins":"Plus de Victoires",
+      "js.recCapotes":"Plus de Blancs","js.recTournaments":"Plus de Tournois Gagnés",
+      "js.recPoints":"Plus de Points Marqués","js.recDuration":"Partie la Plus Longue",
+      "js.recMgTap":"Record Frappes Rapides","js.recMgMemory":"Record Mémoire",
+      "js.recEloGain":"Plus Grande Progression",
+      "js.wins_unit":"victoires","js.min_unit":"min","js.pts_unit":"pts",
+      "js.roundQF":"Quarts de finale","js.roundSF":"Demi-finales","js.roundF":"Finale",
+      "js.serveEvery2":"Service tous les 2 points","js.serveEvery5":"Service tous les 5 points",
+      "js.serveEvery1":"Service tous les 1 point (égalité)",
+      "js.eraseConfirm":"Êtes-vous sûr ? Cette action est irréversible.",
+      "js.missedGame":"Erreur — annuler le dernier point",
+    },
+    de: {
+      "menu.newGame":"Neues Spiel","menu.newGameSub":"Spieler wählen und starten",
+      "menu.tournament":"Turnier","menu.tournamentSub":"K.o.-System, automatisch gesetzt",
+      "menu.players":"Spieler","menu.playersSub":"Verwalten und Statistiken ansehen",
+      "menu.history":"Verlauf","menu.historySub":"Vergangene Spiele",
+      "menu.data":"Daten","menu.dataSub":"Backup exportieren oder importieren",
+      "menu.footer":"Daten nur auf diesem Gerät gespeichert",
+      "screen.players":"Spieler","screen.history":"Verlauf",
+      "screen.gameDetail":"Spieldetail","screen.newGame":"Neues Spiel",
+      "screen.gameType":"Spieltyp","screen.pointsFormat":"Punkte und Format",
+      "screen.newTournament":"Neues Turnier","screen.tournament":"Turnier",
+      "screen.minigames":"Minispiele","screen.achievements":"Erfolge",
+      "screen.records":"Rekorde","screen.data":"Daten",
+      "btn.addPlayer":"＋ Neu","btn.deletePlayer":"Löschen",
+      "btn.abandon":"Abbrechen","btn.continue":"Weiter ▸",
+      "btn.startGame":"Spiel starten","btn.createTournament":"Turnier erstellen",
+      "btn.backMenu":"Zurück zum Menü","btn.start":"Starten",
+      "serve.title":"AUFSCHLAG","serve.hint":"schlägt auf",
+      "setup.bluePlayer":"Blaue Seite","setup.whitePlayer":"Weiße Seite",
+      "setup.pointsPerSet":"Punkte pro Satz","setup.format":"Format",
+      "mg.tap":"Schnelle Tipper","mg.tapSub":"Tippe die Punkte bevor sie verschwinden",
+      "mg.memory":"Visuelles Gedächtnis","mg.memorySub":"Merken und Sequenz wiederholen",
+      "ach.unlocked":"🏆 ERFOLG FREIGESCHALTET!",
+      "data.export":"Backup exportieren","data.exportSub":"Erzeugt eine .json-Datei mit allem",
+      "data.import":"Backup importieren","data.importSub":"Daten hinzufügen oder zusammenführen",
+      "data.wipe":"Alle Daten löschen","data.wipeSub":"Entfernt Spieler und Verlauf von diesem Gerät",
+      "js.choosePlayer":"Spieler wählen","js.continue":"Trotzdem weiter ▸",
+      "js.nextSet":"Nächster Satz ▸","js.undoMsg":"Letzter Punkt zurückgenommen — du kannst weiterspielen.",
+      "js.setInProgress":"Der laufende Satz (%b-%w) wird nicht gezählt. Abgeschlossene Sätze bleiben im Verlauf.",
+      "js.confirmEnd":"Das aktuelle Ergebnis wird im Verlauf gespeichert.",
+      "js.confirmWipe":"Alle Daten löschen?","js.confirmAbandon":"Turnier abbrechen?",
+      "js.emptyPlayers":"Erst Spieler anlegen.","js.noData":"Noch keine Daten",
+      "js.wins":"Siege","js.losses":"Niederlagen","js.draws":"Unentschieden","js.capotes":"Klatsche",
+      "js.winRate":"S%","js.elo":"Rating",
+      "js.allPlayers":"Alle Spieler",
+      "js.serve":"Aufschlag","js.notServe":"Kein Aufschlag",
+      "js.set":"Satz","js.bestOf":"Best of","js.free":"Offen",
+      "js.classic":"Klassisch","js.custom":"Benutzerdefiniert",
+      "js.gameWon":"%n hat das Spiel gewonnen","js.setWon":"%n hat den Satz gewonnen",
+      "js.deuce":"EINSTAND","js.matchPoint":"MATCHBALL",
+      "js.capoteTag":"Klatsche","js.newRecord":"🏆 Neuer Rekord!",
+      "js.points":"Punkte","js.level":"Level","js.levelReached":"Erreichtes Level",
+      "js.playAgain":"Nochmal spielen",
+      "js.tbd":"Noch offen","js.play":"▶ SPIELEN",
+      "js.whoseServe":"Satz %n · wer schlägt auf?",
+      "js.champion":"🏆 Turniersieger",
+      "js.winsLabel":"S","js.lossesLabel":"N","js.drawsLabel":"U",
+      "js.capotesLabel":"Kl.","js.winRateLabel":"S%","js.eloLabel":"Rating",
+      "js.bestRival":"Bester Gegner","js.worstRival":"Schlechtester Gegner",
+      "js.last10":"Letzte 10 Spiele","js.streak":"Aktuelle Serie",
+      "js.setsWon":"Gewonnene Sätze","js.setsLost":"Verlorene Sätze",
+      "js.capotesMade":"Klatschen gegeben","js.capotesSuffered":"Klatschen erhalten",
+      "js.tournamentsWon":"Gewonnene Turniere","js.tournamentsPlayed":"Gespielte Turniere",
+      "js.trainingMin":"Min. Training","js.trainingSessions":"Einheiten",
+      "js.importReplace":"Alles ersetzen","js.importMerge":"Zu vorhandenen Daten hinzufügen",
+      "js.recElo":"Höchstes Rating","js.recStreak":"Längste Serie","js.recWins":"Meiste Siege",
+      "js.recCapotes":"Meiste Klatschen","js.recTournaments":"Meiste Turniersiege",
+      "js.recPoints":"Meiste Punkte","js.recDuration":"Längstes Spiel",
+      "js.recMgTap":"Schnelle-Tipper-Rekord","js.recMgMemory":"Gedächtnis-Rekord",
+      "js.recEloGain":"Größter Rating-Anstieg",
+      "js.wins_unit":"Siege","js.min_unit":"Min","js.pts_unit":"Pkt",
+      "js.roundQF":"Viertelfinale","js.roundSF":"Halbfinale","js.roundF":"Finale",
+      "js.serveEvery2":"Aufschlag alle 2 Punkte","js.serveEvery5":"Aufschlag alle 5 Punkte",
+      "js.serveEvery1":"Aufschlag jeden Punkt (Einstand)",
+      "js.eraseConfirm":"Sicher? Diese Aktion kann nicht rückgängig gemacht werden.",
+      "js.missedGame":"Versehen — letzten Punkt rückgängig machen",
+    },
+    zh: {
+      "menu.newGame":"新局","menu.newGameSub":"选择球员并开始",
+      "menu.tournament":"锦标赛","menu.tournamentSub":"单淘汰赛，自动分组",
+      "menu.players":"球员","menu.playersSub":"管理和查看统计数据",
+      "menu.history":"历史","menu.historySub":"以往比赛",
+      "menu.data":"数据","menu.dataSub":"导出或导入备份",
+      "menu.footer":"数据仅保存在此设备上",
+      "screen.players":"球员","screen.history":"历史",
+      "screen.gameDetail":"比赛详情","screen.newGame":"新局",
+      "screen.gameType":"赛制","screen.pointsFormat":"分制与赛制",
+      "screen.newTournament":"新锦标赛","screen.tournament":"锦标赛",
+      "screen.minigames":"小游戏","screen.achievements":"成就",
+      "screen.records":"纪录","screen.data":"数据",
+      "btn.addPlayer":"＋ 新增","btn.deletePlayer":"删除",
+      "btn.abandon":"放弃","btn.continue":"继续 ▸",
+      "btn.startGame":"开始比赛","btn.createTournament":"创建锦标赛",
+      "btn.backMenu":"返回菜单","btn.start":"开始",
+      "serve.title":"发球","serve.hint":"先发球",
+      "setup.bluePlayer":"蓝方","setup.whitePlayer":"白方",
+      "setup.pointsPerSet":"每局分数","setup.format":"赛制",
+      "mg.tap":"快速点击","mg.tapSub":"在点消失前点击",
+      "mg.memory":"视觉记忆","mg.memorySub":"记忆并重复序列",
+      "ach.unlocked":"🏆 成就解锁！",
+      "data.export":"导出备份","data.exportSub":"生成包含所有数据的 .json 文件",
+      "data.import":"导入备份","data.importSub":"添加或合并备份数据",
+      "data.wipe":"清除所有数据","data.wipeSub":"从此设备移除球员和历史记录",
+      "js.choosePlayer":"选择球员","js.continue":"仍然继续 ▸",
+      "js.nextSet":"下一局 ▸","js.undoMsg":"最后一分已撤销 — 可以继续比赛。",
+      "js.setInProgress":"当前局（%b-%w）不计入成绩。已结束的局保存在历史中。",
+      "js.confirmEnd":"当前结果将保存到历史记录。",
+      "js.confirmWipe":"清除所有数据？","js.confirmAbandon":"放弃锦标赛？",
+      "js.emptyPlayers":"请先创建球员。","js.noData":"暂无数据",
+      "js.wins":"胜","js.losses":"负","js.draws":"平","js.capotes":"11-0",
+      "js.winRate":"胜率","js.elo":"积分",
+      "js.allPlayers":"所有球员",
+      "js.serve":"发球","js.notServe":"接球",
+      "js.set":"局","js.bestOf":"三局两胜制 /","js.free":"自由",
+      "js.classic":"标准","js.custom":"自定义",
+      "js.gameWon":"%n 赢得比赛","js.setWon":"%n 赢得该局",
+      "js.deuce":"平分","js.matchPoint":"赛点",
+      "js.capoteTag":"11-0","js.newRecord":"🏆 新纪录！",
+      "js.points":"分数","js.level":"等级","js.levelReached":"达到等级",
+      "js.playAgain":"再玩一次",
+      "js.tbd":"待定","js.play":"▶ 开始",
+      "js.whoseServe":"第 %n 局 · 谁先发球？",
+      "js.champion":"🏆 锦标赛冠军",
+      "js.winsLabel":"胜","js.lossesLabel":"负","js.drawsLabel":"平",
+      "js.capotesLabel":"11-0","js.winRateLabel":"胜率","js.eloLabel":"积分",
+      "js.bestRival":"最佳对手","js.worstRival":"最差对手",
+      "js.last10":"最近10场","js.streak":"当前连胜",
+      "js.setsWon":"赢得的局","js.setsLost":"失去的局",
+      "js.capotesMade":"11-0 胜","js.capotesSuffered":"被11-0",
+      "js.tournamentsWon":"锦标赛冠军","js.tournamentsPlayed":"参加锦标赛",
+      "js.trainingMin":"分钟训练","js.trainingSessions":"次训练",
+      "js.importReplace":"替换所有","js.importMerge":"添加到现有数据",
+      "js.recElo":"最高积分","js.recStreak":"最长连胜","js.recWins":"最多胜场",
+      "js.recCapotes":"最多11-0","js.recTournaments":"最多锦标赛冠军",
+      "js.recPoints":"最多得分","js.recDuration":"最长比赛",
+      "js.recMgTap":"快速点击纪录","js.recMgMemory":"记忆纪录",
+      "js.recEloGain":"最大积分增长",
+      "js.wins_unit":"胜","js.min_unit":"分钟","js.pts_unit":"分",
+      "js.roundQF":"四分之一决赛","js.roundSF":"半决赛","js.roundF":"决赛",
+      "js.serveEvery2":"每2分换发球","js.serveEvery5":"每5分换发球",
+      "js.serveEvery1":"每分换发球（平分）",
+      "js.eraseConfirm":"确定吗？此操作无法撤销。",
+      "js.missedGame":"误操作 — 撤销最后一分",
+    },
+
+    ja: {
+      "menu.newGame":"新しいゲーム","menu.newGameSub":"プレイヤーを選んで開始",
+      "menu.tournament":"トーナメント","menu.tournamentSub":"自動シードによる決勝トーナメント",
+      "menu.players":"プレイヤー","menu.playersSub":"管理と統計表示",
+      "menu.history":"履歴","menu.historySub":"過去の試合",
+      "menu.data":"データ","menu.dataSub":"バックアップのエクスポートまたはインポート",
+      "menu.footer":"データはこの端末にのみ保存されます",
+      "screen.players":"プレイヤー","screen.history":"履歴",
+      "screen.gameDetail":"試合詳細","screen.newGame":"新しいゲーム",
+      "screen.gameType":"ゲームタイプ","screen.pointsFormat":"得点とフォーマット",
+      "screen.newTournament":"新しいトーナメント","screen.tournament":"トーナメント",
+      "screen.minigames":"ミニゲーム","screen.achievements":"実績",
+      "screen.records":"記録","screen.data":"データ",
+      "btn.addPlayer":"＋ 新規","btn.deletePlayer":"削除",
+      "btn.abandon":"棄権","btn.continue":"続ける ▸",
+      "btn.startGame":"試合開始","btn.createTournament":"トーナメント作成",
+      "btn.backMenu":"メニューに戻る","btn.start":"開始",
+      "serve.title":"サービス","serve.hint":"が先にサービス",
+      "setup.bluePlayer":"青サイド","setup.whitePlayer":"白サイド",
+      "setup.pointsPerSet":"1ゲームの得点","setup.format":"フォーマット",
+      "mg.tap":"クイックタップ","mg.tapSub":"消える前に点をタップ",
+      "mg.memory":"視覚記憶","mg.memorySub":"シーケンスを覚えて繰り返す",
+      "ach.unlocked":"🏆 実績解除！",
+      "data.export":"バックアップを書き出す","data.exportSub":"すべてを含む .json ファイルを生成",
+      "data.import":"バックアップを読み込む","data.importSub":"バックアップからデータを追加または統合",
+      "data.wipe":"全データを削除","data.wipeSub":"この端末からプレイヤーと履歴を削除",
+      "js.choosePlayer":"プレイヤーを選択","js.continue":"このまま続ける ▸",
+      "js.nextSet":"次のゲーム ▸","js.undoMsg":"最後の得点を取り消しました。試合を続けてください。",
+      "js.setInProgress":"進行中のゲーム（%b-%w）はカウントされません。終了したゲームは履歴に保存されます。",
+      "js.confirmEnd":"現在の結果が履歴に保存されます。",
+      "js.confirmWipe":"全データを削除しますか？","js.confirmAbandon":"トーナメントを棄権しますか？",
+      "js.emptyPlayers":"先にプレイヤーを作成してください。","js.noData":"データなし",
+      "js.wins":"勝","js.losses":"敗","js.draws":"分","js.capotes":"完封",
+      "js.winRate":"勝率","js.elo":"レーティング",
+      "js.allPlayers":"全プレイヤー",
+      "js.serve":"サービス","js.notServe":"レシーブ",
+      "js.set":"ゲーム","js.bestOf":"先取","js.free":"フリー",
+      "js.classic":"クラシック","js.custom":"カスタム",
+      "js.gameWon":"%n がマッチ勝利","js.setWon":"%n がゲーム勝利",
+      "js.deuce":"デュース","js.matchPoint":"マッチポイント",
+      "js.capoteTag":"完封","js.newRecord":"🏆 新記録！",
+      "js.points":"得点","js.level":"レベル","js.levelReached":"到達レベル",
+      "js.playAgain":"もう一度",
+      "js.tbd":"未定","js.play":"▶ プレイ",
+      "js.whoseServe":"第%nゲーム · 最初のサービスは？",
+      "js.champion":"🏆 トーナメント優勝者",
+      "js.winsLabel":"勝","js.lossesLabel":"敗","js.drawsLabel":"分",
+      "js.capotesLabel":"完封","js.winRateLabel":"勝率","js.eloLabel":"R",
+      "js.bestRival":"得意な相手","js.worstRival":"苦手な相手",
+      "js.last10":"直近10試合","js.streak":"現在の連勝",
+      "js.setsWon":"獲得ゲーム","js.setsLost":"失ゲーム",
+      "js.capotesMade":"完封勝利","js.capotesSuffered":"完封負け",
+      "js.tournamentsWon":"優勝回数","js.tournamentsPlayed":"参加トーナメント",
+      "js.trainingMin":"分 練習","js.trainingSessions":"セッション",
+      "js.importReplace":"すべて置き換え","js.importMerge":"既存データに追加",
+      "js.recElo":"最高レーティング","js.recStreak":"最長連勝","js.recWins":"最多勝利",
+      "js.recCapotes":"最多完封","js.recTournaments":"最多優勝",
+      "js.recPoints":"最多得点","js.recDuration":"最長試合",
+      "js.recMgTap":"クイックタップ記録","js.recMgMemory":"記憶ゲーム記録",
+      "js.recEloGain":"最大レーティング上昇",
+      "js.wins_unit":"勝","js.min_unit":"分","js.pts_unit":"点",
+      "js.roundQF":"準々決勝","js.roundSF":"準決勝","js.roundF":"決勝",
+      "js.serveEvery2":"2点ごとにサービス交代","js.serveEvery5":"5点ごとにサービス交代",
+      "js.serveEvery1":"1点ごとにサービス交代（デュース）",
+      "js.eraseConfirm":"本当に削除しますか？この操作は元に戻せません。",
+      "js.missedGame":"ミス — 最後の得点を取り消す",
+    },
+  };
+
+  // helper global para aceder à tradução actual
+  function t(key, vars) {
+    const lang = localStorage.getItem("pp-lang") || "pt";
+    const dict = LANGS[lang] || LANGS.pt;
+    let str = dict[key] || LANGS.pt[key] || key;
+    if (vars) Object.keys(vars).forEach(k => { str = str.replace("%" + k, vars[k]); });
+    return str;
+  }
+
+  // aplica traduções a todos os elementos [data-i18n]
+  function applyTranslations() {
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      const val = t(key);
+      if (val) el.textContent = val;
+    });
+    // placeholder do input de descrição
+    const descInput = document.getElementById("input-game-description");
+    if (descInput) descInput.placeholder = t("js.choosePlayer") === "Escolher jogador"
+      ? "Ex: torneio de verão, sala de jogos..." : "";
+  }
+
   function showScreen(id) {
     document.querySelectorAll(".screen").forEach((el) => el.classList.remove("active"));
     const target = document.getElementById(id);
@@ -143,6 +653,42 @@
   document.getElementById("btn-tournament").addEventListener("click", openTournamentSetup);
   document.getElementById("btn-training").addEventListener("click", openTrainingMode);
   document.getElementById("btn-minigames").addEventListener("click", openMinigames);
+
+  /* ---- seletor de idioma ---- */
+  (function(){
+    const btn = document.getElementById("btn-lang");
+    const dropdown = document.getElementById("menu-lang-dropdown");
+    const savedLang = localStorage.getItem("pp-lang") || "pt";
+
+    function applyLang(lang) {
+      const opt = dropdown.querySelector('[data-lang="'+lang+'"]');
+      const flag = opt ? opt.dataset.flag : "🇵🇹";
+      btn.textContent = flag;
+      dropdown.querySelectorAll(".lang-option").forEach(o => o.classList.toggle("is-active", o.dataset.lang === lang));
+      localStorage.setItem("pp-lang", lang);
+      applyTranslations();
+    }
+
+    applyLang(savedLang);
+
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dropdown.hidden = !dropdown.hidden;
+    });
+
+    dropdown.querySelectorAll(".lang-option").forEach(o => {
+      o.addEventListener("click", () => {
+        applyLang(o.dataset.lang);
+        dropdown.hidden = true;
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!dropdown.hidden && !dropdown.contains(e.target) && e.target !== btn) {
+        dropdown.hidden = true;
+      }
+    });
+  })();
 
   function checkResumeBanner() {
     const banner = document.getElementById("menu-resume");
@@ -236,7 +782,7 @@
 
       const allLabel = document.createElement("p");
       allLabel.className = "section-label";
-      allLabel.textContent = "Todos os jogadores";
+      allLabel.textContent = t("js.allPlayers");
       list.appendChild(allLabel);
     }
 
@@ -644,7 +1190,7 @@
               <span class="history-side-sets">${g.white.setsWon}</span>
             </div>
           </div>
-          ${capoteCount > 0 ? `<span class="capote-tag capote-tag--card">${capoteCount > 1 ? capoteCount + "x Capote" : "Capote"}</span>` : ""}
+          ${capoteCount > 0 ? `<span class="capote-tag capote-tag--card">${capoteCount > 1 ? capoteCount + "x Capote" : t("js.capoteTag")}</span>` : ""}
           ${g.description ? `<p class="history-card-desc">${escapeHTML(g.description)}</p>` : ""}
         `;
         card.addEventListener("click", () => openGameDetail(g.id));
@@ -1003,7 +1549,7 @@
     document.getElementById("bolar-name-blue").textContent = blueName;
     document.getElementById("bolar-name-white").textContent = whiteName;
     const setNumber = game.sets.length + 1;
-    document.getElementById("bolar-set-label").textContent = `Set ${setNumber} · quem serve primeiro?`;
+    document.getElementById("bolar-set-label").textContent = t("js.whoseServe",{n:setNumber});
     applyGameColors();
     showScreen("screen-bolar");
     if (document.documentElement.requestFullscreen) {
@@ -1320,10 +1866,10 @@
       const isDeuceNow = isDeuce();
       if (isDeuceNow && !wasDeuceBefore) {
         playDeuceSound();
-        showStatusBanner("DEUCE", "deuce");
+        showStatusBanner(t("js.deuce"), "deuce");
       } else if (isMatchPoint()) {
         playMatchPointSound();
-        showStatusBanner("MATCH POINT", "matchpoint");
+        showStatusBanner(t("js.matchPoint"), "matchpoint");
       }
     }
   }
@@ -1424,7 +1970,7 @@
         : getPlayer(game.whitePlayerId)?.name || "Branco";
 
     document.getElementById("set-end-eyebrow").textContent = closedSet.capote ? "FIM DO SET · CAPOTE" : "FIM DO SET";
-    document.getElementById("set-end-winner").textContent = `${winnerName} venceu o set`;
+    document.getElementById("set-end-winner").textContent = t("js.setWon",{n:winnerName});
     document.getElementById("set-end-detail").textContent = `${closedSet.blueScore} — ${closedSet.whiteScore}`;
 
     const recap = document.getElementById("set-end-recap");
@@ -1447,10 +1993,10 @@
       document.getElementById("set-end-eyebrow").textContent = closedSet.capote
         ? "FIM DO SET · CAPOTE · JOGO DECIDIDO"
         : "FIM DO SET · JOGO DECIDIDO";
-      nextBtn.textContent = "Continuar de qualquer forma ▸";
+      nextBtn.textContent = t("js.continue");
       document.getElementById("overlay-set-end").dataset.decided = "1";
     } else {
-      nextBtn.textContent = "Próximo Set ▸";
+      nextBtn.textContent = t("js.nextSet");
       delete document.getElementById("overlay-set-end").dataset.decided;
     }
 
@@ -1507,7 +2053,7 @@
     if (game.currentBlue > 0 || game.currentWhite > 0) {
       detail.textContent = `O set em curso (${game.currentBlue}-${game.currentWhite}) não vai ser contado. O resultado dos sets já fechados é guardado no histórico.`;
     } else {
-      detail.textContent = "O resultado atual vai ser guardado no histórico.";
+      detail.textContent = t("js.confirmEnd");
     }
     document.getElementById("overlay-confirm-end").hidden = false;
   }
@@ -1572,7 +2118,7 @@
       document.getElementById("game-end-winner").textContent = `Empate entre ${blueName} e ${whiteName}`;
     } else {
       const winnerName = record.winnerSide === "blue" ? blueName : whiteName;
-      document.getElementById("game-end-winner").textContent = `${winnerName} venceu o jogo`;
+      document.getElementById("game-end-winner").textContent = t("js.gameWon",{n:winnerName});
     }
     const recap = document.getElementById("game-end-recap");
     recap.innerHTML = `
@@ -1873,6 +2419,7 @@
      --------------------------------------------------------- */
   function init() {
     _initAchievementToastListener();
+    applyTranslations();
     checkAchievementsRetroactive();
     checkResumeBanner();
     showScreen("screen-menu");
@@ -1963,7 +2510,7 @@
     DATA.activeTournament = {id:uid("tournament"),seeded,bracket,mode:tournamentSetup.mode,points:tournamentSetup.points,format:tournamentSetup.format,status:"ongoing",winner:null,startedAt:new Date().toISOString()};
     saveData(); renderTournamentBracket(); showScreen("screen-tournament-bracket"); checkResumeBanner();
   }
-  function tournamentRoundLabel(ri,total) { const f=total-1-ri; if(f===0)return"Final"; if(f===1)return"Meia-final"; if(f===2)return"Quartos-de-final"; return"Ronda "+(ri+1); }
+  function tournamentRoundLabel(ri,total) { const f=total-1-ri; if(f===0)returnt("js.roundF"); if(f===1)returnt("js.roundSF"); if(f===2)returnt("js.roundQF"); return"Ronda "+(ri+1); }
   function renderTournamentBracket() {
     const t = DATA.activeTournament; if (!t) return;
     const total = t.bracket.length;
@@ -2241,7 +2788,7 @@
     {id:"streak_10",cat:"Vitórias",icon:"🔥",name:"Imparável",desc:"10 vitórias consecutivas.",secret:false,progressive:true,total:10,progress:(pid)=>_currentStreak(pid),check:(pid)=>_maxStreak(pid)>=10},
     {id:"streak_20",cat:"Vitórias",icon:"🔥",name:"Invencível",desc:"20 vitórias consecutivas.",secret:false,progressive:true,total:20,progress:(pid)=>_currentStreak(pid),check:(pid)=>_maxStreak(pid)>=20},
     {id:"sweep",cat:"Sets",icon:"🧹",name:"Vassoura",desc:"Ganha um jogo sem perder nenhum set.",secret:false,check:(pid)=>DATA.games.some(g=>!g.isDraw&&_myWin(g,pid)&&_oppSets(g,pid)===0&&_mySets(g,pid)>=2)},
-    {id:"capote_set",cat:"Sets",icon:"💀",name:"Capote",desc:"Ganha um set por 11-0.",secret:false,check:(pid)=>DATA.games.some(g=>{const s=g.blue.playerId===pid?"blue":"white";return g.sets.some(set=>set.winnerSide===s&&set.capote);})},
+    {id:"capote_set",cat:"Sets",icon:"💀",name:t("js.capoteTag"),desc:"Ganha um set por 11-0.",secret:false,check:(pid)=>DATA.games.some(g=>{const s=g.blue.playerId===pid?"blue":"white";return g.sets.some(set=>set.winnerSide===s&&set.capote);})},
     {id:"set_perfect",cat:"Sets",icon:"✨",name:"Set Perfeito",desc:"Ganha um set permitindo no máximo 3 pontos.",secret:false,check:(pid)=>DATA.games.some(g=>{const s=g.blue.playerId===pid?"blue":"white";return g.sets.some(set=>set.winnerSide===s&&(s==="blue"?set.whiteScore:set.blueScore)<=3);})},
     {id:"deciding_set",cat:"Sets",icon:"⚔️",name:"Decisão",desc:"Ganha um jogo decidido no último set.",secret:false,check:(pid)=>DATA.games.some(g=>!g.isDraw&&_myWin(g,pid)&&g.sets.length>=3&&g.blue.setsWon>0&&g.white.setsWon>0)},
     {id:"comeback",cat:"Remontadas",icon:"↩️",name:"Remontada",desc:"Ganha um jogo depois de perder o 1º set.",secret:false,check:(pid)=>DATA.games.some(g=>{if(!_myWin(g,pid)||g.sets.length<2)return false;const me=g.blue.playerId===pid?"blue":"white";return g.sets[0].winnerSide!==me;})},
@@ -2256,7 +2803,7 @@
     {id:"pts_1000",cat:"Pontos",icon:"🎯",name:"1000 Pontos",desc:"Acumula 1000 pontos.",secret:false,progressive:true,total:1000,progress:(pid)=>_totalPoints(pid),check:(pid)=>_totalPoints(pid)>=1000},
     {id:"tour_2",cat:"Torneios",icon:"🏆",name:"Bicampeão",desc:"Ganha 2 torneios.",secret:false,progressive:true,total:2,progress:(pid)=>_tourWins(pid),check:(pid)=>_tourWins(pid)>=2},
     {id:"tour_3",cat:"Torneios",icon:"🏆",name:"Tricampeão",desc:"Ganha 3 torneios.",secret:false,progressive:true,total:3,progress:(pid)=>_tourWins(pid),check:(pid)=>_tourWins(pid)>=3},
-    {id:"rival_10",cat:"Rivalidades",icon:"⚔️",name:"Clássico",desc:"Joga 10 partidas contra o mesmo adversário.",secret:false,progressive:true,total:10,progress:(pid)=>_maxRivalGames(pid),check:(pid)=>_maxRivalGames(pid)>=10},
+    {id:"rival_10",cat:"Rivalidades",icon:"⚔️",name:t("js.classic"),desc:"Joga 10 partidas contra o mesmo adversário.",secret:false,progressive:true,total:10,progress:(pid)=>_maxRivalGames(pid),check:(pid)=>_maxRivalGames(pid)>=10},
     {id:"rival_25",cat:"Rivalidades",icon:"⚔️",name:"Rivalidade",desc:"Joga 25 partidas contra o mesmo adversário.",secret:false,progressive:true,total:25,progress:(pid)=>_maxRivalGames(pid),check:(pid)=>_maxRivalGames(pid)>=25},
     {id:"rival_dom",cat:"Rivalidades",icon:"👑",name:"Domínio",desc:"10 vitórias de vantagem sobre o mesmo adversário.",secret:false,check:(pid)=>_maxRivalDom(pid)>=10},
     {id:"rival_5",cat:"Rivalidades",icon:"💀",name:"Carrasco",desc:"5 vitórias consecutivas contra o mesmo adversário.",secret:false,check:(pid)=>_maxRivalStreak(pid)>=5},
@@ -2392,14 +2939,14 @@
     const container=document.getElementById("records-list");container.innerHTML="";
     const allElos=computeAllElos();
     const recs=[
-      {icon:"📈",label:"Maior ELO",get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const e=allElos[p.id]||ELO_BASE;if(e>bv){bv=e;b=p;}});return b?{player:b,value:bv+" ELO"}:null;}},
-      {icon:"🔥",label:"Maior Sequência",get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const s=_maxStreak(p.id);if(s>bv){bv=s;b=p;}});return b&&bv>0?{player:b,value:bv+" vitórias"}:null;}},
-      {icon:"🏓",label:"Mais Vitórias",get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const w=_wins(p.id);if(w>bv){bv=w;b=p;}});return b&&bv>0?{player:b,value:bv+" vitórias"}:null;}},
-      {icon:"💀",label:"Mais Capotes Feitos",get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const s=computePlayerStats(p.id,allElos);if(s.capotes>bv){bv=s.capotes;b=p;}});return b&&bv>0?{player:b,value:bv+" capotes"}:null;}},
-      {icon:"🏆",label:"Mais Torneios Ganhos",get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const t=_tourWins(p.id);if(t>bv){bv=t;b=p;}});return b&&bv>0?{player:b,value:bv+" torneios"}:null;}},
+      {icon:"📈",label:t("js.recElo"),get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const e=allElos[p.id]||ELO_BASE;if(e>bv){bv=e;b=p;}});return b?{player:b,value:bv+" ELO"}:null;}},
+      {icon:"🔥",label:t("js.recStreak"),get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const s=_maxStreak(p.id);if(s>bv){bv=s;b=p;}});return b&&bv>0?{player:b,value:bv+" vitórias"}:null;}},
+      {icon:"🏓",label:t("js.recWins"),get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const w=_wins(p.id);if(w>bv){bv=w;b=p;}});return b&&bv>0?{player:b,value:bv+" vitórias"}:null;}},
+      {icon:"💀",label:t("js.recCapotes"),get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const s=computePlayerStats(p.id,allElos);if(s.capotes>bv){bv=s.capotes;b=p;}});return b&&bv>0?{player:b,value:bv+" capotes"}:null;}},
+      {icon:"🏆",label:t("js.recTournaments"),get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const t=_tourWins(p.id);if(t>bv){bv=t;b=p;}});return b&&bv>0?{player:b,value:bv+" torneios"}:null;}},
       {icon:"🎯",label:"Mais Pontos Acumulados",get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const pts=_totalPoints(p.id);if(pts>bv){bv=pts;b=p;}});return b&&bv>0?{player:b,value:bv+" pontos"}:null;}},
       {icon:"⏱️",label:"Mais Tempo de Treino",get:()=>{const s=DATA.trainingStats["global"];return s&&s.totalMinutes>0?{player:null,value:Math.round(s.totalMinutes)+" min"}:null;}},
-      {icon:"⚡",label:"Recorde Toques Rápidos",get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const r=getMgRec("tap",p.id);if(r>bv){bv=r;b=p;}});return b&&bv>0?{player:b,value:bv+" pontos"}:null;}},
+      {icon:"⚡",label:t("js.recMgTap"),get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const r=getMgRec("tap",p.id);if(r>bv){bv=r;b=p;}});return b&&bv>0?{player:b,value:bv+" pontos"}:null;}},
       {icon:"🧠",label:"Recorde Memória Visual",get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const r=getMgRec("memory",p.id);if(r>bv){bv=r;b=p;}});return b&&bv>0?{player:b,value:"nível "+bv}:null;}},
     ];
     recs.forEach(rec=>{

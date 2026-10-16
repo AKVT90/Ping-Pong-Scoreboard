@@ -67,6 +67,49 @@ input{ font-family:inherit; }
   width:100%;
 }
 .menu-header{ text-align:center; margin-bottom:48px; }
+
+/* botão de idioma — canto superior direito do ecrã */
+.menu-lang-btn{
+  position:fixed; top:12px; right:12px; z-index:50;
+  background:none; border:none; cursor:pointer;
+  width:36px; height:36px;
+  font-size:22px; line-height:36px;
+  border-radius:8px;
+  transition:background .15s;
+}
+.menu-lang-btn:hover{ background:rgba(255,255,255,.1); }
+
+/* dropdown de idioma — abre no canto superior direito, abaixo do botão */
+.menu-lang-dropdown{
+  position:fixed; top:54px; right:12px; z-index:49;
+  width:180px;
+  background:rgba(20,30,48,.97);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;
+  overflow:hidden;
+  animation:fadeSlideDown .18s ease;
+}
+@keyframes fadeSlideDown{
+  from{ opacity:0; transform:translateY(-6px); }
+  to{   opacity:1; transform:translateY(0); }
+}
+.lang-option{
+  display:block; width:100%;
+  background:none; border:none; cursor:pointer;
+  padding:13px 18px;
+  text-align:left;
+  font-family:var(--font-body);
+  font-size:15px;
+  color:var(--white);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  transition:background .12s;
+}
+.lang-option:last-child{ border-bottom:none; }
+.lang-option:hover{ background:rgba(255,255,255,.08); }
+.lang-option.is-active{
+  color:var(--yellow);
+  font-weight:600;
+}
 .menu-mark{
   display:flex; justify-content:center; gap:10px; margin-bottom:18px;
 }
