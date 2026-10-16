@@ -285,6 +285,41 @@
       "js.mgQuizResultGreat":"Excelente! Conheces muito bem as regras!",
       "js.mgQuizResultGood":"Bom trabalho! Continua a estudar as regras.",
       "js.mgQuizResultTry":"Continua a praticar e a ler as regras ITTF.",
+      // chaves em falta — adicionadas na auditoria completa
+      "js.langBtn":"Idioma",
+      "js.descLabel":"Descrição",
+      "js.optional":"(opcional)",
+      "js.nPlayers4":"4 jogadores",
+      "js.nPlayers8":"8 jogadores",
+      "js.nPlayers16":"16 jogadores",
+      "js.trainingDuration":"Duração (minutos)",
+      "js.back":"‹ Voltar",
+      "js.gameEndedTitle":"JOGO TERMINADO",
+      "js.backToMenu":"Voltar ao Menu",
+      "js.newPlayerTitle":"NOVO JOGADOR",
+      "js.newPlayerName":"Nome do jogador",
+      "js.playerNamePlaceholder":"Ex: Miguel",
+      "js.colorPickerLabel":"Cor no placar",
+      "js.color.blueWhite":"Azul / Branco",
+      "js.color.greenWhite":"Verde / Branco",
+      "js.color.redWhite":"Vermelho / Branco",
+      "js.color.pinkWhite":"Rosa / Branco",
+      "js.color.purpleWhite":"Roxo / Branco",
+      "js.color.goldWhite":"Dourado / Branco",
+      "js.color.whiteBlack":"Branco / Preto",
+      "js.color.orangeWhite":"Laranja / Branco",
+      "js.dataExplain":"Guarda jogadores e histórico num ficheiro que podes manter na nuvem (Drive, email, etc.) e usar para recuperar tudo neste tablet ou noutro.",
+      "js.importTitle":"IMPORTAR DADOS",
+      "js.importQuestion":"O que queres fazer?",
+      "js.importDetail":"Isto vai substituir os jogadores e o histórico já guardados neste tablet.",
+      "js.mergeImport":"Adicionar ao que já tenho",
+      "js.replaceImport":"Substituir tudo",
+      "js.wipeTitle":"APAGAR TUDO",
+      "js.wipeQuestion":"Apagar todos os dados?",
+      "js.wipeDetail":"Esta ação não pode ser desfeita. Considera exportar uma cópia de segurança primeiro.",
+      "js.wipeConfirm":"Apagar tudo",
+      "js.rotateHint":"Roda o tablet para a horizontal",
+      "js.overlay.confirmEndDetail":"O resultado atual vai ser guardado no histórico.",
     },
     en: {
       "menu.newGame":"New Game","menu.newGameSub":"Choose players and start",
@@ -503,6 +538,40 @@
       "js.mgQuizResultGreat":"Excellent! You know the rules very well!",
       "js.mgQuizResultGood":"Good job! Keep studying the rules.",
       "js.mgQuizResultTry":"Keep practising and reading the ITTF rules.",
+      "js.langBtn":"Language",
+      "js.descLabel":"Description",
+      "js.optional":"(optional)",
+      "js.nPlayers4":"4 players",
+      "js.nPlayers8":"8 players",
+      "js.nPlayers16":"16 players",
+      "js.trainingDuration":"Duration (minutes)",
+      "js.back":"‹ Back",
+      "js.gameEndedTitle":"GAME OVER",
+      "js.backToMenu":"Back to Menu",
+      "js.newPlayerTitle":"NEW PLAYER",
+      "js.newPlayerName":"Player name",
+      "js.playerNamePlaceholder":"E.g.: Alex",
+      "js.colorPickerLabel":"Scorer colour",
+      "js.color.blueWhite":"Blue / White",
+      "js.color.greenWhite":"Green / White",
+      "js.color.redWhite":"Red / White",
+      "js.color.pinkWhite":"Pink / White",
+      "js.color.purpleWhite":"Purple / White",
+      "js.color.goldWhite":"Gold / White",
+      "js.color.whiteBlack":"White / Black",
+      "js.color.orangeWhite":"Orange / White",
+      "js.dataExplain":"Save players and history to a file you can keep in the cloud (Drive, email, etc.) and use to restore everything on this or another device.",
+      "js.importTitle":"IMPORT DATA",
+      "js.importQuestion":"What do you want to do?",
+      "js.importDetail":"This will replace the players and history already saved on this device.",
+      "js.mergeImport":"Add to existing data",
+      "js.replaceImport":"Replace everything",
+      "js.wipeTitle":"WIPE ALL",
+      "js.wipeQuestion":"Wipe all data?",
+      "js.wipeDetail":"This action cannot be undone. Consider exporting a backup first.",
+      "js.wipeConfirm":"Wipe all",
+      "js.rotateHint":"Rotate the tablet to landscape",
+      "js.overlay.confirmEndDetail":"The current result will be saved to history.",
     },
     es: {
       "menu.newGame":"Nueva Partida","menu.newGameSub":"Elegir jugadores y empezar",
@@ -721,6 +790,40 @@
       "js.mgQuizResultGreat":"¡Excelente! ¡Conoces muy bien las reglas!",
       "js.mgQuizResultGood":"¡Buen trabajo! Sigue estudiando las reglas.",
       "js.mgQuizResultTry":"Sigue practicando y leyendo las reglas ITTF.",
+      "js.langBtn":"Idioma",
+      "js.descLabel":"Descripción",
+      "js.optional":"(opcional)",
+      "js.nPlayers4":"4 jugadores",
+      "js.nPlayers8":"8 jugadores",
+      "js.nPlayers16":"16 jugadores",
+      "js.trainingDuration":"Duración (minutos)",
+      "js.back":"‹ Volver",
+      "js.gameEndedTitle":"PARTIDO TERMINADO",
+      "js.backToMenu":"Volver al Menú",
+      "js.newPlayerTitle":"NUEVO JUGADOR",
+      "js.newPlayerName":"Nombre del jugador",
+      "js.playerNamePlaceholder":"Ej.: Miguel",
+      "js.colorPickerLabel":"Color en el marcador",
+      "js.color.blueWhite":"Azul / Blanco",
+      "js.color.greenWhite":"Verde / Blanco",
+      "js.color.redWhite":"Rojo / Blanco",
+      "js.color.pinkWhite":"Rosa / Blanco",
+      "js.color.purpleWhite":"Morado / Blanco",
+      "js.color.goldWhite":"Dorado / Blanco",
+      "js.color.whiteBlack":"Blanco / Negro",
+      "js.color.orangeWhite":"Naranja / Blanco",
+      "js.dataExplain":"Guarda jugadores e historial en un archivo que puedes conservar en la nube (Drive, email, etc.) para recuperar todo en esta tableta u otra.",
+      "js.importTitle":"IMPORTAR DATOS",
+      "js.importQuestion":"¿Qué quieres hacer?",
+      "js.importDetail":"Esto sustituirá los jugadores e historial ya guardados en esta tableta.",
+      "js.mergeImport":"Añadir a los datos actuales",
+      "js.replaceImport":"Reemplazar todo",
+      "js.wipeTitle":"BORRAR TODO",
+      "js.wipeQuestion":"¿Borrar todos los datos?",
+      "js.wipeDetail":"Esta acción no se puede deshacer. Considera exportar una copia de seguridad primero.",
+      "js.wipeConfirm":"Borrar todo",
+      "js.rotateHint":"Gira la tableta a horizontal",
+      "js.overlay.confirmEndDetail":"El resultado actual se guardará en el historial.",
     },
     fr: {
       "menu.newGame":"Nouvelle Partie","menu.newGameSub":"Choisir les joueurs et commencer",
@@ -939,6 +1042,40 @@
       "js.mgQuizResultGreat":"Excellent ! Vous connaissez très bien les règles !",
       "js.mgQuizResultGood":"Bon travail ! Continuez à étudier les règles.",
       "js.mgQuizResultTry":"Continuez à pratiquer et à lire les règles ITTF.",
+      "js.langBtn":"Langue",
+      "js.descLabel":"Description",
+      "js.optional":"(optionnel)",
+      "js.nPlayers4":"4 joueurs",
+      "js.nPlayers8":"8 joueurs",
+      "js.nPlayers16":"16 joueurs",
+      "js.trainingDuration":"Durée (minutes)",
+      "js.back":"‹ Retour",
+      "js.gameEndedTitle":"PARTIE TERMINÉE",
+      "js.backToMenu":"Retour au Menu",
+      "js.newPlayerTitle":"NOUVEAU JOUEUR",
+      "js.newPlayerName":"Nom du joueur",
+      "js.playerNamePlaceholder":"Ex : Michel",
+      "js.colorPickerLabel":"Couleur au tableau",
+      "js.color.blueWhite":"Bleu / Blanc",
+      "js.color.greenWhite":"Vert / Blanc",
+      "js.color.redWhite":"Rouge / Blanc",
+      "js.color.pinkWhite":"Rose / Blanc",
+      "js.color.purpleWhite":"Violet / Blanc",
+      "js.color.goldWhite":"Or / Blanc",
+      "js.color.whiteBlack":"Blanc / Noir",
+      "js.color.orangeWhite":"Orange / Blanc",
+      "js.dataExplain":"Sauvegardez joueurs et historique dans un fichier à conserver dans le cloud (Drive, email, etc.) pour tout récupérer sur cette tablette ou une autre.",
+      "js.importTitle":"IMPORTER DES DONNÉES",
+      "js.importQuestion":"Que voulez-vous faire ?",
+      "js.importDetail":"Cela remplacera les joueurs et l'historique déjà enregistrés sur cette tablette.",
+      "js.mergeImport":"Ajouter aux données existantes",
+      "js.replaceImport":"Tout remplacer",
+      "js.wipeTitle":"TOUT EFFACER",
+      "js.wipeQuestion":"Effacer toutes les données ?",
+      "js.wipeDetail":"Cette action est irréversible. Pensez à exporter une sauvegarde d'abord.",
+      "js.wipeConfirm":"Tout effacer",
+      "js.rotateHint":"Faites pivoter la tablette en mode paysage",
+      "js.overlay.confirmEndDetail":"Le résultat actuel sera enregistré dans l'historique.",
     },
     de: {
       "menu.newGame":"Neues Spiel","menu.newGameSub":"Spieler wählen und starten",
@@ -1157,6 +1294,40 @@
       "js.mgQuizResultGreat":"Ausgezeichnet! Du kennst die Regeln sehr gut!",
       "js.mgQuizResultGood":"Gut gemacht! Lerne weiter die Regeln.",
       "js.mgQuizResultTry":"Übe weiter und lies die ITTF-Regeln.",
+      "js.langBtn":"Sprache",
+      "js.descLabel":"Beschreibung",
+      "js.optional":"(optional)",
+      "js.nPlayers4":"4 Spieler",
+      "js.nPlayers8":"8 Spieler",
+      "js.nPlayers16":"16 Spieler",
+      "js.trainingDuration":"Dauer (Minuten)",
+      "js.back":"‹ Zurück",
+      "js.gameEndedTitle":"SPIEL BEENDET",
+      "js.backToMenu":"Zurück zum Menü",
+      "js.newPlayerTitle":"NEUER SPIELER",
+      "js.newPlayerName":"Spielername",
+      "js.playerNamePlaceholder":"Z.B.: Markus",
+      "js.colorPickerLabel":"Farbe auf dem Spielstand",
+      "js.color.blueWhite":"Blau / Weiß",
+      "js.color.greenWhite":"Grün / Weiß",
+      "js.color.redWhite":"Rot / Weiß",
+      "js.color.pinkWhite":"Pink / Weiß",
+      "js.color.purpleWhite":"Lila / Weiß",
+      "js.color.goldWhite":"Gold / Weiß",
+      "js.color.whiteBlack":"Weiß / Schwarz",
+      "js.color.orangeWhite":"Orange / Weiß",
+      "js.dataExplain":"Speichere Spieler und Verlauf in einer Datei, die du in der Cloud (Drive, E-Mail usw.) aufbewahren und zum Wiederherstellen auf diesem oder einem anderen Gerät verwenden kannst.",
+      "js.importTitle":"DATEN IMPORTIEREN",
+      "js.importQuestion":"Was möchtest du tun?",
+      "js.importDetail":"Dies ersetzt die bereits auf diesem Gerät gespeicherten Spieler und den Spielverlauf.",
+      "js.mergeImport":"Zu vorhandenen Daten hinzufügen",
+      "js.replaceImport":"Alles ersetzen",
+      "js.wipeTitle":"ALLES LÖSCHEN",
+      "js.wipeQuestion":"Alle Daten löschen?",
+      "js.wipeDetail":"Diese Aktion kann nicht rückgängig gemacht werden. Erwäge zuerst ein Backup zu exportieren.",
+      "js.wipeConfirm":"Alles löschen",
+      "js.rotateHint":"Tablet ins Querformat drehen",
+      "js.overlay.confirmEndDetail":"Das aktuelle Ergebnis wird im Verlauf gespeichert.",
     },
     zh: {
       "menu.newGame":"新局","menu.newGameSub":"选择球员并开始",
@@ -1375,6 +1546,40 @@
       "js.mgQuizResultGreat":"出色！你非常了解规则！",
       "js.mgQuizResultGood":"干得好！继续学习规则。",
       "js.mgQuizResultTry":"继续练习并阅读ITTF规则。",
+      "js.langBtn":"语言",
+      "js.descLabel":"描述",
+      "js.optional":"（可选）",
+      "js.nPlayers4":"4名球员",
+      "js.nPlayers8":"8名球员",
+      "js.nPlayers16":"16名球员",
+      "js.trainingDuration":"时长（分钟）",
+      "js.back":"‹ 返回",
+      "js.gameEndedTitle":"比赛结束",
+      "js.backToMenu":"返回菜单",
+      "js.newPlayerTitle":"新球员",
+      "js.newPlayerName":"球员姓名",
+      "js.playerNamePlaceholder":"例：张三",
+      "js.colorPickerLabel":"记分板颜色",
+      "js.color.blueWhite":"蓝色 / 白色",
+      "js.color.greenWhite":"绿色 / 白色",
+      "js.color.redWhite":"红色 / 白色",
+      "js.color.pinkWhite":"粉色 / 白色",
+      "js.color.purpleWhite":"紫色 / 白色",
+      "js.color.goldWhite":"金色 / 白色",
+      "js.color.whiteBlack":"白色 / 黑色",
+      "js.color.orangeWhite":"橙色 / 白色",
+      "js.dataExplain":"将球员和历史记录保存到可存储在云端（网盘、电子邮件等）的文件中，用于在此设备或其他设备上恢复所有数据。",
+      "js.importTitle":"导入数据",
+      "js.importQuestion":"你想做什么？",
+      "js.importDetail":"这将替换此设备上已保存的球员和历史记录。",
+      "js.mergeImport":"添加到现有数据",
+      "js.replaceImport":"替换所有",
+      "js.wipeTitle":"清除所有",
+      "js.wipeQuestion":"清除所有数据？",
+      "js.wipeDetail":"此操作无法撤销。建议先导出备份。",
+      "js.wipeConfirm":"清除所有",
+      "js.rotateHint":"将平板电脑横置",
+      "js.overlay.confirmEndDetail":"当前结果将保存到历史记录。",
     },
 
     ja: {
@@ -1594,6 +1799,40 @@
       "js.mgQuizResultGreat":"素晴らしい！ルールをよく知っています！",
       "js.mgQuizResultGood":"よくできました！ルールの学習を続けてください。",
       "js.mgQuizResultTry":"練習を続けてITTFルールを読んでください。",
+      "js.langBtn":"言語",
+      "js.descLabel":"説明",
+      "js.optional":"（任意）",
+      "js.nPlayers4":"4人",
+      "js.nPlayers8":"8人",
+      "js.nPlayers16":"16人",
+      "js.trainingDuration":"時間（分）",
+      "js.back":"‹ 戻る",
+      "js.gameEndedTitle":"試合終了",
+      "js.backToMenu":"メニューに戻る",
+      "js.newPlayerTitle":"新しいプレイヤー",
+      "js.newPlayerName":"プレイヤー名",
+      "js.playerNamePlaceholder":"例：田中",
+      "js.colorPickerLabel":"スコアボードの色",
+      "js.color.blueWhite":"青 / 白",
+      "js.color.greenWhite":"緑 / 白",
+      "js.color.redWhite":"赤 / 白",
+      "js.color.pinkWhite":"ピンク / 白",
+      "js.color.purpleWhite":"紫 / 白",
+      "js.color.goldWhite":"金 / 白",
+      "js.color.whiteBlack":"白 / 黒",
+      "js.color.orangeWhite":"オレンジ / 白",
+      "js.dataExplain":"プレイヤーと履歴をクラウド（ドライブ、メールなど）に保存できるファイルに書き出し、この端末や他の端末で復元できます。",
+      "js.importTitle":"データのインポート",
+      "js.importQuestion":"どうしますか？",
+      "js.importDetail":"この端末に保存されているプレイヤーと履歴が置き換えられます。",
+      "js.mergeImport":"既存データに追加",
+      "js.replaceImport":"すべて置き換え",
+      "js.wipeTitle":"全削除",
+      "js.wipeQuestion":"すべてのデータを削除しますか？",
+      "js.wipeDetail":"この操作は元に戻せません。先にバックアップのエクスポートを検討してください。",
+      "js.wipeConfirm":"すべて削除",
+      "js.rotateHint":"タブレットを横向きにしてください",
+      "js.overlay.confirmEndDetail":"現在の結果が履歴に保存されます。",
     },
   };
 
@@ -1620,11 +1859,15 @@
       const val = t(key);
       if (val) el.title = val;
     });
-    // placeholders
+    // placeholders — tratamento genérico via data-i18n-placeholder
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+      const key = el.getAttribute("data-i18n-placeholder");
+      const val = t(key);
+      if (val) el.placeholder = val;
+    });
+    // fallback explícito para inputs sem o atributo (compatibilidade)
     const descInput = document.getElementById("input-game-description");
-    if (descInput) descInput.placeholder = t("js.descPlaceholder");
-    const playerInput = document.getElementById("input-player-name");
-    if (playerInput) playerInput.placeholder = "Ex: Miguel";
+    if (descInput && !descInput.hasAttribute("data-i18n-placeholder")) descInput.placeholder = t("js.descPlaceholder");
   }
 
   function showScreen(id) {
@@ -2001,7 +2244,7 @@
                 <strong>vs ${escapeHTML(r.name)}</strong>
                 <small>${t("js.gamesDisputed").replace("%n", r.gamesPlayed)}</small>
               </div>
-              <span class="history-row-score">${r.gamesWon}V – ${r.gamesLost}D${r.gamesDrawn ? ` – ${r.gamesDrawn}E` : ""}</span>
+              <span class="history-row-score">${r.gamesWon}${t("js.winsLabel")} – ${r.gamesLost}${t("js.lossesLabel")}${r.gamesDrawn ? ` – ${r.gamesDrawn}${t("js.drawsLabel")}` : ""}</span>
             </div>`
           )
           .join("")}
@@ -2038,14 +2281,14 @@
       ${historyHTML}
       <p class="section-label">${t("js.scorerColor")}</p>
       <div class="color-picker color-picker--profile" id="color-picker-profile">
-        <button class="color-swatch color-swatch--blue-white"   data-color="blue-white"   title="Azul / Branco"></button>
-        <button class="color-swatch color-swatch--green-white"  data-color="green-white"  title="Verde / Branco"></button>
-        <button class="color-swatch color-swatch--red-white"    data-color="red-white"    title="Vermelho / Branco"></button>
-        <button class="color-swatch color-swatch--pink-white"   data-color="pink-white"   title="Rosa / Branco"></button>
-        <button class="color-swatch color-swatch--purple-white" data-color="purple-white" title="Roxo / Branco"></button>
-        <button class="color-swatch color-swatch--gold-white"   data-color="gold-white"   title="Dourado / Branco"></button>
-        <button class="color-swatch color-swatch--white-black"  data-color="white-black"  title="Branco / Preto"></button>
-        <button class="color-swatch color-swatch--orange-white" data-color="orange-white" title="Laranja / Branco"></button>
+        <button class="color-swatch color-swatch--blue-white"   data-color="blue-white"   title="${t('js.color.blueWhite')}"></button>
+        <button class="color-swatch color-swatch--green-white"  data-color="green-white"  title="${t('js.color.greenWhite')}"></button>
+        <button class="color-swatch color-swatch--red-white"    data-color="red-white"    title="${t('js.color.redWhite')}"></button>
+        <button class="color-swatch color-swatch--pink-white"   data-color="pink-white"   title="${t('js.color.pinkWhite')}"></button>
+        <button class="color-swatch color-swatch--purple-white" data-color="purple-white" title="${t('js.color.purpleWhite')}"></button>
+        <button class="color-swatch color-swatch--gold-white"   data-color="gold-white"   title="${t('js.color.goldWhite')}"></button>
+        <button class="color-swatch color-swatch--white-black"  data-color="white-black"  title="${t('js.color.whiteBlack')}"></button>
+        <button class="color-swatch color-swatch--orange-white" data-color="orange-white" title="${t('js.color.orangeWhite')}"></button>
       </div>
     `;
 

@@ -28,7 +28,7 @@
       </div>
       <h1 class="menu-title">PLACAR</h1>
       <p class="menu-sub">Ping Pong</p>
-      <button class="menu-lang-btn" id="btn-lang" title="Idioma">🇵🇹</button>
+      <button class="menu-lang-btn" id="btn-lang" data-i18n-title="js.langBtn" title="Idioma">🇵🇹</button>
     </div>
     <div class="menu-lang-dropdown" id="menu-lang-dropdown" hidden>
       <button class="lang-option" data-lang="pt" data-flag="🇵🇹">🇵🇹 Português</button>
@@ -90,8 +90,8 @@
     </div>
 
     <div class="menu-resume" id="menu-resume" hidden>
-      <p>Tens um jogo em curso</p>
-      <button class="resume-btn" id="btn-resume">Continuar jogo ▸</button>
+      <p data-i18n="js.gameInProgress">Tens um jogo em curso</p>
+      <button class="resume-btn" id="btn-resume" data-i18n="js.resumeGame">Continuar jogo ▸</button>
     </div>
 
     <p class="menu-footer"><span data-i18n="menu.footer">Dados guardados apenas neste dispositivo</span></p>
@@ -178,8 +178,8 @@
     </section>
 
     <section class="setup-section">
-      <p class="setup-label">Descrição <span class="setup-label-optional">(opcional)</span></p>
-      <input type="text" id="input-game-description" class="setup-description-input" placeholder="Ex: torneio de verão, sala de jogos..." maxlength="60" autocomplete="off">
+      <p class="setup-label"><span data-i18n="js.descLabel">Descrição</span> <span class="setup-label-optional" data-i18n="js.optional">(opcional)</span></p>
+      <input type="text" id="input-game-description" class="setup-description-input" data-i18n-placeholder="js.descPlaceholder" placeholder="Ex: torneio de verão, sala de jogos..." maxlength="60" autocomplete="off">
     </section>
 
     <button class="setup-confirm" id="btn-goto-mode" disabled data-i18n="btn.continue">Continuar ▸</button>
@@ -246,7 +246,7 @@
 <div id="screen-pick-player" class="screen">
   <header class="bar">
     <button class="bar-back" id="btn-cancel-pick">‹</button>
-    <h2 class="bar-title" id="pick-player-title">Escolher Jogador</h2>
+    <h2 class="bar-title" id="pick-player-title" data-i18n="js.choosePlayer">Escolher Jogador</h2>
     <span class="bar-action bar-action--ghost"></span>
   </header>
   <div class="bar-spacer"></div>
@@ -266,9 +266,9 @@
   <div class="content">
     <p class="section-label" data-i18n="js.tournament.size">Tamanho</p>
     <div class="setup-options" id="opt-tournament-size">
-      <button class="setup-option active" data-size="4">4 jogadores</button>
-      <button class="setup-option" data-size="8">8 jogadores</button>
-      <button class="setup-option" data-size="16">16 jogadores</button>
+      <button class="setup-option active" data-size="4" data-i18n="js.nPlayers4">4 jogadores</button>
+      <button class="setup-option" data-size="8" data-i18n="js.nPlayers8">8 jogadores</button>
+      <button class="setup-option" data-size="16" data-i18n="js.nPlayers16">16 jogadores</button>
     </div>
     <p class="section-label" data-i18n="js.tournament.mode">Modo</p>
     <div class="setup-options" id="opt-tournament-mode">
@@ -286,7 +286,7 @@
       <button class="setup-option" data-tformat="5" data-i18n="js.formatBo5">Melhor de 5</button>
       <button class="setup-option" id="opt-tformat-7" data-tformat="7" hidden data-i18n="js.formatBo7">Melhor de 7</button>
     </div>
-    <p class="section-label">Jogadores <span id="tournament-player-count" class="section-label-count">0 / 4</span></p>
+    <p class="section-label"><span data-i18n="menu.players">Jogadores</span> <span id="tournament-player-count" class="section-label-count">0 / 4</span></p>
     <div id="tournament-player-list" class="tournament-player-checklist"></div>
     <button class="setup-confirm" id="btn-start-tournament" disabled data-i18n="btn.createTournament">Criar Torneio</button>
   </div>
@@ -303,7 +303,7 @@
 <div id="screen-tournament-winner" class="screen">
   <div class="tournament-winner-content">
     <div class="tournament-trophy">🏆</div>
-    <p class="tournament-winner-label">Campeão do Torneio</p>
+    <p class="tournament-winner-label" data-i18n="js.champion">Campeão do Torneio</p>
     <h1 class="tournament-winner-name" id="tournament-winner-name">—</h1>
     <p class="tournament-winner-sub" id="tournament-winner-sub"></p>
     <button class="setup-confirm" id="btn-tournament-done" data-i18n="btn.backMenu">Voltar ao Menu</button>
@@ -315,7 +315,7 @@
     <button class="training-pick-btn" id="btn-training-free"><span class="training-pick-icon">▶</span><span data-i18n="js.trainingFree">Cronómetro livre</span></button>
     <button class="training-pick-btn" id="btn-training-timed"><span class="training-pick-icon">⏱</span><span data-i18n="js.trainingTimed">Treino com tempo definido</span></button>
     <div class="training-time-input" id="training-time-input" hidden>
-      <p class="training-time-label">Duração (minutos)</p>
+      <p class="training-time-label" data-i18n="js.trainingDuration">Duração (minutos)</p>
       <div class="training-time-row">
         <button class="training-time-btn" id="btn-time-minus">−</button>
         <span class="training-time-val" id="training-time-val">15</span>
@@ -323,7 +323,7 @@
       </div>
       <button class="setup-confirm" id="btn-training-start-timed" data-i18n="btn.start">Começar</button>
     </div>
-    <button class="training-pick-back" id="btn-training-pick-back">‹ Voltar</button>
+    <button class="training-pick-back" id="btn-training-pick-back" data-i18n="js.back">‹ Voltar</button>
   </div>
   <div class="training-inner" id="training-inner">
     <button class="training-close" id="btn-training-close">✕</button>
@@ -355,7 +355,7 @@
   </div>
 </div>
 <div id="screen-mg-tap" class="screen screen-minigame">
-  <div class="mg-header"><button class="mg-back" id="btn-mg-tap-back">‹</button><span class="mg-title">Toques Rápidos</span><span class="mg-score-display">Pts: <span id="mg-tap-score">0</span> · rec: <span id="mg-tap-record">—</span></span></div>
+  <div class="mg-header"><button class="mg-back" id="btn-mg-tap-back">‹</button><span class="mg-title" data-i18n="mg.tap">Toques Rápidos</span><span class="mg-score-display"><span data-i18n="js.mgPoints">Pts:</span> <span id="mg-tap-score">0</span> · <span data-i18n="js.mgRecord">rec:</span> <span id="mg-tap-record">—</span></span></div>
   <div class="mg-arena" id="mg-tap-arena">
     <div class="mg-countdown" id="mg-tap-countdown" hidden></div>
     <div class="mg-start-msg" id="mg-tap-start"><p style="font-size:18px"><span data-i18n="js.mgLevel">Nível</span> <span id="mg-tap-level">1</span></p><button class="setup-confirm" id="btn-mg-tap-start" data-i18n="btn.start">Começar</button></div>
@@ -380,7 +380,7 @@
     </button>
     <button class="bolar-half bolar-half--white" id="bolar-white" data-side="white">
       <span class="bolar-name" id="bolar-name-white">Branco</span>
-      <span class="bolar-hint">serve primeiro</span>
+      <span class="bolar-hint" data-i18n="serve.hint">serve primeiro</span>
     </button>
     <div class="bolar-center">
       <span class="bolar-title" data-i18n="serve.title">SERVIÇO</span>
@@ -423,7 +423,7 @@
 
     <div class="bottombar">
       <button class="btn-undo" id="btn-undo" data-i18n-title="js.undo" title="Anular último ponto">↺</button>
-      <button class="btn-end-game" id="btn-end-game">Terminar Jogo</button>
+      <button class="btn-end-game" id="btn-end-game" data-i18n="js.overlay.endGameTitle">Terminar Jogo</button>
       <button class="btn-pause" id="btn-pause" data-i18n-title="js.pause" title="Pausar cronómetro">❙❙</button>
     </div>
 
@@ -438,10 +438,10 @@
     <p class="overlay-detail" id="set-end-detail">11 — 6</p>
     <div class="overlay-sets-recap" id="set-end-recap"></div>
     <div class="overlay-actions">
-      <button class="overlay-btn overlay-btn--ghost" id="btn-finish-from-set">Terminar Jogo</button>
-      <button class="overlay-btn overlay-btn--primary" id="btn-next-set">Próximo Set ▸</button>
+      <button class="overlay-btn overlay-btn--ghost" id="btn-finish-from-set" data-i18n="js.overlay.endGameTitle">Terminar Jogo</button>
+      <button class="overlay-btn overlay-btn--primary" id="btn-next-set" data-i18n="js.nextSet">Próximo Set ▸</button>
     </div>
-    <button class="overlay-undo-link" id="btn-undo-set-end">Foi engano — anular o último ponto</button>
+    <button class="overlay-undo-link" id="btn-undo-set-end" data-i18n="js.missedGame">Foi engano — anular o último ponto</button>
   </div>
 </div>
 
@@ -450,7 +450,7 @@
   <div class="overlay-card">
     <p class="overlay-eyebrow" data-i18n="js.overlay.endGameTitle">TERMINAR JOGO</p>
     <h3 class="overlay-title" data-i18n="js.overlay.confirmEnd">Confirmar fim de jogo?</h3>
-    <p class="overlay-detail" id="confirm-end-detail">O resultado atual vai ser guardado no histórico.</p>
+    <p class="overlay-detail" id="confirm-end-detail" data-i18n="js.overlay.confirmEndDetail">O resultado atual vai ser guardado no histórico.</p>
     <div class="overlay-actions">
       <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-end" data-i18n="js.cancel">Cancelar</button>
       <button class="overlay-btn overlay-btn--danger" id="btn-confirm-end" data-i18n="js.overlay.confirmEndBtn">Terminar</button>
@@ -461,11 +461,11 @@
 <!-- ============ OVERLAY: FIM DE JOGO (resumo final) ============ -->
 <div id="overlay-game-end" class="overlay" hidden>
   <div class="overlay-card overlay-card--big">
-    <p class="overlay-eyebrow">JOGO TERMINADO</p>
+    <p class="overlay-eyebrow" data-i18n="js.gameEndedTitle">JOGO TERMINADO</p>
     <h3 class="overlay-title" id="game-end-winner">Jogador venceu o jogo</h3>
     <div class="overlay-sets-recap" id="game-end-recap"></div>
     <div class="overlay-actions">
-      <button class="overlay-btn overlay-btn--primary" id="btn-game-end-ok">Voltar ao Menu</button>
+      <button class="overlay-btn overlay-btn--primary" id="btn-game-end-ok" data-i18n="js.backToMenu">Voltar ao Menu</button>
     </div>
   </div>
 </div>
@@ -473,19 +473,19 @@
 <!-- ============ OVERLAY: NOVO JOGADOR ============ -->
 <div id="overlay-new-player" class="overlay" hidden>
   <div class="overlay-card">
-    <p class="overlay-eyebrow">NOVO JOGADOR</p>
-    <h3 class="overlay-title">Nome do jogador</h3>
-    <input type="text" id="input-player-name" class="overlay-input" placeholder="Ex: Miguel" maxlength="20" autocomplete="off">
-    <p class="color-picker-label">Cor no placar</p>
+    <p class="overlay-eyebrow" data-i18n="js.newPlayerTitle">NOVO JOGADOR</p>
+    <h3 class="overlay-title" data-i18n="js.newPlayerName">Nome do jogador</h3>
+    <input type="text" id="input-player-name" class="overlay-input" data-i18n-placeholder="js.playerNamePlaceholder" placeholder="Ex: Miguel" maxlength="20" autocomplete="off">
+    <p class="color-picker-label" data-i18n="js.colorPickerLabel">Cor no placar</p>
     <div class="color-picker" id="color-picker-new">
-      <button class="color-swatch color-swatch--blue-white active"   data-color="blue-white"   title="Azul / Branco"></button>
-      <button class="color-swatch color-swatch--green-white"         data-color="green-white"  title="Verde / Branco"></button>
-      <button class="color-swatch color-swatch--red-white"           data-color="red-white"    title="Vermelho / Branco"></button>
-      <button class="color-swatch color-swatch--pink-white"          data-color="pink-white"   title="Rosa / Branco"></button>
-      <button class="color-swatch color-swatch--purple-white"        data-color="purple-white" title="Roxo / Branco"></button>
-      <button class="color-swatch color-swatch--gold-white"          data-color="gold-white"   title="Dourado / Branco"></button>
-      <button class="color-swatch color-swatch--white-black"         data-color="white-black"  title="Branco / Preto"></button>
-      <button class="color-swatch color-swatch--orange-white"        data-color="orange-white" title="Laranja / Branco"></button>
+      <button class="color-swatch color-swatch--blue-white active"   data-color="blue-white"   data-i18n-title="js.color.blueWhite"   title="Azul / Branco"></button>
+      <button class="color-swatch color-swatch--green-white"         data-color="green-white"  data-i18n-title="js.color.greenWhite"  title="Verde / Branco"></button>
+      <button class="color-swatch color-swatch--red-white"           data-color="red-white"    data-i18n-title="js.color.redWhite"    title="Vermelho / Branco"></button>
+      <button class="color-swatch color-swatch--pink-white"          data-color="pink-white"   data-i18n-title="js.color.pinkWhite"   title="Rosa / Branco"></button>
+      <button class="color-swatch color-swatch--purple-white"        data-color="purple-white" data-i18n-title="js.color.purpleWhite" title="Roxo / Branco"></button>
+      <button class="color-swatch color-swatch--gold-white"          data-color="gold-white"   data-i18n-title="js.color.goldWhite"   title="Dourado / Branco"></button>
+      <button class="color-swatch color-swatch--white-black"         data-color="white-black"  data-i18n-title="js.color.whiteBlack"  title="Branco / Preto"></button>
+      <button class="color-swatch color-swatch--orange-white"        data-color="orange-white" data-i18n-title="js.color.orangeWhite" title="Laranja / Branco"></button>
     </div>
     <div class="overlay-actions">
       <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-new-player" data-i18n="js.cancel">Cancelar</button>
@@ -509,7 +509,7 @@
     </div>
 
     <p class="section-label" data-i18n="js.data.backup">Cópia de segurança</p>
-    <p class="data-explain">
+    <p class="data-explain" data-i18n="js.dataExplain">
       Guarda jogadores e histórico num ficheiro que podes manter na nuvem (Drive, email, etc.)
       e usar para recuperar tudo neste tablet ou noutro.
     </p>
@@ -545,12 +545,12 @@
 <!-- ============ OVERLAY: CONFIRMAR IMPORTAÇÃO ============ -->
 <div id="overlay-confirm-import" class="overlay" hidden>
   <div class="overlay-card">
-    <p class="overlay-eyebrow">IMPORTAR DADOS</p>
-    <h3 class="overlay-title">O que queres fazer?</h3>
-    <p class="overlay-detail" id="confirm-import-detail">Isto vai substituir os jogadores e o histórico já guardados neste tablet.</p>
+    <p class="overlay-eyebrow" data-i18n="js.importTitle">IMPORTAR DADOS</p>
+    <h3 class="overlay-title" data-i18n="js.importQuestion">O que queres fazer?</h3>
+    <p class="overlay-detail" id="confirm-import-detail" data-i18n="js.importDetail">Isto vai substituir os jogadores e o histórico já guardados neste tablet.</p>
     <div class="overlay-actions overlay-actions--col">
-      <button class="overlay-btn overlay-btn--primary" id="btn-merge-import">Adicionar ao que já tenho</button>
-      <button class="overlay-btn overlay-btn--danger" id="btn-confirm-import">Substituir tudo</button>
+      <button class="overlay-btn overlay-btn--primary" id="btn-merge-import" data-i18n="js.mergeImport">Adicionar ao que já tenho</button>
+      <button class="overlay-btn overlay-btn--danger" id="btn-confirm-import" data-i18n="js.replaceImport">Substituir tudo</button>
       <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-import" data-i18n="js.cancel">Cancelar</button>
     </div>
   </div>
@@ -559,12 +559,12 @@
 <!-- ============ OVERLAY: CONFIRMAR APAGAR TUDO ============ -->
 <div id="overlay-confirm-wipe" class="overlay" hidden>
   <div class="overlay-card">
-    <p class="overlay-eyebrow">APAGAR TUDO</p>
-    <h3 class="overlay-title">Apagar todos os dados?</h3>
-    <p class="overlay-detail">Esta ação não pode ser desfeita. Considera exportar uma cópia de segurança primeiro.</p>
+    <p class="overlay-eyebrow" data-i18n="js.wipeTitle">APAGAR TUDO</p>
+    <h3 class="overlay-title" data-i18n="js.wipeQuestion">Apagar todos os dados?</h3>
+    <p class="overlay-detail" data-i18n="js.wipeDetail">Esta ação não pode ser desfeita. Considera exportar uma cópia de segurança primeiro.</p>
     <div class="overlay-actions">
       <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-wipe" data-i18n="js.cancel">Cancelar</button>
-      <button class="overlay-btn overlay-btn--danger" id="btn-confirm-wipe">Apagar tudo</button>
+      <button class="overlay-btn overlay-btn--danger" id="btn-confirm-wipe" data-i18n="js.wipeConfirm">Apagar tudo</button>
     </div>
   </div>
 </div>
@@ -575,7 +575,7 @@
 <!-- ============ TOAST ROTAÇÃO ============ -->
 <div id="rotate-hint" class="rotate-hint" hidden>
   <div class="rotate-icon">⟳</div>
-  <p>Roda o tablet para a horizontal</p>
+  <p data-i18n="js.rotateHint">Roda o tablet para a horizontal</p>
 </div>
 
 <script src="app.js"></script>
