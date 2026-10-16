@@ -134,6 +134,66 @@
       "js.serveEvery1":"Serviço a cada 1 ponto (deuce)",
       "js.eraseConfirm":"Tens a certeza? Esta ação não pode ser desfeita.",
       "js.missedGame":"Foi engano — anular o último ponto",
+      "js.gameInProgress":"Tens um jogo em curso",
+      "js.tournamentInProgress":"Tens um torneio em curso",
+      "js.resumeGame":"Continuar jogo ▸",
+      "js.resumeTournament":"Continuar torneio ▸",
+      "js.endOfSet":"FIM DO SET",
+      "js.endOfSetCapote":"FIM DO SET · CAPOTE",
+      "js.endOfSetDeciding":"FIM DO SET · JOGO DECIDIDO",
+      "js.endOfSetCapoteDeciding":"FIM DO SET · CAPOTE · JOGO DECIDIDO",
+      "js.endOfGame":"FIM DO JOGO",
+      "js.endOfGameCapote":"FIM DO JOGO · CAPOTE",
+      "js.drawBetween":"Empate entre",
+      "js.chooseBlue":"Escolher — Lado Azul",
+      "js.chooseWhite":"Escolher — Lado Branco",
+      "js.noPlayersYet":"Ainda não tens jogadores criados.<br>Volta ao menu e cria jogadores primeiro.",
+      "js.trainingTitle":"Modo Treino",
+      "js.trainingFree":"Cronómetro livre",
+      "js.trainingTimed":"Treino com tempo definido",
+      "js.trainingModeFree":"MODO LIVRE",
+      "js.trainingModeTimed":"TREINO %n MIN",
+      "js.mgMemorize":"Memoriza!",
+      "js.mgYourTurn":"A tua vez!",
+      "js.mgPoints":"Pontos:",
+      "js.mgLevel":"Nível",
+      "js.mgLevelReached":"Nível atingido:",
+      "js.mgRecord":"rec:",
+      "js.mgMemoryTitle":"Memória Visual",
+      "js.achSecret":"Conquista secreta desbloqueada!",
+      "js.achSecretDesc":"Conquista secreta. Continua a jogar para a descobrir.",
+      "js.cancel":"Cancelar",
+      "js.save":"Guardar",
+      "js.undo":"Anular último ponto",
+      "js.pause":"Pausar cronómetro",
+      "js.modeCustom":"Personalizado",
+      "js.modeClassic":"Clássico",
+      "js.modeClassicDesc":"11 pontos por set · BO3, BO5 ou BO7",
+      "js.formatFree":"Livre",
+      "js.formatBo3":"Melhor de 3",
+      "js.formatBo5":"Melhor de 5",
+      "js.formatBo7":"Melhor de 7",
+      "js.setBalanced":"Set muito equilibrado",
+      "js.descPlaceholder":"Ex: torneio de verão, sala de jogos...",
+      "js.shortcutTraining":"Modo Treino",
+      "js.shortcutMinigames":"Mini Jogos",
+      "js.shortcutAchievements":"Conquistas",
+      "js.shortcutRecords":"Recordes",
+      "js.setLabel":"SET",
+      "js.noHistory":"Sem jogos no histórico ainda.",
+      "js.catFirstSteps":"Primeiros Passos",
+      "js.catWins":"Vitórias",
+      "js.catSets":"Sets",
+      "js.catComebacks":"Remontadas",
+      "js.catElo":"ELO",
+      "js.catPoints":"Pontos",
+      "js.catTournaments":"Torneios",
+      "js.catRivalries":"Rivalidades",
+      "js.catTraining":"Treino",
+      "js.catMinigames":"Mini-Jogos",
+      "js.catSpecials":"Especiais",
+      "js.noDataYet":"Sem dados ainda",
+      "js.bracketTbd":"A definir",
     },
     en: {
       "menu.newGame":"New Game","menu.newGameSub":"Choose players and start",
@@ -201,6 +261,66 @@
       "js.serveEvery1":"Service every 1 point (deuce)",
       "js.eraseConfirm":"Are you sure? This cannot be undone.",
       "js.missedGame":"Mistake — undo last point",
+      "js.gameInProgress":"You have a game in progress",
+      "js.tournamentInProgress":"You have a tournament in progress",
+      "js.resumeGame":"Resume game ▸",
+      "js.resumeTournament":"Resume tournament ▸",
+      "js.endOfSet":"END OF GAME",
+      "js.endOfSetCapote":"END OF GAME · WHITEWASH",
+      "js.endOfSetDeciding":"END OF GAME · MATCH DECIDED",
+      "js.endOfSetCapoteDeciding":"END OF GAME · WHITEWASH · MATCH DECIDED",
+      "js.endOfGame":"END OF MATCH",
+      "js.endOfGameCapote":"END OF MATCH · WHITEWASH",
+      "js.drawBetween":"Draw between",
+      "js.chooseBlue":"Choose — Blue Side",
+      "js.chooseWhite":"Choose — White Side",
+      "js.noPlayersYet":"No players created yet.<br>Go back to the menu and create players first.",
+      "js.trainingTitle":"Training Mode",
+      "js.trainingFree":"Free timer",
+      "js.trainingTimed":"Timed training",
+      "js.trainingModeFree":"FREE MODE",
+      "js.trainingModeTimed":"TRAINING %n MIN",
+      "js.mgMemorize":"Memorise!",
+      "js.mgYourTurn":"Your turn!",
+      "js.mgPoints":"Points:",
+      "js.mgLevel":"Level",
+      "js.mgLevelReached":"Level reached:",
+      "js.mgRecord":"rec:",
+      "js.mgMemoryTitle":"Visual Memory",
+      "js.achSecret":"Secret achievement unlocked!",
+      "js.achSecretDesc":"Secret achievement. Keep playing to discover it.",
+      "js.cancel":"Cancel",
+      "js.save":"Save",
+      "js.undo":"Undo last point",
+      "js.pause":"Pause timer",
+      "js.modeCustom":"Custom",
+      "js.modeClassic":"Classic",
+      "js.modeClassicDesc":"11 points per game · BO3, BO5 or BO7",
+      "js.formatFree":"Free",
+      "js.formatBo3":"Best of 3",
+      "js.formatBo5":"Best of 5",
+      "js.formatBo7":"Best of 7",
+      "js.setBalanced":"Very balanced game",
+      "js.descPlaceholder":"E.g.: summer tournament, game room...",
+      "js.shortcutTraining":"Training Mode",
+      "js.shortcutMinigames":"Mini Games",
+      "js.shortcutAchievements":"Achievements",
+      "js.shortcutRecords":"Records",
+      "js.setLabel":"GAME",
+      "js.noHistory":"No matches in history yet.",
+      "js.catFirstSteps":"First Steps",
+      "js.catWins":"Victories",
+      "js.catSets":"Games",
+      "js.catComebacks":"Comebacks",
+      "js.catElo":"Rating",
+      "js.catPoints":"Points",
+      "js.catTournaments":"Tournaments",
+      "js.catRivalries":"Rivalries",
+      "js.catTraining":"Training",
+      "js.catMinigames":"Mini-Games",
+      "js.catSpecials":"Special",
+      "js.noDataYet":"No data yet",
+      "js.bracketTbd":"TBD",
     },
     es: {
       "menu.newGame":"Nueva Partida","menu.newGameSub":"Elegir jugadores y empezar",
@@ -268,6 +388,66 @@
       "js.serveEvery1":"Saque cada 1 punto (iguales)",
       "js.eraseConfirm":"¿Seguro? Esta acción no se puede deshacer.",
       "js.missedGame":"Error — anular último punto",
+      "js.gameInProgress":"Tienes una partida en curso",
+      "js.tournamentInProgress":"Tienes un torneo en curso",
+      "js.resumeGame":"Continuar partida ▸",
+      "js.resumeTournament":"Continuar torneo ▸",
+      "js.endOfSet":"FIN DEL JUEGO",
+      "js.endOfSetCapote":"FIN DEL JUEGO · CAPOTE",
+      "js.endOfSetDeciding":"FIN DEL JUEGO · PARTIDO DECIDIDO",
+      "js.endOfSetCapoteDeciding":"FIN DEL JUEGO · CAPOTE · PARTIDO DECIDIDO",
+      "js.endOfGame":"FIN DEL PARTIDO",
+      "js.endOfGameCapote":"FIN DEL PARTIDO · CAPOTE",
+      "js.drawBetween":"Empate entre",
+      "js.chooseBlue":"Elegir — Lado Azul",
+      "js.chooseWhite":"Elegir — Lado Blanco",
+      "js.noPlayersYet":"Todavía no hay jugadores.<br>Vuelve al menú y crea jugadores primero.",
+      "js.trainingTitle":"Modo Entrenamiento",
+      "js.trainingFree":"Cronómetro libre",
+      "js.trainingTimed":"Entrenamiento con tiempo",
+      "js.trainingModeFree":"MODO LIBRE",
+      "js.trainingModeTimed":"ENTRENAMIENTO %n MIN",
+      "js.mgMemorize":"¡Memoriza!",
+      "js.mgYourTurn":"¡Tu turno!",
+      "js.mgPoints":"Puntos:",
+      "js.mgLevel":"Nivel",
+      "js.mgLevelReached":"Nivel alcanzado:",
+      "js.mgRecord":"rec:",
+      "js.mgMemoryTitle":"Memoria Visual",
+      "js.achSecret":"¡Logro secreto desbloqueado!",
+      "js.achSecretDesc":"Logro secreto. Sigue jugando para descubrirlo.",
+      "js.cancel":"Cancelar",
+      "js.save":"Guardar",
+      "js.undo":"Anular último punto",
+      "js.pause":"Pausar cronómetro",
+      "js.modeCustom":"Personalizado",
+      "js.modeClassic":"Clásico",
+      "js.modeClassicDesc":"11 puntos por juego · BO3, BO5 o BO7",
+      "js.formatFree":"Libre",
+      "js.formatBo3":"Al mejor de 3",
+      "js.formatBo5":"Al mejor de 5",
+      "js.formatBo7":"Al mejor de 7",
+      "js.setBalanced":"Juego muy equilibrado",
+      "js.descPlaceholder":"Ej.: torneo de verano, sala de juegos...",
+      "js.shortcutTraining":"Modo Entrenamiento",
+      "js.shortcutMinigames":"Minijuegos",
+      "js.shortcutAchievements":"Logros",
+      "js.shortcutRecords":"Récords",
+      "js.setLabel":"JUEGO",
+      "js.noHistory":"Aún no hay partidas en el historial.",
+      "js.catFirstSteps":"Primeros Pasos",
+      "js.catWins":"Victorias",
+      "js.catSets":"Juegos",
+      "js.catComebacks":"Remontadas",
+      "js.catElo":"Ranking",
+      "js.catPoints":"Puntos",
+      "js.catTournaments":"Torneos",
+      "js.catRivalries":"Rivalidades",
+      "js.catTraining":"Entrenamiento",
+      "js.catMinigames":"Minijuegos",
+      "js.catSpecials":"Especiales",
+      "js.noDataYet":"Sin datos todavía",
+      "js.bracketTbd":"Por definir",
     },
     fr: {
       "menu.newGame":"Nouvelle Partie","menu.newGameSub":"Choisir les joueurs et commencer",
@@ -335,6 +515,66 @@
       "js.serveEvery1":"Service tous les 1 point (égalité)",
       "js.eraseConfirm":"Êtes-vous sûr ? Cette action est irréversible.",
       "js.missedGame":"Erreur — annuler le dernier point",
+      "js.gameInProgress":"Tu as une partie en cours",
+      "js.tournamentInProgress":"Tu as un tournoi en cours",
+      "js.resumeGame":"Reprendre la partie ▸",
+      "js.resumeTournament":"Reprendre le tournoi ▸",
+      "js.endOfSet":"FIN DE LA MANCHE",
+      "js.endOfSetCapote":"FIN DE LA MANCHE · BLANC",
+      "js.endOfSetDeciding":"FIN DE LA MANCHE · PARTIE DÉCIDÉE",
+      "js.endOfSetCapoteDeciding":"FIN DE LA MANCHE · BLANC · PARTIE DÉCIDÉE",
+      "js.endOfGame":"FIN DE LA PARTIE",
+      "js.endOfGameCapote":"FIN DE LA PARTIE · BLANC",
+      "js.drawBetween":"Égalité entre",
+      "js.chooseBlue":"Choisir — Côté Bleu",
+      "js.chooseWhite":"Choisir — Côté Blanc",
+      "js.noPlayersYet":"Aucun joueur créé.<br>Retourne au menu et crée des joueurs d'abord.",
+      "js.trainingTitle":"Mode Entraînement",
+      "js.trainingFree":"Chrono libre",
+      "js.trainingTimed":"Entraînement minuté",
+      "js.trainingModeFree":"MODE LIBRE",
+      "js.trainingModeTimed":"ENTRAÎNEMENT %n MIN",
+      "js.mgMemorize":"Mémorise !",
+      "js.mgYourTurn":"À toi !",
+      "js.mgPoints":"Points :",
+      "js.mgLevel":"Niveau",
+      "js.mgLevelReached":"Niveau atteint :",
+      "js.mgRecord":"rec :",
+      "js.mgMemoryTitle":"Mémoire Visuelle",
+      "js.achSecret":"Succès secret débloqué !",
+      "js.achSecretDesc":"Succès secret. Continue à jouer pour le découvrir.",
+      "js.cancel":"Annuler",
+      "js.save":"Enregistrer",
+      "js.undo":"Annuler dernier point",
+      "js.pause":"Mettre en pause",
+      "js.modeCustom":"Personnalisé",
+      "js.modeClassic":"Classique",
+      "js.modeClassicDesc":"11 points par manche · BO3, BO5 ou BO7",
+      "js.formatFree":"Libre",
+      "js.formatBo3":"Au meilleur de 3",
+      "js.formatBo5":"Au meilleur de 5",
+      "js.formatBo7":"Au meilleur de 7",
+      "js.setBalanced":"Manche très équilibrée",
+      "js.descPlaceholder":"Ex : tournoi d'été, salle de jeux...",
+      "js.shortcutTraining":"Mode Entraînement",
+      "js.shortcutMinigames":"Mini-Jeux",
+      "js.shortcutAchievements":"Succès",
+      "js.shortcutRecords":"Records",
+      "js.setLabel":"MANCHE",
+      "js.noHistory":"Aucune partie dans l'historique pour l'instant.",
+      "js.catFirstSteps":"Premiers Pas",
+      "js.catWins":"Victoires",
+      "js.catSets":"Manches",
+      "js.catComebacks":"Remontées",
+      "js.catElo":"Classement",
+      "js.catPoints":"Points",
+      "js.catTournaments":"Tournois",
+      "js.catRivalries":"Rivalités",
+      "js.catTraining":"Entraînement",
+      "js.catMinigames":"Mini-Jeux",
+      "js.catSpecials":"Spéciaux",
+      "js.noDataYet":"Pas encore de données",
+      "js.bracketTbd":"À définir",
     },
     de: {
       "menu.newGame":"Neues Spiel","menu.newGameSub":"Spieler wählen und starten",
@@ -402,6 +642,66 @@
       "js.serveEvery1":"Aufschlag jeden Punkt (Einstand)",
       "js.eraseConfirm":"Sicher? Diese Aktion kann nicht rückgängig gemacht werden.",
       "js.missedGame":"Versehen — letzten Punkt rückgängig machen",
+      "js.gameInProgress":"Du hast ein laufendes Spiel",
+      "js.tournamentInProgress":"Du hast ein laufendes Turnier",
+      "js.resumeGame":"Spiel fortsetzen ▸",
+      "js.resumeTournament":"Turnier fortsetzen ▸",
+      "js.endOfSet":"SATZENDE",
+      "js.endOfSetCapote":"SATZENDE · KLATSCHE",
+      "js.endOfSetDeciding":"SATZENDE · SPIEL ENTSCHIEDEN",
+      "js.endOfSetCapoteDeciding":"SATZENDE · KLATSCHE · SPIEL ENTSCHIEDEN",
+      "js.endOfGame":"SPIELENDE",
+      "js.endOfGameCapote":"SPIELENDE · KLATSCHE",
+      "js.drawBetween":"Unentschieden zwischen",
+      "js.chooseBlue":"Wählen — Blaue Seite",
+      "js.chooseWhite":"Wählen — Weiße Seite",
+      "js.noPlayersYet":"Noch keine Spieler angelegt.<br>Gehe zurück ins Menü und lege zuerst Spieler an.",
+      "js.trainingTitle":"Trainingsmodus",
+      "js.trainingFree":"Freier Timer",
+      "js.trainingTimed":"Zeitgesteuertes Training",
+      "js.trainingModeFree":"FREIER MODUS",
+      "js.trainingModeTimed":"TRAINING %n MIN",
+      "js.mgMemorize":"Merken!",
+      "js.mgYourTurn":"Du bist dran!",
+      "js.mgPoints":"Punkte:",
+      "js.mgLevel":"Level",
+      "js.mgLevelReached":"Erreichtes Level:",
+      "js.mgRecord":"Rek:",
+      "js.mgMemoryTitle":"Visuelles Gedächtnis",
+      "js.achSecret":"Geheimen Erfolg freigeschaltet!",
+      "js.achSecretDesc":"Geheimer Erfolg. Weiterspielen, um ihn zu entdecken.",
+      "js.cancel":"Abbrechen",
+      "js.save":"Speichern",
+      "js.undo":"Letzten Punkt rückgängig",
+      "js.pause":"Timer pausieren",
+      "js.modeCustom":"Benutzerdefiniert",
+      "js.modeClassic":"Klassisch",
+      "js.modeClassicDesc":"11 Punkte pro Satz · BO3, BO5 oder BO7",
+      "js.formatFree":"Offen",
+      "js.formatBo3":"Best of 3",
+      "js.formatBo5":"Best of 5",
+      "js.formatBo7":"Best of 7",
+      "js.setBalanced":"Sehr ausgeglichener Satz",
+      "js.descPlaceholder":"Z.B.: Sommerturnier, Spielraum...",
+      "js.shortcutTraining":"Trainingsmodus",
+      "js.shortcutMinigames":"Minispiele",
+      "js.shortcutAchievements":"Erfolge",
+      "js.shortcutRecords":"Rekorde",
+      "js.setLabel":"SATZ",
+      "js.noHistory":"Noch keine Spiele im Verlauf.",
+      "js.catFirstSteps":"Erste Schritte",
+      "js.catWins":"Siege",
+      "js.catSets":"Sätze",
+      "js.catComebacks":"Comebacks",
+      "js.catElo":"Rating",
+      "js.catPoints":"Punkte",
+      "js.catTournaments":"Turniere",
+      "js.catRivalries":"Rivalitäten",
+      "js.catTraining":"Training",
+      "js.catMinigames":"Minispiele",
+      "js.catSpecials":"Besondere",
+      "js.noDataYet":"Noch keine Daten",
+      "js.bracketTbd":"Noch offen",
     },
     zh: {
       "menu.newGame":"新局","menu.newGameSub":"选择球员并开始",
@@ -469,6 +769,66 @@
       "js.serveEvery1":"每分换发球（平分）",
       "js.eraseConfirm":"确定吗？此操作无法撤销。",
       "js.missedGame":"误操作 — 撤销最后一分",
+      "js.gameInProgress":"有一场进行中的比赛",
+      "js.tournamentInProgress":"有一个进行中的锦标赛",
+      "js.resumeGame":"继续比赛 ▸",
+      "js.resumeTournament":"继续锦标赛 ▸",
+      "js.endOfSet":"局结束",
+      "js.endOfSetCapote":"局结束 · 11-0",
+      "js.endOfSetDeciding":"局结束 · 比赛决定",
+      "js.endOfSetCapoteDeciding":"局结束 · 11-0 · 比赛决定",
+      "js.endOfGame":"比赛结束",
+      "js.endOfGameCapote":"比赛结束 · 11-0",
+      "js.drawBetween":"平局：",
+      "js.chooseBlue":"选择 — 蓝方",
+      "js.chooseWhite":"选择 — 白方",
+      "js.noPlayersYet":"还没有创建球员。<br>返回菜单先创建球员。",
+      "js.trainingTitle":"训练模式",
+      "js.trainingFree":"自由计时",
+      "js.trainingTimed":"定时训练",
+      "js.trainingModeFree":"自由模式",
+      "js.trainingModeTimed":"训练 %n 分钟",
+      "js.mgMemorize":"记住！",
+      "js.mgYourTurn":"轮到你了！",
+      "js.mgPoints":"分数：",
+      "js.mgLevel":"等级",
+      "js.mgLevelReached":"达到等级：",
+      "js.mgRecord":"纪录：",
+      "js.mgMemoryTitle":"视觉记忆",
+      "js.achSecret":"隐藏成就解锁！",
+      "js.achSecretDesc":"隐藏成就。继续游戏来发现它。",
+      "js.cancel":"取消",
+      "js.save":"保存",
+      "js.undo":"撤销最后一分",
+      "js.pause":"暂停计时器",
+      "js.modeCustom":"自定义",
+      "js.modeClassic":"标准",
+      "js.modeClassicDesc":"每局11分 · BO3、BO5 或 BO7",
+      "js.formatFree":"自由",
+      "js.formatBo3":"三局两胜",
+      "js.formatBo5":"五局三胜",
+      "js.formatBo7":"七局四胜",
+      "js.setBalanced":"局势非常均衡",
+      "js.descPlaceholder":"例：夏季锦标赛、游戏室...",
+      "js.shortcutTraining":"训练模式",
+      "js.shortcutMinigames":"小游戏",
+      "js.shortcutAchievements":"成就",
+      "js.shortcutRecords":"纪录",
+      "js.setLabel":"局",
+      "js.noHistory":"历史记录中还没有比赛。",
+      "js.catFirstSteps":"第一步",
+      "js.catWins":"胜利",
+      "js.catSets":"局",
+      "js.catComebacks":"逆转",
+      "js.catElo":"积分",
+      "js.catPoints":"得分",
+      "js.catTournaments":"锦标赛",
+      "js.catRivalries":"竞争",
+      "js.catTraining":"训练",
+      "js.catMinigames":"小游戏",
+      "js.catSpecials":"特殊",
+      "js.noDataYet":"暂无数据",
+      "js.bracketTbd":"待定",
     },
 
     ja: {
@@ -537,6 +897,66 @@
       "js.serveEvery1":"1点ごとにサービス交代（デュース）",
       "js.eraseConfirm":"本当に削除しますか？この操作は元に戻せません。",
       "js.missedGame":"ミス — 最後の得点を取り消す",
+      "js.gameInProgress":"試合が進行中です",
+      "js.tournamentInProgress":"トーナメントが進行中です",
+      "js.resumeGame":"試合を再開 ▸",
+      "js.resumeTournament":"トーナメントを再開 ▸",
+      "js.endOfSet":"ゲーム終了",
+      "js.endOfSetCapote":"ゲーム終了 · 完封",
+      "js.endOfSetDeciding":"ゲーム終了 · マッチ確定",
+      "js.endOfSetCapoteDeciding":"ゲーム終了 · 完封 · マッチ確定",
+      "js.endOfGame":"マッチ終了",
+      "js.endOfGameCapote":"マッチ終了 · 完封",
+      "js.drawBetween":"引き分け：",
+      "js.chooseBlue":"選択 — 青サイド",
+      "js.chooseWhite":"選択 — 白サイド",
+      "js.noPlayersYet":"プレイヤーが作成されていません。<br>メニューに戻ってプレイヤーを作成してください。",
+      "js.trainingTitle":"練習モード",
+      "js.trainingFree":"フリータイマー",
+      "js.trainingTimed":"タイム制練習",
+      "js.trainingModeFree":"フリーモード",
+      "js.trainingModeTimed":"練習 %n 分",
+      "js.mgMemorize":"覚えて！",
+      "js.mgYourTurn":"あなたの番！",
+      "js.mgPoints":"得点：",
+      "js.mgLevel":"レベル",
+      "js.mgLevelReached":"到達レベル：",
+      "js.mgRecord":"記録：",
+      "js.mgMemoryTitle":"視覚記憶",
+      "js.achSecret":"シークレット実績解除！",
+      "js.achSecretDesc":"シークレット実績。プレイを続けて発見しよう。",
+      "js.cancel":"キャンセル",
+      "js.save":"保存",
+      "js.undo":"最後の得点を取り消す",
+      "js.pause":"タイマーを一時停止",
+      "js.modeCustom":"カスタム",
+      "js.modeClassic":"クラシック",
+      "js.modeClassicDesc":"1ゲーム11点 · BO3、BO5、BO7",
+      "js.formatFree":"フリー",
+      "js.formatBo3":"3ゲームマッチ",
+      "js.formatBo5":"5ゲームマッチ",
+      "js.formatBo7":"7ゲームマッチ",
+      "js.setBalanced":"拮抗したゲーム",
+      "js.descPlaceholder":"例：夏のトーナメント、ゲームルーム...",
+      "js.shortcutTraining":"練習モード",
+      "js.shortcutMinigames":"ミニゲーム",
+      "js.shortcutAchievements":"実績",
+      "js.shortcutRecords":"記録",
+      "js.setLabel":"ゲーム",
+      "js.noHistory":"履歴にまだ試合がありません。",
+      "js.catFirstSteps":"はじめの一歩",
+      "js.catWins":"勝利",
+      "js.catSets":"ゲーム",
+      "js.catComebacks":"逆転",
+      "js.catElo":"レーティング",
+      "js.catPoints":"得点",
+      "js.catTournaments":"トーナメント",
+      "js.catRivalries":"ライバル関係",
+      "js.catTraining":"練習",
+      "js.catMinigames":"ミニゲーム",
+      "js.catSpecials":"特別",
+      "js.noDataYet":"まだデータなし",
+      "js.bracketTbd":"未定",
     },
   };
 
@@ -551,15 +971,23 @@
 
   // aplica traduções a todos os elementos [data-i18n]
   function applyTranslations() {
+    // textContent
     document.querySelectorAll("[data-i18n]").forEach(el => {
       const key = el.getAttribute("data-i18n");
       const val = t(key);
       if (val) el.textContent = val;
     });
-    // placeholder do input de descrição
+    // title attributes (tooltips)
+    document.querySelectorAll("[data-i18n-title]").forEach(el => {
+      const key = el.getAttribute("data-i18n-title");
+      const val = t(key);
+      if (val) el.title = val;
+    });
+    // placeholders
     const descInput = document.getElementById("input-game-description");
-    if (descInput) descInput.placeholder = t("js.choosePlayer") === "Escolher jogador"
-      ? "Ex: torneio de verão, sala de jogos..." : "";
+    if (descInput) descInput.placeholder = t("js.descPlaceholder");
+    const playerInput = document.getElementById("input-player-name");
+    if (playerInput) playerInput.placeholder = "Ex: Miguel";
   }
 
   function showScreen(id) {
@@ -690,16 +1118,24 @@
     });
   })();
 
+  const CAT_I18N = {
+    "Primeiros Passos":"js.catFirstSteps","Vitórias":"js.catWins","Sets":"js.catSets",
+    "Remontadas":"js.catComebacks","ELO":"js.catElo","Pontos":"js.catPoints",
+    "Torneios":"js.catTournaments","Rivalidades":"js.catRivalries",
+    "Treino":"js.catTraining","Mini-Jogos":"js.catMinigames","Especiais":"js.catSpecials"
+  };
+  function tCat(cat){ return t(CAT_I18N[cat]||("js.cat"+cat))||cat; }
+
   function checkResumeBanner() {
     const banner = document.getElementById("menu-resume");
     if (DATA.activeGame) {
       banner.hidden = false;
-      banner.querySelector("p").textContent = "Tens um jogo em curso";
-      document.getElementById("btn-resume").textContent = "Continuar jogo ▸";
+      banner.querySelector("p").textContent = t("js.gameInProgress");
+      document.getElementById("btn-resume").textContent = t("js.resumeGame");
     } else if (DATA.activeTournament && DATA.activeTournament.status !== "done") {
       banner.hidden = false;
-      banner.querySelector("p").textContent = "Tens um torneio em curso";
-      document.getElementById("btn-resume").textContent = "Continuar torneio ▸";
+      banner.querySelector("p").textContent = t("js.tournamentInProgress");
+      document.getElementById("btn-resume").textContent = t("js.resumeTournament");
     } else {
       banner.hidden = true;
     }
@@ -1219,9 +1655,9 @@
         return `
           <div class="set-row set-row--expanded">
             <div class="set-row-top">
-              <span class="set-row-num">SET ${i + 1}</span>
+              <span class="set-row-num">${t("js.setLabel")} ${i + 1}</span>
               <span class="set-row-score">${s.blueScore} – ${s.whiteScore}</span>
-              <span class="set-row-winner">${winnerName}${s.capote ? '<span class="capote-tag">Capote</span>' : ""}</span>
+              <span class="set-row-winner">${winnerName}${s.capote ? '<span class="capote-tag">'+t("js.capoteTag")+'</span>' : ""}</span>
             </div>
             ${momentumSVG}
           </div>`;
@@ -1275,7 +1711,7 @@
     });
     let leadSummary;
     if (blueLeadPoints === whiteLeadPoints) {
-      leadSummary = "Set muito equilibrado";
+      leadSummary = t("js.setBalanced");
     } else {
       const leaderName = blueLeadPoints > whiteLeadPoints
         ? escapeHTML(blueName)
@@ -1460,7 +1896,7 @@
   function openPicker(side) {
     pickTarget = side;
     document.getElementById("pick-player-title").textContent =
-      side === "blue" ? "Escolher — Lado Azul" : "Escolher — Lado Branco";
+      side === "blue" ? t("js.chooseBlue") : t("js.chooseWhite");
 
     const list = document.getElementById("pick-player-list");
     list.innerHTML = "";
@@ -1969,7 +2405,7 @@
         ? getPlayer(game.bluePlayerId)?.name || "Azul"
         : getPlayer(game.whitePlayerId)?.name || "Branco";
 
-    document.getElementById("set-end-eyebrow").textContent = closedSet.capote ? "FIM DO SET · CAPOTE" : "FIM DO SET";
+    document.getElementById("set-end-eyebrow").textContent = closedSet.capote ? t("js.endOfSetCapote") : t("js.endOfSet");
     document.getElementById("set-end-winner").textContent = t("js.setWon",{n:winnerName});
     document.getElementById("set-end-detail").textContent = `${closedSet.blueScore} — ${closedSet.whiteScore}`;
 
@@ -1991,8 +2427,8 @@
           ? getPlayer(game.bluePlayerId)?.name || "Azul"
           : getPlayer(game.whitePlayerId)?.name || "Branco";
       document.getElementById("set-end-eyebrow").textContent = closedSet.capote
-        ? "FIM DO SET · CAPOTE · JOGO DECIDIDO"
-        : "FIM DO SET · JOGO DECIDIDO";
+        ? t("js.endOfSetCapoteDeciding")
+        : t("js.endOfSetDeciding");
       nextBtn.textContent = t("js.continue");
       document.getElementById("overlay-set-end").dataset.decided = "1";
     } else {
@@ -2051,7 +2487,7 @@
   function openConfirmEndOverlay() {
     const detail = document.getElementById("confirm-end-detail");
     if (game.currentBlue > 0 || game.currentWhite > 0) {
-      detail.textContent = `O set em curso (${game.currentBlue}-${game.currentWhite}) não vai ser contado. O resultado dos sets já fechados é guardado no histórico.`;
+      detail.textContent = t("js.setInProgress").replace("%b",game.currentBlue).replace("%w",game.currentWhite);
     } else {
       detail.textContent = t("js.confirmEnd");
     }
@@ -2115,7 +2551,7 @@
     const whiteName = getPlayer(record.white.playerId)?.name || "Branco";
 
     if (record.isDraw) {
-      document.getElementById("game-end-winner").textContent = `Empate entre ${blueName} e ${whiteName}`;
+      document.getElementById("game-end-winner").textContent = t("js.drawBetween") + " " + blueName + " & " + whiteName;
     } else {
       const winnerName = record.winnerSide === "blue" ? blueName : whiteName;
       document.getElementById("game-end-winner").textContent = t("js.gameWon",{n:winnerName});
@@ -2526,7 +2962,7 @@
         const mel=document.createElement("div"); mel.className="bracket-match"+(isDone?" is-done":"")+(isNext?" is-next":"");
         const s1=p1?t.seeded.indexOf(match.player1Id)+1:null, s2=p2?t.seeded.indexOf(match.player2Id)+1:null;
         const p1w=match.winnerId===match.player1Id, p2w=match.winnerId===match.player2Id;
-        mel.innerHTML=`<div class="bracket-player ${p1w?"is-winner":isDone?"is-loser":""}"><span class="bracket-player-seed">${s1?"#"+s1:""}</span><span class="bracket-player-name">${p1?escapeHTML(p1.name):'<span class="bracket-tbd">A definir</span>'}</span></div><div class="bracket-player ${p2w?"is-winner":isDone?"is-loser":""}"><span class="bracket-player-seed">${s2?"#"+s2:""}</span><span class="bracket-player-name">${p2?escapeHTML(p2.name):'<span class="bracket-tbd">A definir</span>'}</span></div>${isNext?`<button class="bracket-play-btn" data-r="${ri}" data-m="${mi}">▶ JOGAR</button>`:""}`;
+        mel.innerHTML=`<div class="bracket-player ${p1w?"is-winner":isDone?"is-loser":""}"><span class="bracket-player-seed">${s1?"#"+s1:""}</span><span class="bracket-player-name">${p1?escapeHTML(p1.name):'<span class="bracket-tbd">'+t("js.tbd")+'</span>'}</span></div><div class="bracket-player ${p2w?"is-winner":isDone?"is-loser":""}"><span class="bracket-player-seed">${s2?"#"+s2:""}</span><span class="bracket-player-name">${p2?escapeHTML(p2.name):'<span class="bracket-tbd">'+t("js.tbd")+'</span>'}</span></div>${isNext?`<button class="bracket-play-btn" data-r="${ri}" data-m="${mi}">▶ JOGAR</button>`:""}`;
         if (isNext) mel.querySelector(".bracket-play-btn").addEventListener("click",()=>startTournamentMatch(ri,mi));
         col.appendChild(mel);
       });
@@ -2597,7 +3033,7 @@
     document.getElementById("training-pick").style.display="none";
     const inner=document.getElementById("training-inner");
     inner.classList.add("is-running"); inner.className="training-inner is-running phase-0";
-    document.getElementById("training-mode-label").textContent=isTimed?"TREINO "+mins+" MIN":"MODO LIVRE";
+    document.getElementById("training-mode-label").textContent=isTimed?t("js.trainingModeTimed").replace("%n",mins):t("js.trainingModeFree");
     document.getElementById("btn-training-pause").textContent="❙❙";
     trainingState={running:true,paused:false,isTimed,targetMs:mins*60000,elapsedMs:0,startTs:performance.now(),rafId:null,muted:false,halfSounded:false,last10Sounded:false,_pausedOffset:0};
     playTrainingSound("start"); startTrainingMusic(); trainingTick();
@@ -2742,14 +3178,14 @@
     const len=2+memGame.level;
     memGame.seq=Array.from({length:len},()=>Math.floor(Math.random()*memGame.gridSize*memGame.gridSize));
     memGame.playerSeq=[];memGame.showing=true;
-    document.getElementById("mg-memory-msg").textContent="Memoriza!";
+    document.getElementById("mg-memory-msg").textContent=t("js.mgMemorize");
     document.getElementById("mg-memory-level").textContent=memGame.level;
     const cells=document.querySelectorAll(".mg-memory-cell");
     cells.forEach(c=>c.classList.remove("is-lit","is-correct","is-wrong"));
     let i=0;
     const show=()=>{
       if(i>0)cells[memGame.seq[i-1]]?.classList.remove("is-lit");
-      if(i>=memGame.seq.length){memGame.showing=false;document.getElementById("mg-memory-msg").textContent="A tua vez!";return;}
+      if(i>=memGame.seq.length){memGame.showing=false;document.getElementById("mg-memory-msg").textContent=t("js.mgYourTurn");return;}
       cells[memGame.seq[i]]?.classList.add("is-lit");playTone(440+memGame.seq[i]*28,200,0.3,"sine");i++;setTimeout(show,600);
     };
     setTimeout(show,400);
@@ -2871,7 +3307,7 @@
     const toast=document.getElementById("achievement-toast");
     document.getElementById("ach-toast-icon").textContent=ach.icon;
     document.getElementById("ach-toast-name").textContent=ach.secret?"???":ach.name;
-    document.getElementById("ach-toast-desc").textContent=ach.secret?"Conquista secreta desbloqueada!":ach.desc;
+    document.getElementById("ach-toast-desc").textContent=ach.secret?t("js.achSecret"):ach.desc;
     document.getElementById("ach-toast-player").textContent=playerName||"";
     toast.hidden=false;
     toast.classList.add("is-visible");
@@ -2914,7 +3350,7 @@
     const container=document.getElementById("ach-list");container.innerHTML="";
     Object.entries(cats).forEach(([cat,items])=>{
       const sec=document.createElement("div");sec.className="ach-section";
-      sec.innerHTML=`<p class="section-label">${cat}</p>`;
+      sec.innerHTML=`<p class="section-label">${tCat(cat)}</p>`;
       items.forEach(ach=>{
         const isU=ach.cat==="Treino"?!!gUnlocked[ach.id]:!!unlocked[ach.id];
         const uAt=ach.cat==="Treino"?gUnlocked[ach.id]?.unlockedAt:unlocked[ach.id]?.unlockedAt;
@@ -2922,7 +3358,7 @@
         const prog=ach.progressive&&ach.progress?(ach.cat==="Treino"?(ach.progress()||0):(ach.progress(pid)||0)):null;
         const card=document.createElement("div");
         card.className="ach-card"+(isU?" is-unlocked":"");
-        card.innerHTML=`<div class="ach-icon">${isSec?"🔒":ach.icon}</div><div class="ach-info"><div class="ach-name">${isSec?"???":escapeHTML(ach.name)}</div><div class="ach-desc">${isSec?"Conquista secreta. Continua a jogar para a descobrir.":escapeHTML(ach.desc)}</div>${isU&&uAt?`<div class="ach-date">${formatDate(uAt)}</div>`:""} ${ach.progressive&&prog!==null&&!isU?`<div class="ach-prog-wrap"><div class="ach-prog-bar" style="width:${Math.min(100,prog/ach.total*100)}%"></div><span class="ach-prog-lbl">${prog} / ${ach.total}</span></div>`:""}</div>`;
+        card.innerHTML=`<div class="ach-icon">${isSec?"🔒":ach.icon}</div><div class="ach-info"><div class="ach-name">${isSec?"???":escapeHTML(ach.name)}</div><div class="ach-desc">${isSec?t("js.achSecretDesc"):escapeHTML(ach.desc)}</div>${isU&&uAt?`<div class="ach-date">${formatDate(uAt)}</div>`:""} ${ach.progressive&&prog!==null&&!isU?`<div class="ach-prog-wrap"><div class="ach-prog-bar" style="width:${Math.min(100,prog/ach.total*100)}%"></div><span class="ach-prog-lbl">${prog} / ${ach.total}</span></div>`:""}</div>`;
         sec.appendChild(card);
       });
       container.appendChild(sec);
@@ -2953,7 +3389,7 @@
       const data=rec.get();
       const card=document.createElement("div");
       card.className="record-card"+(data?"":" record-card--empty");
-      card.innerHTML=`<span class="record-icon">${rec.icon}</span><div class="record-info"><div class="record-label">${rec.label}</div>${data?`<div class="record-value">${data.player?escapeHTML(data.player.name)+" · ":""}${data.value}</div>`:`<div class="record-empty">Sem dados ainda</div>`}</div>`;
+      card.innerHTML=`<span class="record-icon">${rec.icon}</span><div class="record-info"><div class="record-label">${rec.label}</div>${data?`<div class="record-value">${data.player?escapeHTML(data.player.name)+" · ":""}${data.value}</div>`:`<div class="record-empty">${t("js.noDataYet")}</div>`}</div>`;
       container.appendChild(card);
     });
   }

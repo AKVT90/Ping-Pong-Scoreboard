@@ -3,7 +3,7 @@
    utilizador (jogadores, jogos) NÃO passam por aqui — ficam só
    no localStorage do dispositivo, em formato JSON. */
 
-const CACHE_NAME = "placar-pingpong-v16";
+const CACHE_NAME = "placar-pingpong-v17";
 const FILES_TO_CACHE = [
   "./",
   "./index.html",

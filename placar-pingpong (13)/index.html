@@ -83,10 +83,10 @@
     </div>
 
     <div class="menu-shortcuts">
-      <button class="menu-shortcut" id="btn-training" title="Modo Treino">⏱</button>
-      <button class="menu-shortcut" id="btn-minigames" title="Mini Jogos">🕹</button>
-      <button class="menu-shortcut" id="btn-achievements" title="Conquistas">🏆</button>
-      <button class="menu-shortcut" id="btn-records" title="Recordes">📊</button>
+      <button class="menu-shortcut" id="btn-training" data-i18n-title="js.shortcutTraining" title="Modo Treino">⏱</button>
+      <button class="menu-shortcut" id="btn-minigames" data-i18n-title="js.shortcutMinigames" title="Mini Jogos">🕹</button>
+      <button class="menu-shortcut" id="btn-achievements" data-i18n-title="js.shortcutAchievements" title="Conquistas">🏆</button>
+      <button class="menu-shortcut" id="btn-records" data-i18n-title="js.shortcutRecords" title="Recordes">📊</button>
     </div>
 
     <div class="menu-resume" id="menu-resume" hidden>
@@ -197,13 +197,13 @@
   <div class="content setup-content">
 
     <button class="mode-card mode-card--custom active" id="mode-custom" data-mode="custom">
-      <span class="mode-card-title">Personalizado</span>
+      <span class="mode-card-title" data-i18n="js.modeCustom">Personalizado</span>
       <span class="mode-card-desc">11 ou 21 pontos · livre, BO3 ou BO5 · serviço alterna a cada 5 pontos somados</span>
     </button>
 
     <button class="mode-card mode-card--classic" id="mode-classic" data-mode="classic">
-      <span class="mode-card-title">Clássico</span>
-      <span class="mode-card-desc">11 pontos por set · BO3, BO5 ou BO7</span>
+      <span class="mode-card-title" data-i18n="js.modeClassic">Clássico</span>
+      <span class="mode-card-desc" data-i18n="js.modeClassicDesc">11 pontos por set · BO3, BO5 ou BO7</span>
     </button>
 
     <button class="setup-confirm" id="btn-goto-options" data-i18n="btn.continue">Continuar ▸</button>
@@ -231,10 +231,10 @@
     <section class="setup-section">
       <p class="setup-label" data-i18n="setup.format">Formato</p>
       <div class="setup-options" id="opt-format">
-        <button class="setup-option active" data-format="free">Livre</button>
-        <button class="setup-option" data-format="3">Melhor de 3</button>
-        <button class="setup-option" data-format="5">Melhor de 5</button>
-        <button class="setup-option" data-format="7" id="opt-format-7">Melhor de 7</button>
+        <button class="setup-option active" data-format="free" data-i18n="js.formatFree">Livre</button>
+        <button class="setup-option" data-format="3" data-i18n="js.formatBo3">Melhor de 3</button>
+        <button class="setup-option" data-format="5" data-i18n="js.formatBo5">Melhor de 5</button>
+        <button class="setup-option" data-format="7" id="opt-format-7" data-i18n="js.formatBo7">Melhor de 7</button>
       </div>
     </section>
 
@@ -272,8 +272,8 @@
     </div>
     <p class="section-label">Modo</p>
     <div class="setup-options" id="opt-tournament-mode">
-      <button class="setup-option active" data-tmode="custom">Personalizado</button>
-      <button class="setup-option" data-tmode="classic">Clássico</button>
+      <button class="setup-option active" data-tmode="custom" data-i18n="js.modeCustom">Personalizado</button>
+      <button class="setup-option" data-tmode="classic" data-i18n="js.modeClassic">Clássico</button>
     </div>
     <div id="opt-tournament-points-wrap">
       <div class="setup-options" id="opt-tournament-points">
@@ -282,9 +282,9 @@
       </div>
     </div>
     <div class="setup-options" id="opt-tournament-format">
-      <button class="setup-option active" data-tformat="3">Melhor de 3</button>
-      <button class="setup-option" data-tformat="5">Melhor de 5</button>
-      <button class="setup-option" id="opt-tformat-7" data-tformat="7" hidden>Melhor de 7</button>
+      <button class="setup-option active" data-tformat="3" data-i18n="js.formatBo3">Melhor de 3</button>
+      <button class="setup-option" data-tformat="5" data-i18n="js.formatBo5">Melhor de 5</button>
+      <button class="setup-option" id="opt-tformat-7" data-tformat="7" hidden data-i18n="js.formatBo7">Melhor de 7</button>
     </div>
     <p class="section-label">Jogadores <span id="tournament-player-count" class="section-label-count">0 / 4</span></p>
     <div id="tournament-player-list" class="tournament-player-checklist"></div>
@@ -311,9 +311,9 @@
 </div>
 <div id="screen-training" class="screen screen-training">
   <div class="training-pick" id="training-pick">
-    <h2 class="training-pick-title">Modo Treino</h2>
-    <button class="training-pick-btn" id="btn-training-free"><span class="training-pick-icon">▶</span><span>Cronómetro livre</span></button>
-    <button class="training-pick-btn" id="btn-training-timed"><span class="training-pick-icon">⏱</span><span>Treino com tempo definido</span></button>
+    <h2 class="training-pick-title" data-i18n="js.trainingTitle">Modo Treino</h2>
+    <button class="training-pick-btn" id="btn-training-free"><span class="training-pick-icon">▶</span><span data-i18n="js.trainingFree">Cronómetro livre</span></button>
+    <button class="training-pick-btn" id="btn-training-timed"><span class="training-pick-icon">⏱</span><span data-i18n="js.trainingTimed">Treino com tempo definido</span></button>
     <div class="training-time-input" id="training-time-input" hidden>
       <p class="training-time-label">Duração (minutos)</p>
       <div class="training-time-row">
@@ -333,7 +333,7 @@
       <button class="training-btn" id="btn-training-pause">❙❙</button>
       <button class="training-btn training-btn--stop" id="btn-training-stop">■</button>
     </div>
-    <div class="training-mode-label" id="training-mode-label">MODO LIVRE</div>
+    <div class="training-mode-label" id="training-mode-label" data-i18n="js.trainingModeFree">MODO LIVRE</div>
   </div>
 </div>
 <div id="screen-minigames" class="screen">
@@ -356,17 +356,17 @@
   <div class="mg-header"><button class="mg-back" id="btn-mg-tap-back">‹</button><span class="mg-title">Toques Rápidos</span><span class="mg-score-display">Pts: <span id="mg-tap-score">0</span> · rec: <span id="mg-tap-record">—</span></span></div>
   <div class="mg-arena" id="mg-tap-arena">
     <div class="mg-countdown" id="mg-tap-countdown" hidden></div>
-    <div class="mg-start-msg" id="mg-tap-start"><p style="font-size:18px">Nível <span id="mg-tap-level">1</span></p><button class="setup-confirm" id="btn-mg-tap-start">Começar</button></div>
-    <div class="mg-gameover" id="mg-tap-gameover" hidden><p class="mg-gameover-score">Pontos: <strong id="mg-tap-final-score">0</strong></p><p class="mg-gameover-level">Nível: <strong id="mg-tap-final-level">1</strong></p><p class="mg-gameover-record" id="mg-tap-new-record" hidden>🏆 Novo recorde!</p><button class="setup-confirm" id="btn-mg-tap-retry">Jogar de novo</button></div>
+    <div class="mg-start-msg" id="mg-tap-start"><p style="font-size:18px"><span data-i18n="js.mgLevel">Nível</span> <span id="mg-tap-level">1</span></p><button class="setup-confirm" id="btn-mg-tap-start" data-i18n="btn.start">Começar</button></div>
+    <div class="mg-gameover" id="mg-tap-gameover" hidden><p class="mg-gameover-score"><span data-i18n="js.mgPoints">Pontos:</span> <strong id="mg-tap-final-score">0</strong></p><p class="mg-gameover-level"><span data-i18n="js.mgLevel">Nível</span>: <strong id="mg-tap-final-level">1</strong></p><p class="mg-gameover-record" id="mg-tap-new-record" hidden data-i18n="js.newRecord">🏆 Novo recorde!</p><button class="setup-confirm" id="btn-mg-tap-retry" data-i18n="js.playAgain">Jogar de novo</button></div>
   </div>
 </div>
 <div id="screen-mg-memory" class="screen screen-minigame">
-  <div class="mg-header"><button class="mg-back" id="btn-mg-memory-back">‹</button><span class="mg-title">Memória Visual</span><span class="mg-score-display">Nível <span id="mg-memory-level">1</span> · rec: <span id="mg-memory-record">—</span></span></div>
+  <div class="mg-header"><button class="mg-back" id="btn-mg-memory-back">‹</button><span class="mg-title" data-i18n="js.mgMemoryTitle">Memória Visual</span><span class="mg-score-display"><span data-i18n="js.mgLevel">Nível</span> <span id="mg-memory-level">1</span> · <span data-i18n="js.mgRecord">rec:</span> <span id="mg-memory-record">—</span></span></div>
   <div class="mg-arena mg-arena--memory" id="mg-memory-arena">
     <div class="mg-memory-msg" id="mg-memory-msg"></div>
     <div class="mg-memory-grid" id="mg-memory-grid"></div>
-    <div class="mg-start-msg" id="mg-memory-start"><p style="font-size:18px">Nível <span id="mg-memory-start-level">1</span></p><button class="setup-confirm" id="btn-mg-memory-start">Começar</button></div>
-    <div class="mg-gameover" id="mg-memory-gameover" hidden><p class="mg-gameover-level">Nível atingido: <strong id="mg-memory-final-level">1</strong></p><p class="mg-gameover-record" id="mg-memory-new-record" hidden>🏆 Novo recorde!</p><button class="setup-confirm" id="btn-mg-memory-retry">Jogar de novo</button></div>
+    <div class="mg-start-msg" id="mg-memory-start"><p style="font-size:18px"><span data-i18n="js.mgLevel">Nível</span> <span id="mg-memory-start-level">1</span></p><button class="setup-confirm" id="btn-mg-memory-start" data-i18n="btn.start">Começar</button></div>
+    <div class="mg-gameover" id="mg-memory-gameover" hidden><p class="mg-gameover-level"><span data-i18n="js.mgLevelReached">Nível atingido:</span> <strong id="mg-memory-final-level">1</strong></p><p class="mg-gameover-record" id="mg-memory-new-record" hidden data-i18n="js.newRecord">🏆 Novo recorde!</p><button class="setup-confirm" id="btn-mg-memory-retry" data-i18n="js.playAgain">Jogar de novo</button></div>
   </div>
 </div>
 <!-- ============ ECRÃ: BOLAR (escolher quem serve) ============ -->
@@ -420,9 +420,9 @@
     </div>
 
     <div class="bottombar">
-      <button class="btn-undo" id="btn-undo" title="Anular último ponto">↺</button>
+      <button class="btn-undo" id="btn-undo" data-i18n-title="js.undo" title="Anular último ponto">↺</button>
       <button class="btn-end-game" id="btn-end-game">Terminar Jogo</button>
-      <button class="btn-pause" id="btn-pause" title="Pausar cronómetro">❙❙</button>
+      <button class="btn-pause" id="btn-pause" data-i18n-title="js.pause" title="Pausar cronómetro">❙❙</button>
     </div>
 
   </div>
@@ -431,7 +431,7 @@
 <!-- ============ OVERLAY: FIM DE SET ============ -->
 <div id="overlay-set-end" class="overlay" hidden>
   <div class="overlay-card">
-    <p class="overlay-eyebrow" id="set-end-eyebrow">FIM DO SET</p>
+    <p class="overlay-eyebrow" id="set-end-eyebrow" data-i18n="js.endOfSet">FIM DO SET</p>
     <h3 class="overlay-title" id="set-end-winner">Jogador venceu o set</h3>
     <p class="overlay-detail" id="set-end-detail">11 — 6</p>
     <div class="overlay-sets-recap" id="set-end-recap"></div>
@@ -450,7 +450,7 @@
     <h3 class="overlay-title">Confirmar fim de jogo?</h3>
     <p class="overlay-detail" id="confirm-end-detail">O resultado atual vai ser guardado no histórico.</p>
     <div class="overlay-actions">
-      <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-end">Cancelar</button>
+      <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-end" data-i18n="js.cancel">Cancelar</button>
       <button class="overlay-btn overlay-btn--danger" id="btn-confirm-end">Terminar</button>
     </div>
   </div>
@@ -486,8 +486,8 @@
       <button class="color-swatch color-swatch--orange-white"        data-color="orange-white" title="Laranja / Branco"></button>
     </div>
     <div class="overlay-actions">
-      <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-new-player">Cancelar</button>
-      <button class="overlay-btn overlay-btn--primary" id="btn-save-new-player">Guardar</button>
+      <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-new-player" data-i18n="js.cancel">Cancelar</button>
+      <button class="overlay-btn overlay-btn--primary" id="btn-save-new-player" data-i18n="js.save">Guardar</button>
     </div>
   </div>
 </div>
@@ -549,7 +549,7 @@
     <div class="overlay-actions overlay-actions--col">
       <button class="overlay-btn overlay-btn--primary" id="btn-merge-import">Adicionar ao que já tenho</button>
       <button class="overlay-btn overlay-btn--danger" id="btn-confirm-import">Substituir tudo</button>
-      <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-import">Cancelar</button>
+      <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-import" data-i18n="js.cancel">Cancelar</button>
     </div>
   </div>
 </div>
@@ -561,7 +561,7 @@
     <h3 class="overlay-title">Apagar todos os dados?</h3>
     <p class="overlay-detail">Esta ação não pode ser desfeita. Considera exportar uma cópia de segurança primeiro.</p>
     <div class="overlay-actions">
-      <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-wipe">Cancelar</button>
+      <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-wipe" data-i18n="js.cancel">Cancelar</button>
       <button class="overlay-btn overlay-btn--danger" id="btn-confirm-wipe">Apagar tudo</button>
     </div>
   </div>
