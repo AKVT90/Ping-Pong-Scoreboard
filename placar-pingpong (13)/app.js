@@ -1213,31 +1213,37 @@
     osc.stop(now + dur + 0.04);
   }
 
-  // ponto marcado: "pling" nítido e presente
+
+  // ponto marcado: "pling" limpo e agudo, tipo sininho — leve e imediato
+  // usa sine puro em frequência alta para soar como uma nota musical real
   function playTapSound() {
-    playTone(1400, 80, 0.75, "triangle");
-    playTone(2100, 55, 0.35, "sine");
+    playTone(1760, 100, 0.75, "sine");  // Lá5 — nota musical clara
+    playTone(2637,  55, 0.30, "sine");  // Mi7 — harmónico natural, dá brilho
   }
 
-  // troca de serviço: dois beeps duplos bem audíveis
+  // troca de serviço: "dun-dun" duplo, grave e redondo — não alarma, só informa
+  // triangle dá um som mais "oco" e suave que square ou sawtooth
   function playServeChangeSound() {
-    playTone(1046, 140, 0.8, "square");
-    setTimeout(() => playTone(1046, 140, 0.8, "square"), 165);
+    playTone(330, 160, 0.80, "triangle");  // Mi3 — grave e redondo
+    setTimeout(() => playTone(440, 180, 0.80, "triangle"), 190);  // Lá3 — ligeiramente mais alto
   }
 
-  // match point: fanfarra ascendente de 3 notas, inconfundível
+  // match point: sirene urgente com salto de oitava no fim — inconfundível
+  // sawtooth tem muito mais harmónicos que square, soa mais "cortante" e urgente
   function playMatchPointSound() {
-    playTone(784,  120, 0.85, "square");
-    setTimeout(() => playTone(988,  120, 0.85, "square"), 135);
-    setTimeout(() => playTone(1318, 200, 0.85, "square"), 270);
+    playTone(523,  110, 0.85, "sawtooth");  // Dó5
+    setTimeout(() => playTone(659,  110, 0.85, "sawtooth"), 130);  // Mi5
+    setTimeout(() => playTone(1047, 220, 0.85, "sawtooth"), 265);  // Dó6 — salta oitava, muito marcante
   }
 
-  // deuce: três notas tensas, alternadas, transmite equilíbrio
+  // deuce: dois tons simultâneos em segunda menor (intervalo mais tenso da música)
+  // triangle grave para soar "pesado" — transmite equilíbrio instável
   function playDeuceSound() {
-    playTone(880, 150, 0.78, "square");
-    setTimeout(() => playTone(698, 150, 0.78, "square"), 170);
-    setTimeout(() => playTone(880, 230, 0.78, "square"), 340);
+    playTone(392, 200, 0.78, "triangle");  // Sol4
+    setTimeout(() => playTone(415, 200, 0.70, "triangle"), 80);   // Lá♭4 — segunda menor, tensão máxima
+    setTimeout(() => playTone(392, 280, 0.68, "triangle"), 380);  // Sol4 de novo — resolve ligeiramente
   }
+
 
   /* ---------------------------------------------------------
      STATUS BANNER — animação visual central para deuce e match point
