@@ -75,6 +75,8 @@
     <div class="menu-shortcuts">
       <button class="menu-shortcut" id="btn-training" title="Modo Treino">⏱</button>
       <button class="menu-shortcut" id="btn-minigames" title="Mini Jogos">🕹</button>
+      <button class="menu-shortcut" id="btn-achievements" title="Conquistas">🏆</button>
+      <button class="menu-shortcut" id="btn-records" title="Recordes">📊</button>
     </div>
 
     <div class="menu-resume" id="menu-resume" hidden>
@@ -565,5 +567,36 @@
 </div>
 
 <script src="app.js"></script>
+
+<!-- ACHIEVEMENT TOAST -->
+<div id="achievement-toast" class="achievement-toast" hidden>
+  <div class="ach-toast-inner">
+    <div class="ach-toast-eyebrow">🏆 CONQUISTA DESBLOQUEADA!</div>
+    <div class="ach-toast-icon" id="ach-toast-icon">⭐</div>
+    <div class="ach-toast-name" id="ach-toast-name">Nome</div>
+    <div class="ach-toast-desc" id="ach-toast-desc">Descrição</div>
+    <div class="ach-toast-player" id="ach-toast-player"></div>
+  </div>
+</div>
+<!-- CONQUISTAS -->
+<div id="screen-achievements" class="screen">
+  <header class="bar"><button class="bar-back" data-back="screen-menu">‹</button><h2 class="bar-title">Conquistas</h2><span class="bar-action bar-action--ghost"></span></header>
+  <div class="bar-spacer"></div>
+  <div class="content">
+    <div class="ach-player-picker" id="ach-player-picker"></div>
+    <div class="ach-progress-wrap-outer">
+      <div class="ach-progress-bar-outer"><div class="ach-progress-bar-fill" id="ach-progress-bar-fill"></div></div>
+      <span class="ach-progress-text" id="ach-progress-text">0 / 0</span>
+    </div>
+    <div id="ach-list"></div>
+  </div>
+</div>
+<!-- RECORDES -->
+<div id="screen-records" class="screen">
+  <header class="bar"><button class="bar-back" data-back="screen-menu">‹</button><h2 class="bar-title">Recordes</h2><span class="bar-action bar-action--ghost"></span></header>
+  <div class="bar-spacer"></div>
+  <div class="content" id="records-list"></div>
+</div>
+
 </body>
 </html>

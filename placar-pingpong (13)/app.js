@@ -19,6 +19,8 @@
       activeGame: null,
       activeTournament: null,
       tournamentHistory: [],
+      achievements: {},
+      trainingStats: {},
       nextPlayerId: 1,
       nextGameId: 1
     };
@@ -57,8 +59,10 @@
     updateRotateHint();
   }
 
-  document.querySelectorAll("[data-back]").forEach((btn) => {
-    btn.addEventListener("click", () => showScreen(btn.dataset.back));
+  // event delegation para data-back — apanha botões adicionados dinamicamente
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-back]");
+    if (btn) showScreen(btn.dataset.back);
   });
 
   /* ---------------------------------------------------------
@@ -1554,11 +1558,9 @@
     DATA.games.push(record);
     DATA.activeGame = null;
     saveData();
-    if (game.tournamentId) {
-      record.tournamentId = game.tournamentId;
-      onTournamentGameFinished(record);
-      return;
-    }
+    if(record.blue.playerId)checkAchievements("game",record.blue.playerId);
+    if(record.white.playerId)checkAchievements("game",record.white.playerId);
+    if(game.tournamentId){record.tournamentId=game.tournamentId;onTournamentGameFinished(record);return;}
     showGameEndOverlay(record);
   }
 
@@ -1870,6 +1872,8 @@
      INICIALIZAÇÃO
      --------------------------------------------------------- */
   function init() {
+    _initAchievementToastListener();
+    checkAchievementsRetroactive();
     checkResumeBanner();
     showScreen("screen-menu");
 
@@ -2005,6 +2009,7 @@
       if(!DATA.tournamentHistory)DATA.tournamentHistory=[];
       DATA.tournamentHistory.push({id:t.id,winner:t.winner,seeded:t.seeded,startedAt:t.startedAt,endedAt:t.endedAt});
       saveData();
+      t.seeded.forEach(pid=>checkAchievements("tournament",pid));
       document.getElementById("tournament-winner-name").textContent=getPlayer(t.winner)?.name||"—";
       document.getElementById("tournament-winner-sub").textContent=(t.seeded.length-1)+" jogos · "+t.seeded.length+" jogadores";
       showScreen("screen-tournament-winner"); checkResumeBanner();
@@ -2070,7 +2075,20 @@
     }
     trainingState.rafId=requestAnimationFrame(trainingTick);
   }
-  function stopTraining(){trainingState.running=false;if(trainingState.rafId)cancelAnimationFrame(trainingState.rafId);stopTrainingMusic();openTrainingMode();}
+  function stopTraining(){
+    trainingState.running=false;
+    if(trainingState.rafId)cancelAnimationFrame(trainingState.rafId);
+    stopTrainingMusic();
+    const elapsedMin=trainingState.elapsedMs/60000;
+    if(elapsedMin>=0.5){
+      if(!DATA.trainingStats["global"])DATA.trainingStats["global"]={totalMinutes:0,sessions:0};
+      DATA.trainingStats["global"].totalMinutes+=elapsedMin;
+      DATA.trainingStats["global"].sessions+=1;
+      saveData();
+      checkAchievements("training",null);
+    }
+    openTrainingMode();
+  }
   document.getElementById("btn-training-free").addEventListener("click",()=>startTrainingTimer(false,0));
   document.getElementById("btn-training-timed").addEventListener("click",()=>{document.getElementById("training-time-input").hidden=false;});
   document.getElementById("btn-time-minus").addEventListener("click",()=>{trainingMinutes=Math.max(1,trainingMinutes-1);document.getElementById("training-time-val").textContent=trainingMinutes;});
@@ -2205,6 +2223,194 @@
     document.getElementById("mg-memory-record").textContent=isNew?memGame.level:rec;
     document.getElementById("mg-memory-gameover").hidden=false;
   }
+
+
+  /* ═══ CONQUISTAS E RECORDES ═══ */
+  const ACHIEVEMENTS=[
+    {id:"first_point",cat:"Primeiros Passos",icon:"⭐",name:"Primeiro Ponto",desc:"Marca o teu primeiro ponto.",secret:false,check:(pid)=>DATA.games.some(g=>(g.blue.playerId===pid||g.white.playerId===pid)&&g.sets.length>0)},
+    {id:"first_set",cat:"Primeiros Passos",icon:"📋",name:"Primeiro Set",desc:"Ganha o teu primeiro set.",secret:false,check:(pid)=>{return DATA.games.some(g=>{const s=g.blue.playerId===pid?"blue":"white";return g.sets.some(set=>set.winnerSide===s);});}},
+    {id:"first_win",cat:"Primeiros Passos",icon:"🥇",name:"Primeira Vitória",desc:"Ganha o teu primeiro jogo.",secret:false,check:(pid)=>DATA.games.some(g=>!g.isDraw&&((g.winnerSide==="blue"&&g.blue.playerId===pid)||(g.winnerSide==="white"&&g.white.playerId===pid)))},
+    {id:"first_tournament",cat:"Primeiros Passos",icon:"🎟",name:"Primeiro Torneio",desc:"Participa no teu primeiro torneio.",secret:false,check:(pid)=>(DATA.tournamentHistory||[]).some(t=>t.seeded&&t.seeded.includes(pid))},
+    {id:"first_trophy",cat:"Primeiros Passos",icon:"🏆",name:"Primeiro Troféu",desc:"Ganha o teu primeiro torneio.",secret:false,check:(pid)=>(DATA.tournamentHistory||[]).some(t=>t.winner===pid)},
+    {id:"wins_10",cat:"Vitórias",icon:"🏓",name:"10 Vitórias",desc:"Ganha 10 jogos.",secret:false,progressive:true,total:10,progress:(pid)=>_wins(pid),check:(pid)=>_wins(pid)>=10},
+    {id:"wins_50",cat:"Vitórias",icon:"🏓",name:"50 Vitórias",desc:"Ganha 50 jogos.",secret:false,progressive:true,total:50,progress:(pid)=>_wins(pid),check:(pid)=>_wins(pid)>=50},
+    {id:"wins_100",cat:"Vitórias",icon:"🏓",name:"100 Vitórias",desc:"Ganha 100 jogos.",secret:false,progressive:true,total:100,progress:(pid)=>_wins(pid),check:(pid)=>_wins(pid)>=100},
+    {id:"wins_200",cat:"Vitórias",icon:"🏓",name:"200 Vitórias",desc:"Ganha 200 jogos.",secret:false,progressive:true,total:200,progress:(pid)=>_wins(pid),check:(pid)=>_wins(pid)>=200},
+    {id:"streak_3",cat:"Vitórias",icon:"🔥",name:"Hat-trick",desc:"3 vitórias consecutivas.",secret:false,progressive:true,total:3,progress:(pid)=>_currentStreak(pid),check:(pid)=>_maxStreak(pid)>=3},
+    {id:"streak_5",cat:"Vitórias",icon:"🔥",name:"Em Forma",desc:"5 vitórias consecutivas.",secret:false,progressive:true,total:5,progress:(pid)=>_currentStreak(pid),check:(pid)=>_maxStreak(pid)>=5},
+    {id:"streak_10",cat:"Vitórias",icon:"🔥",name:"Imparável",desc:"10 vitórias consecutivas.",secret:false,progressive:true,total:10,progress:(pid)=>_currentStreak(pid),check:(pid)=>_maxStreak(pid)>=10},
+    {id:"streak_20",cat:"Vitórias",icon:"🔥",name:"Invencível",desc:"20 vitórias consecutivas.",secret:false,progressive:true,total:20,progress:(pid)=>_currentStreak(pid),check:(pid)=>_maxStreak(pid)>=20},
+    {id:"sweep",cat:"Sets",icon:"🧹",name:"Vassoura",desc:"Ganha um jogo sem perder nenhum set.",secret:false,check:(pid)=>DATA.games.some(g=>!g.isDraw&&_myWin(g,pid)&&_oppSets(g,pid)===0&&_mySets(g,pid)>=2)},
+    {id:"capote_set",cat:"Sets",icon:"💀",name:"Capote",desc:"Ganha um set por 11-0.",secret:false,check:(pid)=>DATA.games.some(g=>{const s=g.blue.playerId===pid?"blue":"white";return g.sets.some(set=>set.winnerSide===s&&set.capote);})},
+    {id:"set_perfect",cat:"Sets",icon:"✨",name:"Set Perfeito",desc:"Ganha um set permitindo no máximo 3 pontos.",secret:false,check:(pid)=>DATA.games.some(g=>{const s=g.blue.playerId===pid?"blue":"white";return g.sets.some(set=>set.winnerSide===s&&(s==="blue"?set.whiteScore:set.blueScore)<=3);})},
+    {id:"deciding_set",cat:"Sets",icon:"⚔️",name:"Decisão",desc:"Ganha um jogo decidido no último set.",secret:false,check:(pid)=>DATA.games.some(g=>!g.isDraw&&_myWin(g,pid)&&g.sets.length>=3&&g.blue.setsWon>0&&g.white.setsWon>0)},
+    {id:"comeback",cat:"Remontadas",icon:"↩️",name:"Remontada",desc:"Ganha um jogo depois de perder o 1º set.",secret:false,check:(pid)=>DATA.games.some(g=>{if(!_myWin(g,pid)||g.sets.length<2)return false;const me=g.blue.playerId===pid?"blue":"white";return g.sets[0].winnerSide!==me;})},
+    {id:"comeback_02",cat:"Remontadas",icon:"⚡",name:"Grande Remontada",desc:"Ganha um jogo depois de estar 0-2 em sets.",secret:false,check:(pid)=>DATA.games.some(g=>{if(!_myWin(g,pid)||g.sets.length<4)return false;const me=g.blue.playerId===pid?"blue":"white";let mine=0,opp=0,found=false;g.sets.forEach(s=>{if(s.winnerSide===me)mine++;else opp++;if(opp>=2&&mine===0)found=true;});return found;})},
+    {id:"comeback_pts",cat:"Remontadas",icon:"🔄",name:"Nunca Desistas",desc:"Ganha um set depois de estar a perder por 5+ pontos.",secret:false,check:(pid)=>DATA.games.some(g=>{const me=g.blue.playerId===pid?"blue":"white";return g.sets.some(set=>{if(set.winnerSide!==me||!set.pointLog)return false;let b=0,w=0,deficit=0;set.pointLog.forEach(side=>{if(side==="blue")b++;else w++;const myP=me==="blue"?b:w,oppP=me==="blue"?w:b;if(oppP-myP>=5)deficit=1;});return deficit===1;});})},
+    {id:"elo_1000",cat:"ELO",icon:"📈",name:"Quatro Dígitos",desc:"Atinge 1000 de ELO.",secret:false,check:(pid)=>getPlayerElo(pid)>=1000},
+    {id:"elo_1200",cat:"ELO",icon:"📈",name:"1200 Club",desc:"Atinge 1200 de ELO.",secret:false,check:(pid)=>getPlayerElo(pid)>=1200},
+    {id:"elo_1300",cat:"ELO",icon:"📈",name:"Elite",desc:"Atinge 1300 de ELO.",secret:false,check:(pid)=>getPlayerElo(pid)>=1300},
+    {id:"elo_1500",cat:"ELO",icon:"📈",name:"Mestre",desc:"Atinge 1500 de ELO.",secret:false,check:(pid)=>getPlayerElo(pid)>=1500},
+    {id:"pts_100",cat:"Pontos",icon:"🎯",name:"Centenário",desc:"Acumula 100 pontos.",secret:false,progressive:true,total:100,progress:(pid)=>_totalPoints(pid),check:(pid)=>_totalPoints(pid)>=100},
+    {id:"pts_500",cat:"Pontos",icon:"🎯",name:"500 Pontos",desc:"Acumula 500 pontos.",secret:false,progressive:true,total:500,progress:(pid)=>_totalPoints(pid),check:(pid)=>_totalPoints(pid)>=500},
+    {id:"pts_1000",cat:"Pontos",icon:"🎯",name:"1000 Pontos",desc:"Acumula 1000 pontos.",secret:false,progressive:true,total:1000,progress:(pid)=>_totalPoints(pid),check:(pid)=>_totalPoints(pid)>=1000},
+    {id:"tour_2",cat:"Torneios",icon:"🏆",name:"Bicampeão",desc:"Ganha 2 torneios.",secret:false,progressive:true,total:2,progress:(pid)=>_tourWins(pid),check:(pid)=>_tourWins(pid)>=2},
+    {id:"tour_3",cat:"Torneios",icon:"🏆",name:"Tricampeão",desc:"Ganha 3 torneios.",secret:false,progressive:true,total:3,progress:(pid)=>_tourWins(pid),check:(pid)=>_tourWins(pid)>=3},
+    {id:"rival_10",cat:"Rivalidades",icon:"⚔️",name:"Clássico",desc:"Joga 10 partidas contra o mesmo adversário.",secret:false,progressive:true,total:10,progress:(pid)=>_maxRivalGames(pid),check:(pid)=>_maxRivalGames(pid)>=10},
+    {id:"rival_25",cat:"Rivalidades",icon:"⚔️",name:"Rivalidade",desc:"Joga 25 partidas contra o mesmo adversário.",secret:false,progressive:true,total:25,progress:(pid)=>_maxRivalGames(pid),check:(pid)=>_maxRivalGames(pid)>=25},
+    {id:"rival_dom",cat:"Rivalidades",icon:"👑",name:"Domínio",desc:"10 vitórias de vantagem sobre o mesmo adversário.",secret:false,check:(pid)=>_maxRivalDom(pid)>=10},
+    {id:"rival_5",cat:"Rivalidades",icon:"💀",name:"Carrasco",desc:"5 vitórias consecutivas contra o mesmo adversário.",secret:false,check:(pid)=>_maxRivalStreak(pid)>=5},
+    {id:"train_first",cat:"Treino",icon:"⏱",name:"Primeiro Treino",desc:"Completa uma sessão de treino.",secret:false,check:()=>{const s=DATA.trainingStats["global"];return !!(s&&s.sessions>=1);}},
+    {id:"train_10m",cat:"Treino",icon:"⏱",name:"10 Minutos",desc:"Acumula 10 minutos de treino.",secret:false,progressive:true,total:10,progress:()=>Math.round((DATA.trainingStats["global"]?.totalMinutes)||0),check:()=>{const s=DATA.trainingStats["global"];return !!(s&&s.totalMinutes>=10);}},
+    {id:"train_1h",cat:"Treino",icon:"⏱",name:"1 Hora",desc:"Acumula 60 minutos de treino.",secret:false,progressive:true,total:60,progress:()=>Math.round((DATA.trainingStats["global"]?.totalMinutes)||0),check:()=>{const s=DATA.trainingStats["global"];return !!(s&&s.totalMinutes>=60);}},
+    {id:"train_5sess",cat:"Treino",icon:"⏱",name:"Disciplina",desc:"Completa 5 sessões de treino.",secret:false,progressive:true,total:5,progress:()=>(DATA.trainingStats["global"]?.sessions)||0,check:()=>{const s=DATA.trainingStats["global"];return !!(s&&s.sessions>=5);}},
+    {id:"mg_tap_10",cat:"Mini-Jogos",icon:"⚡",name:"Reflexos de Aço",desc:"Faz 10 pontos em Toques Rápidos.",secret:false,progressive:true,total:10,progress:(pid)=>getMgRec("tap",pid),check:(pid)=>getMgRec("tap",pid)>=10},
+    {id:"mg_tap_30",cat:"Mini-Jogos",icon:"⚡",name:"Relâmpago",desc:"Faz 30 pontos em Toques Rápidos.",secret:false,progressive:true,total:30,progress:(pid)=>getMgRec("tap",pid),check:(pid)=>getMgRec("tap",pid)>=30},
+    {id:"mg_mem_5",cat:"Mini-Jogos",icon:"🧠",name:"Memória Sólida",desc:"Chega ao nível 5 em Memória Visual.",secret:false,progressive:true,total:5,progress:(pid)=>getMgRec("memory",pid),check:(pid)=>getMgRec("memory",pid)>=5},
+    {id:"mg_mem_10",cat:"Mini-Jogos",icon:"🧠",name:"Memória de Ferro",desc:"Chega ao nível 10 em Memória Visual.",secret:false,progressive:true,total:10,progress:(pid)=>getMgRec("memory",pid),check:(pid)=>getMgRec("memory",pid)>=10},
+    {id:"secret_11_0",cat:"Especiais",icon:"💀",name:"Humilhação",desc:"Ganha um set por 11-0.",secret:true,check:(pid)=>DATA.games.some(g=>{const s=g.blue.playerId===pid?"blue":"white";return g.sets.some(set=>set.winnerSide===s&&set.capote);})},
+    {id:"secret_3_2",cat:"Especiais",icon:"💪",name:"Até ao Limite",desc:"Ganha um jogo decidido no 5º set.",secret:true,check:(pid)=>DATA.games.some(g=>!g.isDraw&&_myWin(g,pid)&&g.sets.length===5)},
+    {id:"secret_11_9",cat:"Especiais",icon:"🎯",name:"Ponto a Ponto",desc:"Ganha um set por 11-9.",secret:true,check:(pid)=>DATA.games.some(g=>{const s=g.blue.playerId===pid?"blue":"white";return g.sets.some(set=>set.winnerSide===s&&(s==="blue"?set.blueScore:set.whiteScore)===11&&(s==="blue"?set.whiteScore:set.blueScore)===9);})},
+    {id:"secret_midnight",cat:"Especiais",icon:"🌙",name:"Sessão Noturna",desc:"Joga depois da meia-noite.",secret:true,check:(pid)=>DATA.games.some(g=>(g.blue.playerId===pid||g.white.playerId===pid)&&new Date(g.startedAt).getHours()>=0&&new Date(g.startedAt).getHours()<4)},
+    {id:"secret_morning",cat:"Especiais",icon:"🌅",name:"Madrugador",desc:"Joga antes das 08:00.",secret:true,check:(pid)=>DATA.games.some(g=>(g.blue.playerId===pid||g.white.playerId===pid)&&new Date(g.startedAt).getHours()<8)},
+    {id:"secret_10day",cat:"Especiais",icon:"🎮",name:"Máquina",desc:"Joga 10 jogos no mesmo dia.",secret:true,check:(pid)=>{const d={};DATA.games.filter(g=>g.blue.playerId===pid||g.white.playerId===pid).forEach(g=>{const k=g.endedAt.slice(0,10);d[k]=(d[k]||0)+1;});return Object.values(d).some(n=>n>=10);}},
+  ];
+
+  function _myWin(g,pid){return !g.isDraw&&((g.winnerSide==="blue"&&g.blue.playerId===pid)||(g.winnerSide==="white"&&g.white.playerId===pid));}
+  function _mySide(g,pid){return g.blue.playerId===pid?"blue":"white";}
+  function _mySets(g,pid){const s=_mySide(g,pid);return s==="blue"?g.blue.setsWon:g.white.setsWon;}
+  function _oppSets(g,pid){const s=_mySide(g,pid);return s==="blue"?g.white.setsWon:g.blue.setsWon;}
+  function _wins(pid){return DATA.games.filter(g=>_myWin(g,pid)).length;}
+  function _tourWins(pid){return (DATA.tournamentHistory||[]).filter(t=>t.winner===pid).length;}
+  function _totalPoints(pid){let t=0;DATA.games.forEach(g=>{const s=_mySide(g,pid);g.sets.forEach(set=>{t+=s==="blue"?set.blueScore:set.whiteScore;});});return t;}
+  function _maxStreak(pid){let c=0,m=0;DATA.games.filter(g=>g.blue.playerId===pid||g.white.playerId===pid).sort((a,b)=>new Date(a.endedAt)-new Date(b.endedAt)).forEach(g=>{if(_myWin(g,pid)){c++;m=Math.max(m,c);}else c=0;});return m;}
+  function _currentStreak(pid){let c=0;const s=DATA.games.filter(g=>g.blue.playerId===pid||g.white.playerId===pid).sort((a,b)=>new Date(b.endedAt)-new Date(a.endedAt));for(const g of s){if(_myWin(g,pid))c++;else break;}return c;}
+  function _maxRivalGames(pid){const c={};DATA.games.forEach(g=>{const r=g.blue.playerId===pid?g.white.playerId:(g.white.playerId===pid?g.blue.playerId:null);if(r)c[r]=(c[r]||0)+1;});const v=Object.values(c);return v.length?Math.max(...v):0;}
+  function _maxRivalDom(pid){const w={},l={};DATA.games.forEach(g=>{const r=g.blue.playerId===pid?g.white.playerId:(g.white.playerId===pid?g.blue.playerId:null);if(!r)return;if(_myWin(g,pid))w[r]=(w[r]||0)+1;else l[r]=(l[r]||0)+1;});let m=0;Object.keys(w).forEach(r=>{m=Math.max(m,(w[r]||0)-(l[r]||0));});return m;}
+  function _maxRivalStreak(pid){const rv={};DATA.games.filter(g=>g.blue.playerId===pid||g.white.playerId===pid).sort((a,b)=>new Date(a.endedAt)-new Date(b.endedAt)).forEach(g=>{const r=g.blue.playerId===pid?g.white.playerId:(g.white.playerId===pid?g.blue.playerId:null);if(!r)return;if(!rv[r])rv[r]={c:0,m:0};if(_myWin(g,pid)){rv[r].c++;rv[r].m=Math.max(rv[r].m,rv[r].c);}else rv[r].c=0;});const vs=Object.values(rv).map(r=>r.m);return vs.length?Math.max(...vs):0;}
+
+  function checkAchievements(trigger,playerId){
+    const pids=playerId?[playerId]:DATA.players.map(p=>p.id);
+    const newlyUnlocked=[];
+    ACHIEVEMENTS.forEach(ach=>{
+      if(ach.cat==="Treino"){
+        if(!DATA.achievements["global"])DATA.achievements["global"]={};
+        if(!DATA.achievements["global"][ach.id]){try{if(ach.check()){DATA.achievements["global"][ach.id]={unlockedAt:new Date().toISOString()};newlyUnlocked.push({ach,pid:null});}}catch(e){}}
+        return;
+      }
+      pids.forEach(pid=>{
+        if(!DATA.achievements[pid])DATA.achievements[pid]={};
+        if(!DATA.achievements[pid][ach.id]){try{if(ach.check(pid)){DATA.achievements[pid][ach.id]={unlockedAt:new Date().toISOString()};newlyUnlocked.push({ach,pid});}}catch(e){}}
+      });
+    });
+    if(newlyUnlocked.length){saveData();newlyUnlocked.forEach(({ach,pid})=>showAchievementToast(ach,pid));}
+  }
+
+  function checkAchievementsRetroactive(){
+    DATA.players.forEach(p=>checkAchievements("retroactive",p.id));
+    checkAchievements("training",null);
+  }
+
+  let _achQueue=[],_achShowing=false;
+  function showAchievementToast(ach,pid){
+    const playerName=pid?getPlayer(pid)?.name:null;
+    _achQueue.push({ach,playerName});
+    if(!_achShowing)_processAchQueue();
+  }
+  function _processAchQueue(){
+    if(!_achQueue.length){_achShowing=false;return;}
+    _achShowing=true;
+    const{ach,playerName}=_achQueue.shift();
+    const toast=document.getElementById("achievement-toast");
+    document.getElementById("ach-toast-icon").textContent=ach.icon;
+    document.getElementById("ach-toast-name").textContent=ach.secret?"???":ach.name;
+    document.getElementById("ach-toast-desc").textContent=ach.secret?"Conquista secreta desbloqueada!":ach.desc;
+    document.getElementById("ach-toast-player").textContent=playerName||"";
+    toast.hidden=false;
+    toast.classList.add("is-visible");
+    setTimeout(()=>{toast.classList.remove("is-visible");setTimeout(()=>{toast.hidden=true;_processAchQueue();},400);},3500);
+  }
+  function _initAchievementToastListener(){
+    const t=document.getElementById("achievement-toast");
+    if(t) t.addEventListener("click",()=>{
+      t.classList.remove("is-visible");
+      setTimeout(()=>{t.hidden=true;_achShowing=false;_processAchQueue();},300);
+    });
+  }
+
+  let _achFilterPlayer=null;
+  function openAchievementsScreen(){
+    _achFilterPlayer=_achFilterPlayer||DATA.players[0]?.id||null;
+    renderAchievementsScreen();
+    showScreen("screen-achievements");
+  }
+  function renderAchievementsScreen(){
+    const allElos=computeAllElos();
+    const picker=document.getElementById("ach-player-picker");
+    picker.innerHTML="";
+    DATA.players.forEach(p=>{
+      const btn=document.createElement("button");
+      btn.className="ach-player-btn"+((_achFilterPlayer===p.id)?" active":"");
+      btn.textContent=playerInitials(p.name);btn.title=p.name;
+      btn.addEventListener("click",()=>{_achFilterPlayer=p.id;renderAchievementsScreen();});
+      picker.appendChild(btn);
+    });
+    const pid=_achFilterPlayer||(DATA.players[0]?.id);
+    if(!pid)return;
+    const unlocked=DATA.achievements[pid]||{};
+    const gUnlocked=DATA.achievements["global"]||{};
+    const total=ACHIEVEMENTS.length;
+    const done=ACHIEVEMENTS.filter(a=>a.cat==="Treino"?!!gUnlocked[a.id]:!!unlocked[a.id]).length;
+    document.getElementById("ach-progress-bar-fill").style.width=(done/total*100)+"%";
+    document.getElementById("ach-progress-text").textContent=done+" / "+total+" conquistas";
+    const cats={};ACHIEVEMENTS.forEach(a=>{if(!cats[a.cat])cats[a.cat]=[];cats[a.cat].push(a);});
+    const container=document.getElementById("ach-list");container.innerHTML="";
+    Object.entries(cats).forEach(([cat,items])=>{
+      const sec=document.createElement("div");sec.className="ach-section";
+      sec.innerHTML=`<p class="section-label">${cat}</p>`;
+      items.forEach(ach=>{
+        const isU=ach.cat==="Treino"?!!gUnlocked[ach.id]:!!unlocked[ach.id];
+        const uAt=ach.cat==="Treino"?gUnlocked[ach.id]?.unlockedAt:unlocked[ach.id]?.unlockedAt;
+        const isSec=ach.secret&&!isU;
+        const prog=ach.progressive&&ach.progress?(ach.cat==="Treino"?(ach.progress()||0):(ach.progress(pid)||0)):null;
+        const card=document.createElement("div");
+        card.className="ach-card"+(isU?" is-unlocked":"");
+        card.innerHTML=`<div class="ach-icon">${isSec?"🔒":ach.icon}</div><div class="ach-info"><div class="ach-name">${isSec?"???":escapeHTML(ach.name)}</div><div class="ach-desc">${isSec?"Conquista secreta. Continua a jogar para a descobrir.":escapeHTML(ach.desc)}</div>${isU&&uAt?`<div class="ach-date">${formatDate(uAt)}</div>`:""} ${ach.progressive&&prog!==null&&!isU?`<div class="ach-prog-wrap"><div class="ach-prog-bar" style="width:${Math.min(100,prog/ach.total*100)}%"></div><span class="ach-prog-lbl">${prog} / ${ach.total}</span></div>`:""}</div>`;
+        sec.appendChild(card);
+      });
+      container.appendChild(sec);
+    });
+  }
+
+  document.getElementById("btn-achievements").addEventListener("click",()=>{
+    _achFilterPlayer=DATA.players[0]?.id||null;
+    openAchievementsScreen();
+  });
+
+  function openRecordsScreen(){renderRecordsScreen();showScreen("screen-records");}
+  function renderRecordsScreen(){
+    const container=document.getElementById("records-list");container.innerHTML="";
+    const allElos=computeAllElos();
+    const recs=[
+      {icon:"📈",label:"Maior ELO",get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const e=allElos[p.id]||ELO_BASE;if(e>bv){bv=e;b=p;}});return b?{player:b,value:bv+" ELO"}:null;}},
+      {icon:"🔥",label:"Maior Sequência",get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const s=_maxStreak(p.id);if(s>bv){bv=s;b=p;}});return b&&bv>0?{player:b,value:bv+" vitórias"}:null;}},
+      {icon:"🏓",label:"Mais Vitórias",get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const w=_wins(p.id);if(w>bv){bv=w;b=p;}});return b&&bv>0?{player:b,value:bv+" vitórias"}:null;}},
+      {icon:"💀",label:"Mais Capotes Feitos",get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const s=computePlayerStats(p.id,allElos);if(s.capotes>bv){bv=s.capotes;b=p;}});return b&&bv>0?{player:b,value:bv+" capotes"}:null;}},
+      {icon:"🏆",label:"Mais Torneios Ganhos",get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const t=_tourWins(p.id);if(t>bv){bv=t;b=p;}});return b&&bv>0?{player:b,value:bv+" torneios"}:null;}},
+      {icon:"🎯",label:"Mais Pontos Acumulados",get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const pts=_totalPoints(p.id);if(pts>bv){bv=pts;b=p;}});return b&&bv>0?{player:b,value:bv+" pontos"}:null;}},
+      {icon:"⏱️",label:"Mais Tempo de Treino",get:()=>{const s=DATA.trainingStats["global"];return s&&s.totalMinutes>0?{player:null,value:Math.round(s.totalMinutes)+" min"}:null;}},
+      {icon:"⚡",label:"Recorde Toques Rápidos",get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const r=getMgRec("tap",p.id);if(r>bv){bv=r;b=p;}});return b&&bv>0?{player:b,value:bv+" pontos"}:null;}},
+      {icon:"🧠",label:"Recorde Memória Visual",get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const r=getMgRec("memory",p.id);if(r>bv){bv=r;b=p;}});return b&&bv>0?{player:b,value:"nível "+bv}:null;}},
+    ];
+    recs.forEach(rec=>{
+      const data=rec.get();
+      const card=document.createElement("div");
+      card.className="record-card"+(data?"":" record-card--empty");
+      card.innerHTML=`<span class="record-icon">${rec.icon}</span><div class="record-info"><div class="record-label">${rec.label}</div>${data?`<div class="record-value">${data.player?escapeHTML(data.player.name)+" · ":""}${data.value}</div>`:`<div class="record-empty">Sem dados ainda</div>`}</div>`;
+      container.appendChild(card);
+    });
+  }
+  document.getElementById("btn-records").addEventListener("click",openRecordsScreen);
 
   init();
 })();
