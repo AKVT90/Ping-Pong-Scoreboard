@@ -39,6 +39,14 @@
         </span>
       </button>
 
+      <button class="menu-btn menu-btn--tournament" id="btn-tournament">
+        <span class="menu-btn-icon">⬡</span>
+        <span class="menu-btn-text">
+          <strong>Torneio</strong>
+          <small>Eliminatórias com chaveamento automático</small>
+        </span>
+      </button>
+
       <button class="menu-btn" id="btn-players">
         <span class="menu-btn-icon">☷</span>
         <span class="menu-btn-text">
@@ -62,6 +70,11 @@
           <small>Exportar ou importar cópia de segurança</small>
         </span>
       </button>
+    </div>
+
+    <div class="menu-shortcuts">
+      <button class="menu-shortcut" id="btn-training" title="Modo Treino">⏱</button>
+      <button class="menu-shortcut" id="btn-minigames" title="Mini Jogos">🕹</button>
     </div>
 
     <div class="menu-resume" id="menu-resume" hidden>
@@ -230,6 +243,120 @@
   </div>
 </div>
 
+<!-- ============ ECRÃ: TORNEIO — setup ============ -->
+<div id="screen-tournament-setup" class="screen">
+  <header class="bar">
+    <button class="bar-back" data-back="screen-menu">‹</button>
+    <h2 class="bar-title">Novo Torneio</h2>
+    <span class="bar-action bar-action--ghost"></span>
+  </header>
+  <div class="bar-spacer"></div>
+  <div class="content">
+    <p class="section-label">Tamanho</p>
+    <div class="setup-options" id="opt-tournament-size">
+      <button class="setup-option active" data-size="4">4 jogadores</button>
+      <button class="setup-option" data-size="8">8 jogadores</button>
+      <button class="setup-option" data-size="16">16 jogadores</button>
+    </div>
+    <p class="section-label">Modo</p>
+    <div class="setup-options" id="opt-tournament-mode">
+      <button class="setup-option active" data-tmode="custom">Personalizado</button>
+      <button class="setup-option" data-tmode="classic">Clássico</button>
+    </div>
+    <div id="opt-tournament-points-wrap">
+      <div class="setup-options" id="opt-tournament-points">
+        <button class="setup-option" data-tpoints="11">11 pontos</button>
+        <button class="setup-option active" data-tpoints="21">21 pontos</button>
+      </div>
+    </div>
+    <div class="setup-options" id="opt-tournament-format">
+      <button class="setup-option active" data-tformat="3">Melhor de 3</button>
+      <button class="setup-option" data-tformat="5">Melhor de 5</button>
+      <button class="setup-option" id="opt-tformat-7" data-tformat="7" hidden>Melhor de 7</button>
+    </div>
+    <p class="section-label">Jogadores <span id="tournament-player-count" class="section-label-count">0 / 4</span></p>
+    <div id="tournament-player-list" class="tournament-player-checklist"></div>
+    <button class="setup-confirm" id="btn-start-tournament" disabled>Criar Torneio</button>
+  </div>
+</div>
+<div id="screen-tournament-bracket" class="screen">
+  <header class="bar">
+    <button class="bar-back" id="btn-tournament-back">‹</button>
+    <h2 class="bar-title">Torneio</h2>
+    <button class="bar-action bar-action--danger" id="btn-tournament-abandon">Abandonar</button>
+  </header>
+  <div class="bar-spacer"></div>
+  <div class="content" id="tournament-bracket-content"></div>
+</div>
+<div id="screen-tournament-winner" class="screen">
+  <div class="tournament-winner-content">
+    <div class="tournament-trophy">🏆</div>
+    <p class="tournament-winner-label">Campeão do Torneio</p>
+    <h1 class="tournament-winner-name" id="tournament-winner-name">—</h1>
+    <p class="tournament-winner-sub" id="tournament-winner-sub"></p>
+    <button class="setup-confirm" id="btn-tournament-done">Voltar ao Menu</button>
+  </div>
+</div>
+<div id="screen-training" class="screen screen-training">
+  <div class="training-pick" id="training-pick">
+    <h2 class="training-pick-title">Modo Treino</h2>
+    <button class="training-pick-btn" id="btn-training-free"><span class="training-pick-icon">▶</span><span>Cronómetro livre</span></button>
+    <button class="training-pick-btn" id="btn-training-timed"><span class="training-pick-icon">⏱</span><span>Treino com tempo definido</span></button>
+    <div class="training-time-input" id="training-time-input" hidden>
+      <p class="training-time-label">Duração (minutos)</p>
+      <div class="training-time-row">
+        <button class="training-time-btn" id="btn-time-minus">−</button>
+        <span class="training-time-val" id="training-time-val">15</span>
+        <button class="training-time-btn" id="btn-time-plus">+</button>
+      </div>
+      <button class="setup-confirm" id="btn-training-start-timed">Começar</button>
+    </div>
+    <button class="training-pick-back" id="btn-training-pick-back">‹ Voltar</button>
+  </div>
+  <div class="training-inner" id="training-inner">
+    <button class="training-close" id="btn-training-close">✕</button>
+    <button class="training-mute" id="btn-training-mute">🔊</button>
+    <div class="training-clock"><span id="training-h">00</span><span class="training-sep">:</span><span id="training-m">00</span><span class="training-sep">:</span><span id="training-s">00</span><span class="training-ms" id="training-ms">.00</span></div>
+    <div class="training-controls">
+      <button class="training-btn" id="btn-training-pause">❙❙</button>
+      <button class="training-btn training-btn--stop" id="btn-training-stop">■</button>
+    </div>
+    <div class="training-mode-label" id="training-mode-label">MODO LIVRE</div>
+  </div>
+</div>
+<div id="screen-minigames" class="screen">
+  <header class="bar">
+    <button class="bar-back" data-back="screen-menu">‹</button>
+    <h2 class="bar-title">Mini Jogos</h2>
+    <span class="bar-action bar-action--ghost"></span>
+  </header>
+  <div class="bar-spacer"></div>
+  <div class="content">
+    <div class="minigame-cards">
+      <button class="minigame-card" id="btn-minigame-tap"><div class="minigame-card-icon">⚡</div><strong>Toques Rápidos</strong><small>Clica nos pontos antes que desapareçam</small></button>
+      <button class="minigame-card" id="btn-minigame-memory"><div class="minigame-card-icon">🧠</div><strong>Memória Visual</strong><small>Memoriza e repete a sequência</small></button>
+    </div>
+    <p class="section-label" style="margin-top:24px">Jogar como</p>
+    <div id="minigame-player-pick" class="players-grid"></div>
+  </div>
+</div>
+<div id="screen-mg-tap" class="screen screen-minigame">
+  <div class="mg-header"><button class="mg-back" id="btn-mg-tap-back">‹</button><span class="mg-title">Toques Rápidos</span><span class="mg-score-display">Pts: <span id="mg-tap-score">0</span> · rec: <span id="mg-tap-record">—</span></span></div>
+  <div class="mg-arena" id="mg-tap-arena">
+    <div class="mg-countdown" id="mg-tap-countdown" hidden></div>
+    <div class="mg-start-msg" id="mg-tap-start"><p style="font-size:18px">Nível <span id="mg-tap-level">1</span></p><button class="setup-confirm" id="btn-mg-tap-start">Começar</button></div>
+    <div class="mg-gameover" id="mg-tap-gameover" hidden><p class="mg-gameover-score">Pontos: <strong id="mg-tap-final-score">0</strong></p><p class="mg-gameover-level">Nível: <strong id="mg-tap-final-level">1</strong></p><p class="mg-gameover-record" id="mg-tap-new-record" hidden>🏆 Novo recorde!</p><button class="setup-confirm" id="btn-mg-tap-retry">Jogar de novo</button></div>
+  </div>
+</div>
+<div id="screen-mg-memory" class="screen screen-minigame">
+  <div class="mg-header"><button class="mg-back" id="btn-mg-memory-back">‹</button><span class="mg-title">Memória Visual</span><span class="mg-score-display">Nível <span id="mg-memory-level">1</span> · rec: <span id="mg-memory-record">—</span></span></div>
+  <div class="mg-arena mg-arena--memory" id="mg-memory-arena">
+    <div class="mg-memory-msg" id="mg-memory-msg"></div>
+    <div class="mg-memory-grid" id="mg-memory-grid"></div>
+    <div class="mg-start-msg" id="mg-memory-start"><p style="font-size:18px">Nível <span id="mg-memory-start-level">1</span></p><button class="setup-confirm" id="btn-mg-memory-start">Começar</button></div>
+    <div class="mg-gameover" id="mg-memory-gameover" hidden><p class="mg-gameover-level">Nível atingido: <strong id="mg-memory-final-level">1</strong></p><p class="mg-gameover-record" id="mg-memory-new-record" hidden>🏆 Novo recorde!</p><button class="setup-confirm" id="btn-mg-memory-retry">Jogar de novo</button></div>
+  </div>
+</div>
 <!-- ============ ECRÃ: BOLAR (escolher quem serve) ============ -->
 <div id="screen-bolar" class="screen screen-bolar">
   <div class="bolar-board">

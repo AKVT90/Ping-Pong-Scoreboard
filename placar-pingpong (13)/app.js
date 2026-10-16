@@ -16,7 +16,9 @@
     return {
       players: [],      // { id, name, createdAt }
       games: [],        // jogos terminados, ver buildGameRecord()
-      activeGame: null,  // jogo em curso (para retomar)
+      activeGame: null,
+      activeTournament: null,
+      tournamentHistory: [],
       nextPlayerId: 1,
       nextGameId: 1
     };
@@ -134,11 +136,20 @@
     renderDataScreen();
     showScreen("screen-data");
   });
+  document.getElementById("btn-tournament").addEventListener("click", openTournamentSetup);
+  document.getElementById("btn-training").addEventListener("click", openTrainingMode);
+  document.getElementById("btn-minigames").addEventListener("click", openMinigames);
 
   function checkResumeBanner() {
     const banner = document.getElementById("menu-resume");
     if (DATA.activeGame) {
       banner.hidden = false;
+      banner.querySelector("p").textContent = "Tens um jogo em curso";
+      document.getElementById("btn-resume").textContent = "Continuar jogo ▸";
+    } else if (DATA.activeTournament && DATA.activeTournament.status !== "done") {
+      banner.hidden = false;
+      banner.querySelector("p").textContent = "Tens um torneio em curso";
+      document.getElementById("btn-resume").textContent = "Continuar torneio ▸";
     } else {
       banner.hidden = true;
     }
@@ -147,6 +158,9 @@
     if (DATA.activeGame) {
       resumeGameUI();
       showScreen("screen-game");
+    } else if (DATA.activeTournament && DATA.activeTournament.status !== "done") {
+      renderTournamentBracket();
+      showScreen("screen-tournament-bracket");
     }
   });
 
@@ -310,6 +324,7 @@
 
     document.getElementById("profile-name").textContent = player.name;
     const stats = computePlayerStats(playerId);
+    const tStats = computePlayerTournamentStats(playerId);
     const content = document.getElementById("profile-content");
 
     const recentGames = DATA.games
@@ -384,6 +399,8 @@
         <div class="stat-box"><strong>${stats.setsLost}</strong><span>Total sets perdidos</span></div>
         <div class="stat-box"><strong>${stats.capotes}</strong><span>Capotes feitos</span></div>
         <div class="stat-box"><strong>${stats.capotesSuffered}</strong><span>Capotes sofridos</span></div>
+        <div class="stat-box"><strong>${tStats.won}</strong><span>Torneios ganhos</span></div>
+        <div class="stat-box"><strong>${tStats.total}</strong><span>Torneios totais</span></div>
       </div>
       ${
         stats.bestRival || stats.worstRival
@@ -1537,7 +1554,11 @@
     DATA.games.push(record);
     DATA.activeGame = null;
     saveData();
-
+    if (game.tournamentId) {
+      record.tournamentId = game.tournamentId;
+      onTournamentGameFinished(record);
+      return;
+    }
     showGameEndOverlay(record);
   }
 
@@ -1883,6 +1904,307 @@
       tryLockOrientation();
     }
   });
+
+
+  /* ═══ TORNEIO ═══ */
+  let tournamentSetup = { size: 4, mode: "custom", points: 21, format: "3", players: new Set() };
+  function openTournamentSetup() {
+    if (DATA.activeTournament && DATA.activeTournament.status !== "done") { renderTournamentBracket(); showScreen("screen-tournament-bracket"); return; }
+    tournamentSetup = { size: 4, mode: "custom", points: 21, format: "3", players: new Set() };
+    renderTournamentPlayerList(); updateTournamentSetupUI(); showScreen("screen-tournament-setup");
+  }
+  function updateTournamentSetupUI() {
+    const { size, mode } = tournamentSetup;
+    document.querySelectorAll("#opt-tournament-size .setup-option").forEach(b => b.classList.toggle("active", Number(b.dataset.size) === size));
+    document.querySelectorAll("#opt-tournament-mode .setup-option").forEach(b => b.classList.toggle("active", b.dataset.tmode === mode));
+    document.querySelectorAll("#opt-tournament-points .setup-option").forEach(b => b.classList.toggle("active", Number(b.dataset.tpoints) === tournamentSetup.points));
+    document.querySelectorAll("#opt-tournament-format .setup-option").forEach(b => b.classList.toggle("active", b.dataset.tformat === tournamentSetup.format));
+    document.getElementById("opt-tournament-points-wrap").hidden = mode === "classic";
+    document.getElementById("opt-tformat-7").hidden = mode !== "classic";
+    if (mode === "classic") { tournamentSetup.points = 11; if (tournamentSetup.format === "free") tournamentSetup.format = "3"; }
+    const sel = tournamentSetup.players.size;
+    document.getElementById("tournament-player-count").textContent = sel + " / " + size;
+    document.getElementById("btn-start-tournament").disabled = sel !== size;
+  }
+  function renderTournamentPlayerList() {
+    const list = document.getElementById("tournament-player-list"); list.innerHTML = "";
+    const allElos = computeAllElos();
+    DATA.players.slice().sort((a,b) => (allElos[b.id]||1000)-(allElos[a.id]||1000)).forEach((p,i) => {
+      const row = document.createElement("button");
+      row.className = "tournament-player-row" + (tournamentSetup.players.has(p.id) ? " is-selected" : "");
+      row.innerHTML = `<div class="player-avatar">${playerInitials(p.name)}</div><span class="tournament-player-name">${escapeHTML(p.name)}</span><span class="tournament-player-seed">#${i+1}</span><span class="tournament-check">${tournamentSetup.players.has(p.id)?"✓":""}</span>`;
+      row.addEventListener("click", () => {
+        if (tournamentSetup.players.has(p.id)) { tournamentSetup.players.delete(p.id); row.classList.remove("is-selected"); }
+        else { if (tournamentSetup.players.size >= tournamentSetup.size) return; tournamentSetup.players.add(p.id); row.classList.add("is-selected"); }
+        row.querySelector(".tournament-check").textContent = tournamentSetup.players.has(p.id) ? "✓" : "";
+        updateTournamentSetupUI();
+      });
+      list.appendChild(row);
+    });
+    if (!DATA.players.length) list.innerHTML = `<div class="empty-state"><p>Cria jogadores primeiro.</p></div>`;
+  }
+  document.querySelectorAll("#opt-tournament-size .setup-option").forEach(b => b.addEventListener("click", () => { tournamentSetup.size=Number(b.dataset.size); tournamentSetup.players.clear(); renderTournamentPlayerList(); updateTournamentSetupUI(); }));
+  document.querySelectorAll("#opt-tournament-mode .setup-option").forEach(b => b.addEventListener("click", () => { tournamentSetup.mode=b.dataset.tmode; updateTournamentSetupUI(); }));
+  document.querySelectorAll("#opt-tournament-points .setup-option").forEach(b => b.addEventListener("click", () => { tournamentSetup.points=Number(b.dataset.tpoints); updateTournamentSetupUI(); }));
+  document.querySelectorAll("#opt-tournament-format .setup-option").forEach(b => b.addEventListener("click", () => { tournamentSetup.format=b.dataset.tformat; updateTournamentSetupUI(); }));
+  document.getElementById("btn-start-tournament").addEventListener("click", createTournament);
+  function createTournament() {
+    const allElos = computeAllElos();
+    const seeded = [...tournamentSetup.players].sort((a,b) => (allElos[b]||1000)-(allElos[a]||1000));
+    const n = seeded.length; const pairs = []; let lo=0,hi=n-1;
+    while (lo<hi) pairs.push([seeded[lo++],seeded[hi--]]);
+    const firstRound = pairs.map(([p1,p2]) => ({player1Id:p1,player2Id:p2,winnerId:null,gameId:null}));
+    const bracket = [firstRound]; let prev = firstRound.length;
+    while (prev>1) { const next=Math.ceil(prev/2); bracket.push(Array.from({length:next},()=>({player1Id:null,player2Id:null,winnerId:null,gameId:null}))); prev=next; }
+    DATA.activeTournament = {id:uid("tournament"),seeded,bracket,mode:tournamentSetup.mode,points:tournamentSetup.points,format:tournamentSetup.format,status:"ongoing",winner:null,startedAt:new Date().toISOString()};
+    saveData(); renderTournamentBracket(); showScreen("screen-tournament-bracket"); checkResumeBanner();
+  }
+  function tournamentRoundLabel(ri,total) { const f=total-1-ri; if(f===0)return"Final"; if(f===1)return"Meia-final"; if(f===2)return"Quartos-de-final"; return"Ronda "+(ri+1); }
+  function renderTournamentBracket() {
+    const t = DATA.activeTournament; if (!t) return;
+    const total = t.bracket.length;
+    const content = document.getElementById("tournament-bracket-content"); content.innerHTML="";
+    const scroll = document.createElement("div"); scroll.className="bracket-scroll";
+    const bracket = document.createElement("div"); bracket.className="bracket";
+    t.bracket.forEach((round,ri) => {
+      const col = document.createElement("div"); col.className="bracket-round";
+      const lbl = document.createElement("div"); lbl.className="bracket-round-label"; lbl.textContent=tournamentRoundLabel(ri,total); col.appendChild(lbl);
+      round.forEach((match,mi) => {
+        const p1=match.player1Id?getPlayer(match.player1Id):null, p2=match.player2Id?getPlayer(match.player2Id):null;
+        const isDone=!!match.winnerId, isNext=!isDone&&p1&&p2&&!DATA.activeGame;
+        const mel=document.createElement("div"); mel.className="bracket-match"+(isDone?" is-done":"")+(isNext?" is-next":"");
+        const s1=p1?t.seeded.indexOf(match.player1Id)+1:null, s2=p2?t.seeded.indexOf(match.player2Id)+1:null;
+        const p1w=match.winnerId===match.player1Id, p2w=match.winnerId===match.player2Id;
+        mel.innerHTML=`<div class="bracket-player ${p1w?"is-winner":isDone?"is-loser":""}"><span class="bracket-player-seed">${s1?"#"+s1:""}</span><span class="bracket-player-name">${p1?escapeHTML(p1.name):'<span class="bracket-tbd">A definir</span>'}</span></div><div class="bracket-player ${p2w?"is-winner":isDone?"is-loser":""}"><span class="bracket-player-seed">${s2?"#"+s2:""}</span><span class="bracket-player-name">${p2?escapeHTML(p2.name):'<span class="bracket-tbd">A definir</span>'}</span></div>${isNext?`<button class="bracket-play-btn" data-r="${ri}" data-m="${mi}">▶ JOGAR</button>`:""}`;
+        if (isNext) mel.querySelector(".bracket-play-btn").addEventListener("click",()=>startTournamentMatch(ri,mi));
+        col.appendChild(mel);
+      });
+      bracket.appendChild(col);
+      if (ri<total-1) { const conn=document.createElement("div"); conn.className="bracket-connector"; round.forEach(()=>{const l=document.createElement("div");l.className="bracket-connector-line";conn.appendChild(l);}); bracket.appendChild(conn); }
+    });
+    scroll.appendChild(bracket); content.appendChild(scroll);
+  }
+  function startTournamentMatch(ri,mi) {
+    const t=DATA.activeTournament; const match=t.bracket[ri][mi];
+    t._pendingRound=ri; t._pendingMatch=mi; saveData();
+    startNewGame(match.player1Id,match.player2Id,t.points,t.format,"",t.mode);
+    game.tournamentId=t.id; persistActiveGame(); openBolarScreen();
+  }
+  function onTournamentGameFinished(record) {
+    const t=DATA.activeTournament; if(!t||t.status==="done") return;
+    if(!record.tournamentId||record.tournamentId!==t.id) return;
+    const ri=t._pendingRound,mi=t._pendingMatch; if(ri==null) return;
+    const match=t.bracket[ri][mi];
+    match.winnerId=record.winnerSide==="blue"?record.blue.playerId:record.white.playerId; match.gameId=record.id;
+    delete t._pendingRound; delete t._pendingMatch;
+    const nr=ri+1;
+    if(nr<t.bracket.length){const nmi=Math.floor(mi/2),slot=mi%2===0?"player1Id":"player2Id";t.bracket[nr][nmi][slot]=match.winnerId;}
+    const last=t.bracket[t.bracket.length-1];
+    if(last.length===1&&last[0].winnerId){
+      t.winner=last[0].winnerId; t.status="done"; t.endedAt=new Date().toISOString();
+      if(!DATA.tournamentHistory)DATA.tournamentHistory=[];
+      DATA.tournamentHistory.push({id:t.id,winner:t.winner,seeded:t.seeded,startedAt:t.startedAt,endedAt:t.endedAt});
+      saveData();
+      document.getElementById("tournament-winner-name").textContent=getPlayer(t.winner)?.name||"—";
+      document.getElementById("tournament-winner-sub").textContent=(t.seeded.length-1)+" jogos · "+t.seeded.length+" jogadores";
+      showScreen("screen-tournament-winner"); checkResumeBanner();
+    } else { saveData(); renderTournamentBracket(); showScreen("screen-tournament-bracket"); }
+  }
+  function computePlayerTournamentStats(playerId) {
+    const h=DATA.tournamentHistory||[];
+    return{total:h.filter(t=>t.seeded&&t.seeded.includes(playerId)).length,won:h.filter(t=>t.winner===playerId).length};
+  }
+  document.getElementById("btn-tournament-done").addEventListener("click",()=>{DATA.activeTournament=null;saveData();checkResumeBanner();showScreen("screen-menu");});
+  document.getElementById("btn-tournament-back").addEventListener("click",()=>showScreen("screen-menu"));
+  document.getElementById("btn-tournament-abandon").addEventListener("click",()=>{if(confirm("Abandonar o torneio?")){DATA.activeTournament=null;saveData();checkResumeBanner();showScreen("screen-menu");}});
+
+  /* ═══ MODO TREINO ═══ */
+  let trainingState={running:false,paused:false,isTimed:false,targetMs:0,elapsedMs:0,startTs:null,rafId:null,muted:false,halfSounded:false,last10Sounded:false,_pausedOffset:0};
+  let trainingMusicInterval=null, trainingMinutes=15;
+  function openTrainingMode(){document.getElementById("training-pick").style.display="flex";document.getElementById("training-inner").classList.remove("is-running");document.getElementById("training-time-input").hidden=true;showScreen("screen-training");}
+  function playTrainingSound(type){
+    if(type==="start"){playTone(880,120,0.5,"sine");setTimeout(()=>playTone(1108,160,0.5,"sine"),130);}
+    else if(type==="half"){playTone(660,100,0.5,"triangle");setTimeout(()=>playTone(660,100,0.5,"triangle"),150);}
+    else if(type==="last10"){for(let i=0;i<4;i++)setTimeout(()=>playTone(880,80,0.55,"square"),i*220);}
+    else if(type==="end"){[0,150,300,500].forEach((t,i)=>setTimeout(()=>playTone(440*(i+1)*0.6,200,0.55,"square"),t));}
+  }
+  function startTrainingMusic(){
+    stopTrainingMusic();
+    const notes=[261.63,329.63,392,329.63,261.63,392,329.63,261.63]; let beat=0;
+    trainingMusicInterval=setInterval(()=>{
+      if(!trainingState.running||trainingState.paused||trainingState.muted)return;
+      const ctx=getAudioCtx(); if(!ctx)return;
+      const osc=ctx.createOscillator(),g=ctx.createGain();
+      osc.type="sine";osc.frequency.value=notes[beat%notes.length];g.gain.value=0;osc.connect(g);g.connect(ctx._compressor||ctx.destination);
+      const now=ctx.currentTime;g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(0.06,now+0.04);g.gain.linearRampToValueAtTime(0,now+0.38);
+      osc.start(now);osc.stop(now+0.5);beat++;
+    },833);
+  }
+  function stopTrainingMusic(){if(trainingMusicInterval){clearInterval(trainingMusicInterval);trainingMusicInterval=null;}}
+  function startTrainingTimer(isTimed,mins){
+    document.getElementById("training-pick").style.display="none";
+    const inner=document.getElementById("training-inner");
+    inner.classList.add("is-running"); inner.className="training-inner is-running phase-0";
+    document.getElementById("training-mode-label").textContent=isTimed?"TREINO "+mins+" MIN":"MODO LIVRE";
+    document.getElementById("btn-training-pause").textContent="❙❙";
+    trainingState={running:true,paused:false,isTimed,targetMs:mins*60000,elapsedMs:0,startTs:performance.now(),rafId:null,muted:false,halfSounded:false,last10Sounded:false,_pausedOffset:0};
+    playTrainingSound("start"); startTrainingMusic(); trainingTick();
+  }
+  function trainingTick(){
+    if(!trainingState.running)return;
+    if(!trainingState.paused)trainingState.elapsedMs=performance.now()-trainingState.startTs+trainingState._pausedOffset;
+    const ms=trainingState.isTimed?Math.max(0,trainingState.targetMs-trainingState.elapsedMs):trainingState.elapsedMs;
+    const ts=Math.floor(ms/1000);
+    document.getElementById("training-h").textContent=String(Math.floor(ts/3600)).padStart(2,"0");
+    document.getElementById("training-m").textContent=String(Math.floor((ts%3600)/60)).padStart(2,"0");
+    document.getElementById("training-s").textContent=String(ts%60).padStart(2,"0");
+    document.getElementById("training-ms").textContent="."+String(Math.floor((ms%1000)/10)).padStart(2,"0");
+    if(trainingState.isTimed){
+      const ratio=trainingState.elapsedMs/trainingState.targetMs;
+      const phase=Math.min(4,Math.floor(ratio*5));
+      const inner=document.getElementById("training-inner");
+      ["phase-0","phase-1","phase-2","phase-3","phase-4"].forEach((c,i)=>inner.classList.toggle(c,i===phase));
+      if(ratio>=0.5&&!trainingState.halfSounded){playTrainingSound("half");trainingState.halfSounded=true;}
+      if(ms<=10000&&ms>0&&!trainingState.last10Sounded){playTrainingSound("last10");trainingState.last10Sounded=true;}
+      if(ms<=0){playTrainingSound("end");stopTraining();return;}
+    }
+    trainingState.rafId=requestAnimationFrame(trainingTick);
+  }
+  function stopTraining(){trainingState.running=false;if(trainingState.rafId)cancelAnimationFrame(trainingState.rafId);stopTrainingMusic();openTrainingMode();}
+  document.getElementById("btn-training-free").addEventListener("click",()=>startTrainingTimer(false,0));
+  document.getElementById("btn-training-timed").addEventListener("click",()=>{document.getElementById("training-time-input").hidden=false;});
+  document.getElementById("btn-time-minus").addEventListener("click",()=>{trainingMinutes=Math.max(1,trainingMinutes-1);document.getElementById("training-time-val").textContent=trainingMinutes;});
+  document.getElementById("btn-time-plus").addEventListener("click",()=>{trainingMinutes=Math.min(120,trainingMinutes+1);document.getElementById("training-time-val").textContent=trainingMinutes;});
+  document.getElementById("btn-training-start-timed").addEventListener("click",()=>startTrainingTimer(true,trainingMinutes));
+  document.getElementById("btn-training-pause").addEventListener("click",()=>{
+    if(!trainingState.running)return;
+    if(trainingState.paused){trainingState._pausedOffset=trainingState.elapsedMs;trainingState.startTs=performance.now();trainingState.paused=false;trainingState.rafId=requestAnimationFrame(trainingTick);document.getElementById("btn-training-pause").textContent="❙❙";}
+    else{trainingState.paused=true;if(trainingState.rafId)cancelAnimationFrame(trainingState.rafId);document.getElementById("btn-training-pause").textContent="▶";}
+  });
+  document.getElementById("btn-training-stop").addEventListener("click",stopTraining);
+  document.getElementById("btn-training-close").addEventListener("click",()=>{stopTraining();showScreen("screen-menu");});
+  document.getElementById("btn-training-pick-back").addEventListener("click",()=>showScreen("screen-menu"));
+  document.getElementById("btn-training-mute").addEventListener("click",()=>{trainingState.muted=!trainingState.muted;document.getElementById("btn-training-mute").classList.toggle("is-muted",trainingState.muted);});
+
+  /* ═══ MINI JOGOS ═══ */
+  let currentMiniGamePlayer=null;
+  function openMinigames(){renderMinigamePlayerPick();showScreen("screen-minigames");}
+  function renderMinigamePlayerPick(){
+    const grid=document.getElementById("minigame-player-pick");grid.innerHTML="";
+    DATA.players.forEach(p=>{
+      const card=document.createElement("button");
+      card.className="player-card player-card--grid"+(currentMiniGamePlayer===p.id?" is-selected":"");
+      if(currentMiniGamePlayer===p.id)card.style.border="2px solid var(--yellow)";
+      card.innerHTML=`<div class="player-avatar">${playerInitials(p.name)}</div><div class="player-info"><strong>${escapeHTML(p.name)}</strong></div>`;
+      card.addEventListener("click",()=>{
+        currentMiniGamePlayer=p.id;
+        grid.querySelectorAll(".player-card").forEach(c=>{c.classList.remove("is-selected");c.style.border="";});
+        card.classList.add("is-selected");card.style.border="2px solid var(--yellow)";
+      });
+      grid.appendChild(card);
+    });
+  }
+  function getMgRec(key,pid){return parseInt(localStorage.getItem("mg_"+key+"_"+(pid||"g"))||"0");}
+  function setMgRec(key,pid,val){localStorage.setItem("mg_"+key+"_"+(pid||"g"),val);}
+
+  /* Toques Rápidos */
+  let tapGame={level:1,score:0};
+  document.getElementById("btn-minigame-tap").addEventListener("click",()=>{if(!currentMiniGamePlayer){showToast("Escolhe um jogador primeiro","error");return;}resetTapGame();showScreen("screen-mg-tap");});
+  function resetTapGame(){
+    tapGame={level:1,score:0};
+    document.getElementById("mg-tap-score").textContent="0";
+    document.getElementById("mg-tap-record").textContent=getMgRec("tap",currentMiniGamePlayer)||"—";
+    document.getElementById("mg-tap-level").textContent="1";
+    document.getElementById("mg-tap-start").hidden=false;
+    document.getElementById("mg-tap-gameover").hidden=true;
+    document.getElementById("mg-tap-arena").querySelectorAll(".mg-dot").forEach(d=>d.remove());
+  }
+  document.getElementById("btn-mg-tap-start").addEventListener("click",()=>{
+    document.getElementById("mg-tap-start").hidden=true;
+    let n=3;const cd=document.getElementById("mg-tap-countdown");cd.hidden=false;cd.textContent=n;
+    const id=setInterval(()=>{n--;if(n===0){clearInterval(id);cd.hidden=true;spawnDot();}else cd.textContent=n;},800);
+  });
+  document.getElementById("btn-mg-tap-retry").addEventListener("click",resetTapGame);
+  document.getElementById("btn-mg-tap-back").addEventListener("click",()=>{document.getElementById("mg-tap-arena").querySelectorAll(".mg-dot").forEach(d=>d.remove());showScreen("screen-minigames");});
+  function spawnDot(){
+    const arena=document.getElementById("mg-tap-arena");
+    const W=arena.clientWidth,H=arena.clientHeight,size=Math.max(44,70-tapGame.level*2);
+    const dot=document.createElement("div");dot.className="mg-dot";
+    dot.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*(W-size)}px;top:${Math.random()*(H-size)}px`;
+    dot.textContent="●";let hit=false;
+    const lifeMs=Math.max(600,2000-tapGame.level*100);
+    const timer=setTimeout(()=>{if(!hit){hit=true;dot.remove();endTapGame();}},lifeMs);
+    dot.addEventListener("click",()=>{if(hit)return;hit=true;clearTimeout(timer);dot.remove();tapGame.score++;if(tapGame.score%5===0)tapGame.level++;document.getElementById("mg-tap-score").textContent=tapGame.score;playTone(1200,60,0.4,"sine");spawnDot();});
+    arena.appendChild(dot);
+  }
+  function endTapGame(){
+    document.getElementById("mg-tap-arena").querySelectorAll(".mg-dot").forEach(d=>d.remove());
+    const rec=getMgRec("tap",currentMiniGamePlayer),isNew=tapGame.score>rec;
+    if(isNew)setMgRec("tap",currentMiniGamePlayer,tapGame.score);
+    document.getElementById("mg-tap-final-score").textContent=tapGame.score;
+    document.getElementById("mg-tap-final-level").textContent=tapGame.level;
+    document.getElementById("mg-tap-new-record").hidden=!isNew;
+    document.getElementById("mg-tap-record").textContent=isNew?tapGame.score:rec;
+    document.getElementById("mg-tap-gameover").hidden=false;
+    playTone(300,200,0.5,"square");
+  }
+
+  /* Memória Visual */
+  let memGame={level:1,seq:[],playerSeq:[],showing:false,gridSize:3};
+  document.getElementById("btn-minigame-memory").addEventListener("click",()=>{if(!currentMiniGamePlayer){showToast("Escolhe um jogador primeiro","error");return;}resetMemGame();showScreen("screen-mg-memory");});
+  function resetMemGame(){
+    memGame={level:1,seq:[],playerSeq:[],showing:false,gridSize:3};
+    document.getElementById("mg-memory-level").textContent="1";
+    document.getElementById("mg-memory-record").textContent=getMgRec("memory",currentMiniGamePlayer)||"—";
+    document.getElementById("mg-memory-start-level").textContent="1";
+    document.getElementById("mg-memory-gameover").hidden=true;
+    document.getElementById("mg-memory-start").hidden=false;
+    document.getElementById("mg-memory-msg").textContent="";
+    buildMemGrid(3);
+  }
+  function buildMemGrid(size){
+    const g=document.getElementById("mg-memory-grid");
+    g.style.gridTemplateColumns=`repeat(${size},1fr)`;
+    const dim=Math.min(300,size*76)+"px";g.style.width=g.style.height=dim;g.innerHTML="";
+    for(let i=0;i<size*size;i++){const c=document.createElement("div");c.className="mg-memory-cell";c.dataset.idx=i;c.addEventListener("click",()=>onMemClick(i));g.appendChild(c);}
+  }
+  document.getElementById("btn-mg-memory-start").addEventListener("click",()=>{document.getElementById("mg-memory-start").hidden=true;nextMemLevel();});
+  document.getElementById("btn-mg-memory-retry").addEventListener("click",resetMemGame);
+  document.getElementById("btn-mg-memory-back").addEventListener("click",()=>showScreen("screen-minigames"));
+  function nextMemLevel(){
+    const ns=Math.min(5,3+Math.floor((memGame.level-1)/3));
+    if(ns!==memGame.gridSize){memGame.gridSize=ns;buildMemGrid(ns);}
+    const len=2+memGame.level;
+    memGame.seq=Array.from({length:len},()=>Math.floor(Math.random()*memGame.gridSize*memGame.gridSize));
+    memGame.playerSeq=[];memGame.showing=true;
+    document.getElementById("mg-memory-msg").textContent="Memoriza!";
+    document.getElementById("mg-memory-level").textContent=memGame.level;
+    const cells=document.querySelectorAll(".mg-memory-cell");
+    cells.forEach(c=>c.classList.remove("is-lit","is-correct","is-wrong"));
+    let i=0;
+    const show=()=>{
+      if(i>0)cells[memGame.seq[i-1]]?.classList.remove("is-lit");
+      if(i>=memGame.seq.length){memGame.showing=false;document.getElementById("mg-memory-msg").textContent="A tua vez!";return;}
+      cells[memGame.seq[i]]?.classList.add("is-lit");playTone(440+memGame.seq[i]*28,200,0.3,"sine");i++;setTimeout(show,600);
+    };
+    setTimeout(show,400);
+  }
+  function onMemClick(idx){
+    if(memGame.showing)return;
+    const cells=document.querySelectorAll(".mg-memory-cell");
+    if(idx===memGame.seq[memGame.playerSeq.length]){
+      cells[idx].classList.add("is-correct");playTone(660,80,0.35,"sine");memGame.playerSeq.push(idx);
+      if(memGame.playerSeq.length===memGame.seq.length)setTimeout(()=>{memGame.level++;nextMemLevel();},600);
+    }else{cells[idx].classList.add("is-wrong");playTone(200,300,0.45,"square");setTimeout(endMemGame,600);}
+  }
+  function endMemGame(){
+    const rec=getMgRec("memory",currentMiniGamePlayer),isNew=memGame.level>rec;
+    if(isNew)setMgRec("memory",currentMiniGamePlayer,memGame.level);
+    document.getElementById("mg-memory-final-level").textContent=memGame.level;
+    document.getElementById("mg-memory-new-record").hidden=!isNew;
+    document.getElementById("mg-memory-record").textContent=isNew?memGame.level:rec;
+    document.getElementById("mg-memory-gameover").hidden=false;
+  }
 
   init();
 })();
