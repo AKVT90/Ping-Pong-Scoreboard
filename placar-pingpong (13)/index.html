@@ -32,7 +32,7 @@
     </div>
     <div class="menu-lang-dropdown" id="menu-lang-dropdown" hidden>
       <button class="lang-option" data-lang="pt" data-flag="🇵🇹">🇵🇹 Português</button>
-      <button class="lang-option" data-lang="en" data-flag="🏴󠁧󠁢󠁥󠁮󠁧󠁿">🇬🇧 English</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
       <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
       <button class="lang-option" data-lang="fr" data-flag="🇫🇷">🇫🇷 Français</button>
       <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
@@ -94,7 +94,7 @@
       <button class="resume-btn" id="btn-resume">Continuar jogo ▸</button>
     </div>
 
-    <p class="menu-footer"><span data-i18n="menu.footer">dados guardados apenas neste tablet</span></p>
+    <p class="menu-footer"><span data-i18n="menu.footer">Dados guardados apenas neste dispositivo</span></p>
     <p class="menu-credit">Powered by AKVT90</p>
   </div>
 </div>
@@ -164,7 +164,7 @@
     <section class="setup-section">
       <p class="setup-label" data-i18n="setup.bluePlayer">Lado Azul</p>
       <button class="setup-player-pick setup-player-pick--blue" id="pick-blue">
-        <span>Escolher jogador</span>
+        <span data-i18n="js.choosePlayer">Escolher jogador</span>
       </button>
     </section>
 
@@ -173,7 +173,7 @@
     <section class="setup-section">
       <p class="setup-label" data-i18n="setup.whitePlayer">Lado Branco</p>
       <button class="setup-player-pick setup-player-pick--white" id="pick-white">
-        <span>Escolher jogador</span>
+        <span data-i18n="js.choosePlayer">Escolher jogador</span>
       </button>
     </section>
 
@@ -198,7 +198,7 @@
 
     <button class="mode-card mode-card--custom active" id="mode-custom" data-mode="custom">
       <span class="mode-card-title" data-i18n="js.modeCustom">Personalizado</span>
-      <span class="mode-card-desc">11 ou 21 pontos · livre, BO3 ou BO5 · serviço alterna a cada 5 pontos somados</span>
+      <span class="mode-card-desc" data-i18n="js.mode.customDesc">11 ou 21 pontos · livre, BO3 ou BO5 · serviço alterna a cada 5 pontos somados</span>
     </button>
 
     <button class="mode-card mode-card--classic" id="mode-classic" data-mode="classic">
@@ -223,8 +223,8 @@
     <section class="setup-section" id="section-points">
       <p class="setup-label" data-i18n="setup.pointsPerSet">Pontos por set</p>
       <div class="setup-options" id="opt-points">
-        <button class="setup-option" data-points="11">11 pontos</button>
-        <button class="setup-option active" data-points="21">21 pontos</button>
+        <button class="setup-option" data-points="11" data-i18n="js.setup.pts11">11 pontos</button>
+        <button class="setup-option active" data-points="21" data-i18n="js.setup.pts21">21 pontos</button>
       </div>
     </section>
 
@@ -264,21 +264,21 @@
   </header>
   <div class="bar-spacer"></div>
   <div class="content">
-    <p class="section-label">Tamanho</p>
+    <p class="section-label" data-i18n="js.tournament.size">Tamanho</p>
     <div class="setup-options" id="opt-tournament-size">
       <button class="setup-option active" data-size="4">4 jogadores</button>
       <button class="setup-option" data-size="8">8 jogadores</button>
       <button class="setup-option" data-size="16">16 jogadores</button>
     </div>
-    <p class="section-label">Modo</p>
+    <p class="section-label" data-i18n="js.tournament.mode">Modo</p>
     <div class="setup-options" id="opt-tournament-mode">
       <button class="setup-option active" data-tmode="custom" data-i18n="js.modeCustom">Personalizado</button>
       <button class="setup-option" data-tmode="classic" data-i18n="js.modeClassic">Clássico</button>
     </div>
     <div id="opt-tournament-points-wrap">
       <div class="setup-options" id="opt-tournament-points">
-        <button class="setup-option" data-tpoints="11">11 pontos</button>
-        <button class="setup-option active" data-tpoints="21">21 pontos</button>
+        <button class="setup-option" data-tpoints="11" data-i18n="js.setup.pts11">11 pontos</button>
+        <button class="setup-option active" data-tpoints="21" data-i18n="js.setup.pts21">21 pontos</button>
       </div>
     </div>
     <div class="setup-options" id="opt-tournament-format">
@@ -348,7 +348,7 @@
       <button class="minigame-card" id="btn-minigame-tap"><div class="minigame-card-icon">⚡</div><strong data-i18n="mg.tap">Toques Rápidos</strong><small data-i18n="mg.tapSub">Clica nos pontos antes que desapareçam</small></button>
       <button class="minigame-card" id="btn-minigame-memory"><div class="minigame-card-icon">🧠</div><strong data-i18n="mg.memory">Memória Visual</strong><small data-i18n="mg.memorySub">Memoriza e repete a sequência</small></button>
     </div>
-    <p class="section-label" style="margin-top:24px">Jogar como</p>
+    <p class="section-label" style="margin-top:24px" data-i18n="js.mg.playAs">Jogar como</p>
     <div id="minigame-player-pick" class="players-grid"></div>
   </div>
 </div>
@@ -446,12 +446,12 @@
 <!-- ============ OVERLAY: CONFIRMAR FIM DE JOGO ============ -->
 <div id="overlay-confirm-end" class="overlay" hidden>
   <div class="overlay-card">
-    <p class="overlay-eyebrow">TERMINAR JOGO</p>
-    <h3 class="overlay-title">Confirmar fim de jogo?</h3>
+    <p class="overlay-eyebrow" data-i18n="js.overlay.endGameTitle">TERMINAR JOGO</p>
+    <h3 class="overlay-title" data-i18n="js.overlay.confirmEnd">Confirmar fim de jogo?</h3>
     <p class="overlay-detail" id="confirm-end-detail">O resultado atual vai ser guardado no histórico.</p>
     <div class="overlay-actions">
       <button class="overlay-btn overlay-btn--ghost" id="btn-cancel-end" data-i18n="js.cancel">Cancelar</button>
-      <button class="overlay-btn overlay-btn--danger" id="btn-confirm-end">Terminar</button>
+      <button class="overlay-btn overlay-btn--danger" id="btn-confirm-end" data-i18n="js.overlay.confirmEndBtn">Terminar</button>
     </div>
   </div>
 </div>
@@ -506,7 +506,7 @@
       <!-- preenchido via JS -->
     </div>
 
-    <p class="section-label">Cópia de segurança</p>
+    <p class="section-label" data-i18n="js.data.backup">Cópia de segurança</p>
     <p class="data-explain">
       Guarda jogadores e histórico num ficheiro que podes manter na nuvem (Drive, email, etc.)
       e usar para recuperar tudo neste tablet ou noutro.
@@ -528,7 +528,7 @@
     </button>
     <input type="file" id="input-import-file" accept="application/json,.json" hidden>
 
-    <p class="section-label">Apagar tudo</p>
+    <p class="section-label" data-i18n="js.data.wipeAll">Apagar tudo</p>
     <button class="data-action data-action--danger" id="btn-wipe">
       <span class="data-action-icon">⨯</span>
       <span class="data-action-text">

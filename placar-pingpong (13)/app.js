@@ -64,7 +64,7 @@
       "menu.players":"Jogadores","menu.playersSub":"Gerir e ver estatísticas",
       "menu.history":"Histórico","menu.historySub":"Jogos anteriores",
       "menu.data":"Dados","menu.dataSub":"Exportar ou importar cópia de segurança",
-      "menu.footer":"dados guardados apenas neste tablet",
+      "menu.footer":"Dados guardados apenas neste dispositivo",
       // ecrãs
       "screen.players":"Jogadores","screen.history":"Histórico",
       "screen.gameDetail":"Detalhe do Jogo","screen.newGame":"Novo Jogo",
@@ -92,7 +92,7 @@
       "data.import":"Importar cópia de segurança","data.importSub":"Adicionar ou fundir dados de uma cópia de segurança",
       "data.wipe":"Apagar todos os dados","data.wipeSub":"Remove jogadores e histórico deste tablet",
       // dinâmicos (usados no JS)
-      "js.choosePlayer":"Escolher jogador","js.continue":"Continuar de qualquer forma ▸",
+      "js.choosePlayer":"Escolher jogador","js.sideBlue":"Azul","js.sideWhite":"Branco","js.continue":"Continuar de qualquer forma ▸",
       "js.nextSet":"Próximo Set ▸","js.undoMsg":"Último ponto anulado — podes continuar o set.",
       "js.setInProgress":"O set em curso (%b-%w) não vai ser contado. O resultado dos sets já fechados é guardado no histórico.",
       "js.confirmEnd":"O resultado atual vai ser guardado no histórico.",
@@ -123,6 +123,9 @@
       "js.tournamentsWon":"Torneios ganhos","js.tournamentsPlayed":"Torneios jogados",
       "js.trainingMin":"min. de treino","js.trainingSessions":"sessões",
       "js.importReplace":"Substituir tudo","js.importMerge":"Adicionar ao que já tenho",
+      "js.importDetailFile":"O ficheiro tem %p jogadores e %g jogos.",
+      "js.importDetailMerge":"<strong>Adicionar</strong> traz %np jogadores e %ng jogos novos (nomes iguais são juntos; repetidos são ignorados).",
+      "js.importDetailReplace":"<strong>Substituir tudo</strong> apaga os %p jogadores e %g jogos atuais e fica só com o ficheiro.",
       "js.recElo":"Maior ELO","js.recStreak":"Maior Sequência","js.recWins":"Mais Vitórias",
       "js.recCapotes":"Mais Capotes Feitos","js.recTournaments":"Mais Torneios Ganhos",
       "js.recPoints":"Mais Pontos Marcados","js.recDuration":"Jogo Mais Longo",
@@ -194,6 +197,82 @@
       "js.catSpecials":"Especiais",
       "js.noDataYet":"Sem dados ainda",
       "js.bracketTbd":"A definir",
+      "js.noPlayersEmpty":"Ainda não tens jogadores.<br>Toca em '＋ Novo' para adicionar o primeiro.",
+      "js.leaderboard":"Leaderboard · Top %n",
+      "js.playerCol":"Jogador",
+      "js.gamesUnit":"%n jogos",
+      "js.noGamesProfile":"Sem jogos registados ainda.",
+      "js.resultDraw":"Empatou",
+      "js.resultWon":"Venceu",
+      "js.resultLost":"Perdeu",
+      "js.gamesDisputed":"%n jogo(s)",
+      "js.headToHead":"Confrontos diretos",
+      "js.recentGames":"Últimos jogos",
+      "js.scorerColor":"Cor no placar",
+      "js.eloLabel2":"ELO (diversão)",
+      "js.statGamesPlayed":"Jogos disputados",
+      "js.statGamesWon":"Jogos ganhos",
+      "js.statGamesLost":"Jogos perdidos",
+      "js.statGamesDrawn":"Jogos empatados",
+      "js.statSetsWonV":"Sets ganhos (vitórias)",
+      "js.statSetsLostD":"Sets perdidos (derrotas)",
+      "js.statTotalSetsWon":"Total sets ganhos",
+      "js.statTotalSetsLost":"Total sets perdidos",
+      "js.statCapotesMade":"Capotes feitos",
+      "js.statCapotesSuffered":"Capotes sofridos",
+      "js.statTournamentsWon":"Torneios ganhos",
+      "js.statTournamentsTotal":"Torneios totais",
+      "js.bestRivalAgainst":"Mais vitórias contra (%n)",
+      "js.worstRivalAgainst":"Mais derrotas contra (%n)",
+      "js.noHistoryYet":"Ainda não há jogos no histórico.<br>Joga a primeira partida para a veres aqui.",
+      "js.draw":"EMPATE",
+      "js.setsSep":"SETS",
+      "js.xCapote":"%nx Capote",
+      "js.modeFree":"LIVRE",
+      "js.modeMd3":"MD3",
+      "js.modeMd5":"MD5",
+      "js.modeMd7":"MD7",
+      "js.gameEndedDraw":"Jogo terminou empatado",
+      "js.setsWonBy":"Sets (%n venceu o jogo)",
+      "js.ptsPerSet":"pontos por set",
+      "js.duration":"duração",
+      "js.setRecap":"Set %n",
+      "js.undoToast":"Último ponto anulado — podes continuar o set.",
+      "js.statsSaved":"Jogadores guardados",
+      "js.gamesInHistory":"Jogos no histórico",
+      "js.exportedToast":"Cópia exportada: %f",
+      "js.importedToast":"Importados: %p jogadores, %g jogos",
+      "js.invalidFile":"Ficheiro inválido ou corrompido.",
+      "js.cantReadFile":"Não foi possível ler o ficheiro.",
+      "js.invalidFormat":"Ficheiro inválido: formato inesperado.",
+      "js.invalidBackup":"Ficheiro inválido: não é uma cópia de segurança do Placar.",
+      "js.replacedToast":"Dados substituídos com sucesso.",
+      "js.wipedToast":"Todos os dados foram apagados.",
+      "js.createPlayersFirst":"Cria jogadores primeiro.",
+      "js.roundLabel":"Ronda %n",
+      "js.tournamentWinnerSub":"%m jogos · %p jogadores",
+      "js.choosePlayerFirst":"Escolhe um jogador primeiro",
+      "js.recMgMemory2":"Recorde Memória Visual",
+      "js.recMorePoints":"Mais Pontos Acumulados",
+      "js.recMoreTraining":"Mais Tempo de Treino",
+      "js.levelPrefix":"nível ",
+      "js.winsUnit":" vitórias",
+      "js.capotesUnit":" capotes",
+      "js.tournamentsUnit":" torneios",
+      "js.pointsUnit":" pontos",
+      "js.minUnit":" min",
+      "js.achProgressText":"%d / %t conquistas",
+      "js.setup.pts11":"11 pontos",
+      "js.setup.pts21":"21 pontos",
+      "js.overlay.endGameTitle":"TERMINAR JOGO",
+      "js.overlay.confirmEnd":"Confirmar fim de jogo?",
+      "js.overlay.confirmEndBtn":"Terminar",
+      "js.data.backup":"Cópia de segurança",
+      "js.data.wipeAll":"Apagar tudo",
+      "js.mg.playAs":"Jogar como",
+      "js.tournament.size":"Tamanho",
+      "js.tournament.mode":"Modo",
+      "js.mode.customDesc":"11 ou 21 pontos · livre, MD3 ou MD5 · serviço alterna a cada 5 pontos somados",
     },
     en: {
       "menu.newGame":"New Game","menu.newGameSub":"Choose players and start",
@@ -221,7 +300,7 @@
       "data.export":"Export backup","data.exportSub":"Generates a .json file with everything",
       "data.import":"Import backup","data.importSub":"Add or merge data from a backup",
       "data.wipe":"Wipe all data","data.wipeSub":"Removes players and history from this device",
-      "js.choosePlayer":"Choose player","js.continue":"Continue anyway ▸",
+      "js.choosePlayer":"Choose player","js.sideBlue":"Blue","js.sideWhite":"White","js.continue":"Continue anyway ▸",
       "js.nextSet":"Next Game ▸","js.undoMsg":"Last point undone — you can continue the game.",
       "js.setInProgress":"The current game (%b-%w) will not count. Finished games are saved to history.",
       "js.confirmEnd":"The current result will be saved to history.",
@@ -250,6 +329,9 @@
       "js.tournamentsWon":"Tournaments won","js.tournamentsPlayed":"Tournaments played",
       "js.trainingMin":"min. of training","js.trainingSessions":"sessions",
       "js.importReplace":"Replace everything","js.importMerge":"Add to existing data",
+      "js.importDetailFile":"The file has %p players and %g games.",
+      "js.importDetailMerge":"<strong>Add</strong> brings %np new players and %ng new games (same names merged; duplicates ignored).",
+      "js.importDetailReplace":"<strong>Replace everything</strong> deletes the current %p players and %g games and keeps only the file.",
       "js.recElo":"Highest Rating","js.recStreak":"Longest Streak","js.recWins":"Most Wins",
       "js.recCapotes":"Most Whitewashes","js.recTournaments":"Most Tournaments Won",
       "js.recPoints":"Most Points Scored","js.recDuration":"Longest Match",
@@ -321,6 +403,82 @@
       "js.catSpecials":"Special",
       "js.noDataYet":"No data yet",
       "js.bracketTbd":"TBD",
+      "js.noPlayersEmpty":"No players yet.<br>Tap '＋ New' to add your first.",
+      "js.leaderboard":"Leaderboard · Top %n",
+      "js.playerCol":"Player",
+      "js.gamesUnit":"%n games",
+      "js.noGamesProfile":"No games recorded yet.",
+      "js.resultDraw":"Draw",
+      "js.resultWon":"Won",
+      "js.resultLost":"Lost",
+      "js.gamesDisputed":"%n game(s)",
+      "js.headToHead":"Head to head",
+      "js.recentGames":"Recent games",
+      "js.scorerColor":"Scorer colour",
+      "js.eloLabel2":"ELO (fun)",
+      "js.statGamesPlayed":"Games played",
+      "js.statGamesWon":"Games won",
+      "js.statGamesLost":"Games lost",
+      "js.statGamesDrawn":"Games drawn",
+      "js.statSetsWonV":"Sets won (wins)",
+      "js.statSetsLostD":"Sets lost (losses)",
+      "js.statTotalSetsWon":"Total sets won",
+      "js.statTotalSetsLost":"Total sets lost",
+      "js.statCapotesMade":"Whitewashes made",
+      "js.statCapotesSuffered":"Whitewashes suffered",
+      "js.statTournamentsWon":"Tournaments won",
+      "js.statTournamentsTotal":"Tournaments total",
+      "js.bestRivalAgainst":"Most wins against (%n)",
+      "js.worstRivalAgainst":"Most losses against (%n)",
+      "js.noHistoryYet":"No games in history yet.<br>Play the first match to see it here.",
+      "js.draw":"DRAW",
+      "js.setsSep":"SETS",
+      "js.xCapote":"%nx Whitewash",
+      "js.modeFree":"FREE",
+      "js.modeMd3":"BO3",
+      "js.modeMd5":"BO5",
+      "js.modeMd7":"BO7",
+      "js.gameEndedDraw":"Game ended in a draw",
+      "js.setsWonBy":"Sets (%n won the match)",
+      "js.ptsPerSet":"points per set",
+      "js.duration":"duration",
+      "js.setRecap":"Set %n",
+      "js.undoToast":"Last point undone — you can continue the set.",
+      "js.statsSaved":"Saved players",
+      "js.gamesInHistory":"Games in history",
+      "js.exportedToast":"Backup exported: %f",
+      "js.importedToast":"Imported: %p players, %g games",
+      "js.invalidFile":"Invalid or corrupted file.",
+      "js.cantReadFile":"Could not read the file.",
+      "js.invalidFormat":"Invalid file: unexpected format.",
+      "js.invalidBackup":"Invalid file: not a PLACAR backup.",
+      "js.replacedToast":"Data replaced successfully.",
+      "js.wipedToast":"All data has been wiped.",
+      "js.createPlayersFirst":"Create players first.",
+      "js.roundLabel":"Round %n",
+      "js.tournamentWinnerSub":"%m games · %p players",
+      "js.choosePlayerFirst":"Choose a player first",
+      "js.recMgMemory2":"Visual Memory Record",
+      "js.recMorePoints":"Most Points Accumulated",
+      "js.recMoreTraining":"Most Training Time",
+      "js.levelPrefix":"level ",
+      "js.winsUnit":" wins",
+      "js.capotesUnit":" whitewashes",
+      "js.tournamentsUnit":" tournaments",
+      "js.pointsUnit":" points",
+      "js.minUnit":" min",
+      "js.achProgressText":"%d / %t achievements",
+      "js.setup.pts11":"11 points",
+      "js.setup.pts21":"21 points",
+      "js.overlay.endGameTitle":"END GAME",
+      "js.overlay.confirmEnd":"Confirm end of game?",
+      "js.overlay.confirmEndBtn":"End Game",
+      "js.data.backup":"Backup",
+      "js.data.wipeAll":"Wipe all",
+      "js.mg.playAs":"Play as",
+      "js.tournament.size":"Size",
+      "js.tournament.mode":"Mode",
+      "js.mode.customDesc":"11 or 21 points · free, BO3 or BO5 · service alternates every 5 points",
     },
     es: {
       "menu.newGame":"Nueva Partida","menu.newGameSub":"Elegir jugadores y empezar",
@@ -328,7 +486,7 @@
       "menu.players":"Jugadores","menu.playersSub":"Gestionar y ver estadísticas",
       "menu.history":"Historial","menu.historySub":"Partidas anteriores",
       "menu.data":"Datos","menu.dataSub":"Exportar o importar copia de seguridad",
-      "menu.footer":"datos guardados solo en esta tableta",
+      "menu.footer":"datos guardados solo en este dispositivo",
       "screen.players":"Jugadores","screen.history":"Historial",
       "screen.gameDetail":"Detalle del Partido","screen.newGame":"Nueva Partida",
       "screen.gameType":"Tipo de Juego","screen.pointsFormat":"Puntos y Formato",
@@ -348,7 +506,7 @@
       "data.export":"Exportar copia de seguridad","data.exportSub":"Genera un archivo .json con todo",
       "data.import":"Importar copia de seguridad","data.importSub":"Añadir o fusionar datos de una copia",
       "data.wipe":"Borrar todos los datos","data.wipeSub":"Elimina jugadores e historial de esta tableta",
-      "js.choosePlayer":"Elegir jugador","js.continue":"Continuar de todas formas ▸",
+      "js.choosePlayer":"Elegir jugador","js.sideBlue":"Azul","js.sideWhite":"Blanco","js.continue":"Continuar de todas formas ▸",
       "js.nextSet":"Siguiente Juego ▸","js.undoMsg":"Último punto anulado — puedes continuar el juego.",
       "js.setInProgress":"El juego en curso (%b-%w) no se contará. Los juegos cerrados quedan en el historial.",
       "js.confirmEnd":"El resultado actual se guardará en el historial.",
@@ -377,6 +535,9 @@
       "js.tournamentsWon":"Torneos ganados","js.tournamentsPlayed":"Torneos jugados",
       "js.trainingMin":"min. de entrenamiento","js.trainingSessions":"sesiones",
       "js.importReplace":"Reemplazar todo","js.importMerge":"Añadir a los datos actuales",
+      "js.importDetailFile":"El archivo tiene %p jugadores y %g partidas.",
+      "js.importDetailMerge":"<strong>Añadir</strong> trae %np jugadores y %ng partidas nuevos (nombres iguales se unen; repetidos se ignoran).",
+      "js.importDetailReplace":"<strong>Reemplazar todo</strong> elimina los %p jugadores y %g partidas actuales y deja solo el archivo.",
       "js.recElo":"Mayor Ranking","js.recStreak":"Mayor Racha","js.recWins":"Más Victorias",
       "js.recCapotes":"Más Capotes","js.recTournaments":"Más Torneos Ganados",
       "js.recPoints":"Más Puntos Marcados","js.recDuration":"Partido Más Largo",
@@ -448,6 +609,82 @@
       "js.catSpecials":"Especiales",
       "js.noDataYet":"Sin datos todavía",
       "js.bracketTbd":"Por definir",
+      "js.noPlayersEmpty":"Aún no tienes jugadores.<br>Toca '＋ Nuevo' para añadir el primero.",
+      "js.leaderboard":"Leaderboard · Top %n",
+      "js.playerCol":"Jugador",
+      "js.gamesUnit":"%n partidas",
+      "js.noGamesProfile":"Sin partidas registradas aún.",
+      "js.resultDraw":"Empató",
+      "js.resultWon":"Ganó",
+      "js.resultLost":"Perdió",
+      "js.gamesDisputed":"%n partida(s)",
+      "js.headToHead":"Cara a cara",
+      "js.recentGames":"Últimas partidas",
+      "js.scorerColor":"Color en el marcador",
+      "js.eloLabel2":"ELO (diversión)",
+      "js.statGamesPlayed":"Partidas jugadas",
+      "js.statGamesWon":"Partidas ganadas",
+      "js.statGamesLost":"Partidas perdidas",
+      "js.statGamesDrawn":"Partidas empatadas",
+      "js.statSetsWonV":"Sets ganados (victorias)",
+      "js.statSetsLostD":"Sets perdidos (derrotas)",
+      "js.statTotalSetsWon":"Total sets ganados",
+      "js.statTotalSetsLost":"Total sets perdidos",
+      "js.statCapotesMade":"Capotes hechos",
+      "js.statCapotesSuffered":"Capotes sufridos",
+      "js.statTournamentsWon":"Torneos ganados",
+      "js.statTournamentsTotal":"Torneos totales",
+      "js.bestRivalAgainst":"Más victorias contra (%n)",
+      "js.worstRivalAgainst":"Más derrotas contra (%n)",
+      "js.noHistoryYet":"No hay partidas en el historial.<br>Juega la primera para verla aquí.",
+      "js.draw":"EMPATE",
+      "js.setsSep":"SETS",
+      "js.xCapote":"%nx Capote",
+      "js.modeFree":"LIBRE",
+      "js.modeMd3":"MD3",
+      "js.modeMd5":"MD5",
+      "js.modeMd7":"MD7",
+      "js.gameEndedDraw":"La partida terminó en empate",
+      "js.setsWonBy":"Sets (%n ganó la partida)",
+      "js.ptsPerSet":"puntos por set",
+      "js.duration":"duración",
+      "js.setRecap":"Set %n",
+      "js.undoToast":"Último punto anulado — puedes continuar el set.",
+      "js.statsSaved":"Jugadores guardados",
+      "js.gamesInHistory":"Partidas en el historial",
+      "js.exportedToast":"Copia exportada: %f",
+      "js.importedToast":"Importados: %p jugadores, %g partidas",
+      "js.invalidFile":"Archivo inválido o corrupto.",
+      "js.cantReadFile":"No se pudo leer el archivo.",
+      "js.invalidFormat":"Archivo inválido: formato inesperado.",
+      "js.invalidBackup":"Archivo inválido: no es una copia de PLACAR.",
+      "js.replacedToast":"Datos reemplazados correctamente.",
+      "js.wipedToast":"Todos los datos han sido borrados.",
+      "js.createPlayersFirst":"Crea jugadores primero.",
+      "js.roundLabel":"Ronda %n",
+      "js.tournamentWinnerSub":"%m partidas · %p jugadores",
+      "js.choosePlayerFirst":"Elige un jugador primero",
+      "js.recMgMemory2":"Récord Memoria Visual",
+      "js.recMorePoints":"Más Puntos Acumulados",
+      "js.recMoreTraining":"Más Tiempo de Entrenamiento",
+      "js.levelPrefix":"nivel ",
+      "js.winsUnit":" victorias",
+      "js.capotesUnit":" capotes",
+      "js.tournamentsUnit":" torneos",
+      "js.pointsUnit":" puntos",
+      "js.minUnit":" min",
+      "js.achProgressText":"%d / %t logros",
+      "js.setup.pts11":"11 puntos",
+      "js.setup.pts21":"21 puntos",
+      "js.overlay.endGameTitle":"TERMINAR PARTIDA",
+      "js.overlay.confirmEnd":"¿Confirmar fin de partida?",
+      "js.overlay.confirmEndBtn":"Terminar",
+      "js.data.backup":"Copia de seguridad",
+      "js.data.wipeAll":"Borrar todo",
+      "js.mg.playAs":"Jugar como",
+      "js.tournament.size":"Tamaño",
+      "js.tournament.mode":"Modo",
+      "js.mode.customDesc":"11 o 21 puntos · libre, MD3 o MD5 · saque alterna cada 5 puntos",
     },
     fr: {
       "menu.newGame":"Nouvelle Partie","menu.newGameSub":"Choisir les joueurs et commencer",
@@ -455,7 +692,7 @@
       "menu.players":"Joueurs","menu.playersSub":"Gérer et voir les statistiques",
       "menu.history":"Historique","menu.historySub":"Parties précédentes",
       "menu.data":"Données","menu.dataSub":"Exporter ou importer une sauvegarde",
-      "menu.footer":"données enregistrées uniquement sur cette tablette",
+      "menu.footer":"données enregistrées uniquement sur cet appareil",
       "screen.players":"Joueurs","screen.history":"Historique",
       "screen.gameDetail":"Détail de la Partie","screen.newGame":"Nouvelle Partie",
       "screen.gameType":"Type de Jeu","screen.pointsFormat":"Points et Format",
@@ -475,7 +712,7 @@
       "data.export":"Exporter la sauvegarde","data.exportSub":"Génère un fichier .json avec tout",
       "data.import":"Importer une sauvegarde","data.importSub":"Ajouter ou fusionner des données",
       "data.wipe":"Effacer toutes les données","data.wipeSub":"Supprime les joueurs et l'historique",
-      "js.choosePlayer":"Choisir un joueur","js.continue":"Continuer quand même ▸",
+      "js.choosePlayer":"Choisir un joueur","js.sideBlue":"Bleu","js.sideWhite":"Blanc","js.continue":"Continuer quand même ▸",
       "js.nextSet":"Manche suivante ▸","js.undoMsg":"Dernier point annulé — vous pouvez continuer.",
       "js.setInProgress":"La manche en cours (%b-%w) ne sera pas comptée. Les manches terminées sont sauvegardées.",
       "js.confirmEnd":"Le résultat actuel sera enregistré dans l'historique.",
@@ -504,6 +741,9 @@
       "js.tournamentsWon":"Tournois gagnés","js.tournamentsPlayed":"Tournois joués",
       "js.trainingMin":"min. d'entraînement","js.trainingSessions":"séances",
       "js.importReplace":"Tout remplacer","js.importMerge":"Ajouter aux données existantes",
+      "js.importDetailFile":"Le fichier contient %p joueurs et %g parties.",
+      "js.importDetailMerge":"<strong>Ajouter</strong> apporte %np nouveaux joueurs et %ng nouvelles parties (noms identiques fusionnés ; doublons ignorés).",
+      "js.importDetailReplace":"<strong>Tout remplacer</strong> supprime les %p joueurs et %g parties actuels et garde uniquement le fichier.",
       "js.recElo":"Meilleur Classement","js.recStreak":"Plus Longue Série","js.recWins":"Plus de Victoires",
       "js.recCapotes":"Plus de Blancs","js.recTournaments":"Plus de Tournois Gagnés",
       "js.recPoints":"Plus de Points Marqués","js.recDuration":"Partie la Plus Longue",
@@ -575,6 +815,82 @@
       "js.catSpecials":"Spéciaux",
       "js.noDataYet":"Pas encore de données",
       "js.bracketTbd":"À définir",
+      "js.noPlayersEmpty":"Pas encore de joueurs.<br>Appuyez sur '＋ Nouveau' pour ajouter le premier.",
+      "js.leaderboard":"Classement · Top %n",
+      "js.playerCol":"Joueur",
+      "js.gamesUnit":"%n parties",
+      "js.noGamesProfile":"Aucune partie enregistrée.",
+      "js.resultDraw":"Nul",
+      "js.resultWon":"Gagné",
+      "js.resultLost":"Perdu",
+      "js.gamesDisputed":"%n partie(s)",
+      "js.headToHead":"Face à face",
+      "js.recentGames":"Dernières parties",
+      "js.scorerColor":"Couleur au tableau",
+      "js.eloLabel2":"ELO (fun)",
+      "js.statGamesPlayed":"Parties jouées",
+      "js.statGamesWon":"Parties gagnées",
+      "js.statGamesLost":"Parties perdues",
+      "js.statGamesDrawn":"Parties nulles",
+      "js.statSetsWonV":"Sets gagnés (victoires)",
+      "js.statSetsLostD":"Sets perdus (défaites)",
+      "js.statTotalSetsWon":"Total sets gagnés",
+      "js.statTotalSetsLost":"Total sets perdus",
+      "js.statCapotesMade":"Blancs réalisés",
+      "js.statCapotesSuffered":"Blancs subis",
+      "js.statTournamentsWon":"Tournois gagnés",
+      "js.statTournamentsTotal":"Tournois totaux",
+      "js.bestRivalAgainst":"Plus de victoires contre (%n)",
+      "js.worstRivalAgainst":"Plus de défaites contre (%n)",
+      "js.noHistoryYet":"Pas encore de parties dans l'historique.<br>Jouez la première pour la voir ici.",
+      "js.draw":"NUL",
+      "js.setsSep":"SETS",
+      "js.xCapote":"%nx Blanc",
+      "js.modeFree":"LIBRE",
+      "js.modeMd3":"MD3",
+      "js.modeMd5":"MD5",
+      "js.modeMd7":"MD7",
+      "js.gameEndedDraw":"La partie s'est terminée par un nul",
+      "js.setsWonBy":"Sets (%n a gagné la partie)",
+      "js.ptsPerSet":"points par set",
+      "js.duration":"durée",
+      "js.setRecap":"Set %n",
+      "js.undoToast":"Dernier point annulé — vous pouvez continuer le set.",
+      "js.statsSaved":"Joueurs sauvegardés",
+      "js.gamesInHistory":"Parties dans l'historique",
+      "js.exportedToast":"Sauvegarde exportée : %f",
+      "js.importedToast":"Importés : %p joueurs, %g parties",
+      "js.invalidFile":"Fichier invalide ou corrompu.",
+      "js.cantReadFile":"Impossible de lire le fichier.",
+      "js.invalidFormat":"Fichier invalide : format inattendu.",
+      "js.invalidBackup":"Fichier invalide : pas une sauvegarde PLACAR.",
+      "js.replacedToast":"Données remplacées avec succès.",
+      "js.wipedToast":"Toutes les données ont été effacées.",
+      "js.createPlayersFirst":"Créez des joueurs d'abord.",
+      "js.roundLabel":"Tour %n",
+      "js.tournamentWinnerSub":"%m parties · %p joueurs",
+      "js.choosePlayerFirst":"Choisissez un joueur d'abord",
+      "js.recMgMemory2":"Record Mémoire Visuelle",
+      "js.recMorePoints":"Plus de Points Accumulés",
+      "js.recMoreTraining":"Plus de Temps d'Entraînement",
+      "js.levelPrefix":"niveau ",
+      "js.winsUnit":" victoires",
+      "js.capotesUnit":" blancs",
+      "js.tournamentsUnit":" tournois",
+      "js.pointsUnit":" points",
+      "js.minUnit":" min",
+      "js.achProgressText":"%d / %t succès",
+      "js.setup.pts11":"11 points",
+      "js.setup.pts21":"21 points",
+      "js.overlay.endGameTitle":"TERMINER LA PARTIE",
+      "js.overlay.confirmEnd":"Confirmer la fin de partie ?",
+      "js.overlay.confirmEndBtn":"Terminer",
+      "js.data.backup":"Sauvegarde",
+      "js.data.wipeAll":"Tout effacer",
+      "js.mg.playAs":"Jouer en tant que",
+      "js.tournament.size":"Taille",
+      "js.tournament.mode":"Mode",
+      "js.mode.customDesc":"11 ou 21 points · libre, MD3 ou MD5 · service alterne tous les 5 points",
     },
     de: {
       "menu.newGame":"Neues Spiel","menu.newGameSub":"Spieler wählen und starten",
@@ -602,7 +918,7 @@
       "data.export":"Backup exportieren","data.exportSub":"Erzeugt eine .json-Datei mit allem",
       "data.import":"Backup importieren","data.importSub":"Daten hinzufügen oder zusammenführen",
       "data.wipe":"Alle Daten löschen","data.wipeSub":"Entfernt Spieler und Verlauf von diesem Gerät",
-      "js.choosePlayer":"Spieler wählen","js.continue":"Trotzdem weiter ▸",
+      "js.choosePlayer":"Spieler wählen","js.sideBlue":"Blau","js.sideWhite":"Weiß","js.continue":"Trotzdem weiter ▸",
       "js.nextSet":"Nächster Satz ▸","js.undoMsg":"Letzter Punkt zurückgenommen — du kannst weiterspielen.",
       "js.setInProgress":"Der laufende Satz (%b-%w) wird nicht gezählt. Abgeschlossene Sätze bleiben im Verlauf.",
       "js.confirmEnd":"Das aktuelle Ergebnis wird im Verlauf gespeichert.",
@@ -631,6 +947,9 @@
       "js.tournamentsWon":"Gewonnene Turniere","js.tournamentsPlayed":"Gespielte Turniere",
       "js.trainingMin":"Min. Training","js.trainingSessions":"Einheiten",
       "js.importReplace":"Alles ersetzen","js.importMerge":"Zu vorhandenen Daten hinzufügen",
+      "js.importDetailFile":"Die Datei hat %p Spieler und %g Spiele.",
+      "js.importDetailMerge":"<strong>Hinzufügen</strong> bringt %np neue Spieler und %ng neue Spiele (gleiche Namen werden zusammengeführt; Duplikate ignoriert).",
+      "js.importDetailReplace":"<strong>Alles ersetzen</strong> löscht die aktuellen %p Spieler und %g Spiele und behält nur die Datei.",
       "js.recElo":"Höchstes Rating","js.recStreak":"Längste Serie","js.recWins":"Meiste Siege",
       "js.recCapotes":"Meiste Klatschen","js.recTournaments":"Meiste Turniersiege",
       "js.recPoints":"Meiste Punkte","js.recDuration":"Längstes Spiel",
@@ -702,6 +1021,82 @@
       "js.catSpecials":"Besondere",
       "js.noDataYet":"Noch keine Daten",
       "js.bracketTbd":"Noch offen",
+      "js.noPlayersEmpty":"Noch keine Spieler.<br>Tippe auf '＋ Neu', um den ersten hinzuzufügen.",
+      "js.leaderboard":"Bestenliste · Top %n",
+      "js.playerCol":"Spieler",
+      "js.gamesUnit":"%n Spiele",
+      "js.noGamesProfile":"Noch keine Spiele aufgezeichnet.",
+      "js.resultDraw":"Unentschieden",
+      "js.resultWon":"Gewonnen",
+      "js.resultLost":"Verloren",
+      "js.gamesDisputed":"%n Spiel(e)",
+      "js.headToHead":"Direktvergleich",
+      "js.recentGames":"Letzte Spiele",
+      "js.scorerColor":"Farbe auf dem Spielstand",
+      "js.eloLabel2":"ELO (Spaß)",
+      "js.statGamesPlayed":"Gespielte Spiele",
+      "js.statGamesWon":"Gewonnene Spiele",
+      "js.statGamesLost":"Verlorene Spiele",
+      "js.statGamesDrawn":"Unentschieden",
+      "js.statSetsWonV":"Gewonnene Sätze (Siege)",
+      "js.statSetsLostD":"Verlorene Sätze (Niederlagen)",
+      "js.statTotalSetsWon":"Sätze gewonnen gesamt",
+      "js.statTotalSetsLost":"Sätze verloren gesamt",
+      "js.statCapotesMade":"Klatschen gegeben",
+      "js.statCapotesSuffered":"Klatschen erhalten",
+      "js.statTournamentsWon":"Turniere gewonnen",
+      "js.statTournamentsTotal":"Turniere gesamt",
+      "js.bestRivalAgainst":"Meiste Siege gegen (%n)",
+      "js.worstRivalAgainst":"Meiste Niederlagen gegen (%n)",
+      "js.noHistoryYet":"Noch keine Spiele im Verlauf.<br>Spiel das erste Match, um es hier zu sehen.",
+      "js.draw":"UNENTSCHIEDEN",
+      "js.setsSep":"SÄTZE",
+      "js.xCapote":"%nx Klatsche",
+      "js.modeFree":"FREI",
+      "js.modeMd3":"BO3",
+      "js.modeMd5":"BO5",
+      "js.modeMd7":"BO7",
+      "js.gameEndedDraw":"Spiel endete unentschieden",
+      "js.setsWonBy":"Sätze (%n gewann das Spiel)",
+      "js.ptsPerSet":"Punkte pro Satz",
+      "js.duration":"Dauer",
+      "js.setRecap":"Satz %n",
+      "js.undoToast":"Letzter Punkt rückgängig — du kannst den Satz fortsetzen.",
+      "js.statsSaved":"Gespeicherte Spieler",
+      "js.gamesInHistory":"Spiele im Verlauf",
+      "js.exportedToast":"Backup exportiert: %f",
+      "js.importedToast":"Importiert: %p Spieler, %g Spiele",
+      "js.invalidFile":"Ungültige oder beschädigte Datei.",
+      "js.cantReadFile":"Datei konnte nicht gelesen werden.",
+      "js.invalidFormat":"Ungültige Datei: unerwartetes Format.",
+      "js.invalidBackup":"Ungültige Datei: kein PLACAR-Backup.",
+      "js.replacedToast":"Daten erfolgreich ersetzt.",
+      "js.wipedToast":"Alle Daten wurden gelöscht.",
+      "js.createPlayersFirst":"Erstelle zuerst Spieler.",
+      "js.roundLabel":"Runde %n",
+      "js.tournamentWinnerSub":"%m Spiele · %p Spieler",
+      "js.choosePlayerFirst":"Wähle zuerst einen Spieler",
+      "js.recMgMemory2":"Rekord Visuelles Gedächtnis",
+      "js.recMorePoints":"Meiste gesammelte Punkte",
+      "js.recMoreTraining":"Meiste Trainingszeit",
+      "js.levelPrefix":"Level ",
+      "js.winsUnit":" Siege",
+      "js.capotesUnit":" Klatschen",
+      "js.tournamentsUnit":" Turniere",
+      "js.pointsUnit":" Punkte",
+      "js.minUnit":" Min",
+      "js.achProgressText":"%d / %t Erfolge",
+      "js.setup.pts11":"11 Punkte",
+      "js.setup.pts21":"21 Punkte",
+      "js.overlay.endGameTitle":"SPIEL BEENDEN",
+      "js.overlay.confirmEnd":"Spielende bestätigen?",
+      "js.overlay.confirmEndBtn":"Beenden",
+      "js.data.backup":"Backup",
+      "js.data.wipeAll":"Alles löschen",
+      "js.mg.playAs":"Spielen als",
+      "js.tournament.size":"Größe",
+      "js.tournament.mode":"Modus",
+      "js.mode.customDesc":"11 oder 21 Punkte · offen, BO3 oder BO5 · Aufschlag wechselt alle 5 Punkte",
     },
     zh: {
       "menu.newGame":"新局","menu.newGameSub":"选择球员并开始",
@@ -729,7 +1124,7 @@
       "data.export":"导出备份","data.exportSub":"生成包含所有数据的 .json 文件",
       "data.import":"导入备份","data.importSub":"添加或合并备份数据",
       "data.wipe":"清除所有数据","data.wipeSub":"从此设备移除球员和历史记录",
-      "js.choosePlayer":"选择球员","js.continue":"仍然继续 ▸",
+      "js.choosePlayer":"选择球员","js.sideBlue":"蓝方","js.sideWhite":"白方","js.continue":"仍然继续 ▸",
       "js.nextSet":"下一局 ▸","js.undoMsg":"最后一分已撤销 — 可以继续比赛。",
       "js.setInProgress":"当前局（%b-%w）不计入成绩。已结束的局保存在历史中。",
       "js.confirmEnd":"当前结果将保存到历史记录。",
@@ -758,6 +1153,9 @@
       "js.tournamentsWon":"锦标赛冠军","js.tournamentsPlayed":"参加锦标赛",
       "js.trainingMin":"分钟训练","js.trainingSessions":"次训练",
       "js.importReplace":"替换所有","js.importMerge":"添加到现有数据",
+      "js.importDetailFile":"文件包含 %p 名玩家和 %g 场游戏。",
+      "js.importDetailMerge":"<strong>添加</strong>将带来 %np 名新玩家和 %ng 场新游戏（相同名称合并；重复忽略）。",
+      "js.importDetailReplace":"<strong>替换所有</strong>将删除当前 %p 名玩家和 %g 场游戏，仅保留文件内容。",
       "js.recElo":"最高积分","js.recStreak":"最长连胜","js.recWins":"最多胜场",
       "js.recCapotes":"最多11-0","js.recTournaments":"最多锦标赛冠军",
       "js.recPoints":"最多得分","js.recDuration":"最长比赛",
@@ -829,6 +1227,82 @@
       "js.catSpecials":"特殊",
       "js.noDataYet":"暂无数据",
       "js.bracketTbd":"待定",
+      "js.noPlayersEmpty":"还没有玩家。<br>点击'＋ 新建'添加第一个。",
+      "js.leaderboard":"排行榜 · 前 %n",
+      "js.playerCol":"玩家",
+      "js.gamesUnit":"%n 场",
+      "js.noGamesProfile":"暂无记录。",
+      "js.resultDraw":"平局",
+      "js.resultWon":"胜",
+      "js.resultLost":"负",
+      "js.gamesDisputed":"%n 场",
+      "js.headToHead":"对决记录",
+      "js.recentGames":"最近对局",
+      "js.scorerColor":"记分板颜色",
+      "js.eloLabel2":"ELO（娱乐）",
+      "js.statGamesPlayed":"对局数",
+      "js.statGamesWon":"胜场数",
+      "js.statGamesLost":"负场数",
+      "js.statGamesDrawn":"平局数",
+      "js.statSetsWonV":"赢得的局数（胜）",
+      "js.statSetsLostD":"输掉的局数（负）",
+      "js.statTotalSetsWon":"总赢局数",
+      "js.statTotalSetsLost":"总输局数",
+      "js.statCapotesMade":"完封对手次数",
+      "js.statCapotesSuffered":"被完封次数",
+      "js.statTournamentsWon":"赢得的锦标赛",
+      "js.statTournamentsTotal":"参加的锦标赛",
+      "js.bestRivalAgainst":"对阵%n最多胜",
+      "js.worstRivalAgainst":"对阵%n最多负",
+      "js.noHistoryYet":"暂无对局记录。<br>打完第一场即可在此查看。",
+      "js.draw":"平局",
+      "js.setsSep":"局",
+      "js.xCapote":"%n次完封",
+      "js.modeFree":"自由",
+      "js.modeMd3":"三局两胜",
+      "js.modeMd5":"五局三胜",
+      "js.modeMd7":"七局四胜",
+      "js.gameEndedDraw":"比赛以平局结束",
+      "js.setsWonBy":"局数（%n赢得比赛）",
+      "js.ptsPerSet":"每局分数",
+      "js.duration":"时长",
+      "js.setRecap":"第%n局",
+      "js.undoToast":"已撤销最后一分 — 可以继续比赛。",
+      "js.statsSaved":"已保存玩家",
+      "js.gamesInHistory":"历史对局",
+      "js.exportedToast":"备份已导出：%f",
+      "js.importedToast":"已导入：%p 名玩家，%g 场对局",
+      "js.invalidFile":"文件无效或已损坏。",
+      "js.cantReadFile":"无法读取文件。",
+      "js.invalidFormat":"文件无效：格式错误。",
+      "js.invalidBackup":"文件无效：不是 PLACAR 备份。",
+      "js.replacedToast":"数据替换成功。",
+      "js.wipedToast":"所有数据已清除。",
+      "js.createPlayersFirst":"请先创建玩家。",
+      "js.roundLabel":"第%n轮",
+      "js.tournamentWinnerSub":"%m场 · %p名玩家",
+      "js.choosePlayerFirst":"请先选择玩家",
+      "js.recMgMemory2":"视觉记忆记录",
+      "js.recMorePoints":"最多积分",
+      "js.recMoreTraining":"最长训练时间",
+      "js.levelPrefix":"第",
+      "js.winsUnit":" 胜",
+      "js.capotesUnit":" 次完封",
+      "js.tournamentsUnit":" 次锦标赛",
+      "js.pointsUnit":" 分",
+      "js.minUnit":" 分钟",
+      "js.achProgressText":"%d / %t 成就",
+      "js.setup.pts11":"11分",
+      "js.setup.pts21":"21分",
+      "js.overlay.endGameTitle":"结束比赛",
+      "js.overlay.confirmEnd":"确认结束比赛？",
+      "js.overlay.confirmEndBtn":"结束",
+      "js.data.backup":"备份",
+      "js.data.wipeAll":"清除所有",
+      "js.mg.playAs":"以…身份游戏",
+      "js.tournament.size":"规模",
+      "js.tournament.mode":"模式",
+      "js.mode.customDesc":"11或21分 · 自由、三局两胜或五局三胜 · 每5分交换发球权",
     },
 
     ja: {
@@ -857,7 +1331,7 @@
       "data.export":"バックアップを書き出す","data.exportSub":"すべてを含む .json ファイルを生成",
       "data.import":"バックアップを読み込む","data.importSub":"バックアップからデータを追加または統合",
       "data.wipe":"全データを削除","data.wipeSub":"この端末からプレイヤーと履歴を削除",
-      "js.choosePlayer":"プレイヤーを選択","js.continue":"このまま続ける ▸",
+      "js.choosePlayer":"プレイヤーを選択","js.sideBlue":"青","js.sideWhite":"白","js.continue":"このまま続ける ▸",
       "js.nextSet":"次のゲーム ▸","js.undoMsg":"最後の得点を取り消しました。試合を続けてください。",
       "js.setInProgress":"進行中のゲーム（%b-%w）はカウントされません。終了したゲームは履歴に保存されます。",
       "js.confirmEnd":"現在の結果が履歴に保存されます。",
@@ -886,6 +1360,9 @@
       "js.tournamentsWon":"優勝回数","js.tournamentsPlayed":"参加トーナメント",
       "js.trainingMin":"分 練習","js.trainingSessions":"セッション",
       "js.importReplace":"すべて置き換え","js.importMerge":"既存データに追加",
+      "js.importDetailFile":"ファイルには %p 人のプレイヤーと %g 試合が含まれます。",
+      "js.importDetailMerge":"<strong>追加</strong>すると %np 人の新プレイヤーと %ng 試合が追加されます（同名は統合；重複は無視）。",
+      "js.importDetailReplace":"<strong>すべて置き換え</strong>は現在の %p 人と %g 試合を削除し、ファイルの内容のみ残します。",
       "js.recElo":"最高レーティング","js.recStreak":"最長連勝","js.recWins":"最多勝利",
       "js.recCapotes":"最多完封","js.recTournaments":"最多優勝",
       "js.recPoints":"最多得点","js.recDuration":"最長試合",
@@ -957,6 +1434,82 @@
       "js.catSpecials":"特別",
       "js.noDataYet":"まだデータなし",
       "js.bracketTbd":"未定",
+      "js.noPlayersEmpty":"まだプレイヤーがいません。<br>'＋ 新規'をタップして最初のプレイヤーを追加してください。",
+      "js.leaderboard":"リーダーボード · トップ%n",
+      "js.playerCol":"プレイヤー",
+      "js.gamesUnit":"%n試合",
+      "js.noGamesProfile":"まだ試合の記録がありません。",
+      "js.resultDraw":"引き分け",
+      "js.resultWon":"勝利",
+      "js.resultLost":"敗北",
+      "js.gamesDisputed":"%n試合",
+      "js.headToHead":"直接対決",
+      "js.recentGames":"最近の試合",
+      "js.scorerColor":"スコアボードの色",
+      "js.eloLabel2":"ELO（楽しさ）",
+      "js.statGamesPlayed":"試合数",
+      "js.statGamesWon":"勝利数",
+      "js.statGamesLost":"敗北数",
+      "js.statGamesDrawn":"引き分け数",
+      "js.statSetsWonV":"獲得セット数（勝利）",
+      "js.statSetsLostD":"失セット数（敗北）",
+      "js.statTotalSetsWon":"総獲得セット数",
+      "js.statTotalSetsLost":"総失セット数",
+      "js.statCapotesMade":"完封した回数",
+      "js.statCapotesSuffered":"完封された回数",
+      "js.statTournamentsWon":"優勝したトーナメント",
+      "js.statTournamentsTotal":"参加したトーナメント",
+      "js.bestRivalAgainst":"%nに最多勝利",
+      "js.worstRivalAgainst":"%nに最多敗北",
+      "js.noHistoryYet":"まだ試合履歴がありません。<br>最初の試合をプレイすると表示されます。",
+      "js.draw":"引き分け",
+      "js.setsSep":"セット",
+      "js.xCapote":"%n回完封",
+      "js.modeFree":"フリー",
+      "js.modeMd3":"BO3",
+      "js.modeMd5":"BO5",
+      "js.modeMd7":"BO7",
+      "js.gameEndedDraw":"試合は引き分けで終了しました",
+      "js.setsWonBy":"セット（%nが試合に勝利）",
+      "js.ptsPerSet":"セットあたりの点数",
+      "js.duration":"時間",
+      "js.setRecap":"第%nセット",
+      "js.undoToast":"最後の得点を取り消しました — セットを続けられます。",
+      "js.statsSaved":"保存済みプレイヤー",
+      "js.gamesInHistory":"履歴の試合数",
+      "js.exportedToast":"バックアップをエクスポートしました：%f",
+      "js.importedToast":"インポートしました：%pプレイヤー、%g試合",
+      "js.invalidFile":"無効または破損したファイルです。",
+      "js.cantReadFile":"ファイルを読み込めませんでした。",
+      "js.invalidFormat":"無効なファイル：予期しない形式です。",
+      "js.invalidBackup":"無効なファイル：PLACARのバックアップではありません。",
+      "js.replacedToast":"データを正常に置き換えました。",
+      "js.wipedToast":"すべてのデータが削除されました。",
+      "js.createPlayersFirst":"まずプレイヤーを作成してください。",
+      "js.roundLabel":"第%nラウンド",
+      "js.tournamentWinnerSub":"%m試合 · %pプレイヤー",
+      "js.choosePlayerFirst":"まずプレイヤーを選択してください",
+      "js.recMgMemory2":"視覚記憶記録",
+      "js.recMorePoints":"最多獲得ポイント",
+      "js.recMoreTraining":"最長トレーニング時間",
+      "js.levelPrefix":"レベル",
+      "js.winsUnit":" 勝",
+      "js.capotesUnit":" 回完封",
+      "js.tournamentsUnit":" トーナメント",
+      "js.pointsUnit":" ポイント",
+      "js.minUnit":" 分",
+      "js.achProgressText":"%d / %t 実績",
+      "js.setup.pts11":"11点",
+      "js.setup.pts21":"21点",
+      "js.overlay.endGameTitle":"試合終了",
+      "js.overlay.confirmEnd":"試合終了を確認しますか？",
+      "js.overlay.confirmEndBtn":"終了",
+      "js.data.backup":"バックアップ",
+      "js.data.wipeAll":"すべて削除",
+      "js.mg.playAs":"プレイヤーとして",
+      "js.tournament.size":"サイズ",
+      "js.tournament.mode":"モード",
+      "js.mode.customDesc":"11点または21点 · フリー、BO3またはBO5 · 5点ごとにサービス交代",
     },
   };
 
@@ -1161,7 +1714,7 @@
       list.innerHTML = `
         <div class="empty-state">
           <div class="empty-state-icon">☷</div>
-          <p>Ainda não tens jogadores.<br>Toca em "＋ Novo" para adicionar o primeiro.</p>
+          <p>${t("js.noPlayersEmpty")}</p>
         </div>`;
       return;
     }
@@ -1185,17 +1738,17 @@
       const leaderboard = document.createElement("div");
       leaderboard.className = "leaderboard";
       leaderboard.innerHTML = `
-        <p class="section-label">Leaderboard · Top ${ranked.length}</p>
+        <p class="section-label">${t("js.leaderboard").replace("%n", ranked.length)}</p>
         <div class="leaderboard-table">
           <div class="leaderboard-row leaderboard-row--head">
             <span class="lb-rank"></span>
-            <span class="lb-name">Jogador</span>
-            <span class="lb-cell">V</span>
-            <span class="lb-cell">D</span>
-            <span class="lb-cell">E</span>
-            <span class="lb-cell">Cap.</span>
-            <span class="lb-cell lb-cell--accent">Win%</span>
-            <span class="lb-cell lb-cell--elo">ELO</span>
+            <span class="lb-name">${t("js.playerCol")}</span>
+            <span class="lb-cell">${t("js.winsLabel")}</span>
+            <span class="lb-cell">${t("js.lossesLabel")}</span>
+            <span class="lb-cell">${t("js.drawsLabel")}</span>
+            <span class="lb-cell">${t("js.capotesLabel")}</span>
+            <span class="lb-cell lb-cell--accent">${t("js.winRateLabel")}</span>
+            <span class="lb-cell lb-cell--elo">${t("js.eloLabel")}</span>
           </div>
           ${ranked
             .map(
@@ -1237,7 +1790,7 @@
           <div class="player-avatar">${playerInitials(p.name)}</div>
           <div class="player-info">
             <strong>${escapeHTML(p.name)}</strong>
-            <span>${stats.gamesPlayed} jogos · ${stats.winRate}%</span>
+            <span>${t("js.gamesUnit").replace("%n", stats.gamesPlayed)} · ${stats.winRate}%</span>
           </div>
           <span class="player-elo player-elo--small">${stats.elo}</span>
         `;
@@ -1320,7 +1873,7 @@
 
     let historyHTML = "";
     if (recentGames.length === 0) {
-      historyHTML = `<div class="empty-state"><p>Sem jogos registados ainda.</p></div>`;
+      historyHTML = `<div class="empty-state"><p>${t("js.noHistoryYet")}</p></div>`;
     } else {
       historyHTML = recentGames
         .map((g) => {
@@ -1331,13 +1884,13 @@
           let resultClass, resultLabel;
           if (g.isDraw) {
             resultClass = "history-row-result--draw";
-            resultLabel = "Empatou";
+            resultLabel = t("js.resultDraw");
           } else if (g.winnerSide === (isBlue ? "blue" : "white")) {
             resultClass = "history-row-result--win";
-            resultLabel = "Venceu";
+            resultLabel = t("js.resultWon");
           } else {
             resultClass = "history-row-result--loss";
-            resultLabel = "Perdeu";
+            resultLabel = t("js.resultLost");
           }
           return `
             <div class="history-row">
@@ -1355,14 +1908,14 @@
     let rivalsHTML = "";
     if (stats.rivals.length > 0) {
       rivalsHTML = `
-        <p class="section-label">Confrontos diretos</p>
+        <p class="section-label">${t("js.headToHead")}</p>
         ${stats.rivals
           .map(
             (r) => `
             <div class="history-row">
               <div class="history-row-main">
                 <strong>vs ${escapeHTML(r.name)}</strong>
-                <small>${r.gamesPlayed} jogo(s) disputado(s)</small>
+                <small>${t("js.gamesDisputed").replace("%n", r.gamesPlayed)}</small>
               </div>
               <span class="history-row-score">${r.gamesWon}V – ${r.gamesLost}D${r.gamesDrawn ? ` – ${r.gamesDrawn}E` : ""}</span>
             </div>`
@@ -1373,33 +1926,33 @@
 
     content.innerHTML = `
       <div class="profile-stats-grid">
-        <div class="stat-box stat-box--elo"><strong>${stats.elo}</strong><span>ELO (diversão)</span></div>
-        <div class="stat-box stat-box--accent"><strong>${stats.winRate}%</strong><span>Win rate</span></div>
-        <div class="stat-box"><strong>${stats.gamesPlayed}</strong><span>Jogos disputados</span></div>
-        <div class="stat-box"><strong>${stats.gamesWon}</strong><span>Jogos ganhos</span></div>
-        <div class="stat-box"><strong>${stats.gamesLost}</strong><span>Jogos perdidos</span></div>
-        <div class="stat-box"><strong>${stats.gamesDrawn}</strong><span>Jogos empatados</span></div>
-        <div class="stat-box"><strong>${stats.wins}</strong><span>Sets ganhos (vitórias)</span></div>
-        <div class="stat-box"><strong>${stats.losses}</strong><span>Sets perdidos (derrotas)</span></div>
-        <div class="stat-box"><strong>${stats.setsWon}</strong><span>Total sets ganhos</span></div>
-        <div class="stat-box"><strong>${stats.setsLost}</strong><span>Total sets perdidos</span></div>
-        <div class="stat-box"><strong>${stats.capotes}</strong><span>Capotes feitos</span></div>
-        <div class="stat-box"><strong>${stats.capotesSuffered}</strong><span>Capotes sofridos</span></div>
-        <div class="stat-box"><strong>${tStats.won}</strong><span>Torneios ganhos</span></div>
-        <div class="stat-box"><strong>${tStats.total}</strong><span>Torneios totais</span></div>
+        <div class="stat-box stat-box--elo"><strong>${stats.elo}</strong><span>${t("js.eloLabel2")}</span></div>
+        <div class="stat-box stat-box--accent"><strong>${stats.winRate}%</strong><span>${t("js.winRateLabel")}</span></div>
+        <div class="stat-box"><strong>${stats.gamesPlayed}</strong><span>${t("js.statGamesPlayed")}</span></div>
+        <div class="stat-box"><strong>${stats.gamesWon}</strong><span>${t("js.statGamesWon")}</span></div>
+        <div class="stat-box"><strong>${stats.gamesLost}</strong><span>${t("js.statGamesLost")}</span></div>
+        <div class="stat-box"><strong>${stats.gamesDrawn}</strong><span>${t("js.statGamesDrawn")}</span></div>
+        <div class="stat-box"><strong>${stats.wins}</strong><span>${t("js.statSetsWonV")}</span></div>
+        <div class="stat-box"><strong>${stats.losses}</strong><span>${t("js.statSetsLostD")}</span></div>
+        <div class="stat-box"><strong>${stats.setsWon}</strong><span>${t("js.statTotalSetsWon")}</span></div>
+        <div class="stat-box"><strong>${stats.setsLost}</strong><span>${t("js.statTotalSetsLost")}</span></div>
+        <div class="stat-box"><strong>${stats.capotes}</strong><span>${t("js.statCapotesMade")}</span></div>
+        <div class="stat-box"><strong>${stats.capotesSuffered}</strong><span>${t("js.statCapotesSuffered")}</span></div>
+        <div class="stat-box"><strong>${tStats.won}</strong><span>${t("js.statTournamentsWon")}</span></div>
+        <div class="stat-box"><strong>${tStats.total}</strong><span>${t("js.statTournamentsTotal")}</span></div>
       </div>
       ${
         stats.bestRival || stats.worstRival
           ? `<div class="profile-stats-grid">
-              ${stats.bestRival ? `<div class="stat-box stat-box--accent"><strong>${escapeHTML(stats.bestRival.name)}</strong><span>Mais vitórias contra (${stats.bestRival.gamesWon})</span></div>` : ""}
-              ${stats.worstRival ? `<div class="stat-box"><strong>${escapeHTML(stats.worstRival.name)}</strong><span>Mais derrotas contra (${stats.worstRival.gamesLost})</span></div>` : ""}
+              ${stats.bestRival ? `<div class="stat-box stat-box--accent"><strong>${escapeHTML(stats.bestRival.name)}</strong><span>${t("js.bestRivalAgainst").replace("%n", stats.bestRival.gamesWon)}</span></div>` : ""}
+              ${stats.worstRival ? `<div class="stat-box"><strong>${escapeHTML(stats.worstRival.name)}</strong><span>${t("js.worstRivalAgainst").replace("%n", stats.worstRival.gamesLost)}</span></div>` : ""}
             </div>`
           : ""
       }
       ${rivalsHTML}
-      <p class="section-label">Últimos jogos</p>
+      <p class="section-label">${t("js.recentGames")}</p>
       ${historyHTML}
-      <p class="section-label">Cor no placar</p>
+      <p class="section-label">${t("js.scorerColor")}</p>
       <div class="color-picker color-picker--profile" id="color-picker-profile">
         <button class="color-swatch color-swatch--blue-white"   data-color="blue-white"   title="Azul / Branco"></button>
         <button class="color-swatch color-swatch--green-white"  data-color="green-white"  title="Verde / Branco"></button>
@@ -1592,7 +2145,7 @@
       list.innerHTML = `
         <div class="empty-state">
           <div class="empty-state-icon">▤</div>
-          <p>Ainda não há jogos no histórico.<br>Joga a primeira partida para a veres aqui.</p>
+          <p>${t("js.noHistoryYet")}</p>
         </div>`;
       return;
     }
@@ -1601,8 +2154,8 @@
       .slice()
       .sort((a, b) => new Date(b.endedAt) - new Date(a.endedAt))
       .forEach((g) => {
-        const blueName = g.blue.playerId ? getPlayer(g.blue.playerId)?.name || "Jogador" : "Jogador";
-        const whiteName = g.white.playerId ? getPlayer(g.white.playerId)?.name || "Jogador" : "Jogador";
+        const blueName = g.blue.playerId ? getPlayer(g.blue.playerId)?.name || "—" : "—";
+        const whiteName = g.white.playerId ? getPlayer(g.white.playerId)?.name || "—" : "—";
         const blueWon = !g.isDraw && g.winnerSide === "blue";
         const whiteWon = !g.isDraw && g.winnerSide === "white";
         const capoteCount = g.sets.filter((s) => s.capote).length;
@@ -1613,20 +2166,20 @@
         card.innerHTML = `
           <div class="history-card-top">
             <span class="history-card-date">${formatDate(g.endedAt)}</span>
-            <span class="history-card-format">${g.pointsTarget} PTS · ${formatModeLabel(g.format)}${g.isDraw ? " · EMPATE" : ""}</span>
+            <span class="history-card-format">${g.pointsTarget} PTS · ${formatModeLabel(g.format)}${g.isDraw ? " · " + t("js.draw") : ""}</span>
           </div>
           <div class="history-card-matchup">
             <div class="history-side history-side--blue">
               <span class="history-side-name ${blueWon ? "is-winner" : ""}">${escapeHTML(blueName)}</span>
               <span class="history-side-sets">${g.blue.setsWon}</span>
             </div>
-            <span class="history-card-sep">SETS</span>
+            <span class="history-card-sep">${t("js.setsSep")}</span>
             <div class="history-side history-side--white history-side--right">
               <span class="history-side-name ${whiteWon ? "is-winner" : ""}">${escapeHTML(whiteName)}</span>
               <span class="history-side-sets">${g.white.setsWon}</span>
             </div>
           </div>
-          ${capoteCount > 0 ? `<span class="capote-tag capote-tag--card">${capoteCount > 1 ? capoteCount + "x Capote" : t("js.capoteTag")}</span>` : ""}
+          ${capoteCount > 0 ? `<span class="capote-tag capote-tag--card">${capoteCount > 1 ? t("js.xCapote").replace("%n", capoteCount) : t("js.capoteTag")}</span>` : ""}
           ${g.description ? `<p class="history-card-desc">${escapeHTML(g.description)}</p>` : ""}
         `;
         card.addEventListener("click", () => openGameDetail(g.id));
@@ -1635,17 +2188,17 @@
   }
 
   function formatModeLabel(format) {
-    if (format === "3") return "MD3";
-    if (format === "5") return "MD5";
-    if (format === "7") return "MD7";
-    return "LIVRE";
+    if (format === "3") return t("js.modeMd3");
+    if (format === "5") return t("js.modeMd5");
+    if (format === "7") return t("js.modeMd7");
+    return t("js.modeFree");
   }
 
   function openGameDetail(gameId) {
     const g = DATA.games.find((x) => x.id === gameId);
     if (!g) return;
-    const blueName = g.blue.playerId ? getPlayer(g.blue.playerId)?.name || "Jogador" : "Jogador";
-    const whiteName = g.white.playerId ? getPlayer(g.white.playerId)?.name || "Jogador" : "Jogador";
+    const blueName = g.blue.playerId ? getPlayer(g.blue.playerId)?.name || "—" : "—";
+    const whiteName = g.white.playerId ? getPlayer(g.white.playerId)?.name || "—" : "—";
     const blueWon = !g.isDraw && g.winnerSide === "blue";
 
     const setsHTML = g.sets
@@ -1665,8 +2218,8 @@
       .join("");
 
     const resultLabel = g.isDraw
-      ? "Jogo terminou empatado"
-      : `Sets (${blueWon ? escapeHTML(blueName) : escapeHTML(whiteName)} venceu o jogo)`;
+      ? t("js.gameEndedDraw")
+      : t("js.setsWonBy").replace("%p", blueWon ? escapeHTML(blueName) : escapeHTML(whiteName));
 
     document.getElementById("game-detail-content").innerHTML = `
       <div class="detail-header">
@@ -1675,7 +2228,7 @@
           <span class="detail-score">${g.blue.setsWon} – ${g.white.setsWon}</span>
           <span class="detail-name">${escapeHTML(whiteName)}</span>
         </div>
-        <p class="detail-sub">${formatDate(g.endedAt)} · ${g.pointsTarget} pontos por set · ${formatModeLabel(g.format)} · duração ${formatClock(g.durationSeconds)}</p>
+        <p class="detail-sub">${formatDate(g.endedAt)} · ${t("js.ptsPerSet").replace("%n", g.pointsTarget)} · ${formatModeLabel(g.format)} · ${t("js.duration")} ${formatClock(g.durationSeconds)}</p>
         ${g.description ? `<p class="detail-description">"${escapeHTML(g.description)}"</p>` : ""}
       </div>
       <p class="section-label">${resultLabel}</p>
@@ -1797,7 +2350,7 @@
       bluePick.innerHTML = `<span>${escapeHTML(p.name)}</span>`;
     } else {
       bluePick.classList.remove("is-filled");
-      bluePick.innerHTML = `<span>Escolher jogador</span>`;
+      bluePick.innerHTML = `<span>${t("js.choosePlayer")}</span>`;
     }
 
     if (setup.whitePlayerId) {
@@ -1806,7 +2359,7 @@
       whitePick.innerHTML = `<span>${escapeHTML(p.name)}</span>`;
     } else {
       whitePick.classList.remove("is-filled");
-      whitePick.innerHTML = `<span>Escolher jogador</span>`;
+      whitePick.innerHTML = `<span>${t("js.choosePlayer")}</span>`;
     }
 
     const goNextBtn = document.getElementById("btn-goto-mode");
@@ -1980,8 +2533,8 @@
      BOLAR — escolher quem serve primeiro, no início de cada set
      --------------------------------------------------------- */
   function openBolarScreen() {
-    const blueName = getPlayer(game.bluePlayerId)?.name || "Azul";
-    const whiteName = getPlayer(game.whitePlayerId)?.name || "Branco";
+    const blueName = getPlayer(game.bluePlayerId)?.name || t("js.sideBlue");
+    const whiteName = getPlayer(game.whitePlayerId)?.name || t("js.sideWhite");
     document.getElementById("bolar-name-blue").textContent = blueName;
     document.getElementById("bolar-name-white").textContent = whiteName;
     const setNumber = game.sets.length + 1;
@@ -2047,8 +2600,8 @@
     game = DATA.activeGame;
     if (!game) return;
 
-    const blueName = getPlayer(game.bluePlayerId)?.name || "Azul";
-    const whiteName = getPlayer(game.whitePlayerId)?.name || "Branco";
+    const blueName = getPlayer(game.bluePlayerId)?.name || t("js.sideBlue");
+    const whiteName = getPlayer(game.whitePlayerId)?.name || t("js.sideWhite");
     document.getElementById("name-blue").textContent = blueName;
     document.getElementById("name-white").textContent = whiteName;
 
@@ -2402,8 +2955,8 @@
   function showSetEndOverlay(closedSet, winnerSide) {
     const winnerName =
       winnerSide === "blue"
-        ? getPlayer(game.bluePlayerId)?.name || "Azul"
-        : getPlayer(game.whitePlayerId)?.name || "Branco";
+        ? getPlayer(game.bluePlayerId)?.name || t("js.sideBlue")
+        : getPlayer(game.whitePlayerId)?.name || t("js.sideWhite");
 
     document.getElementById("set-end-eyebrow").textContent = closedSet.capote ? t("js.endOfSetCapote") : t("js.endOfSet");
     document.getElementById("set-end-winner").textContent = t("js.setWon",{n:winnerName});
@@ -2413,7 +2966,7 @@
     recap.innerHTML = game.sets
       .map((s, i) => {
         const cls = s.capote ? "recap-pill is-capote" : "recap-pill";
-        return `<span class="${cls}">Set ${i + 1}: ${s.blueScore}-${s.whiteScore}</span>`;
+        return `<span class="${cls}">${t("js.setRecap").replace("%n", i + 1)}: ${s.blueScore}-${s.whiteScore}</span>`;
       })
       .join("");
 
@@ -2424,8 +2977,8 @@
     if (neededToWin && (game.blueSetsWon >= neededToWin || game.whiteSetsWon >= neededToWin)) {
       const matchWinnerName =
         game.blueSetsWon >= neededToWin
-          ? getPlayer(game.bluePlayerId)?.name || "Azul"
-          : getPlayer(game.whitePlayerId)?.name || "Branco";
+          ? getPlayer(game.bluePlayerId)?.name || t("js.sideBlue")
+          : getPlayer(game.whitePlayerId)?.name || t("js.sideWhite");
       document.getElementById("set-end-eyebrow").textContent = closedSet.capote
         ? t("js.endOfSetCapoteDeciding")
         : t("js.endOfSetDeciding");
@@ -2478,7 +3031,7 @@
     document.getElementById("overlay-set-end").hidden = true;
     resumeGameUI();
     showScreen("screen-game");
-    showToast("Último ponto anulado — podes continuar o set.", "success");
+    showToast(t("js.undoToast"), "success");
   });
 
   /* ---------- terminar jogo ---------- */
@@ -2547,8 +3100,8 @@
   }
 
   function showGameEndOverlay(record) {
-    const blueName = getPlayer(record.blue.playerId)?.name || "Azul";
-    const whiteName = getPlayer(record.white.playerId)?.name || "Branco";
+    const blueName = getPlayer(record.blue.playerId)?.name || t("js.sideBlue");
+    const whiteName = getPlayer(record.white.playerId)?.name || t("js.sideWhite");
 
     if (record.isDraw) {
       document.getElementById("game-end-winner").textContent = t("js.drawBetween") + " " + blueName + " & " + whiteName;
@@ -2563,7 +3116,7 @@
     ` + record.sets
       .map((s, i) => {
         const cls = s.capote ? "recap-pill is-capote" : "recap-pill";
-        return `<span class="${cls}">Set ${i + 1}: ${s.blueScore}-${s.whiteScore}</span>`;
+        return `<span class="${cls}">${t("js.setRecap").replace("%n", i + 1)}: ${s.blueScore}-${s.whiteScore}</span>`;
       })
       .join("");
 
@@ -2602,8 +3155,8 @@
   function renderDataScreen() {
     const summary = document.getElementById("data-summary");
     summary.innerHTML = `
-      <div class="stat-box"><strong>${DATA.players.length}</strong><span>Jogadores guardados</span></div>
-      <div class="stat-box"><strong>${DATA.games.length}</strong><span>Jogos no histórico</span></div>
+      <div class="stat-box"><strong>${DATA.players.length}</strong><span>${t("js.statsSaved")}</span></div>
+      <div class="stat-box"><strong>${DATA.games.length}</strong><span>${t("js.gamesInHistory")}</span></div>
     `;
   }
 
@@ -2633,7 +3186,7 @@
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
-    showToast("Cópia exportada: " + filename, "success");
+    showToast(t("js.exportedToast").replace("%f", filename), "success");
   }
   document.getElementById("btn-export").addEventListener("click", exportData);
 
@@ -2661,28 +3214,25 @@
         pendingImport = parsed;
         const preview = previewMerge(parsed);
         const detail = document.getElementById("confirm-import-detail");
-        const pJogador = (n) => (n === 1 ? "jogador" : "jogadores");
-        const pJogo = (n) => (n === 1 ? "jogo" : "jogos");
         detail.innerHTML =
-          `O ficheiro tem ${parsed.players.length} ${pJogador(parsed.players.length)} e ${parsed.games.length} ${pJogo(parsed.games.length)}.<br><br>` +
-          `<strong>Adicionar ao que já tens</strong> traz ${preview.newPlayers} ${pJogador(preview.newPlayers)} novo(s) e ${preview.newGames} ${pJogo(preview.newGames)} novo(s) ` +
-          `(jogadores com o mesmo nome são juntos automaticamente; jogos repetidos são ignorados).<br><br>` +
-          `<strong>Substituir tudo</strong> apaga os ${DATA.players.length} ${pJogador(DATA.players.length)} e ${DATA.games.length} ${pJogo(DATA.games.length)} atuais e fica só com o que está no ficheiro.`;
+          t("js.importDetailFile").replace("%p", parsed.players.length).replace("%g", parsed.games.length) + "<br><br>" +
+          t("js.importDetailMerge").replace("%np", preview.newPlayers).replace("%ng", preview.newGames) + "<br><br>" +
+          t("js.importDetailReplace").replace("%p", DATA.players.length).replace("%g", DATA.games.length);
         document.getElementById("overlay-confirm-import").hidden = false;
       } catch (err) {
-        showToast("Ficheiro inválido ou corrompido.", "error");
+        showToast(t("js.invalidFile"), "error");
       }
     };
-    reader.onerror = () => showToast("Não foi possível ler o ficheiro.", "error");
+    reader.onerror = () => showToast(t("js.cantReadFile"), "error");
     reader.readAsText(file);
   });
 
   function validateImportPayload(parsed) {
     if (!parsed || typeof parsed !== "object") {
-      return { ok: false, message: "Ficheiro inválido: formato inesperado." };
+      return { ok: false, message: t("js.invalidFormat") };
     }
     if (!Array.isArray(parsed.players) || !Array.isArray(parsed.games)) {
-      return { ok: false, message: "Ficheiro inválido: não é uma cópia de segurança do Placar." };
+      return { ok: false, message: t("js.invalidBackup") };
     }
     return { ok: true };
   }
@@ -2799,9 +3349,7 @@
     document.getElementById("overlay-confirm-import").hidden = true;
     renderDataScreen();
     checkResumeBanner();
-    const pJogador = (n) => (n === 1 ? "jogador" : "jogadores");
-    const pJogo = (n) => (n === 1 ? "jogo" : "jogos");
-    showToast(`Adicionados ${addedPlayers} ${pJogador(addedPlayers)} e ${addedGames} ${pJogo(addedGames)} novo(s).`, "success");
+    showToast(t("js.importedToast").replace("%p", addedPlayers).replace("%g", addedGames), "success");
   });
 
   document.getElementById("btn-confirm-import").addEventListener("click", () => {
@@ -2816,7 +3364,7 @@
     document.getElementById("overlay-confirm-import").hidden = true;
     renderDataScreen();
     checkResumeBanner();
-    showToast("Dados substituídos com sucesso.", "success");
+    showToast(t("js.replacedToast"), "success");
   });
 
   /* ---------- apagar tudo ---------- */
@@ -2832,7 +3380,7 @@
     document.getElementById("overlay-confirm-wipe").hidden = true;
     renderDataScreen();
     checkResumeBanner();
-    showToast("Todos os dados foram apagados.", "success");
+    showToast(t("js.wipedToast"), "success");
   });
 
   /* ---------------------------------------------------------
@@ -2928,7 +3476,7 @@
       });
       list.appendChild(row);
     });
-    if (!DATA.players.length) list.innerHTML = `<div class="empty-state"><p>Cria jogadores primeiro.</p></div>`;
+    if (!DATA.players.length) list.innerHTML = `<div class="empty-state"><p>${t("js.createPlayersFirst")}</p></div>`;
   }
   document.querySelectorAll("#opt-tournament-size .setup-option").forEach(b => b.addEventListener("click", () => { tournamentSetup.size=Number(b.dataset.size); tournamentSetup.players.clear(); renderTournamentPlayerList(); updateTournamentSetupUI(); }));
   document.querySelectorAll("#opt-tournament-mode .setup-option").forEach(b => b.addEventListener("click", () => { tournamentSetup.mode=b.dataset.tmode; updateTournamentSetupUI(); }));
@@ -2946,23 +3494,23 @@
     DATA.activeTournament = {id:uid("tournament"),seeded,bracket,mode:tournamentSetup.mode,points:tournamentSetup.points,format:tournamentSetup.format,status:"ongoing",winner:null,startedAt:new Date().toISOString()};
     saveData(); renderTournamentBracket(); showScreen("screen-tournament-bracket"); checkResumeBanner();
   }
-  function tournamentRoundLabel(ri,total) { const f=total-1-ri; if(f===0)returnt("js.roundF"); if(f===1)returnt("js.roundSF"); if(f===2)returnt("js.roundQF"); return"Ronda "+(ri+1); }
+  function tournamentRoundLabel(ri,total) { const f=total-1-ri; if(f===0) return t("js.roundF"); if(f===1) return t("js.roundSF"); if(f===2) return t("js.roundQF"); return t("js.roundLabel").replace("%n",ri+1); }
   function renderTournamentBracket() {
-    const t = DATA.activeTournament; if (!t) return;
-    const total = t.bracket.length;
+    const tournament = DATA.activeTournament; if (!tournament) return;
+    const total = tournament.bracket.length;
     const content = document.getElementById("tournament-bracket-content"); content.innerHTML="";
     const scroll = document.createElement("div"); scroll.className="bracket-scroll";
     const bracket = document.createElement("div"); bracket.className="bracket";
-    t.bracket.forEach((round,ri) => {
+    tournament.bracket.forEach((round,ri) => {
       const col = document.createElement("div"); col.className="bracket-round";
       const lbl = document.createElement("div"); lbl.className="bracket-round-label"; lbl.textContent=tournamentRoundLabel(ri,total); col.appendChild(lbl);
       round.forEach((match,mi) => {
         const p1=match.player1Id?getPlayer(match.player1Id):null, p2=match.player2Id?getPlayer(match.player2Id):null;
         const isDone=!!match.winnerId, isNext=!isDone&&p1&&p2&&!DATA.activeGame;
         const mel=document.createElement("div"); mel.className="bracket-match"+(isDone?" is-done":"")+(isNext?" is-next":"");
-        const s1=p1?t.seeded.indexOf(match.player1Id)+1:null, s2=p2?t.seeded.indexOf(match.player2Id)+1:null;
+        const s1=p1?tournament.seeded.indexOf(match.player1Id)+1:null, s2=p2?tournament.seeded.indexOf(match.player2Id)+1:null;
         const p1w=match.winnerId===match.player1Id, p2w=match.winnerId===match.player2Id;
-        mel.innerHTML=`<div class="bracket-player ${p1w?"is-winner":isDone?"is-loser":""}"><span class="bracket-player-seed">${s1?"#"+s1:""}</span><span class="bracket-player-name">${p1?escapeHTML(p1.name):'<span class="bracket-tbd">'+t("js.tbd")+'</span>'}</span></div><div class="bracket-player ${p2w?"is-winner":isDone?"is-loser":""}"><span class="bracket-player-seed">${s2?"#"+s2:""}</span><span class="bracket-player-name">${p2?escapeHTML(p2.name):'<span class="bracket-tbd">'+t("js.tbd")+'</span>'}</span></div>${isNext?`<button class="bracket-play-btn" data-r="${ri}" data-m="${mi}">▶ JOGAR</button>`:""}`;
+        mel.innerHTML=`<div class="bracket-player ${p1w?"is-winner":isDone?"is-loser":""}"><span class="bracket-player-seed">${s1?"#"+s1:""}</span><span class="bracket-player-name">${p1?escapeHTML(p1.name):'<span class="bracket-tbd">'+t("js.tbd")+'</span>'}</span></div><div class="bracket-player ${p2w?"is-winner":isDone?"is-loser":""}"><span class="bracket-player-seed">${s2?"#"+s2:""}</span><span class="bracket-player-name">${p2?escapeHTML(p2.name):'<span class="bracket-tbd">'+t("js.tbd")+'</span>'}</span></div>${isNext?`<button class="bracket-play-btn" data-r="${ri}" data-m="${mi}">▶ ${t("js.play")}</button>`:""}`;
         if (isNext) mel.querySelector(".bracket-play-btn").addEventListener("click",()=>startTournamentMatch(ri,mi));
         col.appendChild(mel);
       });
@@ -2972,39 +3520,39 @@
     scroll.appendChild(bracket); content.appendChild(scroll);
   }
   function startTournamentMatch(ri,mi) {
-    const t=DATA.activeTournament; const match=t.bracket[ri][mi];
-    t._pendingRound=ri; t._pendingMatch=mi; saveData();
-    startNewGame(match.player1Id,match.player2Id,t.points,t.format,"",t.mode);
-    game.tournamentId=t.id; persistActiveGame(); openBolarScreen();
+    const tournament=DATA.activeTournament; const match=tournament.bracket[ri][mi];
+    tournament._pendingRound=ri; tournament._pendingMatch=mi; saveData();
+    startNewGame(match.player1Id,match.player2Id,tournament.points,tournament.format,"",tournament.mode);
+    game.tournamentId=tournament.id; persistActiveGame(); openBolarScreen();
   }
   function onTournamentGameFinished(record) {
-    const t=DATA.activeTournament; if(!t||t.status==="done") return;
-    if(!record.tournamentId||record.tournamentId!==t.id) return;
-    const ri=t._pendingRound,mi=t._pendingMatch; if(ri==null) return;
-    const match=t.bracket[ri][mi];
+    const tournament=DATA.activeTournament; if(!tournament||tournament.status==="done") return;
+    if(!record.tournamentId||record.tournamentId!==tournament.id) return;
+    const ri=tournament._pendingRound,mi=tournament._pendingMatch; if(ri==null) return;
+    const match=tournament.bracket[ri][mi];
     match.winnerId=record.winnerSide==="blue"?record.blue.playerId:record.white.playerId; match.gameId=record.id;
-    delete t._pendingRound; delete t._pendingMatch;
+    delete tournament._pendingRound; delete tournament._pendingMatch;
     const nr=ri+1;
-    if(nr<t.bracket.length){const nmi=Math.floor(mi/2),slot=mi%2===0?"player1Id":"player2Id";t.bracket[nr][nmi][slot]=match.winnerId;}
-    const last=t.bracket[t.bracket.length-1];
+    if(nr<tournament.bracket.length){const nmi=Math.floor(mi/2),slot=mi%2===0?"player1Id":"player2Id";tournament.bracket[nr][nmi][slot]=match.winnerId;}
+    const last=tournament.bracket[tournament.bracket.length-1];
     if(last.length===1&&last[0].winnerId){
-      t.winner=last[0].winnerId; t.status="done"; t.endedAt=new Date().toISOString();
+      tournament.winner=last[0].winnerId; tournament.status="done"; tournament.endedAt=new Date().toISOString();
       if(!DATA.tournamentHistory)DATA.tournamentHistory=[];
-      DATA.tournamentHistory.push({id:t.id,winner:t.winner,seeded:t.seeded,startedAt:t.startedAt,endedAt:t.endedAt});
+      DATA.tournamentHistory.push({id:tournament.id,winner:tournament.winner,seeded:tournament.seeded,startedAt:tournament.startedAt,endedAt:tournament.endedAt});
       saveData();
-      t.seeded.forEach(pid=>checkAchievements("tournament",pid));
-      document.getElementById("tournament-winner-name").textContent=getPlayer(t.winner)?.name||"—";
-      document.getElementById("tournament-winner-sub").textContent=(t.seeded.length-1)+" jogos · "+t.seeded.length+" jogadores";
+      tournament.seeded.forEach(pid=>checkAchievements("tournament",pid));
+      document.getElementById("tournament-winner-name").textContent=getPlayer(tournament.winner)?.name||"—";
+      document.getElementById("tournament-winner-sub").textContent=t("js.tournamentWinnerSub").replace("%m",tournament.seeded.length-1).replace("%p",tournament.seeded.length);
       showScreen("screen-tournament-winner"); checkResumeBanner();
     } else { saveData(); renderTournamentBracket(); showScreen("screen-tournament-bracket"); }
   }
   function computePlayerTournamentStats(playerId) {
     const h=DATA.tournamentHistory||[];
-    return{total:h.filter(t=>t.seeded&&t.seeded.includes(playerId)).length,won:h.filter(t=>t.winner===playerId).length};
+    return{total:h.filter(tr=>tr.seeded&&tr.seeded.includes(playerId)).length,won:h.filter(tr=>tr.winner===playerId).length};
   }
   document.getElementById("btn-tournament-done").addEventListener("click",()=>{DATA.activeTournament=null;saveData();checkResumeBanner();showScreen("screen-menu");});
   document.getElementById("btn-tournament-back").addEventListener("click",()=>showScreen("screen-menu"));
-  document.getElementById("btn-tournament-abandon").addEventListener("click",()=>{if(confirm("Abandonar o torneio?")){DATA.activeTournament=null;saveData();checkResumeBanner();showScreen("screen-menu");}});
+  document.getElementById("btn-tournament-abandon").addEventListener("click",()=>{if(confirm(t("js.confirmAbandon"))){DATA.activeTournament=null;saveData();checkResumeBanner();showScreen("screen-menu");}});
 
   /* ═══ MODO TREINO ═══ */
   let trainingState={running:false,paused:false,isTimed:false,targetMs:0,elapsedMs:0,startTs:null,rafId:null,muted:false,halfSounded:false,last10Sounded:false,_pausedOffset:0};
@@ -3110,7 +3658,7 @@
 
   /* Toques Rápidos */
   let tapGame={level:1,score:0};
-  document.getElementById("btn-minigame-tap").addEventListener("click",()=>{if(!currentMiniGamePlayer){showToast("Escolhe um jogador primeiro","error");return;}resetTapGame();showScreen("screen-mg-tap");});
+  document.getElementById("btn-minigame-tap").addEventListener("click",()=>{if(!currentMiniGamePlayer){showToast(t("js.choosePlayerFirst"),"error");return;}resetTapGame();showScreen("screen-mg-tap");});
   function resetTapGame(){
     tapGame={level:1,score:0};
     document.getElementById("mg-tap-score").textContent="0";
@@ -3152,7 +3700,7 @@
 
   /* Memória Visual */
   let memGame={level:1,seq:[],playerSeq:[],showing:false,gridSize:3};
-  document.getElementById("btn-minigame-memory").addEventListener("click",()=>{if(!currentMiniGamePlayer){showToast("Escolhe um jogador primeiro","error");return;}resetMemGame();showScreen("screen-mg-memory");});
+  document.getElementById("btn-minigame-memory").addEventListener("click",()=>{if(!currentMiniGamePlayer){showToast(t("js.choosePlayerFirst"),"error");return;}resetMemGame();showScreen("screen-mg-memory");});
   function resetMemGame(){
     memGame={level:1,seq:[],playerSeq:[],showing:false,gridSize:3};
     document.getElementById("mg-memory-level").textContent="1";
@@ -3345,7 +3893,7 @@
     const total=ACHIEVEMENTS.length;
     const done=ACHIEVEMENTS.filter(a=>a.cat==="Treino"?!!gUnlocked[a.id]:!!unlocked[a.id]).length;
     document.getElementById("ach-progress-bar-fill").style.width=(done/total*100)+"%";
-    document.getElementById("ach-progress-text").textContent=done+" / "+total+" conquistas";
+    document.getElementById("ach-progress-text").textContent=t("js.achProgressText").replace("%d",done).replace("%t",total);
     const cats={};ACHIEVEMENTS.forEach(a=>{if(!cats[a.cat])cats[a.cat]=[];cats[a.cat].push(a);});
     const container=document.getElementById("ach-list");container.innerHTML="";
     Object.entries(cats).forEach(([cat,items])=>{
@@ -3376,14 +3924,14 @@
     const allElos=computeAllElos();
     const recs=[
       {icon:"📈",label:t("js.recElo"),get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const e=allElos[p.id]||ELO_BASE;if(e>bv){bv=e;b=p;}});return b?{player:b,value:bv+" ELO"}:null;}},
-      {icon:"🔥",label:t("js.recStreak"),get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const s=_maxStreak(p.id);if(s>bv){bv=s;b=p;}});return b&&bv>0?{player:b,value:bv+" vitórias"}:null;}},
-      {icon:"🏓",label:t("js.recWins"),get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const w=_wins(p.id);if(w>bv){bv=w;b=p;}});return b&&bv>0?{player:b,value:bv+" vitórias"}:null;}},
-      {icon:"💀",label:t("js.recCapotes"),get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const s=computePlayerStats(p.id,allElos);if(s.capotes>bv){bv=s.capotes;b=p;}});return b&&bv>0?{player:b,value:bv+" capotes"}:null;}},
-      {icon:"🏆",label:t("js.recTournaments"),get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const t=_tourWins(p.id);if(t>bv){bv=t;b=p;}});return b&&bv>0?{player:b,value:bv+" torneios"}:null;}},
-      {icon:"🎯",label:"Mais Pontos Acumulados",get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const pts=_totalPoints(p.id);if(pts>bv){bv=pts;b=p;}});return b&&bv>0?{player:b,value:bv+" pontos"}:null;}},
-      {icon:"⏱️",label:"Mais Tempo de Treino",get:()=>{const s=DATA.trainingStats["global"];return s&&s.totalMinutes>0?{player:null,value:Math.round(s.totalMinutes)+" min"}:null;}},
-      {icon:"⚡",label:t("js.recMgTap"),get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const r=getMgRec("tap",p.id);if(r>bv){bv=r;b=p;}});return b&&bv>0?{player:b,value:bv+" pontos"}:null;}},
-      {icon:"🧠",label:"Recorde Memória Visual",get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const r=getMgRec("memory",p.id);if(r>bv){bv=r;b=p;}});return b&&bv>0?{player:b,value:"nível "+bv}:null;}},
+      {icon:"🔥",label:t("js.recStreak"),get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const s=_maxStreak(p.id);if(s>bv){bv=s;b=p;}});return b&&bv>0?{player:b,value:bv+" "+t("js.winsUnit")}:null;}},
+      {icon:"🏓",label:t("js.recWins"),get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const w=_wins(p.id);if(w>bv){bv=w;b=p;}});return b&&bv>0?{player:b,value:bv+" "+t("js.winsUnit")}:null;}},
+      {icon:"💀",label:t("js.recCapotes"),get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const s=computePlayerStats(p.id,allElos);if(s.capotes>bv){bv=s.capotes;b=p;}});return b&&bv>0?{player:b,value:bv+" "+t("js.capotesUnit")}:null;}},
+      {icon:"🏆",label:t("js.recTournaments"),get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const tw=_tourWins(p.id);if(tw>bv){bv=tw;b=p;}});return b&&bv>0?{player:b,value:bv+" "+t("js.tournamentsUnit")}:null;}},
+      {icon:"🎯",label:t("js.recMorePoints"),get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const pts=_totalPoints(p.id);if(pts>bv){bv=pts;b=p;}});return b&&bv>0?{player:b,value:bv+" "+t("js.pointsUnit")}:null;}},
+      {icon:"⏱️",label:t("js.recMoreTraining"),get:()=>{const s=DATA.trainingStats["global"];return s&&s.totalMinutes>0?{player:null,value:Math.round(s.totalMinutes)+" "+t("js.minUnit")}:null;}},
+      {icon:"⚡",label:t("js.recMgTap"),get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const r=getMgRec("tap",p.id);if(r>bv){bv=r;b=p;}});return b&&bv>0?{player:b,value:bv+" "+t("js.pointsUnit")}:null;}},
+      {icon:"🧠",label:t("js.recMgMemory2"),get:()=>{let b=null,bv=0;DATA.players.forEach(p=>{const r=getMgRec("memory",p.id);if(r>bv){bv=r;b=p;}});return b&&bv>0?{player:b,value:t("js.levelPrefix")+bv}:null;}},
     ];
     recs.forEach(rec=>{
       const data=rec.get();
