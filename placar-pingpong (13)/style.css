@@ -1155,3 +1155,6 @@ input{ font-family:inherit; }
 .mg-memory-cell.is-lit{background:var(--yellow);border-color:var(--yellow-deep);transform:scale(1.06);}
 .mg-memory-cell.is-correct{background:#2f8f4e;border-color:#2f8f4e;}
 .mg-memory-cell.is-wrong{background:var(--danger);border-color:var(--danger);}
+
+/* fix global: hidden sempre ganha */
+[hidden]{ display:none !important; pointer-events:none !important; }
