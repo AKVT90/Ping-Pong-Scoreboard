@@ -273,6 +273,18 @@
       "js.tournament.size":"Tamanho",
       "js.tournament.mode":"Modo",
       "js.mode.customDesc":"11 ou 21 pontos · livre, MD3 ou MD5 · serviço alterna a cada 5 pontos somados",
+      "mg.quiz":"Quiz de Regras","mg.quizSub":"Testa os teus conhecimentos das regras ITTF",
+      "mg.rules":"Regras ITTF","mg.rulesSub":"Todas as regras oficiais do ténis de mesa",
+      "js.mgQuizScore":"Pontos:","js.mgQuizIntro":"Escolhe o nível de dificuldade",
+      "js.mgQuizEasy":"Fácil","js.mgQuizEasyDesc":"Regras básicas do jogo",
+      "js.mgQuizMedium":"Médio","js.mgQuizMediumDesc":"Regras de serviço e pontuação",
+      "js.mgQuizHard":"Difícil","js.mgQuizHardDesc":"Regulamentação e torneios",
+      "js.mgQuizBestScore":"Melhor pontuação:","js.mgQuizNext":"Próxima ▸",
+      "js.mgQuizFinalScore":"Pontuação final:","js.mgQuizCorrect":"Correto! ✓",
+      "js.mgQuizWrong":"Errado ✗","js.mgQuizChooseFirst":"Escolhe um jogador primeiro",
+      "js.mgQuizResultGreat":"Excelente! Conheces muito bem as regras!",
+      "js.mgQuizResultGood":"Bom trabalho! Continua a estudar as regras.",
+      "js.mgQuizResultTry":"Continua a praticar e a ler as regras ITTF.",
     },
     en: {
       "menu.newGame":"New Game","menu.newGameSub":"Choose players and start",
@@ -479,6 +491,18 @@
       "js.tournament.size":"Size",
       "js.tournament.mode":"Mode",
       "js.mode.customDesc":"11 or 21 points · free, BO3 or BO5 · service alternates every 5 points",
+      "mg.quiz":"Rules Quiz","mg.quizSub":"Test your knowledge of ITTF rules",
+      "mg.rules":"ITTF Rules","mg.rulesSub":"All official table tennis rules",
+      "js.mgQuizScore":"Score:","js.mgQuizIntro":"Choose difficulty level",
+      "js.mgQuizEasy":"Easy","js.mgQuizEasyDesc":"Basic game rules",
+      "js.mgQuizMedium":"Medium","js.mgQuizMediumDesc":"Service and scoring rules",
+      "js.mgQuizHard":"Hard","js.mgQuizHardDesc":"Regulations and tournaments",
+      "js.mgQuizBestScore":"Best score:","js.mgQuizNext":"Next ▸",
+      "js.mgQuizFinalScore":"Final score:","js.mgQuizCorrect":"Correct! ✓",
+      "js.mgQuizWrong":"Wrong ✗","js.mgQuizChooseFirst":"Choose a player first",
+      "js.mgQuizResultGreat":"Excellent! You know the rules very well!",
+      "js.mgQuizResultGood":"Good job! Keep studying the rules.",
+      "js.mgQuizResultTry":"Keep practising and reading the ITTF rules.",
     },
     es: {
       "menu.newGame":"Nueva Partida","menu.newGameSub":"Elegir jugadores y empezar",
@@ -685,6 +709,18 @@
       "js.tournament.size":"Tamaño",
       "js.tournament.mode":"Modo",
       "js.mode.customDesc":"11 o 21 puntos · libre, MD3 o MD5 · saque alterna cada 5 puntos",
+      "mg.quiz":"Quiz de Reglas","mg.quizSub":"Pon a prueba tu conocimiento de las reglas ITTF",
+      "mg.rules":"Reglas ITTF","mg.rulesSub":"Todas las reglas oficiales del tenis de mesa",
+      "js.mgQuizScore":"Puntos:","js.mgQuizIntro":"Elige el nivel de dificultad",
+      "js.mgQuizEasy":"Fácil","js.mgQuizEasyDesc":"Reglas básicas del juego",
+      "js.mgQuizMedium":"Medio","js.mgQuizMediumDesc":"Reglas de saque y puntuación",
+      "js.mgQuizHard":"Difícil","js.mgQuizHardDesc":"Reglamento y torneos",
+      "js.mgQuizBestScore":"Mejor puntuación:","js.mgQuizNext":"Siguiente ▸",
+      "js.mgQuizFinalScore":"Puntuación final:","js.mgQuizCorrect":"¡Correcto! ✓",
+      "js.mgQuizWrong":"Incorrecto ✗","js.mgQuizChooseFirst":"Elige un jugador primero",
+      "js.mgQuizResultGreat":"¡Excelente! ¡Conoces muy bien las reglas!",
+      "js.mgQuizResultGood":"¡Buen trabajo! Sigue estudiando las reglas.",
+      "js.mgQuizResultTry":"Sigue practicando y leyendo las reglas ITTF.",
     },
     fr: {
       "menu.newGame":"Nouvelle Partie","menu.newGameSub":"Choisir les joueurs et commencer",
@@ -891,6 +927,18 @@
       "js.tournament.size":"Taille",
       "js.tournament.mode":"Mode",
       "js.mode.customDesc":"11 ou 21 points · libre, MD3 ou MD5 · service alterne tous les 5 points",
+      "mg.quiz":"Quiz de Règles","mg.quizSub":"Testez vos connaissances des règles ITTF",
+      "mg.rules":"Règles ITTF","mg.rulesSub":"Toutes les règles officielles du tennis de table",
+      "js.mgQuizScore":"Points :","js.mgQuizIntro":"Choisissez le niveau de difficulté",
+      "js.mgQuizEasy":"Facile","js.mgQuizEasyDesc":"Règles de base du jeu",
+      "js.mgQuizMedium":"Moyen","js.mgQuizMediumDesc":"Règles de service et de score",
+      "js.mgQuizHard":"Difficile","js.mgQuizHardDesc":"Règlement et tournois",
+      "js.mgQuizBestScore":"Meilleur score :","js.mgQuizNext":"Suivant ▸",
+      "js.mgQuizFinalScore":"Score final :","js.mgQuizCorrect":"Correct ! ✓",
+      "js.mgQuizWrong":"Faux ✗","js.mgQuizChooseFirst":"Choisissez un joueur d'abord",
+      "js.mgQuizResultGreat":"Excellent ! Vous connaissez très bien les règles !",
+      "js.mgQuizResultGood":"Bon travail ! Continuez à étudier les règles.",
+      "js.mgQuizResultTry":"Continuez à pratiquer et à lire les règles ITTF.",
     },
     de: {
       "menu.newGame":"Neues Spiel","menu.newGameSub":"Spieler wählen und starten",
@@ -1097,6 +1145,18 @@
       "js.tournament.size":"Größe",
       "js.tournament.mode":"Modus",
       "js.mode.customDesc":"11 oder 21 Punkte · offen, BO3 oder BO5 · Aufschlag wechselt alle 5 Punkte",
+      "mg.quiz":"Regelquiz","mg.quizSub":"Teste dein ITTF-Regelwissen",
+      "mg.rules":"ITTF-Regeln","mg.rulesSub":"Alle offiziellen Tischtennis-Regeln",
+      "js.mgQuizScore":"Punkte:","js.mgQuizIntro":"Wähle den Schwierigkeitsgrad",
+      "js.mgQuizEasy":"Leicht","js.mgQuizEasyDesc":"Grundregeln des Spiels",
+      "js.mgQuizMedium":"Mittel","js.mgQuizMediumDesc":"Aufschlag- und Punktregeln",
+      "js.mgQuizHard":"Schwer","js.mgQuizHardDesc":"Regelwerk und Turniere",
+      "js.mgQuizBestScore":"Bestes Ergebnis:","js.mgQuizNext":"Weiter ▸",
+      "js.mgQuizFinalScore":"Endergebnis:","js.mgQuizCorrect":"Richtig! ✓",
+      "js.mgQuizWrong":"Falsch ✗","js.mgQuizChooseFirst":"Wähle zuerst einen Spieler",
+      "js.mgQuizResultGreat":"Ausgezeichnet! Du kennst die Regeln sehr gut!",
+      "js.mgQuizResultGood":"Gut gemacht! Lerne weiter die Regeln.",
+      "js.mgQuizResultTry":"Übe weiter und lies die ITTF-Regeln.",
     },
     zh: {
       "menu.newGame":"新局","menu.newGameSub":"选择球员并开始",
@@ -1303,6 +1363,18 @@
       "js.tournament.size":"规模",
       "js.tournament.mode":"模式",
       "js.mode.customDesc":"11或21分 · 自由、三局两胜或五局三胜 · 每5分交换发球权",
+      "mg.quiz":"规则问答","mg.quizSub":"测试你对ITTF规则的了解",
+      "mg.rules":"ITTF规则","mg.rulesSub":"乒乓球全部官方规则",
+      "js.mgQuizScore":"分数：","js.mgQuizIntro":"选择难度级别",
+      "js.mgQuizEasy":"简单","js.mgQuizEasyDesc":"基本游戏规则",
+      "js.mgQuizMedium":"中等","js.mgQuizMediumDesc":"发球和得分规则",
+      "js.mgQuizHard":"困难","js.mgQuizHardDesc":"规章制度和锦标赛",
+      "js.mgQuizBestScore":"最高分：","js.mgQuizNext":"下一题 ▸",
+      "js.mgQuizFinalScore":"最终分数：","js.mgQuizCorrect":"正确！✓",
+      "js.mgQuizWrong":"错误 ✗","js.mgQuizChooseFirst":"请先选择玩家",
+      "js.mgQuizResultGreat":"出色！你非常了解规则！",
+      "js.mgQuizResultGood":"干得好！继续学习规则。",
+      "js.mgQuizResultTry":"继续练习并阅读ITTF规则。",
     },
 
     ja: {
@@ -1510,6 +1582,18 @@
       "js.tournament.size":"サイズ",
       "js.tournament.mode":"モード",
       "js.mode.customDesc":"11点または21点 · フリー、BO3またはBO5 · 5点ごとにサービス交代",
+      "mg.quiz":"ルールクイズ","mg.quizSub":"ITTFルールの知識をテスト",
+      "mg.rules":"ITTFルール","mg.rulesSub":"卓球の全公式ルール",
+      "js.mgQuizScore":"得点：","js.mgQuizIntro":"難易度を選んでください",
+      "js.mgQuizEasy":"かんたん","js.mgQuizEasyDesc":"基本的なゲームルール",
+      "js.mgQuizMedium":"ふつう","js.mgQuizMediumDesc":"サービスと採点のルール",
+      "js.mgQuizHard":"むずかしい","js.mgQuizHardDesc":"規則とトーナメント",
+      "js.mgQuizBestScore":"ベストスコア：","js.mgQuizNext":"次へ ▸",
+      "js.mgQuizFinalScore":"最終スコア：","js.mgQuizCorrect":"正解！✓",
+      "js.mgQuizWrong":"不正解 ✗","js.mgQuizChooseFirst":"先にプレイヤーを選択してください",
+      "js.mgQuizResultGreat":"素晴らしい！ルールをよく知っています！",
+      "js.mgQuizResultGood":"よくできました！ルールの学習を続けてください。",
+      "js.mgQuizResultTry":"練習を続けてITTFルールを読んでください。",
     },
   };
 
@@ -3755,6 +3839,354 @@
     document.getElementById("mg-memory-gameover").hidden=false;
   }
 
+
+  /* ═══ QUIZ DE REGRAS ITTF ═══ */
+
+  const ITTF_QUIZ = {
+    easy: [
+      {q:"Quantos pontos são necessários para ganhar um set no ténis de mesa (modo standard)?",a:0,opts:["11","21","15","9"],exp:"Na ITTF, um set é ganho ao atingir 11 pontos, com uma vantagem mínima de 2 pontos."},
+      {q:"De quantos em quantos pontos se troca o serviço durante um jogo?",a:0,opts:["2","5","3","1"],exp:"O serviço muda a cada 2 pontos, exceto em caso de deuce (10-10)."},
+      {q:"O que é o 'deuce' no ténis de mesa?",a:2,opts:["Vitória por 11-0","Falta de serviço","Empate a 10 pontos que exige vantagem de 2","Ponto disputado"],exp:"Deuce ocorre quando o marcador fica 10-10. A partir daí, o serviço muda a cada ponto e é necessária uma vantagem de 2 pontos para ganhar o set."},
+      {q:"Qual é o diâmetro oficial da bola de ténis de mesa (ITTF)?",a:1,opts:["36 mm","40 mm","38 mm","42 mm"],exp:"A bola oficial ITTF tem 40 mm de diâmetro (introduzido em 2000, substituindo 38 mm)."},
+      {q:"Ao servir, o lançamento da bola deve ter pelo menos quantos centímetros de altura?",a:2,opts:["10 cm","15 cm","16 cm","20 cm"],exp:"A bola deve ser lançada quase verticalmente para cima, pelo menos 16 cm, a partir da palma da mão aberta."},
+      {q:"Quando um set chega a 10-10, quantos pontos consecutivos são necessários para ganhar?",a:1,opts:["1","2","3","4"],exp:"Em deuce (10-10), é necessária uma vantagem de 2 pontos, ou seja, dois pontos consecutivos sobre o adversário."},
+      {q:"A mesa de ténis de mesa tem que dimensões?",a:0,opts:["274 × 152,5 cm","260 × 140 cm","280 × 160 cm","250 × 130 cm"],exp:"A mesa oficial ITTF mede 274 cm de comprimento × 152,5 cm de largura, com altura de 76 cm."},
+      {q:"A que altura fica o topo da rede oficial ITTF?",a:1,opts:["14,25 cm","15,25 cm","16,25 cm","13,25 cm"],exp:"A rede tem 15,25 cm de altura ao centro e ao longo de toda a sua extensão."},
+      {q:"Quantos sets tem normalmente um jogo clássico ITTF (competição)?",a:2,opts:["3","5","7","9"],exp:"Na maioria das competições ITTF usa-se o formato melhor de 7 (4 sets ganhos para vencer). Para muitos eventos usa-se também melhor de 5 ou 3."},
+      {q:"O que acontece se a bola toca a rede durante o serviço?",a:0,opts:["Recomeça-se (let)","Ponto para o adversário","Ponto para quem serve","Segunda oportunidade"],exp:"Se a bola toca a rede e cai na metade correta da mesa, é um 'let' e o serviço é repetido sem penalização."},
+      {q:"Em que lado da mesa deve cair a bola no serviço (jogo de singulares)?",a:1,opts:["Só no lado esquerdo","Em qualquer ponto da metade do adversário","Só no lado direito","Na diagonal"],exp:"Em singulares, a bola deve apenas cair na metade da mesa do adversário, em qualquer ponto. Não há restrição diagonal (ao contrário dos pares)."},
+      {q:"Qual a cor padrão da superfície da mesa ITTF?",a:0,opts:["Azul ou verde","Vermelho ou amarelo","Branco","Preto"],exp:"A superfície da mesa deve ser de cor uniforme, mate (não brilhante), tipicamente azul escuro ou verde."},
+      {q:"O que é um 'expedite system' (sistema de aceleração)?",a:2,opts:["Forma de acelerar o serviço","Sistema de desempate por sorteio","Regra que limita um set a 10 minutos de duração","Sistema de pontuação dupla"],exp:"Após 10 minutos de jogo num set, entra em vigor o 'expedite system': o ponto é ganho pelo recetor se o servidor fizer 13 pancadas consecutivas sem ganhar o ponto."},
+      {q:"Em pares, qual é a regra do serviço?",a:1,opts:["Qualquer jogador pode servir para qualquer lado","A bola deve ir em diagonal — metade direita para metade direita","A bola deve ir para a metade esquerda do adversário","Não há restrições em pares"],exp:"Em pares (duplas), o serviço deve ser feito em diagonal: da metade direita do servidor para a metade direita do recetor."},
+      {q:"Um jogador pode apoiar a mão livre na mesa durante o jogo?",a:1,opts:["Sim, é permitido","Não, ponto para o adversário se tocar","Só no lado do próprio jogador","Apenas durante o serviço"],exp:"Se a mão livre (a que não segura a raquete) tocar a superfície de jogo durante um rally, o ponto é perdido pelo jogador infrator."},
+    ],
+    medium: [
+      {q:"Após um 'let' no serviço, o que acontece ao par de pontos desse serviço?",a:0,opts:["O serviço é repetido, sem mudar a contagem","Perde-se um dos dois pontos desse par","O par de serviços reinicia","O adversário ganha o serviço"],exp:"Um 'let' anula o serviço. O servidor repete exatamente o mesmo serviço, sem alterar nenhum marcador ou par de pontos."},
+      {q:"Quando começa exatamente o 'expedite system'?",a:1,opts:["Quando o marcador chega a 9-9","Após 10 minutos de jogo num set, se nenhum jogador ainda tiver 9 pontos","Sempre que um set dura mais de 8 minutos","Quando o atacante faz 10 pancadas seguidas"],exp:"O expedite system é introduzido após 10 minutos de jogo num set, desde que nenhum dos jogadores tenha chegado aos 9 pontos. A qualquer momento pode ser pedido por ambos os jogadores."},
+      {q:"O que acontece se a bola toca a borda lateral da mesa?",a:1,opts:["É 'let'","Ponto para quem bateu na bola","Ponto para o adversário","Repetição do ponto"],exp:"A borda lateral (borda lateral da superfície de jogo) não é válida. Se a bola toca a borda lateral, é ponto para o adversário."},
+      {q:"A bola pode tocar a borda superior da mesa (edge) e ser boa?",a:0,opts:["Sim, é ponto válido","Não, é falta","Apenas no serviço","Apenas se cair para dentro"],exp:"Se a bola toca a borda superior da mesa (edge — a superfície de jogo), é um ponto válido, pois faz parte da superfície de jogo."},
+      {q:"Qual é o peso oficial de uma bola ITTF?",a:2,opts:["2,0 g","2,3 g","2,7 g","3,0 g"],exp:"A bola oficial ITTF pesa 2,7 gramas."},
+      {q:"Durante o serviço, em que posição deve estar a palma da mão livre ao lançar a bola?",a:0,opts:["Aberta e plana, acima do nível da mesa","Fechada em punho","Apontada para o adversário","Abaixo do nível da mesa"],exp:"A bola deve estar na palma da mão aberta e imóvel, acima do nível da superfície de jogo, antes de ser lançada para o serviço."},
+      {q:"O topo da rede pode ser tocado pela bola durante um rally (não no serviço)?",a:0,opts:["Sim, se cair do outro lado é ponto válido","Não, é sempre falta","Só se a bola não parar na rede","É sempre 'let'"],exp:"Durante o rally, se a bola toca o topo da rede e cai válida no outro lado, o ponto é válido (não é let — o let só existe no serviço)."},
+      {q:"Se um jogador interrompe o jogo intencionalmente sem razão válida, o que acontece?",a:2,opts:["O set é anulado","O árbitro dá um aviso oral","O ponto em disputa é atribuído ao adversário","O jogador é desqualificado"],exp:"Interrupção deliberada do jogo é considerada 'má conduta'. O árbitro pode atribuir o ponto ao adversário como penalização."},
+      {q:"Em singulares, o servidor tem de bater na bola do próprio lado antes de ir para o outro lado?",a:1,opts:["Sim, obrigatório","Não, a bola vai diretamente para o lado do adversário","Só no primeiro serviço de cada jogo","Depende do modo de jogo"],exp:"Em singulares, a bola vai diretamente da raquete para a metade do adversário, sem tocar no lado do servidor. É em pares que o serviço deve ser diagonal."},
+      {q:"O que é um 'good return' (devolução válida)?",a:3,opts:["Bola que toca sempre a rede","Bola que bate na mesa do servidor","Bola que cai fora da mesa","Bola que passa a rede e cai dentro da mesa do adversário ou na borda"],exp:"Uma devolução válida é aquela em que a bola (após ser batida) passa sobre ou à volta da rede e cai na área de jogo do adversário ou na borda superior da mesa."},
+      {q:"Pode um jogador bater na bola antes de ela tocar a sua metade da mesa (volley)?",a:1,opts:["Sim, se a bola estiver a sair da mesa","Não, ponto para o adversário","Só no último ponto do set","Apenas se a bola tocar a rede antes"],exp:"É proibido bater na bola antes de ela tocar a sua metade da mesa (volley). Se o fizer, perde o ponto, mesmo que a bola fosse para fora."},
+      {q:"O que sucede se o servidor lança a bola e decide não a bater?",a:1,opts:["É automático 'let'","É falta e ponto para o adversário","Pode apanhar a bola e repetir","É aviso oral do árbitro"],exp:"Se o servidor lançar a bola para o serviço e não a bater, é falta — o ponto vai para o adversário."},
+      {q:"Se a bola em jogo toca num objeto alheio (roupa do jogador, etc.), o que acontece?",a:0,opts:["Ponto para o adversário","É 'let'","O ponto é repetido","Depende do árbitro"],exp:"Se a bola em jogo tocar qualquer coisa que não seja a rede, os seus suportes ou a mesa, o ponto vai para o adversário."},
+      {q:"Qual é a altura mínima do teto ou obstáculo acima da mesa em competições ITTF?",a:2,opts:["3 m","4 m","5 m","6 m"],exp:"A ITTF recomenda pelo menos 5 metros de espaço livre acima da mesa para competições internacionais."},
+      {q:"Em pares, após cada set, como muda a ordem de serviço?",a:1,opts:["Mantém-se igual","O recetor do último serviço torna-se servidor","O parceiro do servidor torna-se o próximo servidor","Escolha livre dos jogadores"],exp:"Em pares, o par que recebeu no set anterior passará a servir, e o jogador que serviu por último passará a receber."},
+    ],
+    hard: [
+      {q:"Segundo o regulamento ITTF, quais as cores obrigatórias dos revestimentos (borrachas) de uma raquete?",a:0,opts:["Um lado vermelho, outro lado preto","Qualquer cor, desde que diferentes","Azul e vermelho","Verde e preto"],exp:"O regulamento ITTF exige que os dois lados da raquete sejam obrigatoriamente um vermelho e um preto, para que o adversário possa distinguir os revestimentos."},
+      {q:"Qual a espessura máxima do revestimento (borracha + esponja) numa raquete aprovada ITTF?",a:2,opts:["3 mm","3,5 mm","4 mm","5 mm"],exp:"A espessura total de cada lado do revestimento (borracha mais esponja, se existir) não pode exceder 4 mm."},
+      {q:"O que significa 'ITTF approved' numa bola?",a:1,opts:["Bola fabricada em China","Bola testada e homologada pela ITTF para competições internacionais","Bola usada nos Jogos Olímpicos","Bola de 38 mm (formato antigo)"],exp:"'ITTF approved' significa que a bola foi testada e está na lista de produtos aprovados pela ITTF, cumprindo todos os critérios de tamanho, peso, redondeza e cor."},
+      {q:"Segundo a ITTF, pode-se usar revestimentos anti-spin (lisos) na raquete?",a:0,opts:["Sim, desde que sejam aprovados pela ITTF","Não, são proibidos em todas as competições","Só em competições nacionais","Apenas num dos lados"],exp:"Revestimentos anti-spin (pimple-out ou lisos) são permitidos desde que estejam na lista aprovada pela ITTF. A lista de borrachas homologadas é publicada e atualizada regularmente."},
+      {q:"Num torneio ITTF, se um jogador parte a raquete durante o jogo, o que pode fazer?",a:2,opts:["Continuar com qualquer raquete disponível","Deve sair do torneio","Pode substituí-la por uma pré-aprovada pelo árbitro","Pede 5 minutos de pausa para substituir"],exp:"Se a raquete ficar inutilizável, o jogador pode substituí-la, mas a raquete substituta deve ser aprovada pelo árbitro."},
+      {q:"Qual é o procedimento correto da inspeção de raquetes em competições ITTF?",a:1,opts:["Apenas o árbitro principal inspeciona antes da final","Os jogadores mostram as raquetes ao adversário e ao árbitro antes do início do jogo","Só se houver protesto do adversário","Só em competições com classificação mundial"],exp:"Em competições ITTF, cada jogador deve mostrar a sua raquete ao adversário e ao árbitro antes do início do jogo (e após o jogo, se solicitado)."},
+      {q:"Em condições normais, a que intervalo muda a bola num match de competição ITTF?",a:2,opts:["Cada set","Cada 3 pontos","Início de cada jogo ou quando danificada","Nunca, só por dano"],exp:"A bola é substituída no início de cada jogo (match) ou quando está visivelmente danificada durante o jogo."},
+      {q:"O que diz a regra ITTF sobre o uso de substâncias na raquete ('speed glue')?",a:1,opts:["É permitido com aprovação prévia","Está completamente proibido desde 2008","É permitido apenas em competições nacionais","Necessita de certificado médico"],exp:"O uso de cola rápida (speed glue) e adesivos com solventes orgânicos foi proibido pela ITTF em 2008. Só são permitidos adesivos aquosos (water-based)."},
+      {q:"Segundo as regras ITTF, o que é uma 'bad service' (serviço inválido) não corrigida pelo árbitro após advertência?",a:0,opts:["Ponto imediato para o adversário","Segundo serviço","Let repetido","Desclassificação"],exp:"Após advertência por mau serviço, qualquer serviço subsequente inválido resulta em ponto direto para o adversário, sem necessidade de nova advertência."},
+      {q:"Qual é a regra ITTF sobre o 'time-out' (pausa) num jogo?",a:2,opts:["Não é permitido time-out","Cada equipa tem 2 time-outs por jogo","Cada jogador/equipa tem direito a 1 time-out de 1 minuto por jogo","Só o árbitro pode interromper o jogo"],exp:"Cada jogador (ou equipa em pares) tem direito a um time-out de 1 minuto por match (não por set). Pode ser pedido em qualquer momento, exceto durante o serviço."},
+      {q:"O que prevê o regulamento ITTF sobre o treinador (coach) durante o jogo?",a:1,opts:["O treinador pode dar instruções em qualquer momento","O treinador só pode dar instruções durante os intervalos entre sets e durante os time-outs","O treinador pode entrar na área de jogo","Não há regulação sobre o comportamento do treinador"],exp:"O treinador só pode comunicar com o jogador durante os intervalos entre sets e durante os time-outs solicitados. Não é permitido qualquer tipo de instrução durante o jogo em si."},
+      {q:"O que são 'pimples-out' (espinhos para fora) num revestimento de raquete?",a:2,opts:["Revestimento com espinhos virados para dentro","Revestimento completamente liso","Revestimento com espinhos virados para fora, sem camada de esponja atrás","Borracha especial para defesa"],exp:"'Pimples-out' (OX ou sem esponja) é um revestimento com os espinhos de borracha virados para fora. Reduz o efeito (spin) mas melhora o controlo. É permitido pela ITTF se aprovado."},
+      {q:"Quantos minutos de intervalo são permitidos entre sets num jogo ITTF?",a:0,opts:["1 minuto","2 minutos","3 minutos","5 minutos"],exp:"O intervalo entre sets num jogo ITTF tem a duração máxima de 1 minuto."},
+      {q:"O que é o 'phantom serve' e qual é a sua situação regulamentar?",a:1,opts:["Serviço invisível, permitido","Serviço em que a raquete não toca claramente a bola, proibido","Serviço com rotação excessiva, limitada a 3000 RPM","Serviço com bola lançada mais de 30 cm, obrigatório"],exp:"O 'phantom serve' esconde o contato da bola com a raquete (com o corpo ou braço livre), impossibilitando o adversário de ver o momento do impacto. É proibido pelas regras ITTF."},
+      {q:"Em competições ITTF, o que especifica a regra sobre a iluminação da área de jogo?",a:2,opts:["Mínimo de 200 lux","Mínimo de 500 lux","Mínimo de 1000 lux no plano da mesa, sem luz natural direta","Sem requisitos específicos"],exp:"A ITTF recomenda pelo menos 1000 lux uniformemente sobre a superfície da mesa, sem luz solar direta, para competições internacionais."},
+    ]
+  };
+
+  const ITTF_RULES_SECTIONS = [
+    {
+      id:"jogo",
+      icon:"🏓",
+      title:"O Jogo — Regras Gerais",
+      rules:[
+        "Um set é ganho pelo primeiro jogador a atingir 11 pontos, com uma vantagem mínima de 2 pontos sobre o adversário.",
+        "Um jogo (match) é ganho pelo jogador que vencer o maior número de sets no formato definido (melhor de 3, 5 ou 7).",
+        "O jogador que marca um ponto começa a servir no par seguinte (ou mantém o serviço conforme a rotação).",
+        "Se a bola em jogo tocar qualquer parte do corpo de um jogador exceto a mão da raquete, o ponto é perdido.",
+        "A mão livre (que não segura a raquete) NÃO pode tocar a superfície de jogo durante um rally — ponto para o adversário.",
+        "Se a bola tocar a borda superior da mesa (edge), o ponto é válido.",
+        "Se a bola tocar a borda lateral da mesa, o ponto é do adversário — não é área de jogo.",
+        "Um jogador não pode bater na bola antes de ela tocar a sua metade da mesa (não há volley).",
+        "O jogo pode ser interrompido por lesão verificável, falha de equipamento ou outro motivo aceite pelo árbitro.",
+        "Após 10 minutos de jogo num set (sem nenhum jogador atingir 9 pontos), entra em vigor o 'expedite system': o ponto é ganho pelo recetor se o servidor não ganhar em 13 pancadas.",
+      ]
+    },
+    {
+      id:"servico",
+      icon:"🏓",
+      title:"Serviço",
+      rules:[
+        "Ao servir, a bola deve ser colocada na palma da mão aberta e imóvel, acima do nível da superfície de jogo.",
+        "A bola deve ser lançada quase verticalmente para cima, pelo menos 16 cm, sem rotação.",
+        "O servidor deve bater na bola quando desce, de forma que toque primeiro o seu próprio lado da mesa e depois o lado do adversário.",
+        "Em singulares, a bola pode cair em qualquer parte da mesa do adversário.",
+        "Em pares, o serviço deve ser em diagonal: da metade direita do servidor para a metade direita do recetor.",
+        "O contato da bola com a raquete deve ser visível ao adversário e ao árbitro — não pode ser ocultado pelo corpo.",
+        "Se a bola toca a rede no serviço e cai válida, é 'let' — o serviço é repetido.",
+        "Após advertência, qualquer serviço incorreto resulta em ponto imediato para o adversário.",
+        "Se o servidor lança a bola para servir e não a bate, perde o ponto.",
+        "Ao servir, o braço livre deve estar acima do nível da mesa e visível ao árbitro e ao adversário.",
+      ]
+    },
+    {
+      id:"pontuacao",
+      icon:"🔢",
+      title:"Pontuação e Troca de Serviço",
+      rules:[
+        "O serviço muda a cada 2 pontos disputados, alternando entre os jogadores.",
+        "Em caso de deuce (10-10), o serviço muda a cada ponto e é necessária uma vantagem de 2 pontos para ganhar o set.",
+        "Em pares, a ordem de serviço e receção deve manter-se até ao fim do set; no set seguinte, o par que recebeu passa a servir.",
+        "O primeiro a servir num jogo é determinado por sorteio (cara ou coroa, ou escolha do lado).",
+        "Ao início de cada set, os jogadores trocam de lado; no set decisivo (último), trocam de lado quando um jogador atinge 5 pontos.",
+        "Num set decisivo em pares, a ordem de receção pode ser alterada pelo par que recebe.",
+        "O 'expedite system' não altera a alternância de serviço de 2 em 2 pontos — passa apenas a 1 em 1 ponto a partir da sua entrada em vigor.",
+        "Após um 'let' no serviço, o par de serviços é repetido completamente (a contagem não avança).",
+      ]
+    },
+    {
+      id:"equipamento",
+      icon:"🎯",
+      title:"Equipamento — Mesa e Rede",
+      rules:[
+        "A mesa tem 274 cm de comprimento × 152,5 cm de largura × 76 cm de altura.",
+        "A superfície de jogo deve ser plana, uniforme, de cor mate (tipicamente azul ou verde) com uma linha branca de 2 cm nas bordas.",
+        "A rede divide a mesa ao meio; tem 15,25 cm de altura ao longo de toda a sua extensão.",
+        "A superfície de jogo não inclui as superfícies laterais (bordas laterais) da mesa.",
+        "A mesa deve ser de madeira ou material similar, com uma taxa de ressalto de 23 ± 1 cm quando uma bola padrão é largada de 30 cm de altura.",
+        "A linha central (2 mm de largura) divide a mesa em duas metades iguais e faz parte de cada metade direita para efeitos do serviço em pares.",
+      ]
+    },
+    {
+      id:"bola",
+      icon:"⚪",
+      title:"Equipamento — Bola",
+      rules:[
+        "A bola deve ter 40 mm de diâmetro (± 0,5 mm) e pesar 2,7 g (± 0,1 g).",
+        "A bola deve ser esférica com um desvio máximo de 0,35 mm.",
+        "A cor da bola deve ser branca ou laranja, mate.",
+        "Desde 2015, as bolas ITTF de competição são de plástico (poly), substituindo as de celuloide.",
+        "Apenas bolas aprovadas pela ITTF podem ser usadas em competições internacionais.",
+      ]
+    },
+    {
+      id:"raquete",
+      icon:"🏓",
+      title:"Equipamento — Raquete",
+      rules:[
+        "A raquete pode ter qualquer dimensão, forma e peso, mas a lâmina deve ser plana e rígida.",
+        "Pelo menos 85% da espessura da lâmina deve ser de madeira natural.",
+        "Os dois lados da raquete devem ter cores diferentes: obrigatoriamente um lado vermelho e outro lado preto.",
+        "O revestimento (borracha) deve ser aprovado pela ITTF; a lista é atualizada regularmente.",
+        "A espessura total de cada lado do revestimento (borracha + esponja) não pode exceder 4 mm.",
+        "Podem ser usados revestimentos pimples-in (espinhos para dentro), pimples-out (espinhos para fora) ou anti-spin, desde que aprovados pela ITTF.",
+        "Antes do jogo, cada jogador deve mostrar a raquete ao adversário e ao árbitro para inspeção.",
+        "O uso de cola rápida (speed glue) com solventes orgânicos é proibido desde 2008 — só são permitidos adesivos aquosos.",
+        "Se a raquete for danificada durante o jogo, pode ser substituída com aprovação do árbitro.",
+      ]
+    },
+    {
+      id:"conduta",
+      icon:"⚖️",
+      title:"Conduta e Fair Play",
+      rules:[
+        "Cada jogador tem direito a 1 time-out de 1 minuto por match (não por set), pedido em qualquer momento exceto durante o serviço.",
+        "O intervalo máximo entre sets é de 1 minuto.",
+        "O treinador só pode dar instruções durante os intervalos entre sets e durante os time-outs — nunca durante o jogo.",
+        "Comportamentos antidesportivos (insultos, danificar equipamento, interrupções deliberadas) são punidos com advertência e/ou ponto atribuído ao adversário.",
+        "Em caso de má conduta repetida, o árbitro pode excluir o jogador do match ou da competição.",
+        "Os jogadores devem respeitar as decisões do árbitro; protestos devem ser feitos de forma educada e apenas pelo jogador, nunca pelo treinador durante o jogo.",
+        "É proibido receber instrução por qualquer meio eletrónico durante o jogo.",
+      ]
+    },
+    {
+      id:"torneio",
+      icon:"🏆",
+      title:"Regras de Torneio",
+      rules:[
+        "Num torneio eliminatório (knockout), o perdedor está imediatamente eliminado.",
+        "O sistema round-robin (todos contra todos) distribui pontos: vitória = 2 pontos, derrota = 1 ponto, não comparência = 0 pontos.",
+        "Em caso de empate em pontos no round-robin, o desempate é feito por sets e depois por pontos dentro dos sets.",
+        "O seeding (cabeças de série) é baseado no ranking ITTF ou pela classificação no torneio anterior.",
+        "Os jogadores devem estar disponíveis no horário indicado; atraso superior a 10 minutos pode resultar em derrota por incomparecência.",
+        "As raquetes são inspecionadas antes do início de cada match e podem ser verificadas novamente após o jogo.",
+        "Em pares, os parceiros devem jogar alternadamente: cada jogador só pode bater na bola quando é a sua vez.",
+        "Nos Jogos Olímpicos e Campeonatos do Mundo, usa-se o sistema de melhor de 7 sets na maioria das fases.",
+        "O árbitro tem autoridade máxima durante o match; as decisões do árbitro assistente (umpire) sobre edge/bord são finais.",
+        "Em competições internacionais, os jogadores devem usar vestuário de cor diferente da bola (branca ou laranja).",
+      ]
+    },
+    {
+      id:"especial",
+      icon:"📌",
+      title:"Situações Especiais e Curiosidades",
+      rules:[
+        "Se a bola passa à volta da rede (em vez de por cima) e cai válida, é um ponto legítimo.",
+        "Um jogador pode bater na bola com qualquer parte da superfície da raquete, incluindo a borda da raquete.",
+        "Se a bola toca o suporte da rede e cai do lado do adversário num rally (não no serviço), é ponto válido.",
+        "Se ambos os jogadores tocam a bola ao mesmo tempo, ponto para o adversário (falta dupla não existe — perde quem toca por último erradamente).",
+        "Um jogador pode mover a mesa por acidente sem intenção — normalmente não é falta se a bola ainda for válida; cabe ao árbitro decidir.",
+        "A ITTF atualiza as regras periodicamente; versão em vigor consultável em ittf.com.",
+        "O material da bola mudou de celuloide para plástico (poly) em 2015, alterando ligeiramente o comportamento do spin.",
+        "O 'tomahawk serve' (serviço com rotação lateral intensa) é permitido desde que o contato seja visível.",
+      ]
+    },
+  ];
+
+  let quizState = {diff:"easy",questions:[],current:0,score:0};
+
+  function openQuiz(){
+    renderMinigamePlayerPick();
+    showScreen("screen-mg-quiz");
+    resetQuizStart();
+  }
+
+  function resetQuizStart(){
+    document.getElementById("mg-quiz-start").hidden=false;
+    document.getElementById("mg-quiz-question-wrap").hidden=true;
+    document.getElementById("mg-quiz-result").hidden=true;
+    const rec=getMgRec("quiz_"+quizState.diff,currentMiniGamePlayer);
+    document.getElementById("mg-quiz-best").textContent=rec?rec+"/10":"—";
+  }
+
+  function startQuiz(diff){
+    if(!currentMiniGamePlayer){showToast(t("js.mgQuizChooseFirst"),"error");return;}
+    quizState.diff=diff;
+    const pool=[...ITTF_QUIZ[diff]];
+    // shuffle and pick 10
+    for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
+    quizState.questions=pool.slice(0,10);
+    quizState.current=0;quizState.score=0;
+    document.getElementById("mg-quiz-start").hidden=true;
+    document.getElementById("mg-quiz-question-wrap").hidden=false;
+    document.getElementById("mg-quiz-result").hidden=true;
+    document.getElementById("mg-quiz-score").textContent="0";
+    renderQuizQuestion();
+  }
+
+  function renderQuizQuestion(){
+    const q=quizState.questions[quizState.current];
+    const total=quizState.questions.length;
+    const pct=((quizState.current)/total)*100;
+    document.getElementById("mg-quiz-progress-fill").style.width=pct+"%";
+    document.getElementById("mg-quiz-progress-text").textContent=(quizState.current+1)+"/"+total;
+    const diffLabels={easy:"🟢 "+t("js.mgQuizEasy"),medium:"🟡 "+t("js.mgQuizMedium"),hard:"🔴 "+t("js.mgQuizHard")};
+    document.getElementById("mg-quiz-diff-badge").textContent=diffLabels[quizState.diff]||quizState.diff;
+    document.getElementById("mg-quiz-question").textContent=q.q;
+    const ans=document.getElementById("mg-quiz-answers");
+    ans.innerHTML="";
+    // shuffle opts
+    const shuffled=q.opts.map((o,i)=>({o,i}));
+    for(let i=shuffled.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]];}
+    shuffled.forEach(({o,i})=>{
+      const btn=document.createElement("button");
+      btn.className="mg-quiz-answer-btn";
+      btn.textContent=o;
+      btn.addEventListener("click",()=>answerQuiz(i===q.a,btn,ans,q.exp));
+      ans.appendChild(btn);
+    });
+    document.getElementById("mg-quiz-feedback").hidden=true;
+  }
+
+  function answerQuiz(correct,btn,ansContainer,exp){
+    // disable all buttons
+    ansContainer.querySelectorAll(".mg-quiz-answer-btn").forEach(b=>{b.disabled=true;b.classList.add("is-disabled");});
+    const fb=document.getElementById("mg-quiz-feedback");
+    const fbText=document.getElementById("mg-quiz-feedback-text");
+    if(correct){
+      btn.classList.add("is-correct");
+      quizState.score++;
+      document.getElementById("mg-quiz-score").textContent=quizState.score;
+      fbText.innerHTML=`<strong class="quiz-fb-correct">${t("js.mgQuizCorrect")}</strong> ${exp}`;
+      playTone(880,80,0.3,"sine");
+    }else{
+      btn.classList.add("is-wrong");
+      fbText.innerHTML=`<strong class="quiz-fb-wrong">${t("js.mgQuizWrong")}</strong> ${exp}`;
+      playTone(220,200,0.3,"square");
+    }
+    fb.hidden=false;
+  }
+
+  function nextQuizQuestion(){
+    quizState.current++;
+    if(quizState.current>=quizState.questions.length){
+      endQuiz();
+    }else{
+      document.getElementById("mg-quiz-feedback").hidden=true;
+      renderQuizQuestion();
+    }
+  }
+
+  function endQuiz(){
+    document.getElementById("mg-quiz-question-wrap").hidden=true;
+    document.getElementById("mg-quiz-result").hidden=false;
+    const s=quizState.score, total=quizState.questions.length;
+    document.getElementById("mg-quiz-final-score").textContent=s+"/"+total;
+    const pct=s/total;
+    let icon,msg;
+    if(pct>=0.8){icon="🏆";msg=t("js.mgQuizResultGreat");}
+    else if(pct>=0.5){icon="👍";msg=t("js.mgQuizResultGood");}
+    else{icon="📚";msg=t("js.mgQuizResultTry");}
+    document.getElementById("mg-quiz-result-icon").textContent=icon;
+    document.getElementById("mg-quiz-result-msg").textContent=msg;
+    const key="quiz_"+quizState.diff;
+    const rec=getMgRec(key,currentMiniGamePlayer);
+    const isNew=quizState.score>rec;
+    if(isNew)setMgRec(key,currentMiniGamePlayer,quizState.score);
+    document.getElementById("mg-quiz-new-rec").hidden=!isNew;
+  }
+
+  document.getElementById("btn-minigame-quiz").addEventListener("click",()=>{
+    if(!currentMiniGamePlayer){showToast(t("js.mgQuizChooseFirst"),"error");return;}
+    openQuiz();
+  });
+  document.getElementById("btn-mg-quiz-back").addEventListener("click",()=>showScreen("screen-minigames"));
+  document.getElementById("btn-quiz-easy").addEventListener("click",()=>startQuiz("easy"));
+  document.getElementById("btn-quiz-medium").addEventListener("click",()=>startQuiz("medium"));
+  document.getElementById("btn-quiz-hard").addEventListener("click",()=>startQuiz("hard"));
+  document.getElementById("btn-quiz-next").addEventListener("click",nextQuizQuestion);
+  document.getElementById("btn-quiz-retry").addEventListener("click",resetQuizStart);
+
+  /* ═══ REGRAS ITTF ═══ */
+
+  function renderRulesScreen(){
+    const content=document.getElementById("rules-content");
+    content.innerHTML="";
+    ITTF_RULES_SECTIONS.forEach(sec=>{
+      const wrap=document.createElement("div");
+      wrap.className="rules-section";
+      const hdr=document.createElement("button");
+      hdr.className="rules-section-header";
+      hdr.innerHTML=`<span class="rules-section-icon">${sec.icon}</span><span class="rules-section-title">${sec.title}</span><span class="rules-section-chevron">›</span>`;
+      const body=document.createElement("div");
+      body.className="rules-section-body";
+      body.hidden=true;
+      const list=document.createElement("ul");
+      list.className="rules-list";
+      sec.rules.forEach(r=>{
+        const li=document.createElement("li");
+        li.textContent=r;
+        list.appendChild(li);
+      });
+      body.appendChild(list);
+      hdr.addEventListener("click",()=>{
+        const open=!body.hidden;
+        body.hidden=open;
+        hdr.classList.toggle("is-open",!open);
+        hdr.querySelector(".rules-section-chevron").textContent=open?"›":"⌄";
+      });
+      wrap.appendChild(hdr);
+      wrap.appendChild(body);
+      content.appendChild(wrap);
+    });
+  }
+
+  document.getElementById("btn-rules-ittf").addEventListener("click",()=>{
+    renderRulesScreen();
+    showScreen("screen-rules-ittf");
+  });
 
   /* ═══ CONQUISTAS E RECORDES ═══ */
   const ACHIEVEMENTS=[

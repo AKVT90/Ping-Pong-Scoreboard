@@ -347,6 +347,8 @@
     <div class="minigame-cards">
       <button class="minigame-card" id="btn-minigame-tap"><div class="minigame-card-icon">⚡</div><strong data-i18n="mg.tap">Toques Rápidos</strong><small data-i18n="mg.tapSub">Clica nos pontos antes que desapareçam</small></button>
       <button class="minigame-card" id="btn-minigame-memory"><div class="minigame-card-icon">🧠</div><strong data-i18n="mg.memory">Memória Visual</strong><small data-i18n="mg.memorySub">Memoriza e repete a sequência</small></button>
+      <button class="minigame-card" id="btn-minigame-quiz"><div class="minigame-card-icon">📋</div><strong data-i18n="mg.quiz">Quiz de Regras</strong><small data-i18n="mg.quizSub">Testa os teus conhecimentos das regras ITTF</small></button>
+      <button class="minigame-card minigame-card--rules" id="btn-rules-ittf"><div class="minigame-card-icon">📖</div><strong data-i18n="mg.rules">Regras ITTF</strong><small data-i18n="mg.rulesSub">Todas as regras oficiais do ténis de mesa</small></button>
     </div>
     <p class="section-label" style="margin-top:24px" data-i18n="js.mg.playAs">Jogar como</p>
     <div id="minigame-player-pick" class="players-grid"></div>
@@ -606,6 +608,73 @@
   <header class="bar"><button class="bar-back" data-back="screen-menu">‹</button><h2 class="bar-title" data-i18n="screen.records">Recordes</h2><span class="bar-action bar-action--ghost"></span></header>
   <div class="bar-spacer"></div>
   <div class="content" id="records-list"></div>
+</div>
+
+<!-- ============ ECRÃ: QUIZ DE REGRAS ITTF ============ -->
+<div id="screen-mg-quiz" class="screen screen-minigame">
+  <div class="mg-header">
+    <button class="mg-back" id="btn-mg-quiz-back">‹</button>
+    <span class="mg-title" data-i18n="mg.quiz">Quiz de Regras</span>
+    <span class="mg-score-display"><span data-i18n="js.mgQuizScore">Pontos:</span> <span id="mg-quiz-score">0</span></span>
+  </div>
+  <div class="mg-arena mg-arena--quiz" id="mg-quiz-arena">
+    <!-- ecrã de início -->
+    <div class="mg-quiz-start" id="mg-quiz-start">
+      <p class="mg-quiz-intro" data-i18n="js.mgQuizIntro">Escolhe o nível de dificuldade</p>
+      <div class="mg-quiz-difficulties">
+        <button class="mg-quiz-diff-btn" data-diff="easy" id="btn-quiz-easy">
+          <span class="mg-quiz-diff-icon">🟢</span>
+          <span class="mg-quiz-diff-info"><span class="mg-quiz-diff-name" data-i18n="js.mgQuizEasy">Fácil</span><span class="mg-quiz-diff-desc" data-i18n="js.mgQuizEasyDesc">Regras básicas do jogo</span></span>
+        </button>
+        <button class="mg-quiz-diff-btn" data-diff="medium" id="btn-quiz-medium">
+          <span class="mg-quiz-diff-icon">🟡</span>
+          <span class="mg-quiz-diff-info"><span class="mg-quiz-diff-name" data-i18n="js.mgQuizMedium">Médio</span><span class="mg-quiz-diff-desc" data-i18n="js.mgQuizMediumDesc">Regras de serviço e pontuação</span></span>
+        </button>
+        <button class="mg-quiz-diff-btn" data-diff="hard" id="btn-quiz-hard">
+          <span class="mg-quiz-diff-icon">🔴</span>
+          <span class="mg-quiz-diff-info"><span class="mg-quiz-diff-name" data-i18n="js.mgQuizHard">Difícil</span><span class="mg-quiz-diff-desc" data-i18n="js.mgQuizHardDesc">Regulamentação e torneios</span></span>
+        </button>
+      </div>
+      <p class="mg-quiz-rec-row"><span data-i18n="js.mgQuizBestScore">Melhor pontuação:</span> <strong id="mg-quiz-best">—</strong></p>
+    </div>
+    <!-- área da pergunta -->
+    <div class="mg-quiz-question-wrap" id="mg-quiz-question-wrap" hidden>
+      <div class="mg-quiz-progress">
+        <div class="mg-quiz-progress-bar"><div id="mg-quiz-progress-fill"></div></div>
+        <span id="mg-quiz-progress-text">1/10</span>
+      </div>
+      <div class="mg-quiz-q-card">
+        <div class="mg-quiz-diff-badge" id="mg-quiz-diff-badge">🟢 Fácil</div>
+        <p class="mg-quiz-question" id="mg-quiz-question">Pergunta aqui</p>
+      </div>
+      <div class="mg-quiz-answers" id="mg-quiz-answers"></div>
+      <div class="mg-quiz-feedback" id="mg-quiz-feedback" hidden>
+        <p class="mg-quiz-feedback-text" id="mg-quiz-feedback-text"></p>
+        <button class="setup-confirm" id="btn-quiz-next" data-i18n="js.mgQuizNext">Próxima ▸</button>
+      </div>
+    </div>
+    <!-- ecrã de resultado -->
+    <div class="mg-quiz-result" id="mg-quiz-result" hidden>
+      <div class="mg-quiz-result-icon" id="mg-quiz-result-icon">🏆</div>
+      <p class="mg-quiz-result-score"><span data-i18n="js.mgQuizFinalScore">Pontuação final:</span> <strong id="mg-quiz-final-score">0/10</strong></p>
+      <p class="mg-quiz-result-msg" id="mg-quiz-result-msg"></p>
+      <p class="mg-quiz-new-rec" id="mg-quiz-new-rec" hidden data-i18n="js.newRecord">🏆 Novo recorde!</p>
+      <button class="setup-confirm" id="btn-quiz-retry" data-i18n="js.playAgain">Jogar de novo</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ECRÃ: REGRAS ITTF ============ -->
+<div id="screen-rules-ittf" class="screen">
+  <header class="bar">
+    <button class="bar-back" data-back="screen-minigames">‹</button>
+    <h2 class="bar-title" data-i18n="mg.rules">Regras ITTF</h2>
+    <span class="bar-action bar-action--ghost"></span>
+  </header>
+  <div class="bar-spacer"></div>
+  <div class="content rules-content" id="rules-content">
+    <!-- preenchido via JS -->
+  </div>
 </div>
 
 </body>
