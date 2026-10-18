@@ -6442,7 +6442,7 @@
       list.innerHTML = `
         <div class="empty-state">
           <div class="empty-state-icon">☷</div>
-          <p>Ainda não tens jogadores criados.<br>Volta ao menu e cria jogadores primeiro.</p>
+          <p>${t("js.noPlayersYet")}</p>
         </div>`;
       showScreen("screen-pick-player");
       return;
@@ -7083,7 +7083,17 @@
     showGameEndOverlay(record);
   }
 
+  let _lastGameSetup = null; // guardado para "jogar de novo"
+
   function showGameEndOverlay(record) {
+    _lastGameSetup = {
+      bluePlayerId: record.blue.playerId,
+      whitePlayerId: record.white.playerId,
+      points: record.pointsTarget,
+      format: record.format,
+      description: record.description,
+      mode: record.gameMode
+    };
     const blueName = getPlayer(record.blue.playerId)?.name || t("js.sideBlue");
     const whiteName = getPlayer(record.white.playerId)?.name || t("js.sideWhite");
 
@@ -7113,6 +7123,24 @@
     pointHistory = [];
     showScreen("screen-menu");
     checkResumeBanner();
+  });
+
+  document.getElementById("btn-game-end-again").addEventListener("click", () => {
+    document.getElementById("overlay-game-end").hidden = true;
+    game = null;
+    pointHistory = [];
+    if (_lastGameSetup) {
+      startNewGame(
+        _lastGameSetup.bluePlayerId,
+        _lastGameSetup.whitePlayerId,
+        _lastGameSetup.points,
+        _lastGameSetup.format,
+        _lastGameSetup.description,
+        _lastGameSetup.mode
+      );
+    } else {
+      showScreen("screen-menu");
+    }
   });
 
   /* ---------------------------------------------------------
