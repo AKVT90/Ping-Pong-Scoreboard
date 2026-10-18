@@ -348,6 +348,7 @@
       "js.mgQuizResultGood":"Bom trabalho! Continua a estudar as regras.",
       "js.mgQuizResultTry":"Continua a praticar e a ler as regras ITTF.",
       "js.langBtn":"Idioma",
+      "js.settingsBtn":"Definições",
       "js.descLabel":"Descrição",
       "js.optional":"(opcional)",
       "js.nPlayers4":"4 jogadores",
@@ -1119,6 +1120,7 @@
       "js.mgQuizResultGood":"Good job! Keep studying the rules.",
       "js.mgQuizResultTry":"Keep practising and reading the ITTF rules.",
       "js.langBtn":"Language",
+      "js.settingsBtn":"Settings",
       "js.descLabel":"Description",
       "js.optional":"(optional)",
       "js.nPlayers4":"4 players",
@@ -1890,6 +1892,7 @@
       "js.mgQuizResultGood":"¡Buen trabajo! Sigue estudiando las reglas.",
       "js.mgQuizResultTry":"Sigue practicando y leyendo las reglas ITTF.",
       "js.langBtn":"Idioma",
+      "js.settingsBtn":"Ajustes",
       "js.descLabel":"Descripción",
       "js.optional":"(opcional)",
       "js.nPlayers4":"4 jugadores",
@@ -2661,6 +2664,7 @@
       "js.mgQuizResultGood":"Bon travail ! Continuez à étudier les règles.",
       "js.mgQuizResultTry":"Continuez à pratiquer et à lire les règles ITTF.",
       "js.langBtn":"Langue",
+      "js.settingsBtn":"Paramètres",
       "js.descLabel":"Description",
       "js.optional":"(optionnel)",
       "js.nPlayers4":"4 joueurs",
@@ -3432,6 +3436,7 @@
       "js.mgQuizResultGood":"Gut gemacht! Lerne weiter die Regeln.",
       "js.mgQuizResultTry":"Übe weiter und lies die ITTF-Regeln.",
       "js.langBtn":"Sprache",
+      "js.settingsBtn":"Einstellungen",
       "js.descLabel":"Beschreibung",
       "js.optional":"(optional)",
       "js.nPlayers4":"4 Spieler",
@@ -4203,6 +4208,7 @@
       "js.mgQuizResultGood":"干得好！继续学习规则。",
       "js.mgQuizResultTry":"继续练习并阅读ITTF规则。",
       "js.langBtn":"语言",
+      "js.settingsBtn":"设置",
       "js.descLabel":"描述",
       "js.optional":"（可选）",
       "js.nPlayers4":"4名球员",
@@ -4974,6 +4980,7 @@
       "js.mgQuizResultGood":"よくできました！ルールの学習を続けてください。",
       "js.mgQuizResultTry":"練習を続けてITTFルールを読んでください。",
       "js.langBtn":"言語",
+      "js.settingsBtn":"設定",
       "js.descLabel":"説明",
       "js.optional":"（任意）",
       "js.nPlayers4":"4人",
@@ -5599,7 +5606,7 @@
     renderHistoryList();
     showScreen("screen-history");
   });
-  document.getElementById("btn-data").addEventListener("click", () => {
+  document.getElementById("btn-settings").addEventListener("click", () => {
     renderDataScreen();
     showScreen("screen-data");
   });

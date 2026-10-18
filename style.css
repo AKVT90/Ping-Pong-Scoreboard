@@ -81,6 +81,18 @@ input{ font-family:inherit; }
 }
 .menu-lang-btn:hover{ background:rgba(255,255,255,.1); }
 
+.menu-settings-btn{
+  position:fixed; top:12px; left:12px; z-index:50;
+  background:none; border:1.5px solid rgba(255,255,255,0.25); cursor:pointer;
+  width:36px; height:36px;
+  padding:0;
+  font-size:20px; line-height:1;
+  border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  transition:background .15s;
+}
+.menu-settings-btn:hover{ background:rgba(255,255,255,.1); }
+
 /* dropdown de idioma — abre no canto superior direito, abaixo do botão */
 .menu-lang-dropdown{
   position:fixed; top:54px; right:12px; z-index:49;
