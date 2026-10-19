@@ -80,7 +80,7 @@
       "screen.minigames":"Mini Jogos",
       "screen.achievements":"Conquistas",
       "screen.records":"Recordes",
-      "screen.data":"Dados",
+      "screen.data":"Definições",
       "btn.addPlayer":"＋ Novo",
       "btn.deletePlayer":"Eliminar",
       "btn.abandon":"Abandonar",
@@ -349,6 +349,9 @@
       "js.mgQuizResultTry":"Continua a praticar e a ler as regras ITTF.",
       "js.langBtn":"Idioma",
       "js.settingsBtn":"Definições",
+      "js.settings.theme":"Tema",
+      "js.settings.themeClassic":"Clássico",
+      "js.settings.themeRetro":"Retro",
       "js.descLabel":"Descrição",
       "js.optional":"(opcional)",
       "js.nPlayers4":"4 jogadores",
@@ -852,7 +855,7 @@
       "screen.minigames":"Mini Games",
       "screen.achievements":"Achievements",
       "screen.records":"Records",
-      "screen.data":"Data",
+      "screen.data":"Settings",
       "btn.addPlayer":"＋ New",
       "btn.deletePlayer":"Delete",
       "btn.abandon":"Abandon",
@@ -1121,6 +1124,9 @@
       "js.mgQuizResultTry":"Keep practising and reading the ITTF rules.",
       "js.langBtn":"Language",
       "js.settingsBtn":"Settings",
+      "js.settings.theme":"Theme",
+      "js.settings.themeClassic":"Classic",
+      "js.settings.themeRetro":"Retro",
       "js.descLabel":"Description",
       "js.optional":"(optional)",
       "js.nPlayers4":"4 players",
@@ -1624,7 +1630,7 @@
       "screen.minigames":"Minijuegos",
       "screen.achievements":"Logros",
       "screen.records":"Récords",
-      "screen.data":"Datos",
+      "screen.data":"Ajustes",
       "btn.addPlayer":"＋ Nuevo",
       "btn.deletePlayer":"Eliminar",
       "btn.abandon":"Abandonar",
@@ -1893,6 +1899,9 @@
       "js.mgQuizResultTry":"Sigue practicando y leyendo las reglas ITTF.",
       "js.langBtn":"Idioma",
       "js.settingsBtn":"Ajustes",
+      "js.settings.theme":"Tema",
+      "js.settings.themeClassic":"Clásico",
+      "js.settings.themeRetro":"Retro",
       "js.descLabel":"Descripción",
       "js.optional":"(opcional)",
       "js.nPlayers4":"4 jugadores",
@@ -2396,7 +2405,7 @@
       "screen.minigames":"Mini-Jeux",
       "screen.achievements":"Succès",
       "screen.records":"Records",
-      "screen.data":"Données",
+      "screen.data":"Paramètres",
       "btn.addPlayer":"＋ Nouveau",
       "btn.deletePlayer":"Supprimer",
       "btn.abandon":"Abandonner",
@@ -2665,6 +2674,9 @@
       "js.mgQuizResultTry":"Continuez à pratiquer et à lire les règles ITTF.",
       "js.langBtn":"Langue",
       "js.settingsBtn":"Paramètres",
+      "js.settings.theme":"Thème",
+      "js.settings.themeClassic":"Classique",
+      "js.settings.themeRetro":"Rétro",
       "js.descLabel":"Description",
       "js.optional":"(optionnel)",
       "js.nPlayers4":"4 joueurs",
@@ -3168,7 +3180,7 @@
       "screen.minigames":"Minispiele",
       "screen.achievements":"Erfolge",
       "screen.records":"Rekorde",
-      "screen.data":"Daten",
+      "screen.data":"Einstellungen",
       "btn.addPlayer":"＋ Neu",
       "btn.deletePlayer":"Löschen",
       "btn.abandon":"Abbrechen",
@@ -3437,6 +3449,9 @@
       "js.mgQuizResultTry":"Übe weiter und lies die ITTF-Regeln.",
       "js.langBtn":"Sprache",
       "js.settingsBtn":"Einstellungen",
+      "js.settings.theme":"Thema",
+      "js.settings.themeClassic":"Klassisch",
+      "js.settings.themeRetro":"Retro",
       "js.descLabel":"Beschreibung",
       "js.optional":"(optional)",
       "js.nPlayers4":"4 Spieler",
@@ -3940,7 +3955,7 @@
       "screen.minigames":"小游戏",
       "screen.achievements":"成就",
       "screen.records":"纪录",
-      "screen.data":"数据",
+      "screen.data":"设置",
       "btn.addPlayer":"＋ 新增",
       "btn.deletePlayer":"删除",
       "btn.abandon":"放弃",
@@ -4209,6 +4224,9 @@
       "js.mgQuizResultTry":"继续练习并阅读ITTF规则。",
       "js.langBtn":"语言",
       "js.settingsBtn":"设置",
+      "js.settings.theme":"主题",
+      "js.settings.themeClassic":"经典",
+      "js.settings.themeRetro":"复古",
       "js.descLabel":"描述",
       "js.optional":"（可选）",
       "js.nPlayers4":"4名球员",
@@ -4712,7 +4730,7 @@
       "screen.minigames":"ミニゲーム",
       "screen.achievements":"実績",
       "screen.records":"記録",
-      "screen.data":"データ",
+      "screen.data":"設定",
       "btn.addPlayer":"＋ 新規",
       "btn.deletePlayer":"削除",
       "btn.abandon":"棄権",
@@ -4981,6 +4999,9 @@
       "js.mgQuizResultTry":"練習を続けてITTFルールを読んでください。",
       "js.langBtn":"言語",
       "js.settingsBtn":"設定",
+      "js.settings.theme":"テーマ",
+      "js.settings.themeClassic":"クラシック",
+      "js.settings.themeRetro":"レトロ",
       "js.descLabel":"説明",
       "js.optional":"（任意）",
       "js.nPlayers4":"4人",
@@ -5614,6 +5635,36 @@
   document.getElementById("btn-training").addEventListener("click", openTrainingMode);
   document.getElementById("btn-minigames").addEventListener("click", openMinigames);
 
+  /* ---- seletor de tema ---- */
+  (function(){
+    const THEME_KEY = "pp-game-theme";
+    function applyGameTheme(theme) {
+      if (theme === "retro") {
+        document.body.setAttribute("data-theme-game", "retro");
+      } else {
+        document.body.removeAttribute("data-theme-game");
+      }
+      // atualiza botões nas definições
+      const btnC = document.getElementById("btn-theme-classic");
+      const btnR = document.getElementById("btn-theme-retro");
+      if (btnC) btnC.classList.toggle("theme-btn--active", theme !== "retro");
+      if (btnR) btnR.classList.toggle("theme-btn--active", theme === "retro");
+    }
+
+    // aplicar tema guardado ao arrancar
+    const saved = localStorage.getItem(THEME_KEY) || "classic";
+    applyGameTheme(saved);
+
+    document.getElementById("btn-theme-classic").addEventListener("click", () => {
+      localStorage.setItem(THEME_KEY, "classic");
+      applyGameTheme("classic");
+    });
+    document.getElementById("btn-theme-retro").addEventListener("click", () => {
+      localStorage.setItem(THEME_KEY, "retro");
+      applyGameTheme("retro");
+    });
+  })();
+
   /* ---- seletor de idioma ---- */
   (function(){
     const btn = document.getElementById("btn-lang");
@@ -5923,8 +5974,6 @@
         <div class="stat-box"><strong>${stats.gamesWon}</strong><span>${t("js.statGamesWon")}</span></div>
         <div class="stat-box"><strong>${stats.gamesLost}</strong><span>${t("js.statGamesLost")}</span></div>
         <div class="stat-box"><strong>${stats.gamesDrawn}</strong><span>${t("js.statGamesDrawn")}</span></div>
-        <div class="stat-box"><strong>${stats.wins}</strong><span>${t("js.statSetsWonV")}</span></div>
-        <div class="stat-box"><strong>${stats.losses}</strong><span>${t("js.statSetsLostD")}</span></div>
         <div class="stat-box"><strong>${stats.setsWon}</strong><span>${t("js.statTotalSetsWon")}</span></div>
         <div class="stat-box"><strong>${stats.setsLost}</strong><span>${t("js.statTotalSetsLost")}</span></div>
         <div class="stat-box"><strong>${stats.capotes}</strong><span>${t("js.statCapotesMade")}</span></div>
@@ -6595,6 +6644,8 @@
     const whiteName = getPlayer(game.whitePlayerId)?.name || t("js.sideWhite");
     document.getElementById("name-blue").textContent = blueName;
     document.getElementById("name-white").textContent = whiteName;
+    document.getElementById("retro-name-blue").textContent = blueName.toUpperCase();
+    document.getElementById("retro-name-white").textContent = whiteName.toUpperCase();
 
     const allElos = computeAllElos();
     const blueEloEl = document.getElementById("elo-blue");
@@ -6614,6 +6665,13 @@
     document.querySelector("#sets-blue .sets-num").textContent = game.blueSetsWon;
     document.querySelector("#sets-white .sets-num").textContent = game.whiteSetsWon;
     document.getElementById("timer").textContent = formatClock(game.elapsedSeconds);
+    // retro sync
+    const pad = n => String(n).padStart(2, "0");
+    document.getElementById("retro-score-blue").textContent = pad(game.currentBlue);
+    document.getElementById("retro-score-white").textContent = pad(game.currentWhite);
+    document.getElementById("retro-sets-blue").textContent = game.blueSetsWon;
+    document.getElementById("retro-sets-white").textContent = game.whiteSetsWon;
+    document.getElementById("retro-timer").textContent = formatClock(game.elapsedSeconds);
     renderServeIndicator();
   }
 
@@ -6672,6 +6730,9 @@
     const serving = currentServingSide();
     ballBlue.hidden = serving !== "blue";
     ballWhite.hidden = serving !== "white";
+    // retro serve dots
+    document.getElementById("retro-serve-blue").classList.toggle("retro-serve-active", serving === "blue");
+    document.getElementById("retro-serve-white").classList.toggle("retro-serve-active", serving === "white");
   }
 
   let serveBlinkInterval = null;
@@ -6692,7 +6753,9 @@
     timerInterval = setInterval(() => {
       if (game && !game.paused) {
         game.elapsedSeconds++;
-        document.getElementById("timer").textContent = formatClock(game.elapsedSeconds);
+        const t = formatClock(game.elapsedSeconds);
+        document.getElementById("timer").textContent = t;
+        document.getElementById("retro-timer").textContent = t;
         // guarda a cada 5s para não sobrecarregar localStorage
         if (game.elapsedSeconds % 5 === 0) persistActiveGame();
       }
@@ -6707,7 +6770,11 @@
     if (!game) return;
     game.paused = !game.paused;
     document.getElementById("timer").classList.toggle("is-paused", game.paused);
+    document.getElementById("retro-timer").classList.toggle("is-paused", game.paused);
     persistActiveGame();
+  });
+  document.getElementById("retro-btn-pause").addEventListener("click", () => {
+    document.getElementById("btn-pause").click();
   });
 
   /* ---------------------------------------------------------
@@ -6819,6 +6886,8 @@
 
   document.getElementById("half-blue").addEventListener("click", () => addPoint("blue"));
   document.getElementById("half-white").addEventListener("click", () => addPoint("white"));
+  document.getElementById("retro-half-blue").addEventListener("click", () => addPoint("blue"));
+  document.getElementById("retro-half-white").addEventListener("click", () => addPoint("white"));
 
   function addPoint(side) {
     if (!game || game.paused) return;
@@ -6854,6 +6923,9 @@
     }
   }
 
+  document.getElementById("retro-btn-undo").addEventListener("click", () => {
+    document.getElementById("btn-undo").click();
+  });
   document.getElementById("btn-undo").addEventListener("click", () => {
     if (!game || pointHistory.length === 0) return;
     const last = pointHistory.pop();
@@ -7027,6 +7099,7 @@
 
   /* ---------- terminar jogo ---------- */
   document.getElementById("btn-end-game").addEventListener("click", openConfirmEndOverlay);
+  document.getElementById("retro-btn-end").addEventListener("click", openConfirmEndOverlay);
 
   function openConfirmEndOverlay() {
     const detail = document.getElementById("confirm-end-detail");
@@ -7121,6 +7194,8 @@
       })
       .join("");
 
+    // Tira o screen-game do caminho para o overlay ficar visível
+    document.querySelectorAll(".screen").forEach((el) => el.classList.remove("active"));
     document.getElementById("overlay-game-end").hidden = false;
   }
 

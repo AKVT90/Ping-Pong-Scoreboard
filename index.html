@@ -421,6 +421,60 @@
       <button class="btn-pause" id="btn-pause" data-i18n-title="js.pause" title="Pausar cronómetro">❙❙</button>
     </div>
 
+    <!-- ═══ RETRO THEME ELEMENTS (hidden in classic mode) ═══ -->
+
+    <!-- Top row: sets | clock | sets -->
+    <div class="retro-top-row">
+      <div class="retro-cell">
+        <span class="retro-sets-digit" id="retro-sets-blue">0</span>
+      </div>
+      <div class="retro-cell">
+        <span class="retro-clock" id="retro-timer">00:00</span>
+      </div>
+      <div class="retro-cell">
+        <span class="retro-sets-digit" id="retro-sets-white">0</span>
+      </div>
+    </div>
+
+    <!-- Serve indicators -->
+    <div class="retro-serve-row">
+      <div class="retro-cell retro-serve-cell-left">
+        <div class="retro-serve-dot" id="retro-serve-blue"></div>
+      </div>
+      <div class="retro-cell retro-serve-cell-right">
+        <div class="retro-serve-dot" id="retro-serve-white"></div>
+      </div>
+    </div>
+
+    <!-- Names -->
+    <div class="retro-names-row">
+      <div class="retro-cell">
+        <span class="retro-name" id="retro-name-blue">JOGADOR 1</span>
+      </div>
+      <div class="retro-cell">
+        <span class="retro-name" id="retro-name-white">JOGADOR 2</span>
+      </div>
+    </div>
+
+    <!-- Scores — clickable halves -->
+    <div class="retro-scores-row">
+      <div class="retro-cell" id="retro-half-blue" style="cursor:pointer">
+        <span class="retro-score" id="retro-score-blue">00</span>
+      </div>
+      <div class="retro-cell" id="retro-half-white" style="cursor:pointer">
+        <span class="retro-score" id="retro-score-white">00</span>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="retro-buttons-row">
+      <button class="retro-btn" id="retro-btn-undo" title="Anular último ponto">↺</button>
+      <button class="retro-btn retro-btn--end" id="retro-btn-end" data-i18n="js.overlay.endGameTitle">TERMINAR JOGO</button>
+      <button class="retro-btn" id="retro-btn-pause" title="Pausar">❙❙</button>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+
   </div>
 </div>
 
@@ -501,6 +555,12 @@
 
     <div class="data-summary" id="data-summary">
       <!-- preenchido via JS -->
+    </div>
+
+    <p class="section-label" data-i18n="js.settings.theme">Tema</p>
+    <div class="theme-picker">
+      <button class="theme-btn theme-btn--active" id="btn-theme-classic" data-i18n="js.settings.themeClassic">Clássico</button>
+      <button class="theme-btn" id="btn-theme-retro" data-i18n="js.settings.themeRetro">Retro</button>
     </div>
 
     <p class="section-label" data-i18n="js.data.backup">Cópia de segurança</p>

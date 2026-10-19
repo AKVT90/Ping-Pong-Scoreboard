@@ -820,13 +820,259 @@ input{ font-family:inherit; }
   box-shadow:0 4px 12px rgba(0,0,0,0.3);
 }
 
+/* ============================================================
+   TEMA RETRO — LED dot-matrix scoreboard
+   Ativo quando <body data-theme-game="retro">
+   ============================================================ */
+
+/* Font retro via @import inline — Share Tech Mono do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+[data-theme-game="retro"] .board {
+  background: #0c0c0c;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: calc(12px + var(--safe-top)) calc(12px + var(--safe-right)) calc(12px + var(--safe-bottom)) calc(12px + var(--safe-left));
+  gap: 8px;
+  box-shadow: inset 0 0 80px rgba(0,0,0,0.7), 0 0 40px rgba(255,34,0,0.06);
+}
+
+/* Scanlines overlay */
+[data-theme-game="retro"] .board::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px
+  );
+  pointer-events: none;
+  z-index: 20;
+}
+[data-theme-game="retro"] .board { position: fixed; }
+
+/* ── Dot-matrix panel base ── */
+[data-theme-game="retro"] .half,
+[data-theme-game="retro"] .topbar,
+[data-theme-game="retro"] .bottombar,
+[data-theme-game="retro"] .sets-badge {
+  position: static !important;
+  transform: none !important;
+}
+
+/* ── TOP ROW: sets | clock | sets ── */
+[data-theme-game="retro"] .retro-top-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 8px;
+  height: clamp(56px, 10vh, 80px);
+  flex-shrink: 0;
+}
+
+/* ── SERVE ROW ── */
+[data-theme-game="retro"] .retro-serve-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+/* ── NAMES ROW ── */
+[data-theme-game="retro"] .retro-names-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  height: clamp(36px, 6vh, 52px);
+  flex-shrink: 0;
+}
+
+/* ── SCORES ROW ── */
+[data-theme-game="retro"] .retro-scores-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ── BUTTONS ROW ── */
+[data-theme-game="retro"] .retro-buttons-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-shrink: 0;
+  padding: 4px 0 2px;
+}
+
+/* ── Dot-matrix cell ── */
+.retro-cell {
+  background: #111;
+  border: 1.5px solid #252525;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.retro-cell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, #1c1c1c 1.2px, transparent 1.2px);
+  background-size: 6px 6px;
+  background-position: 3px 3px;
+  pointer-events: none;
+  z-index: 0;
+}
+.retro-cell > * { position: relative; z-index: 1; }
+
+/* ── Sets digit (red LED) ── */
+.retro-sets-digit {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(28px, 7vw, 48px);
+  font-weight: 700;
+  color: #ff2200;
+  text-shadow: 0 0 10px rgba(255,34,0,0.65), 0 0 22px rgba(255,34,0,0.3);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Clock (amber LED) ── */
+.retro-clock {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(22px, 5vw, 36px);
+  font-weight: 700;
+  color: #ffaa00;
+  text-shadow: 0 0 10px rgba(255,170,0,0.7), 0 0 22px rgba(255,170,0,0.3);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+/* ── Serve dot (green LED) ── */
+.retro-serve-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: #1c1c1c;
+  transition: background .2s, box-shadow .2s;
+}
+.retro-serve-dot.retro-serve-active {
+  background: #00dd44;
+  box-shadow: 0 0 8px #00dd44, 0 0 16px rgba(0,221,68,0.4);
+}
+.retro-serve-cell-left { justify-content: flex-start; padding-left: 12px; }
+.retro-serve-cell-right { justify-content: flex-end; padding-right: 12px; }
+
+/* ── Name (white LED) ── */
+.retro-name {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(10px, 2.2vw, 14px);
+  font-weight: 700;
+  color: #e0e0e0;
+  text-shadow: 0 0 7px rgba(220,220,220,0.45);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 90%;
+}
+
+/* ── Score (big red LED) ── */
+.retro-score {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(60px, 16vw, 130px);
+  font-weight: 700;
+  color: #ff2200;
+  text-shadow: 0 0 18px rgba(255,34,0,0.7), 0 0 36px rgba(255,34,0,0.35), 0 0 54px rgba(255,34,0,0.15);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* ── Retro buttons ── */
+.retro-btn {
+  background: #111;
+  border: 1.5px solid #2e2e2e;
+  border-radius: 6px;
+  color: #bbb;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: background .15s, border-color .15s;
+}
+.retro-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 5px 5px;
+  pointer-events: none;
+}
+.retro-btn:active { background: #1a1a1a; }
+
+.retro-btn--end {
+  border-color: #ff2200;
+  color: #ff2200;
+  text-shadow: 0 0 8px rgba(255,34,0,0.5);
+  box-shadow: 0 0 0 1px rgba(255,34,0,0.12), inset 0 0 10px rgba(255,34,0,0.04);
+  padding: 10px 0;
+  flex: 1;
+  max-width: 260px;
+}
+.retro-btn--end:active { background: rgba(255,34,0,0.08); }
+
+/* paused state for retro timer */
+[data-theme-game="retro"] .retro-clock.is-paused {
+  animation: blink 1s infinite;
+  color: #666;
+  text-shadow: none;
+}
+
+/* Hide classic elements when retro is active */
+[data-theme-game="retro"] .half,
+[data-theme-game="retro"] .sets-badge,
+[data-theme-game="retro"] .topbar,
+[data-theme-game="retro"] .bottombar,
+[data-theme-game="retro"] .status-banner {
+  display: none !important;
+}
+
+/* Show retro rows (hidden by default) */
+.retro-top-row,
+.retro-serve-row,
+.retro-names-row,
+.retro-scores-row,
+.retro-buttons-row {
+  display: none;
+}
+[data-theme-game="retro"] .retro-top-row { display: grid; }
+[data-theme-game="retro"] .retro-serve-row { display: grid; }
+[data-theme-game="retro"] .retro-names-row { display: grid; }
+[data-theme-game="retro"] .retro-scores-row { display: grid; }
+[data-theme-game="retro"] .retro-buttons-row { display: flex; }
+
+/* ============================================================ */
+
 /* ============== OVERLAYS ============== */
 .overlay[hidden]{ display:none; }
 .overlay{
   position:fixed; inset:0;
   background:rgba(0,0,0,0.72);
   display:flex; align-items:center; justify-content:center;
-  z-index:50;
+  z-index:200;
   padding:24px;
 }
 .overlay-card{
@@ -987,6 +1233,28 @@ input{ font-family:inherit; }
   line-height:1.5;
   margin-bottom:14px;
 }
+/* ---- Theme picker ---- */
+.theme-picker{
+  display:grid; grid-template-columns:1fr 1fr; gap:10px;
+  margin-bottom:20px;
+}
+.theme-btn{
+  padding:12px 0;
+  background:var(--panel);
+  border:1.5px solid var(--panel-line);
+  border-radius:10px;
+  color:var(--text-dim);
+  font-size:14px; font-weight:600; letter-spacing:.04em; text-transform:uppercase;
+  cursor:pointer;
+  transition:background .15s, border-color .15s, color .15s;
+}
+.theme-btn:active{ background:#242424; }
+.theme-btn--active{
+  background:var(--panel);
+  border-color:var(--blue-light);
+  color:var(--white);
+}
+
 .data-action{
   display:flex; align-items:center; gap:14px;
   width:100%;
