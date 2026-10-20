@@ -6572,6 +6572,23 @@
   /* ---------------------------------------------------------
      BOLAR — escolher quem serve primeiro, no início de cada set
      --------------------------------------------------------- */
+  // retro bolar — serve dot blink timer
+  let retroBolarBlinkTimer = null;
+  function startRetroBolarBlink() {
+    stopRetroBolarBlink();
+    let side = "blue";
+    retroBolarBlinkTimer = setInterval(() => {
+      document.getElementById("retro-bolar-dot-blue").classList.toggle("rb-dot-active", side === "blue");
+      document.getElementById("retro-bolar-dot-white").classList.toggle("rb-dot-active", side === "white");
+      side = side === "blue" ? "white" : "blue";
+    }, 900);
+  }
+  function stopRetroBolarBlink() {
+    if (retroBolarBlinkTimer) { clearInterval(retroBolarBlinkTimer); retroBolarBlinkTimer = null; }
+    document.getElementById("retro-bolar-dot-blue").classList.remove("rb-dot-active");
+    document.getElementById("retro-bolar-dot-white").classList.remove("rb-dot-active");
+  }
+
   function openBolarScreen() {
     const blueName = getPlayer(game.bluePlayerId)?.name || t("js.sideBlue");
     const whiteName = getPlayer(game.whitePlayerId)?.name || t("js.sideWhite");
@@ -6579,6 +6596,11 @@
     document.getElementById("bolar-name-white").textContent = whiteName;
     const setNumber = game.sets.length + 1;
     document.getElementById("bolar-set-label").textContent = t("js.whoseServe",{n:setNumber});
+    // sync retro elements
+    document.getElementById("retro-bolar-name-blue").textContent = blueName.toUpperCase();
+    document.getElementById("retro-bolar-name-white").textContent = whiteName.toUpperCase();
+    document.getElementById("retro-bolar-set-label").textContent = t("js.whoseServe",{n:setNumber});
+    startRetroBolarBlink();
     applyGameColors();
     showScreen("screen-bolar");
     if (document.documentElement.requestFullscreen) {
@@ -6589,6 +6611,7 @@
   }
 
   function chooseServer(side) {
+    stopRetroBolarBlink();
     game.servingSide = side;
     persistActiveGame();
     resumeGameUI();
@@ -6596,6 +6619,8 @@
   }
   document.getElementById("bolar-blue").addEventListener("click", () => chooseServer("blue"));
   document.getElementById("bolar-white").addEventListener("click", () => chooseServer("white"));
+  document.getElementById("retro-bolar-blue").addEventListener("click", () => chooseServer("blue"));
+  document.getElementById("retro-bolar-white").addEventListener("click", () => chooseServer("white"));
 
   function persistActiveGame() {
     DATA.activeGame = game;

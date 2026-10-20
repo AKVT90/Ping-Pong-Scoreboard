@@ -90,6 +90,7 @@
 
     <p class="menu-footer"><span data-i18n="menu.footer">Dados guardados apenas neste dispositivo</span></p>
     <p class="menu-credit">Powered by AKVT90</p>
+    <p class="menu-copyright">© 2026 José Pedro Fonseca. Todos os direitos reservados.</p>
   </div>
 </div>
 
@@ -367,6 +368,7 @@
 </div>
 <!-- ============ ECRÃ: BOLAR (escolher quem serve) ============ -->
 <div id="screen-bolar" class="screen screen-bolar">
+  <!-- CLASSIC serve picker -->
   <div class="bolar-board">
     <button class="bolar-half bolar-half--blue" id="bolar-blue" data-side="blue">
       <span class="bolar-name" id="bolar-name-blue">Azul</span>
@@ -379,6 +381,33 @@
     <div class="bolar-center">
       <span class="bolar-title" data-i18n="serve.title">SERVIÇO</span>
       <span class="bolar-set-label" id="bolar-set-label">Set 1 · quem serve primeiro?</span>
+    </div>
+  </div>
+
+  <!-- RETRO serve picker (shown only when data-theme-game="retro") -->
+  <div class="retro-bolar-board">
+    <button class="retro-bolar-half retro-bolar-half--left" id="retro-bolar-blue">
+      <div class="retro-bolar-dots"></div>
+      <div class="retro-bolar-content">
+        <div class="retro-bolar-dot" id="retro-bolar-dot-blue"></div>
+        <span class="retro-bolar-name" id="retro-bolar-name-blue">AZUL</span>
+        <span class="retro-bolar-hint" id="retro-bolar-hint-blue" data-i18n="serve.hint">SERVE PRIMEIRO</span>
+      </div>
+    </button>
+    <button class="retro-bolar-half retro-bolar-half--right" id="retro-bolar-white">
+      <div class="retro-bolar-dots"></div>
+      <div class="retro-bolar-content">
+        <div class="retro-bolar-dot" id="retro-bolar-dot-white"></div>
+        <span class="retro-bolar-name" id="retro-bolar-name-white">BRANCO</span>
+        <span class="retro-bolar-hint" id="retro-bolar-hint-white" data-i18n="serve.hint">SERVE PRIMEIRO</span>
+      </div>
+    </button>
+    <div class="retro-bolar-center">
+      <div class="retro-bolar-center-inner">
+        <span class="retro-bolar-title" data-i18n="serve.title">SERVIÇO</span>
+        <div class="retro-bolar-divider"></div>
+        <span class="retro-bolar-set-label" id="retro-bolar-set-label">Set 1</span>
+      </div>
     </div>
   </div>
 </div>
